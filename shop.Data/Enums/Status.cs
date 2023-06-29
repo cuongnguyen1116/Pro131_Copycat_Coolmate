@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace shop.Data.Enums;
 
-namespace shop.Data.Enums
+public enum Status
 {
-    public enum Status
-    {
-        Active,
-        Inactive
-    }
+    Active,
+    Inactive
 }
