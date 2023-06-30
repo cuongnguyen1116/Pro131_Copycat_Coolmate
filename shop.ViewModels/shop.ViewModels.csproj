@@ -10,4 +10,8 @@
     <Folder Include="Catalog\Categories\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\shop.Data\shop.Data.csproj" />
+  </ItemGroup>
+
 </Project>

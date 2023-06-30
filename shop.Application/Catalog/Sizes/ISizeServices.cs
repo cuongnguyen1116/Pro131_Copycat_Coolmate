@@ -1,10 +1,9 @@
 ﻿using shop.ViewModels.Catalog.Sizes;
 
-namespace shop.Application.Catalog.Sizes
+namespace shop.Application.Catalog.Sizes;
+
+public interface ISizeServices
 {
-    public interface ISizeServices
-    {
-        Task<List<SizeVm>> GetAll();
-        Task<SizeVm> GetById(Guid id);
-    }
+    Task<List<SizeVm>> GetAll();
+    Task<SizeVm> GetById(Guid id);
 }

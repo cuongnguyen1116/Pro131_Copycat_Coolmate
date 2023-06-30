@@ -1,8 +1,7 @@
-﻿namespace shop.ViewModels.Catalog.Sizes
+﻿namespace shop.ViewModels.Catalog.Sizes;
+
+public class SizeVm
 {
-    public class SizeVm
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-    }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
 }

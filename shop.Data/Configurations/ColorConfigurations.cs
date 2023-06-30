@@ -9,6 +9,7 @@ public class ColorConfigurations : IEntityTypeConfiguration<Color>
     public void Configure(EntityTypeBuilder<Color> builder)
     {
         builder.HasKey(x => x.Id);
+
         builder.Property(x => x.Name).HasMaxLength(128).IsRequired();
     }
 }

@@ -1,15 +1,14 @@
-﻿namespace shop.ViewModels.Common
+﻿namespace shop.ViewModels.Common;
+
+public class SelectItem
 {
-    public class SelectItem
+    public string Id { get; set; }
+    public string Name { get; set; }
+
+    public bool Selected { get; set; }
+
+    public object Select()
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-
-        public bool Selected { get; set; }
-
-        public object Select()
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
     }
 }

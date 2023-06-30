@@ -32,12 +32,14 @@ public static class ModelBuilderExtensions
             {
                 Id = productId1,
                 Name = "Gym Powerfit",
+                Description = "Chất liệu: 86% Poly + 14% Spandex. Co giãn 4 chiều mang lại sự thoải mái để bạn vận động hết mình. Thiết kế công thái học, cải tiến giữ các đường may không bị mài mòn và tăng độ bền. Chất liệu thấm mồ hôi và khô nhanh, thoáng khí mang lại khả năng khô thoáng vượt trội. Form áo: Slim fit. Người mẫu: 180cm - 80kg, mặc áo size XL. Tự hào sản xuất tại Việt Nam",
                 Status = Status.Active
             },
             new Product
             {
                 Id = productId2,
                 Name = "Cotton Summer Coolwaves",
+                Description = "Sản phẩm trong Bộ sưu tập Summer. Chất liệu: 100% Cotton mềm mại. Định lượng vải: 200gsm, dày dặn. Dáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà. Hình in PET bền bỉ, không lo bong tróc, thoải mái giặt máy. Tự hào sản xuất tại Việt Nam",
                 Status = Status.Active
             });
 
@@ -100,32 +102,38 @@ public static class ModelBuilderExtensions
             new Size
             {
                 Id = sizeId1,
-                Name = "S"
+                Name = "S",
+                SortOrder = 1
             },
             new Size
             {
                 Id = sizeId2,
-                Name = "M"
+                Name = "M",
+                SortOrder = 2
             },
             new Size
             {
                 Id = sizeId3,
-                Name = "L"
+                Name = "L",
+                SortOrder = 3
             },
             new Size
             {
                 Id = sizeId4,
                 Name = "XL",
+                SortOrder = 4
             },
             new Size
             {
                 Id = sizeId5,
-                Name = "XXL"
+                Name = "XXL",
+                SortOrder = 5
             },
             new Size
             {
                 Id = sizeId6,
-                Name = "XXXL"
+                Name = "XXXL",
+                SortOrder = 6
             });
 
 
@@ -142,113 +150,58 @@ public static class ModelBuilderExtensions
                 Stock = 50,
                 Price = 199000,
                 OriginalPrice = 150000,
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId1,
+                ColorId= colorId1,
+                SizeId = sizeId1,
+            }, new ProductDetail
+            {
+                Id = productDetailId2,
+                ProductId = productId1,
+                Stock = 50,
+                Price = 199000,
+                OriginalPrice = 150000,
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId1,
+                ColorId= colorId1,
+                SizeId = sizeId2,
+            }, new ProductDetail
+            {
+                Id = productDetailId3,
+                ProductId = productId1,
+                Stock = 50,
+                Price = 199000,
+                OriginalPrice = 150000,
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId1,
+                ColorId= colorId1,
+                SizeId = sizeId4,
             },
             new ProductDetail
             {
-                Id = productDetailId2,
+                Id = productDetailId4,
                 ProductId = productId2,
                 Stock = 50,
                 Price = 299000,
                 OriginalPrice = 200000,
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId2,
+                ColorId= colorId2,
+                SizeId = sizeId1
             });
 
         // bảng trung gian
         builder.Entity<ProductInCategory>().HasData(
             new ProductInCategory
             {
-                ProductDetailId = productDetailId1,
+                ProductId = productId1,
                 CategoryId = categoryId1
             },
             new ProductInCategory
             {
-                ProductDetailId = productDetailId2,
+                ProductId = productId2,
                 CategoryId = categoryId2
             });
-
-        builder.Entity<ProductColor>().HasData(
-            new ProductColor
-            {
-                ProductDetailId = productDetailId1,
-                ColorId = colorId1,
-                Status = Status.Active
-            },
-            new ProductColor
-            {
-                ProductDetailId = productDetailId1,
-                ColorId = colorId2,
-                Status = Status.Active
-            },
-            new ProductColor
-            {
-                ProductDetailId = productDetailId2,
-                ColorId = colorId3,
-                Status = Status.Active
-            });
-
-        builder.Entity<ProductMaterial>().HasData(
-            new ProductMaterial
-            {
-                ProductDetailId = productDetailId1,
-                MaterialId = materialId1,
-                Status = Status.Active
-            },
-            new ProductMaterial
-            {
-                ProductDetailId = productDetailId2,
-                MaterialId = materialId2,
-                Status = Status.Active
-            });
-
-        builder.Entity<ProductSize>().HasData(
-            new ProductSize
-            {
-                ProductDetailId = productDetailId1,
-                SizeId = sizeId1,
-                Status = Status.Active
-            }, new ProductSize
-            {
-                ProductDetailId = productDetailId1,
-                SizeId = sizeId2,
-                Status = Status.Active
-            }, new ProductSize
-            {
-                ProductDetailId = productDetailId1,
-                SizeId = sizeId3,
-                Status = Status.Active
-            }, new ProductSize
-            {
-                ProductDetailId = productDetailId1,
-                SizeId = sizeId4,
-                Status = Status.Active
-            }, new ProductSize
-            {
-                ProductDetailId = productDetailId1,
-                SizeId = sizeId5,
-                Status = Status.Active
-            }, new ProductSize
-            {
-                ProductDetailId = productDetailId1,
-                SizeId = sizeId6,
-                Status = Status.Active
-            }, new ProductSize
-            {
-                ProductDetailId = productDetailId2,
-                SizeId = sizeId2,
-                Status = Status.Active
-            }, new ProductSize
-            {
-                ProductDetailId = productDetailId2,
-                SizeId = sizeId3,
-                Status = Status.Active
-            }, new ProductSize
-            {
-                ProductDetailId = productDetailId2,
-                SizeId = sizeId4,
-                Status = Status.Active
-            });
-
 
         // role
         var roleId1 = new Guid("1090dcdd-b383-417b-9523-d73f0373fbb0");

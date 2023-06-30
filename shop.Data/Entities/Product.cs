@@ -8,5 +8,6 @@ public class Product
     public string Name { get; set; }
     public string Description { get; set; }
     public Status Status { get; set; }
-    public ICollection<ProductDetail> ProductDetails { get; set; }
+    public virtual ICollection<ProductInCategory> ProductInCategories { get; set; }
+    public virtual ICollection<ProductDetail> ProductDetails { get; set; }
 }

@@ -8,8 +8,10 @@ public class ProductInCategoryConfigurations : IEntityTypeConfiguration<ProductI
 {
     public void Configure(EntityTypeBuilder<ProductInCategory> builder)
     {
-        builder.HasKey(x => new { x.ProductDetailId, x.CategoryId });
-        builder.HasOne(x => x.ProductDetail).WithMany().HasForeignKey(x => x.ProductDetailId);
+        builder.HasKey(x => new { x.ProductId, x.CategoryId });
+
+        builder.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
+
         builder.HasOne(x => x.Category).WithMany().HasForeignKey(x => x.CategoryId);
     }
 }

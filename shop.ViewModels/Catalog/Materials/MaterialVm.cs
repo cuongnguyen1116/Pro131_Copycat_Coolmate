@@ -1,8 +1,7 @@
-﻿namespace shop.ViewModels.Catalog.Materials
+﻿namespace shop.ViewModels.Catalog.Materials;
+
+public class MaterialVm
 {
-    public class MaterialVm
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-    }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
 }

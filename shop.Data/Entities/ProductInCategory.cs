@@ -2,8 +2,8 @@
 
 public class ProductInCategory
 {
-    public Guid ProductDetailId { get; set; }
+    public Guid ProductId { get; set; }
     public Guid CategoryId { get; set; }
-    public Category Category { get; set; }
-    public ProductDetail ProductDetail { get; set; }
+    public virtual Category Category { get; set; }
+    public virtual Product Product { get; set; }
 }

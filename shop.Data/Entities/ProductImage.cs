@@ -10,5 +10,5 @@ public class ProductImage
     //public DateTime CreatedDate { get; set; }
     public int SortOrder { get; set; }
     //public long FileSize { get; set; }
-    public ProductDetail ProductDetail { get; set; }
+    public virtual ProductDetail ProductDetail { get; set; }
 }
