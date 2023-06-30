@@ -9,6 +9,7 @@ public class CartConfigurations : IEntityTypeConfiguration<Cart>
     public void Configure(EntityTypeBuilder<Cart> builder)
     {
         builder.HasKey(x => x.UserId);
+
         builder.Property(x => x.Description).HasMaxLength(256).IsRequired();
     }
 }

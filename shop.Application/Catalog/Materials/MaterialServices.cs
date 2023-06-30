@@ -4,74 +4,73 @@ using shop.Data.Entities;
 using shop.Utilities.Exceptions;
 using shop.ViewModels.Catalog.Materials;
 
-namespace shop.Application.Catalog.Materials
+namespace shop.Application.Catalog.Materials;
+
+public class MaterialServices : IMaterialServices
 {
-    public class MaterialServices : IMaterialServices
+    private readonly ShopDbContext _context;
+
+    public MaterialServices(ShopDbContext context)
     {
-        private readonly ShopDbContext _context;
+        _context = context;
+    }
 
-        public MaterialServices(ShopDbContext context)
+    public Task<List<MaterialVm>> GetAll()
+    {
+        var data = _context.Materials;
+        var list = data.Select(x => new MaterialVm
         {
-            _context = context;
-        }
+            Id = x.Id,
+            Name = x.Name,
+        }).ToListAsync();
+        return list;
+    }
 
-        public Task<List<MaterialVm>> GetAll()
+    public async Task<MaterialVm> GetById(Guid id)
+    {
+        var data = from x in _context.Materials
+                   where x.Id == id
+                   select x;
+        var material = await data.Select(x => new MaterialVm
         {
-            var data = _context.Materials;
-            var list = data.Select(x => new MaterialVm
-            {
-                Id = x.Id,
-                Name = x.Name,
-            }).ToListAsync();
-            return list;
-        }
+            Id = x.Id,
+            Name = x.Name,
+        }).FirstOrDefaultAsync();
+        return material;
+    }
 
-        public async Task<MaterialVm> GetById(Guid id)
+    public async Task<bool> Create(MaterialVm request)
+    {
+        var existingMaterial = await _context.Materials.FirstOrDefaultAsync(x => x.Name.ToLower().Trim() == request.Name.ToLower().Trim());
+        if (existingMaterial != null) throw new ShopException($"Material names '{request.Name}' đã tồn tại");
+
+        var material = new Material
         {
-            var data = from x in _context.Materials
-                       where x.Id == id
-                       select x;
-            var material = await data.Select(x => new MaterialVm
-            {
-                Id = x.Id,
-                Name = x.Name,
-            }).FirstOrDefaultAsync();
-            return material;
-        }
+            Id = Guid.NewGuid(),
+            Name = request.Name,
+        };
 
-        public async Task<bool> Create(MaterialVm request)
-        {
-            var existingMaterial = await _context.Materials.FirstOrDefaultAsync(x => x.Name.ToLower().Trim() == request.Name.ToLower().Trim());
-            if (existingMaterial != null) throw new ShopException($"Material names '{request.Name}' đã tồn tại");
+        await _context.Materials.AddAsync(material);
+        await _context.SaveChangesAsync();
 
-            var material = new Material
-            {
-                Id = Guid.NewGuid(),
-                Name = request.Name,
-            };
+        return true;
+    }
 
-            await _context.Materials.AddAsync(material);
-            await _context.SaveChangesAsync();
+    public async Task<bool> Update(Guid id, MaterialVm request)
+    {
+        var existingMaterial = await _context.Materials.FindAsync(id) ?? throw new ShopException($"Can not find material with id {id}");
+        existingMaterial.Name = request.Name;
 
-            return true;
-        }
+        _context.Materials.Update(existingMaterial);
+        await _context.SaveChangesAsync();
+        return true;
+    }
 
-        public async Task<bool> Update(Guid id, MaterialVm request)
-        {
-            var existingMaterial = await _context.Materials.FindAsync(id) ?? throw new ShopException($"Can not find material with id {id}");
-            existingMaterial.Name = request.Name;
-
-            _context.Materials.Update(existingMaterial);
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<bool> Delete(Guid id)
-        {
-            var existingMaterial = await _context.Materials.FindAsync(id) ?? throw new ShopException($"Can not find material with id {id}");
-            _context.Materials.Remove(existingMaterial);
-            await _context.SaveChangesAsync();
-            return true;
-        }
+    public async Task<bool> Delete(Guid id)
+    {
+        var existingMaterial = await _context.Materials.FindAsync(id) ?? throw new ShopException($"Can not find material with id {id}");
+        _context.Materials.Remove(existingMaterial);
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

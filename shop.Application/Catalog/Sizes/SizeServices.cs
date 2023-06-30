@@ -1,35 +1,33 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using shop.Data.Context;
+using shop.Utilities.Exceptions;
 using shop.ViewModels.Catalog.Sizes;
 
-namespace shop.Application.Catalog.Sizes
+namespace shop.Application.Catalog.Sizes;
+
+public class SizeServices : ISizeServices
 {
-    public class SizeServices : ISizeServices
+    private readonly ShopDbContext _context;
+
+    public SizeServices(ShopDbContext context)
     {
-        private readonly ShopDbContext _context;
+        _context = context;
+    }
 
-        public SizeServices(ShopDbContext context)
-        {
-            _context = context;
-        }
+    public async Task<List<SizeVm>> GetAll()
+    {
+        var data = _context.Sizes;
+        var list = await data.Select(x => new SizeVm { Id = x.Id, Name = x.Name }).ToListAsync();
+        return list;
+    }
 
-        public async Task<List<SizeVm>> GetAll()
+    public async Task<SizeVm> GetById(Guid id)
+    {
+        var data = await _context.Sizes.FindAsync(id) ?? throw new ShopException($"Không tìm thấy kích cỡ có id {id}");
+        return new SizeVm
         {
-            var data = _context.Sizes;
-            var list = await data.Select(x => new SizeVm { Id = x.Id, Name = x.Name }).ToListAsync();
-            return list;
-        }
-
-        public async Task<SizeVm> GetById(Guid id)
-        {
-            var data = from v in _context.Sizes
-                       where v.Id == id
-                       select new { v };
-            return await data.Select(x => new SizeVm
-            {
-                Id = x.v.Id,
-                Name = x.v.Name,
-            }).FirstOrDefaultAsync();
-        }
+            Id = data.Id,
+            Name = data.Name
+        };
     }
 }

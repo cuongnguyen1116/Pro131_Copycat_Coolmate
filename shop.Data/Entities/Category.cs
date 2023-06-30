@@ -8,5 +8,5 @@ public class Category
     public string Name { get; set; }
     public Status Status { get; set; }
     public Guid? ParentId { get; set; }
-    public ICollection<ProductInCategory> ProductInCategories { get; set; }
+    public virtual ICollection<ProductInCategory> ProductInCategories { get; set; }
 }

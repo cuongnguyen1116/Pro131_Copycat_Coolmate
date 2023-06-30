@@ -8,1180 +8,1015 @@ using shop.Data.Context;
 
 #nullable disable
 
-namespace shop.Data.Migrations
+namespace shop.Data.Migrations;
+
+[DbContext(typeof(ShopDbContext))]
+partial class ShopDbContextModelSnapshot : ModelSnapshot
 {
-    [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.19")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+        modelBuilder
+            .HasAnnotation("ProductVersion", "6.0.19")
+            .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+        SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimType")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimValue")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("RoleId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("AppRoleClaims", (string)null);
-                });
+                b.ToTable("AppRoleClaims", (string)null);
+            });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimType")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimValue")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("UserId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("AppUserClaims", (string)null);
-                });
+                b.ToTable("AppUserClaims", (string)null);
+            });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+            {
+                b.Property<Guid>("UserId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("LoginProvider")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("AppUserLogins", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.ToTable("AppUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
-                            RoleId = new Guid("1090dcdd-b383-417b-9523-d73f0373fbb0")
-                        },
-                        new
-                        {
-                            UserId = new Guid("c2ec6dd4-8170-4b6d-acf4-33d52a128789"),
-                            RoleId = new Guid("4a1c9012-a602-46a9-8eba-05e85149fd81")
-                        },
-                        new
-                        {
-                            UserId = new Guid("3b294e1f-c3f7-4f71-9be6-11c614fbdce5"),
-                            RoleId = new Guid("66d310d2-f7e1-4aab-8003-4370144e3f8d")
-                        });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("AppUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.AppRole", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                b.Property<string>("ProviderDisplayName")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("ProviderKey")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("UserId");
+
+                b.ToTable("AppUserLogins", (string)null);
+            });
+
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+            {
+                b.Property<Guid>("UserId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<Guid>("RoleId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.HasKey("UserId", "RoleId");
+
+                b.ToTable("AppUserRoles", (string)null);
+
+                b.HasData(
+                    new
+                    {
+                        UserId = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
+                        RoleId = new Guid("1090dcdd-b383-417b-9523-d73f0373fbb0")
+                    },
+                    new
+                    {
+                        UserId = new Guid("c2ec6dd4-8170-4b6d-acf4-33d52a128789"),
+                        RoleId = new Guid("4a1c9012-a602-46a9-8eba-05e85149fd81")
+                    },
+                    new
+                    {
+                        UserId = new Guid("3b294e1f-c3f7-4f71-9be6-11c614fbdce5"),
+                        RoleId = new Guid("66d310d2-f7e1-4aab-8003-4370144e3f8d")
+                    });
+            });
+
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+            {
+                b.Property<Guid>("UserId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<string>("LoginProvider")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Name")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Value")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("UserId");
+
+                b.ToTable("AppUserTokens", (string)null);
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.AppRole", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<string>("ConcurrencyStamp")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Description")
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Name")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1090dcdd-b383-417b-9523-d73f0373fbb0"),
-                            ConcurrencyStamp = "38c07c9a-8a1a-45f9-83dd-6386274310b1",
-                            Description = "Administrator role",
-                            Name = "admin"
-                        },
-                        new
-                        {
-                            Id = new Guid("4a1c9012-a602-46a9-8eba-05e85149fd81"),
-                            ConcurrencyStamp = "b799bec3-bf69-4393-b174-f14efed8caae",
-                            Description = "Employee role",
-                            Name = "employee"
-                        },
-                        new
-                        {
-                            Id = new Guid("66d310d2-f7e1-4aab-8003-4370144e3f8d"),
-                            ConcurrencyStamp = "317e25fa-ae93-4fc3-8f13-ed8262ea8ef2",
-                            Description = "Customer role",
-                            Name = "customer"
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.AppUser", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DoB")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c437a51e-3539-400b-b705-1b4c98f32b0b",
-                            DoB = new DateTime(2003, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "cuongnguyenpm1116@gmail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Cuong",
-                            LastName = "Nguyen Phuc Minh",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "cuongnguyenpm1116@gmail.com",
-                            NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG0xtvQCfOZffq4wZvEG97d3G1+bkqUTgs3t2yv0hrpnds5lkf3xux0WsGt3hnXd1Q==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        },
-                        new
-                        {
-                            Id = new Guid("c2ec6dd4-8170-4b6d-acf4-33d52a128789"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b26b468a-0973-4951-a516-a7d3157b81e8",
-                            DoB = new DateTime(2003, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "hq37na@gmail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Hoc",
-                            LastName = "Nguyen Kim",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "hq37na@gmail.com",
-                            NormalizedUserName = "kimhoc1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDbtlbI8auENxgPol5tPMC9ggWM64+PMNZUvB0YXj2RJGDozNHzWb+WAasEhpVdo6Q==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
-                            TwoFactorEnabled = false,
-                            UserName = "kimhoc1"
-                        },
-                        new
-                        {
-                            Id = new Guid("3b294e1f-c3f7-4f71-9be6-11c614fbdce5"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "cedca863-7f17-44d6-9b96-ec7e09850a68",
-                            DoB = new DateTime(2003, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "lusdeer@gmail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Hieu",
-                            LastName = "Le Minh",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "lusdeer@gmail.com",
-                            NormalizedUserName = "lmaohieu1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKXa3gVusojQE+Yv09ICfVYlV2Lsx2qotJ00+ErhuW4sAgLaruXNt5TyUsVWrOl7UQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
-                            TwoFactorEnabled = false,
-                            UserName = "lmaohieu1"
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Cart", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.CartDetail", b =>
-                {
-                    b.Property<Guid>("ProductDetailId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductDetailId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CartDetails");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<Guid?>("ParentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("e785507b-109e-4c6e-b2f1-87a792896e3c"),
-                            Name = "Áo thun",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("d8eb1629-a276-4667-8da2-0926fc66de0c"),
-                            Name = "Áo polo",
-                            Status = 0
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Color", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Colors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("b8457fc8-60a5-43a1-9e4a-e4855c86524f"),
-                            Name = "Đen"
-                        },
-                        new
-                        {
-                            Id = new Guid("c22c0a96-b3fc-4223-8cca-b9046732bb89"),
-                            Name = "Trắng"
-                        },
-                        new
-                        {
-                            Id = new Guid("46894c70-1d26-4a20-993b-8d2198913585"),
-                            Name = "Xám"
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Material", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Materials");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
-                            Name = "Vải Cotton"
-                        },
-                        new
-                        {
-                            Id = new Guid("5cd1370c-dd94-4038-b33c-49a27aad25ab"),
-                            Name = "Vải Excool"
-                        },
-                        new
-                        {
-                            Id = new Guid("99df0e16-bab3-4d8a-8916-72e4a03e99e4"),
-                            Name = "Vải Polyester tính năng"
-                        },
-                        new
-                        {
-                            Id = new Guid("093e72f7-4bae-448c-b009-b6acf0fe9120"),
-                            Name = "Vải Recycle"
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Order", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CompletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderStatus")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("PaidDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ShipAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ShipDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ShipName")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("ShipPhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("UserId")
-                        .IsRequired()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.OrderDetail", b =>
-                {
-                    b.Property<Guid>("ProductDetailId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.HasKey("ProductDetailId", "OrderId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1dc01736-d7e2-4c24-94de-00844d5cb1f9"),
-                            Name = "Gym Powerfit",
-                            Status = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("3b997d7b-e67a-4b00-8e4a-043ce70b2844"),
-                            Name = "Cotton Summer Coolwaves",
-                            Status = 0
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductColor", b =>
-                {
-                    b.Property<Guid>("ProductDetailId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ColorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ColorId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ProductDetailId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.HasKey("ProductDetailId", "ColorId");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("ColorId1");
-
-                    b.HasIndex("ProductDetailId1");
-
-                    b.ToTable("ProductColors");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductDetailId = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
-                            ColorId = new Guid("b8457fc8-60a5-43a1-9e4a-e4855c86524f"),
-                            Status = 0
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
-                            ColorId = new Guid("c22c0a96-b3fc-4223-8cca-b9046732bb89"),
-                            Status = 0
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("0a3dcb7c-884d-4a05-a5dd-a1d5df404dff"),
-                            ColorId = new Guid("46894c70-1d26-4a20-993b-8d2198913585"),
-                            Status = 0
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductDetail", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("OriginalPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid?>("ProductId")
-                        .IsRequired()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Stock")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductDetails");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
-                            CreatedDate = new DateTime(2023, 6, 29, 10, 55, 6, 408, DateTimeKind.Local).AddTicks(2622),
-                            OriginalPrice = 150000m,
-                            Price = 199000m,
-                            ProductId = new Guid("1dc01736-d7e2-4c24-94de-00844d5cb1f9"),
-                            Stock = 50
-                        },
-                        new
-                        {
-                            Id = new Guid("0a3dcb7c-884d-4a05-a5dd-a1d5df404dff"),
-                            CreatedDate = new DateTime(2023, 6, 29, 10, 55, 6, 408, DateTimeKind.Local).AddTicks(2635),
-                            OriginalPrice = 200000m,
-                            Price = 299000m,
-                            ProductId = new Guid("3b997d7b-e67a-4b00-8e4a-043ce70b2844"),
-                            Stock = 50
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductImage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Caption")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ProductDetailId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductDetailId");
-
-                    b.ToTable("ProductImages");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductInCategory", b =>
-                {
-                    b.Property<Guid>("ProductDetailId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CategoryId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ProductDetailId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ProductDetailId", "CategoryId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("CategoryId1");
-
-                    b.HasIndex("ProductDetailId1");
-
-                    b.ToTable("ProductInCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductDetailId = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
-                            CategoryId = new Guid("e785507b-109e-4c6e-b2f1-87a792896e3c")
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("0a3dcb7c-884d-4a05-a5dd-a1d5df404dff"),
-                            CategoryId = new Guid("d8eb1629-a276-4667-8da2-0926fc66de0c")
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductMaterial", b =>
-                {
-                    b.Property<Guid>("ProductDetailId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MaterialId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("MaterialId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ProductDetailId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.HasKey("ProductDetailId", "MaterialId");
-
-                    b.HasIndex("MaterialId");
-
-                    b.HasIndex("MaterialId1");
-
-                    b.HasIndex("ProductDetailId1");
-
-                    b.ToTable("ProductMaterials");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductDetailId = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
-                            MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
-                            Status = 0
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("0a3dcb7c-884d-4a05-a5dd-a1d5df404dff"),
-                            MaterialId = new Guid("5cd1370c-dd94-4038-b33c-49a27aad25ab"),
-                            Status = 0
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductSize", b =>
-                {
-                    b.Property<Guid>("ProductDetailId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SizeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ProductDetailId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("SizeId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.HasKey("ProductDetailId", "SizeId");
-
-                    b.HasIndex("ProductDetailId1");
-
-                    b.HasIndex("SizeId");
-
-                    b.HasIndex("SizeId1");
-
-                    b.ToTable("ProductSizes");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductDetailId = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
-                            SizeId = new Guid("573566fb-4e8c-4dad-bb2c-b2d9a597d9f7"),
-                            Status = 0
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
-                            SizeId = new Guid("966f5bf6-a0a7-4d88-a700-728eb8e32c85"),
-                            Status = 0
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
-                            SizeId = new Guid("3cb61050-1fe6-4f5c-94a2-4db93e69c7ba"),
-                            Status = 0
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
-                            SizeId = new Guid("190d7f43-6bde-4d74-a58b-e50b22b35751"),
-                            Status = 0
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
-                            SizeId = new Guid("f6a1a967-7487-463b-9d7b-09aebf15d304"),
-                            Status = 0
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
-                            SizeId = new Guid("aa66fbee-a9d6-4bb5-8ed8-b329d394221f"),
-                            Status = 0
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("0a3dcb7c-884d-4a05-a5dd-a1d5df404dff"),
-                            SizeId = new Guid("966f5bf6-a0a7-4d88-a700-728eb8e32c85"),
-                            Status = 0
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("0a3dcb7c-884d-4a05-a5dd-a1d5df404dff"),
-                            SizeId = new Guid("3cb61050-1fe6-4f5c-94a2-4db93e69c7ba"),
-                            Status = 0
-                        },
-                        new
-                        {
-                            ProductDetailId = new Guid("0a3dcb7c-884d-4a05-a5dd-a1d5df404dff"),
-                            SizeId = new Guid("190d7f43-6bde-4d74-a58b-e50b22b35751"),
-                            Status = 0
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Promotion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("ApplyForAll")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal?>("DiscountAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("DiscountPercent")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("FromDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ToDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Promotions", (string)null);
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Size", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sizes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("573566fb-4e8c-4dad-bb2c-b2d9a597d9f7"),
-                            Name = "S"
-                        },
-                        new
-                        {
-                            Id = new Guid("966f5bf6-a0a7-4d88-a700-728eb8e32c85"),
-                            Name = "M"
-                        },
-                        new
-                        {
-                            Id = new Guid("3cb61050-1fe6-4f5c-94a2-4db93e69c7ba"),
-                            Name = "L"
-                        },
-                        new
-                        {
-                            Id = new Guid("190d7f43-6bde-4d74-a58b-e50b22b35751"),
-                            Name = "XL"
-                        },
-                        new
-                        {
-                            Id = new Guid("f6a1a967-7487-463b-9d7b-09aebf15d304"),
-                            Name = "XXL"
-                        },
-                        new
-                        {
-                            Id = new Guid("aa66fbee-a9d6-4bb5-8ed8-b329d394221f"),
-                            Name = "XXXL"
-                        });
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Cart", b =>
-                {
-                    b.HasOne("shop.Data.Entities.AppUser", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("shop.Data.Entities.Cart", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.CartDetail", b =>
-                {
-                    b.HasOne("shop.Data.Entities.ProductDetail", null)
-                        .WithMany("CartDetails")
-                        .HasForeignKey("ProductDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("shop.Data.Entities.Cart", "Cart")
-                        .WithMany("CartDetails")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Order", b =>
-                {
-                    b.HasOne("shop.Data.Entities.AppUser", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.OrderDetail", b =>
-                {
-                    b.HasOne("shop.Data.Entities.Order", "Order")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("shop.Data.Entities.ProductDetail", "ProductDetail")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("ProductDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("ProductDetail");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductColor", b =>
-                {
-                    b.HasOne("shop.Data.Entities.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("shop.Data.Entities.Color", null)
-                        .WithMany("ProductColors")
-                        .HasForeignKey("ColorId1");
-
-                    b.HasOne("shop.Data.Entities.ProductDetail", "ProductDetail")
-                        .WithMany()
-                        .HasForeignKey("ProductDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("shop.Data.Entities.ProductDetail", null)
-                        .WithMany("ProductColors")
-                        .HasForeignKey("ProductDetailId1");
-
-                    b.Navigation("Color");
-
-                    b.Navigation("ProductDetail");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductDetail", b =>
-                {
-                    b.HasOne("shop.Data.Entities.Product", "Product")
-                        .WithMany("ProductDetails")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductImage", b =>
-                {
-                    b.HasOne("shop.Data.Entities.ProductDetail", "ProductDetail")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ProductDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProductDetail");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductInCategory", b =>
-                {
-                    b.HasOne("shop.Data.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("shop.Data.Entities.Category", null)
-                        .WithMany("ProductInCategories")
-                        .HasForeignKey("CategoryId1");
-
-                    b.HasOne("shop.Data.Entities.ProductDetail", "ProductDetail")
-                        .WithMany()
-                        .HasForeignKey("ProductDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("shop.Data.Entities.ProductDetail", null)
-                        .WithMany("ProductInCategories")
-                        .HasForeignKey("ProductDetailId1");
-
-                    b.Navigation("Category");
-
-                    b.Navigation("ProductDetail");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductMaterial", b =>
-                {
-                    b.HasOne("shop.Data.Entities.Material", "Material")
-                        .WithMany()
-                        .HasForeignKey("MaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("shop.Data.Entities.Material", null)
-                        .WithMany("ProductMaterials")
-                        .HasForeignKey("MaterialId1");
-
-                    b.HasOne("shop.Data.Entities.ProductDetail", "ProductDetail")
-                        .WithMany()
-                        .HasForeignKey("ProductDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("shop.Data.Entities.ProductDetail", null)
-                        .WithMany("ProductMaterials")
-                        .HasForeignKey("ProductDetailId1");
-
-                    b.Navigation("Material");
-
-                    b.Navigation("ProductDetail");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductSize", b =>
-                {
-                    b.HasOne("shop.Data.Entities.ProductDetail", "ProductDetail")
-                        .WithMany()
-                        .HasForeignKey("ProductDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("shop.Data.Entities.ProductDetail", null)
-                        .WithMany("ProductSizes")
-                        .HasForeignKey("ProductDetailId1");
-
-                    b.HasOne("shop.Data.Entities.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("shop.Data.Entities.Size", null)
-                        .WithMany("ProductSizes")
-                        .HasForeignKey("SizeId1");
-
-                    b.Navigation("ProductDetail");
-
-                    b.Navigation("Size");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.AppUser", b =>
-                {
-                    b.Navigation("Cart")
-                        .IsRequired();
-
-                    b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Cart", b =>
-                {
-                    b.Navigation("CartDetails");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Category", b =>
-                {
-                    b.Navigation("ProductInCategories");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Color", b =>
-                {
-                    b.Navigation("ProductColors");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Material", b =>
-                {
-                    b.Navigation("ProductMaterials");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Order", b =>
-                {
-                    b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Product", b =>
-                {
-                    b.Navigation("ProductDetails");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.ProductDetail", b =>
-                {
-                    b.Navigation("CartDetails");
-
-                    b.Navigation("OrderDetails");
-
-                    b.Navigation("ProductColors");
-
-                    b.Navigation("ProductImages");
-
-                    b.Navigation("ProductInCategories");
-
-                    b.Navigation("ProductMaterials");
-
-                    b.Navigation("ProductSizes");
-                });
-
-            modelBuilder.Entity("shop.Data.Entities.Size", b =>
-                {
-                    b.Navigation("ProductSizes");
-                });
+                b.Property<string>("NormalizedName")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("Id");
+
+                b.ToTable("AppRoles", (string)null);
+
+                b.HasData(
+                    new
+                    {
+                        Id = new Guid("1090dcdd-b383-417b-9523-d73f0373fbb0"),
+                        ConcurrencyStamp = "d0495817-ae4c-4e4e-884b-09d0be05ba06",
+                        Description = "Administrator role",
+                        Name = "admin"
+                    },
+                    new
+                    {
+                        Id = new Guid("4a1c9012-a602-46a9-8eba-05e85149fd81"),
+                        ConcurrencyStamp = "f082f729-5c75-411c-8e97-f0a65b2f3e8a",
+                        Description = "Employee role",
+                        Name = "employee"
+                    },
+                    new
+                    {
+                        Id = new Guid("66d310d2-f7e1-4aab-8003-4370144e3f8d"),
+                        ConcurrencyStamp = "3f6c4486-e697-4243-815a-2c8daf8da726",
+                        Description = "Customer role",
+                        Name = "customer"
+                    });
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.AppUser", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<int>("AccessFailedCount")
+                    .HasColumnType("int");
+
+                b.Property<string>("ConcurrencyStamp")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<DateTime>("DoB")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("Email")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<bool>("EmailConfirmed")
+                    .HasColumnType("bit");
+
+                b.Property<string>("FirstName")
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .HasColumnType("nvarchar(200)");
+
+                b.Property<string>("LastName")
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .HasColumnType("nvarchar(200)");
+
+                b.Property<bool>("LockoutEnabled")
+                    .HasColumnType("bit");
+
+                b.Property<DateTimeOffset?>("LockoutEnd")
+                    .HasColumnType("datetimeoffset");
+
+                b.Property<string>("NormalizedEmail")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("NormalizedUserName")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("PasswordHash")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("PhoneNumber")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<bool>("PhoneNumberConfirmed")
+                    .HasColumnType("bit");
+
+                b.Property<string>("SecurityStamp")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<bool>("TwoFactorEnabled")
+                    .HasColumnType("bit");
+
+                b.Property<string>("UserName")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("Id");
+
+                b.ToTable("AppUsers", (string)null);
+
+                b.HasData(
+                    new
+                    {
+                        Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
+                        AccessFailedCount = 0,
+                        ConcurrencyStamp = "601ba688-e206-4b50-ad66-f656b4511814",
+                        DoB = new DateTime(2003, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Email = "cuongnguyenpm1116@gmail.com",
+                        EmailConfirmed = true,
+                        FirstName = "Cuong",
+                        LastName = "Nguyen Phuc Minh",
+                        LockoutEnabled = false,
+                        NormalizedEmail = "cuongnguyenpm1116@gmail.com",
+                        NormalizedUserName = "admin",
+                        PasswordHash = "AQAAAAEAACcQAAAAECEjSuKJL3mqBNW9k/fxRifIdqXGJPlcOUPhudKZOaSXTNvTPaOTDzbfycvxZxy7Bw==",
+                        PhoneNumberConfirmed = false,
+                        SecurityStamp = "",
+                        TwoFactorEnabled = false,
+                        UserName = "admin"
+                    },
+                    new
+                    {
+                        Id = new Guid("c2ec6dd4-8170-4b6d-acf4-33d52a128789"),
+                        AccessFailedCount = 0,
+                        ConcurrencyStamp = "3a87b627-6419-4b6f-b8e0-77f47140ddfa",
+                        DoB = new DateTime(2003, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Email = "hq37na@gmail.com",
+                        EmailConfirmed = true,
+                        FirstName = "Hoc",
+                        LastName = "Nguyen Kim",
+                        LockoutEnabled = false,
+                        NormalizedEmail = "hq37na@gmail.com",
+                        NormalizedUserName = "kimhoc1",
+                        PasswordHash = "AQAAAAEAACcQAAAAEFI/7wnmvlPGEEX8ZoInuJCEys8Dno1R1jRIjfnQtFkCWZblV+zPYYJRVLr7Gy9+VA==",
+                        PhoneNumberConfirmed = false,
+                        SecurityStamp = "",
+                        TwoFactorEnabled = false,
+                        UserName = "kimhoc1"
+                    },
+                    new
+                    {
+                        Id = new Guid("3b294e1f-c3f7-4f71-9be6-11c614fbdce5"),
+                        AccessFailedCount = 0,
+                        ConcurrencyStamp = "a6a6e261-7c1c-4b25-b1b4-e750bc4d8f48",
+                        DoB = new DateTime(2003, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Email = "lusdeer@gmail.com",
+                        EmailConfirmed = true,
+                        FirstName = "Hieu",
+                        LastName = "Le Minh",
+                        LockoutEnabled = false,
+                        NormalizedEmail = "lusdeer@gmail.com",
+                        NormalizedUserName = "lmaohieu1",
+                        PasswordHash = "AQAAAAEAACcQAAAAEJ/ws0MDJIApWOM/8G8NiV0mWxxF5V92UIC6DLnx0e2bKuvbmfRTglwWO/iJntfsmw==",
+                        PhoneNumberConfirmed = false,
+                        SecurityStamp = "",
+                        TwoFactorEnabled = false,
+                        UserName = "lmaohieu1"
+                    });
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Cart", b =>
+            {
+                b.Property<Guid>("UserId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<string>("Description")
+                    .IsRequired()
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar(256)");
+
+                b.HasKey("UserId");
+
+                b.ToTable("Carts");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.CartDetail", b =>
+            {
+                b.Property<Guid>("ProductDetailId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<Guid>("UserId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(18,2)");
+
+                b.Property<int>("Quantity")
+                    .HasColumnType("int");
+
+                b.HasKey("ProductDetailId", "UserId");
+
+                b.HasIndex("UserId");
+
+                b.ToTable("CartDetails");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Category", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnType("nvarchar(128)");
+
+                b.Property<Guid?>("ParentId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<int>("Status")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasDefaultValue(0);
+
+                b.HasKey("Id");
+
+                b.ToTable("Categories");
+
+                b.HasData(
+                    new
+                    {
+                        Id = new Guid("e785507b-109e-4c6e-b2f1-87a792896e3c"),
+                        Name = "Áo thun",
+                        Status = 0
+                    },
+                    new
+                    {
+                        Id = new Guid("d8eb1629-a276-4667-8da2-0926fc66de0c"),
+                        Name = "Áo polo",
+                        Status = 0
+                    });
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Color", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnType("nvarchar(128)");
+
+                b.HasKey("Id");
+
+                b.ToTable("Colors");
+
+                b.HasData(
+                    new
+                    {
+                        Id = new Guid("b8457fc8-60a5-43a1-9e4a-e4855c86524f"),
+                        Name = "Đen"
+                    },
+                    new
+                    {
+                        Id = new Guid("c22c0a96-b3fc-4223-8cca-b9046732bb89"),
+                        Name = "Trắng"
+                    },
+                    new
+                    {
+                        Id = new Guid("46894c70-1d26-4a20-993b-8d2198913585"),
+                        Name = "Xám"
+                    });
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Material", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnType("nvarchar(128)");
+
+                b.HasKey("Id");
+
+                b.ToTable("Materials");
+
+                b.HasData(
+                    new
+                    {
+                        Id = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
+                        Name = "Vải Cotton"
+                    },
+                    new
+                    {
+                        Id = new Guid("5cd1370c-dd94-4038-b33c-49a27aad25ab"),
+                        Name = "Vải Excool"
+                    },
+                    new
+                    {
+                        Id = new Guid("99df0e16-bab3-4d8a-8916-72e4a03e99e4"),
+                        Name = "Vải Polyester tính năng"
+                    },
+                    new
+                    {
+                        Id = new Guid("093e72f7-4bae-448c-b009-b6acf0fe9120"),
+                        Name = "Vải Recycle"
+                    });
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Order", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<DateTime?>("CompletedDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<DateTime>("CreatedDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<int>("OrderStatus")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasDefaultValue(0);
+
+                b.Property<DateTime?>("PaidDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("ShipAddress")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<DateTime?>("ShipDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("ShipName")
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnType("nvarchar(128)");
+
+                b.Property<string>("ShipPhoneNumber")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<Guid?>("UserId")
+                    .IsRequired()
+                    .HasColumnType("uniqueidentifier");
+
+                b.HasKey("Id");
+
+                b.HasIndex("UserId");
+
+                b.ToTable("Orders");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.OrderDetail", b =>
+            {
+                b.Property<Guid>("ProductDetailId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<Guid>("OrderId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(18,2)");
+
+                b.Property<int>("Quantity")
+                    .HasColumnType("int");
+
+                b.Property<int>("Status")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasDefaultValue(0);
+
+                b.HasKey("ProductDetailId", "OrderId");
+
+                b.HasIndex("OrderId");
+
+                b.ToTable("OrderDetails");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Product", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<string>("Description")
+                    .IsRequired()
+                    .HasMaxLength(512)
+                    .HasColumnType("nvarchar(512)");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar(256)");
+
+                b.Property<int>("Status")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasDefaultValue(0);
+
+                b.HasKey("Id");
+
+                b.ToTable("Products");
+
+                b.HasData(
+                    new
+                    {
+                        Id = new Guid("1dc01736-d7e2-4c24-94de-00844d5cb1f9"),
+                        Description = "Chất liệu: 86% Poly + 14% Spandex. Co giãn 4 chiều mang lại sự thoải mái để bạn vận động hết mình. Thiết kế công thái học, cải tiến giữ các đường may không bị mài mòn và tăng độ bền. Chất liệu thấm mồ hôi và khô nhanh, thoáng khí mang lại khả năng khô thoáng vượt trội. Form áo: Slim fit. Người mẫu: 180cm - 80kg, mặc áo size XL. Tự hào sản xuất tại Việt Nam",
+                        Name = "Gym Powerfit",
+                        Status = 0
+                    },
+                    new
+                    {
+                        Id = new Guid("3b997d7b-e67a-4b00-8e4a-043ce70b2844"),
+                        Description = "Sản phẩm trong Bộ sưu tập Summer. Chất liệu: 100% Cotton mềm mại. Định lượng vải: 200gsm, dày dặn. Dáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà. Hình in PET bền bỉ, không lo bong tróc, thoải mái giặt máy. Tự hào sản xuất tại Việt Nam",
+                        Name = "Cotton Summer Coolwaves",
+                        Status = 0
+                    });
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.ProductDetail", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<Guid?>("ColorId")
+                    .IsRequired()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<DateTime>("CreatedDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<Guid?>("MaterialId")
+                    .IsRequired()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<decimal>("OriginalPrice")
+                    .HasColumnType("decimal(18,2)");
+
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(18,2)");
+
+                b.Property<Guid?>("ProductId")
+                    .IsRequired()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<Guid?>("SizeId")
+                    .IsRequired()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<int>("Status")
+                    .HasColumnType("int");
+
+                b.Property<int>("Stock")
+                    .HasColumnType("int");
+
+                b.HasKey("Id");
+
+                b.HasIndex("ColorId");
+
+                b.HasIndex("MaterialId");
+
+                b.HasIndex("ProductId");
+
+                b.HasIndex("SizeId");
+
+                b.ToTable("ProductDetails");
+
+                b.HasData(
+                    new
+                    {
+                        Id = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5"),
+                        ColorId = new Guid("b8457fc8-60a5-43a1-9e4a-e4855c86524f"),
+                        CreatedDate = new DateTime(2023, 6, 30, 14, 30, 47, 442, DateTimeKind.Local).AddTicks(1292),
+                        MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
+                        OriginalPrice = 150000m,
+                        Price = 199000m,
+                        ProductId = new Guid("1dc01736-d7e2-4c24-94de-00844d5cb1f9"),
+                        SizeId = new Guid("573566fb-4e8c-4dad-bb2c-b2d9a597d9f7"),
+                        Status = 0,
+                        Stock = 50
+                    },
+                    new
+                    {
+                        Id = new Guid("0a3dcb7c-884d-4a05-a5dd-a1d5df404dff"),
+                        ColorId = new Guid("b8457fc8-60a5-43a1-9e4a-e4855c86524f"),
+                        CreatedDate = new DateTime(2023, 6, 30, 14, 30, 47, 442, DateTimeKind.Local).AddTicks(1309),
+                        MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
+                        OriginalPrice = 150000m,
+                        Price = 199000m,
+                        ProductId = new Guid("1dc01736-d7e2-4c24-94de-00844d5cb1f9"),
+                        SizeId = new Guid("966f5bf6-a0a7-4d88-a700-728eb8e32c85"),
+                        Status = 0,
+                        Stock = 50
+                    },
+                    new
+                    {
+                        Id = new Guid("231e0060-c281-4c8d-b5c2-791edfa5a680"),
+                        ColorId = new Guid("b8457fc8-60a5-43a1-9e4a-e4855c86524f"),
+                        CreatedDate = new DateTime(2023, 6, 30, 14, 30, 47, 442, DateTimeKind.Local).AddTicks(1311),
+                        MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
+                        OriginalPrice = 150000m,
+                        Price = 199000m,
+                        ProductId = new Guid("1dc01736-d7e2-4c24-94de-00844d5cb1f9"),
+                        SizeId = new Guid("190d7f43-6bde-4d74-a58b-e50b22b35751"),
+                        Status = 0,
+                        Stock = 50
+                    },
+                    new
+                    {
+                        Id = new Guid("aa06827c-df06-4a43-94d2-75bba02d9da6"),
+                        ColorId = new Guid("c22c0a96-b3fc-4223-8cca-b9046732bb89"),
+                        CreatedDate = new DateTime(2023, 6, 30, 14, 30, 47, 442, DateTimeKind.Local).AddTicks(1312),
+                        MaterialId = new Guid("5cd1370c-dd94-4038-b33c-49a27aad25ab"),
+                        OriginalPrice = 200000m,
+                        Price = 299000m,
+                        ProductId = new Guid("3b997d7b-e67a-4b00-8e4a-043ce70b2844"),
+                        SizeId = new Guid("573566fb-4e8c-4dad-bb2c-b2d9a597d9f7"),
+                        Status = 0,
+                        Stock = 50
+                    });
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.ProductImage", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<string>("Caption")
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnType("nvarchar(128)");
+
+                b.Property<string>("ImagePath")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<bool>("IsDefault")
+                    .HasColumnType("bit");
+
+                b.Property<Guid>("ProductDetailId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<int>("SortOrder")
+                    .HasColumnType("int");
+
+                b.HasKey("Id");
+
+                b.HasIndex("ProductDetailId");
+
+                b.ToTable("ProductImages");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.ProductInCategory", b =>
+            {
+                b.Property<Guid>("ProductId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<Guid>("CategoryId")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<Guid?>("CategoryId1")
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<Guid?>("ProductId1")
+                    .HasColumnType("uniqueidentifier");
+
+                b.HasKey("ProductId", "CategoryId");
+
+                b.HasIndex("CategoryId");
+
+                b.HasIndex("CategoryId1");
+
+                b.HasIndex("ProductId1");
+
+                b.ToTable("ProductInCategories");
+
+                b.HasData(
+                    new
+                    {
+                        ProductId = new Guid("1dc01736-d7e2-4c24-94de-00844d5cb1f9"),
+                        CategoryId = new Guid("e785507b-109e-4c6e-b2f1-87a792896e3c")
+                    },
+                    new
+                    {
+                        ProductId = new Guid("3b997d7b-e67a-4b00-8e4a-043ce70b2844"),
+                        CategoryId = new Guid("d8eb1629-a276-4667-8da2-0926fc66de0c")
+                    });
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Promotion", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
+
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                b.Property<bool>("ApplyForAll")
+                    .HasColumnType("bit");
+
+                b.Property<decimal?>("DiscountAmount")
+                    .HasColumnType("decimal(18,2)");
+
+                b.Property<int?>("DiscountPercent")
+                    .HasColumnType("int");
+
+                b.Property<DateTime>("FromDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<int>("Status")
+                    .HasColumnType("int");
+
+                b.Property<DateTime>("ToDate")
+                    .HasColumnType("datetime2");
+
+                b.HasKey("Id");
+
+                b.ToTable("Promotions", (string)null);
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Size", b =>
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
+
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .HasColumnType("nvarchar(30)");
+
+                b.Property<int>("SortOrder")
+                    .HasColumnType("int");
+
+                b.HasKey("Id");
+
+                b.ToTable("Sizes");
+
+                b.HasData(
+                    new
+                    {
+                        Id = new Guid("573566fb-4e8c-4dad-bb2c-b2d9a597d9f7"),
+                        Name = "S",
+                        SortOrder = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("966f5bf6-a0a7-4d88-a700-728eb8e32c85"),
+                        Name = "M",
+                        SortOrder = 2
+                    },
+                    new
+                    {
+                        Id = new Guid("3cb61050-1fe6-4f5c-94a2-4db93e69c7ba"),
+                        Name = "L",
+                        SortOrder = 3
+                    },
+                    new
+                    {
+                        Id = new Guid("190d7f43-6bde-4d74-a58b-e50b22b35751"),
+                        Name = "XL",
+                        SortOrder = 4
+                    },
+                    new
+                    {
+                        Id = new Guid("f6a1a967-7487-463b-9d7b-09aebf15d304"),
+                        Name = "XXL",
+                        SortOrder = 5
+                    },
+                    new
+                    {
+                        Id = new Guid("aa66fbee-a9d6-4bb5-8ed8-b329d394221f"),
+                        Name = "XXXL",
+                        SortOrder = 6
+                    });
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Cart", b =>
+            {
+                b.HasOne("shop.Data.Entities.AppUser", "User")
+                    .WithOne("Cart")
+                    .HasForeignKey("shop.Data.Entities.Cart", "UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.Navigation("User");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.CartDetail", b =>
+            {
+                b.HasOne("shop.Data.Entities.ProductDetail", null)
+                    .WithMany("CartDetails")
+                    .HasForeignKey("ProductDetailId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.HasOne("shop.Data.Entities.Cart", "Cart")
+                    .WithMany("CartDetails")
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.Navigation("Cart");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Order", b =>
+            {
+                b.HasOne("shop.Data.Entities.AppUser", "User")
+                    .WithMany("Orders")
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.Navigation("User");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.OrderDetail", b =>
+            {
+                b.HasOne("shop.Data.Entities.Order", "Order")
+                    .WithMany("OrderDetails")
+                    .HasForeignKey("OrderId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.HasOne("shop.Data.Entities.ProductDetail", "ProductDetail")
+                    .WithMany("OrderDetails")
+                    .HasForeignKey("ProductDetailId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.Navigation("Order");
+
+                b.Navigation("ProductDetail");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.ProductDetail", b =>
+            {
+                b.HasOne("shop.Data.Entities.Color", "Color")
+                    .WithMany("ProductDetails")
+                    .HasForeignKey("ColorId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.HasOne("shop.Data.Entities.Material", "Material")
+                    .WithMany("ProductDetails")
+                    .HasForeignKey("MaterialId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.HasOne("shop.Data.Entities.Product", "Product")
+                    .WithMany("ProductDetails")
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.HasOne("shop.Data.Entities.Size", "Size")
+                    .WithMany("ProductDetails")
+                    .HasForeignKey("SizeId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.Navigation("Color");
+
+                b.Navigation("Material");
+
+                b.Navigation("Product");
+
+                b.Navigation("Size");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.ProductImage", b =>
+            {
+                b.HasOne("shop.Data.Entities.ProductDetail", "ProductDetail")
+                    .WithMany("ProductImages")
+                    .HasForeignKey("ProductDetailId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.Navigation("ProductDetail");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.ProductInCategory", b =>
+            {
+                b.HasOne("shop.Data.Entities.Category", "Category")
+                    .WithMany()
+                    .HasForeignKey("CategoryId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.HasOne("shop.Data.Entities.Category", null)
+                    .WithMany("ProductInCategories")
+                    .HasForeignKey("CategoryId1");
+
+                b.HasOne("shop.Data.Entities.Product", "Product")
+                    .WithMany()
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.HasOne("shop.Data.Entities.Product", null)
+                    .WithMany("ProductInCategories")
+                    .HasForeignKey("ProductId1");
+
+                b.Navigation("Category");
+
+                b.Navigation("Product");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.AppUser", b =>
+            {
+                b.Navigation("Cart")
+                    .IsRequired();
+
+                b.Navigation("Orders");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Cart", b =>
+            {
+                b.Navigation("CartDetails");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Category", b =>
+            {
+                b.Navigation("ProductInCategories");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Color", b =>
+            {
+                b.Navigation("ProductDetails");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Material", b =>
+            {
+                b.Navigation("ProductDetails");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Order", b =>
+            {
+                b.Navigation("OrderDetails");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Product", b =>
+            {
+                b.Navigation("ProductDetails");
+
+                b.Navigation("ProductInCategories");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.ProductDetail", b =>
+            {
+                b.Navigation("CartDetails");
+
+                b.Navigation("OrderDetails");
+
+                b.Navigation("ProductImages");
+            });
+
+        modelBuilder.Entity("shop.Data.Entities.Size", b =>
+            {
+                b.Navigation("ProductDetails");
+            });
 #pragma warning restore 612, 618
-        }
     }
 }

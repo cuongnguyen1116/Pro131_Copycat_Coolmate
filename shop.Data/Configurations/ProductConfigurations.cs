@@ -10,7 +10,11 @@ public class ProductConfigurations : IEntityTypeConfiguration<Product>
     public void Configure(EntityTypeBuilder<Product> builder)
     {
         builder.HasKey(x => x.Id);
+
         builder.Property(x => x.Name).HasMaxLength(256).IsRequired();
+
+        builder.Property(x => x.Description).HasMaxLength(512).IsRequired();
+
         builder.Property(x => x.Status).HasDefaultValue(Status.Active);
     }
 }

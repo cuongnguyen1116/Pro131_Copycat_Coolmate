@@ -14,4 +14,10 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\shop.Application\shop.Application.csproj" />
+    <ProjectReference Include="..\shop.Data\shop.Data.csproj" />
+    <ProjectReference Include="..\shop.Utilities\shop.Utilities.csproj" />
+  </ItemGroup>
+
 </Project>

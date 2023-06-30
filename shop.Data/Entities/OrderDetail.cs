@@ -9,6 +9,6 @@ public class OrderDetail
     public int Quantity { get; set; }
     public decimal Price { get; set; }
     public Status Status { get; set; }
-    public Order Order { get; set; }
-    public ProductDetail ProductDetail { get; set; }
+    public virtual Order Order { get; set; }
+    public virtual ProductDetail ProductDetail { get; set; }
 }

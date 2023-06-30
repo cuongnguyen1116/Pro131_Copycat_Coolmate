@@ -1,17 +1,16 @@
-﻿namespace shop.Utilities.Exceptions
+﻿namespace shop.Utilities.Exceptions;
+
+public class ShopException : Exception
 {
-    public class ShopException : Exception
+    public ShopException()
     {
-        public ShopException()
-        {
-        }
+    }
 
-        public ShopException(string message) : base(message)
-        {
-        }
+    public ShopException(string message) : base(message)
+    {
+    }
 
-        public ShopException(string message, Exception inner) : base(message, inner)
-        {
-        }
+    public ShopException(string message, Exception inner) : base(message, inner)
+    {
     }
 }

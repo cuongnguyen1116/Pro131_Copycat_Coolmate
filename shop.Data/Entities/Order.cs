@@ -14,6 +14,6 @@ public class Order
     public string ShipAddress { get; set; }
     public string ShipPhoneNumber { get; set; }
     public OrderStatus OrderStatus { get; set; }
-    public AppUser User { get; set; }
-    public ICollection<OrderDetail> OrderDetails { get; set; }
+    public virtual AppUser User { get; set; }
+    public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 }

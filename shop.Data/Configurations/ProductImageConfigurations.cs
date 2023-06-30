@@ -9,7 +9,9 @@ public class ProductImageConfigurations : IEntityTypeConfiguration<ProductImage>
     public void Configure(EntityTypeBuilder<ProductImage> builder)
     {
         builder.HasKey(x => x.Id);
+
         builder.Property(x => x.ImagePath).IsRequired();
+
         builder.Property(x => x.Caption).HasMaxLength(128).IsRequired();
 
         builder.HasOne(x => x.ProductDetail).WithMany(x => x.ProductImages).HasForeignKey(x => x.ProductDetailId);

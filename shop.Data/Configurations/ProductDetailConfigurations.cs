@@ -15,5 +15,8 @@ public class ProductDetailConfigurations : IEntityTypeConfiguration<ProductDetai
         builder.Property(x => x.CreatedDate).IsRequired();
 
         builder.HasOne(x => x.Product).WithMany(x => x.ProductDetails).HasForeignKey(x => x.ProductId);
+        builder.HasOne(x => x.Color).WithMany(x => x.ProductDetails).HasForeignKey(x => x.ColorId);
+        builder.HasOne(x => x.Size).WithMany(x => x.ProductDetails).HasForeignKey(x => x.SizeId);
+        builder.HasOne(x => x.Material).WithMany(x => x.ProductDetails).HasForeignKey(x => x.MaterialId);
     }
 }

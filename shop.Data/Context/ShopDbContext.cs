@@ -23,9 +23,6 @@ public class ShopDbContext : IdentityDbContext<AppUser, AppRole, Guid>
     public DbSet<Category> Categories { get; set; }
     public DbSet<ProductImage> ProductImages { get; set; }
     public DbSet<Size> Sizes { get; set; }
-    public DbSet<ProductColor> ProductColors { get; set; }
-    public DbSet<ProductMaterial> ProductMaterials { get; set; }
-    public DbSet<ProductSize> ProductSizes { get; set; }
     public DbSet<Promotion> Promotions { get; set; }
 
     public ShopDbContext()
@@ -50,9 +47,6 @@ public class ShopDbContext : IdentityDbContext<AppUser, AppRole, Guid>
         modelBuilder.ApplyConfiguration(new ProductConfigurations());
         modelBuilder.ApplyConfiguration(new ProductDetailConfigurations());
         modelBuilder.ApplyConfiguration(new ProductImageConfigurations());
-        modelBuilder.ApplyConfiguration(new ProductColorConfigurations());
-        modelBuilder.ApplyConfiguration(new ProductSizeConfigurations());
-        modelBuilder.ApplyConfiguration(new ProductMaterialConfigurations());
         modelBuilder.ApplyConfiguration(new ProductInCategoryConfigurations());
         modelBuilder.ApplyConfiguration(new PromotionConfigurations());
         modelBuilder.ApplyConfiguration(new SizeConfigurations());

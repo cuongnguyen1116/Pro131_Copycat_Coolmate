@@ -1,10 +1,9 @@
 ﻿using shop.ViewModels.Common;
 
-namespace shop.ViewModels.System.Users
+namespace shop.ViewModels.System.Users;
+
+public class RoleAssignRequest
 {
-    public class RoleAssignRequest
-    {
-        public Guid Id { get; set; }
-        public List<SelectItem> Roles { get; set; } = new List<SelectItem>();
-    }
+    public Guid Id { get; set; }
+    public List<SelectItem> Roles { get; set; } = new List<SelectItem>();
 }
