@@ -32,12 +32,14 @@ public static class ModelBuilderExtensions
             {
                 Id = productId1,
                 Name = "Gym Powerfit",
+                Description ="",
                 Status = Status.Active
             },
             new Product
             {
                 Id = productId2,
                 Name = "Cotton Summer Coolwaves",
+                Description = "",
                 Status = Status.Active
             });
 
