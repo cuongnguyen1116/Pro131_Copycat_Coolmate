@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace shop.Application.Common;
 
@@ -7,11 +8,10 @@ public class FileStorageService : IStorageService
     private readonly string _userContentFolder;
     private const string USER_CONTENT_FOLDER_NAME = "user-content";
 
-    public FileStorageService(IHostEnvironment webHostEnvironment)
+    public FileStorageService(IWebHostEnvironment webHostEnvironment)
     {
-        _userContentFolder = Path.Combine(webHostEnvironment.ContentRootPath, USER_CONTENT_FOLDER_NAME);
+        _userContentFolder = Path.Combine(webHostEnvironment.WebRootPath, USER_CONTENT_FOLDER_NAME);
     }
-
     public string GetFileUrl(string fileName)
     {
         return $"/{USER_CONTENT_FOLDER_NAME}/{fileName}";

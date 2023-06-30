@@ -10,5 +10,8 @@ namespace shop.Application.Catalog.Product;
 public interface IProductServices
 {
     Task<List<ProductVm>> GetAll();
-
+    Task<ProductVm> GetById(Guid productdetailId);
+    Task<bool> Create(ProductCreateRequest request);
+    Task<bool> Update(ProductUpdateRequest request);
+    Task<bool> Delete(Guid productdetailId);
 }
