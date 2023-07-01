@@ -1,9 +1,8 @@
-namespace shop.AdminApp.Models
-{
-    public class ErrorViewModel
-    {
-        public string? RequestId { get; set; }
+namespace shop.AdminApp.Models;
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-    }
+public class ErrorViewModel
+{
+    public string? RequestId { get; set; }
+
+    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 }
