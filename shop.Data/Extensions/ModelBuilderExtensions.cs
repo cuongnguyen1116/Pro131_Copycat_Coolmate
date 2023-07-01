@@ -44,9 +44,17 @@ public static class ModelBuilderExtensions
             });
 
         // color
-        var colorId1 = new Guid("b8457fc8-60a5-43a1-9e4a-e4855c86524f");
-        var colorId2 = new Guid("c22c0a96-b3fc-4223-8cca-b9046732bb89");
-        var colorId3 = new Guid("46894c70-1d26-4a20-993b-8d2198913585");
+        Guid colorId1 = new Guid("24f04c0b-34c3-428c-8767-0bb98da225e0");
+        Guid colorId2 = new Guid("87513ccc-798f-485a-8206-0522f1d8b0ad");
+        Guid colorId3 = new Guid("070139ef-2c91-4261-af8b-c07d2a5932b3");
+        Guid colorId4 = new Guid("5b28789c-e43f-4e10-b447-6290d4130c66");
+        Guid colorId5 = new Guid("97e83440-0351-4d34-9964-30aa65dd9cd5");
+        Guid colorId6 = new Guid("a556951b-68bd-42d2-b7b3-a765ca19edf8");
+        Guid colorId7 = new Guid("e481bd9d-e38c-4a2b-8194-30c0f6adc380");
+        Guid colorId8 = new Guid("b9ed9a3a-0098-4575-93bc-d4beda3a0c0f");
+        Guid colorId9 = new Guid("ee96d4a7-f5b8-4b83-b8bc-8b6d4c110e98");
+        Guid colorId10 = new Guid("7f60198e-4f05-4cc5-8418-cffe41c392d4");
+
         builder.Entity<Color>().HasData(
             new Color
             {
@@ -62,6 +70,40 @@ public static class ModelBuilderExtensions
             {
                 Id = colorId3,
                 Name = "Xám",
+            },
+            new Color
+            {
+                Id = colorId4,
+                Name = "Đỏ",
+            },
+             new Color
+            {
+                Id = colorId5,
+                Name = "Xanh lá cây",
+            },
+             new Color
+            {
+                Id = colorId6,
+                Name = "Xanh dương",
+            }, new Color
+            {
+                Id = colorId7,
+                Name = "Vàng",
+            },
+            new Color
+            {
+             Id = colorId8,
+             Name = "Cam",
+            },
+            new Color
+            {
+                Id = colorId9,
+                Name = "Hồng",
+            }, 
+            new Color
+            {
+                Id = colorId10,
+                Name = "Tím",
             });
 
         // material
@@ -138,10 +180,18 @@ public static class ModelBuilderExtensions
 
 
         // product detail
-        var productDetailId1 = new Guid("fb684bf0-020f-4607-8e79-b3aa9bd005a5");
-        var productDetailId2 = new Guid("0a3dcb7c-884d-4a05-a5dd-a1d5df404dff");
-        var productDetailId3 = new Guid("231e0060-c281-4c8d-b5c2-791edfa5a680");
-        var productDetailId4 = new Guid("aa06827c-df06-4a43-94d2-75bba02d9da6");
+        var productDetailId1 = new Guid("9a6ccc00-6b1c-40c5-be61-eb71323c9151");
+        var productDetailId2 = new Guid("3643727e-d49c-45f5-bfae-9cd4fbcebb45");
+        var productDetailId3 = new Guid("b799297f-d21e-4280-8df9-a3c6788c806e");
+        var productDetailId4 = new Guid("e3acb616-dd2c-44ee-93f0-754c68503b38");
+        var productDetailId5 = new Guid("f1e33f26-6797-43ae-83c5-dabb932a880e");
+        var productDetailId6 = new Guid("9610c212-5a16-4a70-8703-6bc7f1224be0");
+        var productDetailId7 = new Guid("28c12878-b191-4d42-974a-7b823de70a06");
+        var productDetailId8 = new Guid("a6767d22-3ea0-4a00-ad31-9dce1d67184e");
+        var productDetailId9 = new Guid("423f83df-dc6c-4b41-aa09-2fe30e841aa6");
+        var productDetailId10 = new Guid("18cd05cb-f995-4b13-9fa4-a9e1f1c43862");
+        var productDetailId11 = new Guid("0976ba79-d822-408a-86cb-e05045db09ed");
+        var productDetailId12 = new Guid("6a008d16-196e-40fe-ada5-2acf339fbede");
         builder.Entity<ProductDetail>().HasData(
             new ProductDetail
             {
@@ -152,9 +202,10 @@ public static class ModelBuilderExtensions
                 OriginalPrice = 150000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
-                ColorId= colorId1,
+                ColorId = colorId2,
                 SizeId = sizeId1,
-            }, new ProductDetail
+            }, 
+            new ProductDetail
             {
                 Id = productDetailId2,
                 ProductId = productId1,
@@ -163,7 +214,7 @@ public static class ModelBuilderExtensions
                 OriginalPrice = 150000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
-                ColorId= colorId1,
+                ColorId = colorId2,
                 SizeId = sizeId2,
             }, new ProductDetail
             {
@@ -174,20 +225,109 @@ public static class ModelBuilderExtensions
                 OriginalPrice = 150000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
-                ColorId= colorId1,
-                SizeId = sizeId4,
+                ColorId = colorId2,
+                SizeId = sizeId3,
             },
             new ProductDetail
             {
                 Id = productDetailId4,
-                ProductId = productId2,
+                ProductId = productId1,
                 Stock = 50,
                 Price = 299000,
                 OriginalPrice = 200000,
                 CreatedDate = DateTime.Now,
-                MaterialId = materialId2,
-                ColorId= colorId2,
+                MaterialId = materialId1,
+                ColorId = colorId2,
+                SizeId = sizeId4
+            },
+            new ProductDetail
+            {
+                Id = productDetailId5,
+                ProductId = productId1,
+                Stock = 50,
+                Price = 299000,
+                OriginalPrice = 200000,
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId1,
+                ColorId = colorId2,
+                SizeId = sizeId5
+            }, new ProductDetail
+            {
+                Id = productDetailId6,
+                ProductId = productId1,
+                Stock = 50,
+                Price = 299000,
+                OriginalPrice = 200000,
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId1,
+                ColorId = colorId2,
+                SizeId = sizeId6
+            }, new ProductDetail
+            {
+                Id = productDetailId7,
+                ProductId = productId1,
+                Stock = 50,
+                Price = 299000,
+                OriginalPrice = 200000,
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId1,
+                ColorId = colorId1,
                 SizeId = sizeId1
+            }, new ProductDetail
+            {
+                Id = productDetailId8,
+                ProductId = productId1,
+                Stock = 50,
+                Price = 299000,
+                OriginalPrice = 200000,
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId1,
+                ColorId = colorId1,
+                SizeId = sizeId2
+            }, new ProductDetail
+            {
+                Id = productDetailId9,
+                ProductId = productId1,
+                Stock = 50,
+                Price = 299000,
+                OriginalPrice = 200000,
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId1,
+                ColorId = colorId1,
+                SizeId = sizeId3
+            }, new ProductDetail
+            {
+                Id = productDetailId10,
+                ProductId = productId1,
+                Stock = 50,
+                Price = 299000,
+                OriginalPrice = 200000,
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId1,
+                ColorId = colorId1,
+                SizeId = sizeId4
+            }, new ProductDetail
+            {
+                Id = productDetailId11,
+                ProductId = productId1,
+                Stock = 50,
+                Price = 299000,
+                OriginalPrice = 200000,
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId1,
+                ColorId = colorId1,
+                SizeId = sizeId5
+            }, new ProductDetail
+            {
+                Id = productDetailId12,
+                ProductId = productId1,
+                Stock = 50,
+                Price = 299000,
+                OriginalPrice = 200000,
+                CreatedDate = DateTime.Now,
+                MaterialId = materialId1,
+                ColorId = colorId1,
+                SizeId = sizeId6
             });
 
         // bảng trung gian
@@ -233,6 +373,10 @@ public static class ModelBuilderExtensions
         var userId1 = new Guid("69BD714F-9576-45BA-B5B7-F00649BE00DE");
         var userId2 = new Guid("c2ec6dd4-8170-4b6d-acf4-33d52a128789");
         var userId3 = new Guid("3b294e1f-c3f7-4f71-9be6-11c614fbdce5");
+        var userId4 = new Guid("a2d98f29-7a98-4d0d-ba21-aa1d88c4e5c2");
+        var userId5 = new Guid("b6c75c5f-9d1b-4a0d-9c6d-3e7d3ce2a2a7");
+        var userId6 = new Guid("e3e4e9f8-cd6d-4299-9d8f-fb5e8ef6d0d5");
+        var userId7 = new Guid("2f00b6e3-2583-4b5f-a92f-9d8f2b8d4d7f");
         builder.Entity<AppUser>().HasData(
             new AppUser
             {
@@ -275,6 +419,62 @@ public static class ModelBuilderExtensions
                 FirstName = "Hieu",
                 LastName = "Le Minh",
                 DoB = new DateTime(2003, 03, 18)
+            },
+            new AppUser
+            {
+                Id = userId4,
+                UserName = "john.doe",
+                NormalizedUserName = "JOHN.DOE",
+                Email = "john.doe@example.com",
+                NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Password123!"),
+                SecurityStamp = string.Empty,
+                FirstName = "John",
+                LastName = "Doe",
+                DoB = new DateTime(1990, 01, 01)
+            },
+            new AppUser
+            {
+                Id = userId5,
+                UserName = "jane.doe",
+                NormalizedUserName = "JANE.DOE",
+                Email = "jane.doe@example.com",
+                NormalizedEmail = "JANE.DOE@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Password123!"),
+                SecurityStamp = string.Empty,
+                FirstName = "Jane",
+                LastName = "Doe",
+                DoB = new DateTime(1995, 05, 05)
+            },
+            new AppUser
+            {
+                Id = userId6,
+                UserName = "bob.smith",
+                NormalizedUserName = "BOB.SMITH",
+                Email = "bob.smith@example.com",
+                NormalizedEmail = "BOB.SMITH@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Password123!"),
+                SecurityStamp = string.Empty,
+                FirstName = "Bob",
+                LastName = "Smith",
+                DoB = new DateTime(1985, 12, 31)
+            }, 
+            new AppUser
+            {
+                Id = userId7,
+                UserName = "jennifer.smith",
+                NormalizedUserName = "JENNIFER.SMITH",
+                Email = "jennifer.smith@example.com",
+                NormalizedEmail = "JENNIFER.SMITH@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Password123!"),
+                SecurityStamp = string.Empty,
+                FirstName = "Jennifer",
+                LastName = "Smith",
+                DoB = new DateTime(1988, 10, 15)
             });
 
         builder.Entity<IdentityUserRole<Guid>>().HasData(
@@ -292,6 +492,169 @@ public static class ModelBuilderExtensions
             {
                 RoleId = roleId3,
                 UserId = userId3
+            },
+            new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId4
+            }, new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId5
+            }, new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId6
+            }, new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId7
+            });
+        
+        var orderId1 = new Guid("f602aed4-37de-446c-8b4d-d5e407a4bf33");
+        var orderId2 = new Guid("4f31c9cd-6fdf-4d3a-9d8b-6f1d3d5c1c24");
+        var orderId3 = new Guid("7afa0b0b-1c0d-4bd4-a1e8-9f1a38a5e5ab");
+        var orderId4 = new Guid("8fd4f3f5-4f1a-4f23-a2b0-1dbf8e9d7a9c");
+        var orderId5 = new Guid("a60b3fd4-40a0-4f4e-8f5b-6e5a9a3d63e6");
+        var orderId6 = new Guid("c9e9de6f-0e6f-4b3e-9f6c-3f8f3a0e6a1d");
+        var orderId7 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
+        DateTime currentTime = DateTime.Now;
+        DateTime shipDate = currentTime.AddDays(1);
+        DateTime completedDate = shipDate.AddDays(3);
+        builder.Entity<Order>().HasData(
+            new Order
+            {
+                Id = orderId1,
+                UserId =userId1,
+                CreatedDate= currentTime,
+                PaidDate = currentTime,
+                ShipDate = shipDate,
+                CompletedDate = completedDate,
+                ShipName = "Alice",
+                ShipPhoneNumber ="0123456789",
+                ShipAddress = "123 Main St.",
+                OrderStatus = OrderStatus.Success
+
+            },
+            new Order
+            {
+                Id = orderId2,
+                UserId = userId2,
+                CreatedDate = currentTime,
+                PaidDate = currentTime,
+                ShipDate = shipDate,
+                CompletedDate = null,
+                ShipName = "Alice",
+                ShipPhoneNumber = "0123456789",
+                ShipAddress = "1010 Oak Dr.",
+                OrderStatus = OrderStatus.Shipping
+
+            },new Order
+            {
+                Id = orderId3,
+                UserId = userId3,
+                CreatedDate = currentTime,
+                PaidDate = null,
+                ShipDate = null,
+                CompletedDate = null,
+                ShipName = "Alice",
+                ShipPhoneNumber = "0123456789",
+                ShipAddress = "1111 Pine Ln.",
+                OrderStatus = OrderStatus.InProgress
+
+            },new Order
+            {
+                Id = orderId4,
+                UserId = userId4,
+                CreatedDate = currentTime,
+                PaidDate = currentTime,
+                ShipDate = shipDate,
+                CompletedDate = completedDate,
+                ShipName = "Alice",
+                ShipPhoneNumber = "0123456789",
+                ShipAddress = "123 Main St.",
+                OrderStatus = OrderStatus.Success
+
+            },new Order
+            {
+                Id = orderId7,
+                UserId = userId7,
+                CreatedDate = currentTime,
+                PaidDate = null,
+                ShipDate = null,
+                CompletedDate = null,
+                ShipName = "0987654321",
+                ShipPhoneNumber = "0987654321",
+                ShipAddress = "456 Elm St.",
+                OrderStatus = OrderStatus.InProgress
+
+            },new Order
+            {
+                Id = orderId5,
+                UserId = userId5,
+                CreatedDate = currentTime,
+                PaidDate = currentTime,
+                ShipDate = shipDate,
+                CompletedDate = completedDate,
+                ShipName = "0987654321",
+                ShipPhoneNumber = "0987654321",
+                ShipAddress = "789 Maple Ave.",
+                OrderStatus = OrderStatus.Success
+
+            },new Order
+            {
+                Id = orderId6,
+                UserId = userId6,
+                CreatedDate = currentTime,
+                PaidDate = currentTime,
+                ShipDate = shipDate,
+                CompletedDate = completedDate,
+                ShipName = "Charlie",
+                ShipPhoneNumber = "0987654321",
+                ShipAddress = "1212 Cedar Blvd.",
+                OrderStatus = OrderStatus.Success
+
+            });
+        var orderdetailId1 = new Guid("a9b9e7f3-6fb3-4c7c-8e2d-19f4c7d7d1ba");
+        var orderdetailId2 = new Guid("45b8fada-8d4b-4e8f-944c-0d4d2c4f760a");
+        var orderdetailId3 = new Guid("c5c4c8fa-7db7-4b5d-8e5f-5b8c4c7b618f");
+        var orderdetailId4 = new Guid("f4f4b1d2-fbc7-4c7a-a4b6-8d4d5e6f7a8b");
+        builder.Entity<OrderDetail>().HasData(
+            new OrderDetail
+            {
+                //Id = orderdetailId1,
+                OrderId = orderId1,
+                ProductDetailId = productDetailId1,
+                Quantity = 5,
+                Price = 199000 * 5,
+                Status = Status.Active
+            },
+            new OrderDetail
+            {
+                //Id = orderdetailId2,
+                OrderId = orderId1,
+                ProductDetailId = productDetailId2,
+                Quantity = 5,
+                Price = 199000 * 5,
+                Status = Status.Active
+            },
+            new OrderDetail
+            {
+                //Id = orderdetailId3,
+                OrderId = orderId2,
+                ProductDetailId = productDetailId3,
+                Quantity = 5,
+                Price = 199000 * 5,
+                Status = Status.Active
+            },
+            new OrderDetail
+            {
+                //Id = orderdetailId4,
+                OrderId = orderId2,
+                ProductDetailId = productDetailId4,
+                Quantity = 5,
+                Price = 199000 * 5,
+                Status = Status.Active
             });
 
     }
