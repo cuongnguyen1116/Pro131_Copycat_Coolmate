@@ -19,7 +19,7 @@ public class OrderConfigurations : IEntityTypeConfiguration<Order>
 
         builder.Property(x => x.ShipPhoneNumber).IsRequired();
 
-        builder.Property(x => x.OrderStatus).HasDefaultValue(OrderStatus.InProgress);
+        builder.Property(x => x.OrderStatus).HasDefaultValue(OrderStatus.Pending);
 
         builder.HasOne(x => x.User).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
     }

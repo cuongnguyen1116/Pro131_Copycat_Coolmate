@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using shop.Data.Context;
 
@@ -11,9 +12,10 @@ using shop.Data.Context;
 namespace shop.Data.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230703092441_addExampleData2")]
+    partial class addExampleData2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1128,9 +1130,19 @@ namespace shop.Data.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CategoryId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ProductId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("ProductId", "CategoryId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("CategoryId1");
+
+                    b.HasIndex("ProductId1");
 
                     b.ToTable("ProductInCategories");
 
@@ -1348,16 +1360,24 @@ namespace shop.Data.Migrations
             modelBuilder.Entity("shop.Data.Entities.ProductInCategory", b =>
                 {
                     b.HasOne("shop.Data.Entities.Category", "Category")
-                        .WithMany("ProductInCategories")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("shop.Data.Entities.Product", "Product")
+                    b.HasOne("shop.Data.Entities.Category", null)
                         .WithMany("ProductInCategories")
+                        .HasForeignKey("CategoryId1");
+
+                    b.HasOne("shop.Data.Entities.Product", "Product")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("shop.Data.Entities.Product", null)
+                        .WithMany("ProductInCategories")
+                        .HasForeignKey("ProductId1");
 
                     b.Navigation("Category");
 

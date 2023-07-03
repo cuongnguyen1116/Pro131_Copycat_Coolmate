@@ -2,9 +2,14 @@
 
 public enum OrderStatus
 {
-    InProgress,
+    Pending,
     Confirmed,
-    Shipping,
-    Success,
-    Canceled
+    AwaitingShipment,
+    AWaitingPickup,
+    Completed,
+    Canceled,
+    Refunded,
+    PartiallyRefunded,
+    Disputed,
+    ManualVerificationRequired
 }

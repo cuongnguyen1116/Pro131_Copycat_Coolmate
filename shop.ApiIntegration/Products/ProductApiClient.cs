@@ -1,23 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using shop.Data.Entities;
-using shop.Utilities.Constants;
+﻿using Newtonsoft.Json;
 using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Colors;
 using shop.ViewModels.Catalog.Materials;
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Catalog.Sizes;
 using shop.ViewModels.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace shop.ApiIntegration
+namespace shop.ApiIntegration.Products
 {
     public class ProductApiClient : IProductApiClient
     {

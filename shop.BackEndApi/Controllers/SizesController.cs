@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Sizes;
-using shop.ViewModels.Catalog.Sizes;
 
 namespace shop.BackEndApi.Controllers
 {

@@ -17,7 +17,7 @@ public class CategoryServices : ICategoryServices
 
     public async Task<bool> Create(CategoryVm vm)
     {
-        var existing = _context.Categories.FirstOrDefault(x=>x.Name.Trim().ToLower() == vm.Name.Trim().ToLower());
+        var existing = _context.Categories.FirstOrDefault(x => x.Name.Trim().ToLower() == vm.Name.Trim().ToLower());
         if (existing != null) throw new ShopException($"Đã tồn tại danh mục với tên {vm.Name}");
         var category = new Category
         {

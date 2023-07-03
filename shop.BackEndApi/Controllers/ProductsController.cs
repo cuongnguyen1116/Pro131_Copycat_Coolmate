@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Products;
 using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
@@ -49,7 +47,7 @@ namespace shop.BackEndApi.Controllers
         }
         [HttpPut("update/{productDetailId}")]
         [Consumes("multipart/form-data")]
-        
+
         public async Task<IActionResult> Update([FromRoute] Guid productDetailId, [FromForm] ProductUpdateRequest request)
         {
             if (!ModelState.IsValid)

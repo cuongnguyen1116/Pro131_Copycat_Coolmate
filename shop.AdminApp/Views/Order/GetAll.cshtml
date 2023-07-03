@@ -1,0 +1,117 @@
+﻿    @model IEnumerable<shop.ViewModels.Catalog.Orders.OrderVm>
+
+@{
+    ViewData["Title"] = "GetAll";
+    int count = 0;
+}
+
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+        }, 2000);
+    </script>
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Danh sách đơn hàng</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Danh sách đơn hàng</li>
+    </ol>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetAll","Order")">Tất Cả</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrderByStatus","Order", new {status = 0})">Đang Chờ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrderByStatus","Order", new {status = 1})">Đã Xác Nhận</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrderByStatus","Order", new {status = 2})">Chờ Giao Hàng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrderByStatus","Order", new {status = 3})">Chờ Nhận Hàng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrderByStatus","Order", new {status = 4})">Hoàn Thành</a>
+        </li>
+    </ul>
+
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <form asp-action="Index" method="get">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary">Tìm</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                @if (ViewBag.SuccessMsg != null)
+                {
+                    <div id="msgAlert" class="alert alert-success" role="alert">
+                        @ViewBag.SuccessMsg
+                    </div>
+                }
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã Đơn Hàng</th>
+                            <th>Tên Khách Hàng</th>
+                            <th>Tổng Đơn Hàng</th>
+                            <th>Trạng Thái</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr onclick="location.href='@Url.Action("GetOrderDetails", "Order", new { id = item.Id })'">
+                                <td>
+                                    @{
+                                        count++;
+                                    }
+                                    @count
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CustomerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Total)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails","Order", new {id = item.Id})">Chi tiết</a> | 
+                                    <a class="btn btn-success" href="@Url.Action()"> </a>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
