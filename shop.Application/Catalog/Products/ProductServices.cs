@@ -12,8 +12,10 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using shop.Utilities.Exceptions;
+using shop.ViewModels.Common;
+using shop.ViewModels.Catalog.Categories;
 
-namespace shop.Application.Catalog.Product;
+namespace shop.Application.Catalog.Products;
 
 public class ProductServices : IProductServices
 {
@@ -174,5 +176,109 @@ public class ProductServices : IProductServices
         };
 
         return productDetailViewModel;
+    }
+
+    public async Task<List<ProductPropVm>> GetAllProductProp()
+    {
+        return await _context.Products
+                .Select(i => new ProductPropVm()
+                {
+                    Id=i.Id,
+                    Name = i.Name,
+                    Description = i.Description,
+                    Status = i.Status
+                }
+            ).ToListAsync();
+    }
+
+    public async Task<ProductPropVm> GetByIdProductProp(Guid productPropId)
+    {
+        var c = await _context.Products.FindAsync(productPropId);
+        if (c == null)
+        {
+            throw new ShopException("Can't find product");
+        }
+        else
+        {
+            var productProp = new ProductPropVm()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Status = c.Status
+            };
+            return productProp;
+        }
+    }
+
+    public async Task<bool> CreateProductProp(ProductPropVm request)
+    {
+        var product = new Product()
+        {
+            Id = Guid.NewGuid(),
+            Name = request.Name,
+            Description = request.Description,
+            Status = request.Status
+        };
+        _context.Products.Add(product);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<bool> UpdateProductProp(ProductPropVm request)
+    {
+        var product = await _context.Products.FindAsync(request.Id);
+        if (product == null)
+        {
+            throw  new ShopException("Can't find product");
+        }
+        product.Name = request.Name;
+        product.Description = request.Description;
+        product.Status = request.Status;
+        _context.Products.Update(product);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<bool> DeleteProductProp(Guid productPropId)
+    {
+        var product = await _context.Products.FindAsync(productPropId);
+        if (product == null)
+        {
+            throw new ShopException("Can't find product");
+        }
+        _context.Products.Remove(product);
+        await _context.SaveChangesAsync();
+        return true;
+
+    }
+
+    public async Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request)
+    {
+        var pro = await _context.Products.FindAsync(id);
+        if (pro == null)
+        {
+            return new ApiErrorResult<bool>($"Sản phẩm với id {id} không tồn tại");
+        }
+        foreach (var category in request.Categories)
+        {
+            var productInCategory = await _context.ProductInCategories
+                .FirstOrDefaultAsync(x => x.CategoryId == Guid.Parse(category.Id)
+                && x.ProductId == id);
+            if (productInCategory != null && category.Selected == false)
+            {
+                _context.ProductInCategories.Remove(productInCategory);
+            }
+            else if (productInCategory == null && category.Selected)
+            {
+                await _context.ProductInCategories.AddAsync(new ProductInCategory()
+                {
+                    CategoryId = Guid.Parse(category.Id),
+                    ProductId = id
+                });
+            }
+        }
+        await _context.SaveChangesAsync();
+        return new ApiSuccessResult<bool>();
     }
 }

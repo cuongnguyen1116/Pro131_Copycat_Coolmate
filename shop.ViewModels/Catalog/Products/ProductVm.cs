@@ -22,5 +22,5 @@ public class ProductVm
     public string ColorName { get; set; }
     public Status Status  { get; set; }
     
-    public List<string> Categories { get; set; } = new List<string>();
+    
 }

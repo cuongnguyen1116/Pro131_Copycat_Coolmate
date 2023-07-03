@@ -1,7 +1,13 @@
+using shop.ApiIntegration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<IProductApiClient, ProductApiClient>();
+builder.Services.AddTransient<ICategoryApiClient, CategoryApiClient>();
 
 var app = builder.Build();
 

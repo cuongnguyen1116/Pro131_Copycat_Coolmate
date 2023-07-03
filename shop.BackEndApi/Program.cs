@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using shop.Application.Catalog.Categories;
 using shop.Application.Catalog.Colors;
 using shop.Application.Catalog.Materials;
-using shop.Application.Catalog.Product;
+using shop.Application.Catalog.Products;
 using shop.Application.Catalog.Sizes;
 using shop.Application.Common;
 using shop.Application.System.Roles;

@@ -10,7 +10,7 @@ namespace shop.ViewModels.Catalog.Products
 {
     public class ProductUpdateRequest
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         public int Stock { get; set; }
         public decimal Price { get; set; }
         public IFormFile ThumbnailImage { get; set; }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using shop.Application.Catalog.Product;
+using shop.Application.Catalog.Products;
+using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
 
 namespace shop.BackEndApi.Controllers
@@ -23,7 +24,13 @@ namespace shop.BackEndApi.Controllers
             var result = await _productServices.GetAll();
             return Ok(result);
         }
-        [HttpPost]
+        [HttpGet("propductprops")]
+        public async Task<IActionResult> GetAllProductProp()
+        {
+            var result = await _productServices.GetAllProductProp();
+            return Ok(result);
+        }
+        [HttpPost("create")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
         {
@@ -40,7 +47,7 @@ namespace shop.BackEndApi.Controllers
                 return Ok(request);
             }
         }
-        [HttpPut("{productDetailId}")]
+        [HttpPut("update/{productDetailId}")]
         [Consumes("multipart/form-data")]
         
         public async Task<IActionResult> Update([FromRoute] Guid productDetailId, [FromForm] ProductUpdateRequest request)
@@ -50,20 +57,20 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest(ModelState);
             }
             request.Id = productDetailId;
-            var affectedResult = await _productServices.Update(request);
-            if (affectedResult == null)
+            var check = await _productServices.Update(request);
+            if (check == null)
                 return BadRequest();
             return Ok();
         }
-        [HttpDelete("{productDetailId}")]
+        [HttpDelete("delete/{productDetailId}")]
         public async Task<IActionResult> Delete(Guid productDetailId)
         {
-            var affectedResult = await _productServices.Delete(productDetailId);
-            if (affectedResult == null)
+            var check = await _productServices.Delete(productDetailId);
+            if (check == null)
                 return BadRequest();
             return Ok();
         }
-        [HttpGet("{productDetailId}")]
+        [HttpGet("product/{productDetailId}")]
         public async Task<IActionResult> GetById(Guid productDetailId)
         {
             var product = await _productServices.GetById(productDetailId);
@@ -72,6 +79,68 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest("Can't find product");
             }
             return Ok(product);
+        }
+
+
+        [HttpPost("createproductprop")]
+        public async Task<IActionResult> CreateProductProp([FromBody] ProductPropVm request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var sanphamId = await _productServices.CreateProductProp(request);
+            if (sanphamId == null)
+                return BadRequest();
+            else
+            {
+                HttpContext.Response.StatusCode = 201;
+                return Ok(request);
+            }
+        }
+        [HttpPut("updateProductProp/{productPropId}")]
+        public async Task<IActionResult> UpdateProductProp([FromRoute] Guid productPropId, ProductPropVm request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            request.Id = productPropId;
+            var check = await _productServices.UpdateProductProp(request);
+            if (check == null)
+                return BadRequest();
+            return Ok();
+        }
+        [HttpDelete("deleteProductProp/{productPropId}")]
+        public async Task<IActionResult> DeleteProductProp(Guid productPropId)
+        {
+            var check = await _productServices.DeleteProductProp(productPropId);
+            if (check == null)
+                return BadRequest();
+            return Ok();
+        }
+        [HttpGet("productprop/{productPropId}")]
+        public async Task<IActionResult> GetByIdProductProp(Guid productPropId)
+        {
+            var product = await _productServices.GetByIdProductProp(productPropId);
+            if (product == null)
+            {
+                return BadRequest("Can't find product");
+            }
+            return Ok(product);
+        }
+        [HttpPut("productProp/{id}/categories")]
+        public async Task<IActionResult> CategoryAssign(Guid id, [FromBody] CategoryAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _productServices.CategoryAssign(id, request);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
     }
 }
