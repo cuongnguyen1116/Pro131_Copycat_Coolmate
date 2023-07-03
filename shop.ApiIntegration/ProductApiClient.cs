@@ -30,7 +30,7 @@ namespace shop.ApiIntegration
 
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
-        
+        // Bảng ProductDetail
         public async Task<bool> CreateProduct(ProductCreateRequest request, Guid productPropId, Guid sizeId, Guid colorId, Guid materialId)
         {
             var httpClient = new HttpClient();
@@ -75,7 +75,7 @@ namespace shop.ApiIntegration
             return response.IsSuccessStatusCode;
 
         }
-
+        // Bảng ProductDetail
         public async Task<bool> DeleteProduct(ProductDeleteRequest request)
         {
             var httpClient = new HttpClient();
@@ -92,7 +92,7 @@ namespace shop.ApiIntegration
             var response = await httpClient.DeleteAsync(apiURL);
             return response.IsSuccessStatusCode;
         }
-
+        // Bảng ProductDetail
         public async Task<List<ProductVm>> GetAll()
         {
             var httpClient = new HttpClient();
@@ -104,7 +104,7 @@ namespace shop.ApiIntegration
             return result;
         }
 
-
+        // Bảng ProductDetail
         public async Task<ProductVm> GetById(Guid productDetailId)
         {
             var httpClient = new HttpClient();
@@ -126,7 +126,7 @@ namespace shop.ApiIntegration
             var result = JsonConvert.DeserializeObject<ProductPropVm>(apiData);
             return result;
         }
-
+        // Lấy danh sách màu
         public async Task<List<ColorVm>> GetListColor()
         {
             var httpClient = new HttpClient();
@@ -137,7 +137,7 @@ namespace shop.ApiIntegration
             var result = JsonConvert.DeserializeObject<List<ColorVm>>(apiData);
             return result;
         }
-
+        //Lấy danh sách chất liệu
         public async Task<List<MaterialVm>> GetListMaterial()
         {
             var httpClient = new HttpClient();
@@ -148,7 +148,7 @@ namespace shop.ApiIntegration
             var result = JsonConvert.DeserializeObject<List<MaterialVm>>(apiData);
             return result;
         }
-
+        //Lấy danh sách tên san phẩm
         public async Task<List<ProductPropVm>> GetListProductProp()
         {
             var httpClient = new HttpClient();
@@ -158,7 +158,7 @@ namespace shop.ApiIntegration
             var result = JsonConvert.DeserializeObject<List<ProductPropVm>>(apiData);
             return result;
         }
-
+        //Lấy danh sách size
         public async Task<List<SizeVm>> GetListSize()
         {
             var httpClient = new HttpClient();
@@ -169,7 +169,7 @@ namespace shop.ApiIntegration
             var result = JsonConvert.DeserializeObject<List<SizeVm>>(apiData);
             return result;
         }
-
+        // Bảng ProductDetail
         public async Task<bool> UpdateProduct(ProductUpdateRequest request)
         {
             var httpClient = new HttpClient();
