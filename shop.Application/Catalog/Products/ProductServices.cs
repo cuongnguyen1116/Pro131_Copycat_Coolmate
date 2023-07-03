@@ -252,7 +252,7 @@ public class ProductServices : IProductServices
         return true;
 
     }
-
+    //gans category voi bang product
     public async Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request)
     {
         var pro = await _context.Products.FindAsync(id);
@@ -275,6 +275,7 @@ public class ProductServices : IProductServices
                 {
                     CategoryId = Guid.Parse(category.Id),
                     ProductId = id
+                    
                 });
             }
         }

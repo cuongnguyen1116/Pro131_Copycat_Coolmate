@@ -204,39 +204,39 @@ namespace shop.AdminApp.Controllers
             return View(request);
         }
         //Bảng  product
-        [HttpGet]
-        public async Task<IActionResult> DeleteProduct(Guid id)
-        {
-            var product = await _productApiClient.GetByIdProductProp(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+        //[HttpGet]
+        //public async Task<IActionResult> DeleteProduct(Guid id)
+        //{
+        //    var product = await _productApiClient.GetByIdProductProp(id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var productPropVm = new ProductPropVm
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Status = product.Status
-            };
+        //    var productPropVm = new ProductPropVm
+        //    {
+        //        Id = product.Id,
+        //        Name = product.Name,
+        //        Description = product.Description,
+        //        Status = product.Status
+        //    };
 
-            return View(productPropVm);
-        }
-        [HttpPost]    
-        public async Task<IActionResult> DeleteProduct(ProductPropVm request)
+        //    return View(productPropVm);
+        //}
+        //[HttpPost]    
+        public async Task<IActionResult> DeleteProduct(ProductPropVm vm)
         {
             if (!ModelState.IsValid)
-                return View(request);
+                return View(vm);
 
-            var result = await _productApiClient.DeleteProductProp(request);
+            var result = await _productApiClient.DeleteProductProp(vm);
             if (result)
             {
                 TempData["result"] = "Xóa sản phẩm thành công";
                 return RedirectToAction("ShowAllProductProp");
             }
             ModelState.AddModelError("", "Xóa không thành công");
-            return View(request);
+            return View(vm);
         }
         private async Task<CategoryAssignRequest> GetCategoryAssignRequest(Guid id)
         {

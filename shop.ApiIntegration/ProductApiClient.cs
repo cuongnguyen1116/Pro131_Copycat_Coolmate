@@ -29,7 +29,7 @@ namespace shop.ApiIntegration
         public async Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request)
         {
             var httpClient = new HttpClient();
-            string apiURL = $"https://localhost:5000/api/Products/productProp/{id}/categories";
+            string apiURL = $"https://localhost:5000/api/Products/productProp/{id}/categories/";
             var json = JsonConvert.SerializeObject(request);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -40,7 +40,7 @@ namespace shop.ApiIntegration
 
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
-
+        
         public async Task<bool> CreateProduct(ProductCreateRequest request, Guid productPropId, Guid sizeId, Guid colorId, Guid materialId)
         {
             var httpClient = new HttpClient();
