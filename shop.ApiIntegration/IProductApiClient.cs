@@ -5,7 +5,7 @@ using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Catalog.Sizes;
 using shop.ViewModels.Common;
 
-namespace shop.ApiIntegration.Products
+namespace shop.ApiIntegration
 {
     public interface IProductApiClient
     {

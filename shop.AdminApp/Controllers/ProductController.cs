@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using shop.ApiIntegration.Categories;
-using shop.ApiIntegration.Products;
+using shop.ApiIntegration;
 using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Common;

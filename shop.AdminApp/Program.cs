@@ -1,6 +1,5 @@
-using shop.ApiIntegration.Categories;
+using shop.ApiIntegration;
 using shop.ApiIntegration.Orders;
-using shop.ApiIntegration.Products;
 
 var builder = WebApplication.CreateBuilder(args);
 
