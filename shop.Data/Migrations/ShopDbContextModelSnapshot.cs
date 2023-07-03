@@ -1128,19 +1128,9 @@ namespace shop.Data.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CategoryId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ProductId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("ProductId", "CategoryId");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("CategoryId1");
-
-                    b.HasIndex("ProductId1");
 
                     b.ToTable("ProductInCategories");
 
@@ -1358,24 +1348,16 @@ namespace shop.Data.Migrations
             modelBuilder.Entity("shop.Data.Entities.ProductInCategory", b =>
                 {
                     b.HasOne("shop.Data.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("ProductInCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("shop.Data.Entities.Category", null)
-                        .WithMany("ProductInCategories")
-                        .HasForeignKey("CategoryId1");
-
                     b.HasOne("shop.Data.Entities.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductInCategories")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("shop.Data.Entities.Product", null)
-                        .WithMany("ProductInCategories")
-                        .HasForeignKey("ProductId1");
 
                     b.Navigation("Category");
 
