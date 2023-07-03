@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using shop.ViewModels.Catalog.Categories;
 
-namespace shop.ApiIntegration.Categories
+namespace shop.ApiIntegration
 {
     public class CategoryApiClient : ICategoryApiClient
     {

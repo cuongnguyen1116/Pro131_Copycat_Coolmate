@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using shop.ApiIntegration.Orders;
 using shop.Data.Enums;
 using shop.Utilities.Constants;
@@ -30,6 +32,26 @@ namespace shop.AdminApp.Controllers
         {
             var data = await _orderApiClient.GetOrderDetails(id);
             return View(data);
+        }
+
+        public async Task<IActionResult> ConfirmOrder(Guid id)
+        {
+            var response = await _orderApiClient.ConfirmOrder(id);
+            if (response) return RedirectToAction("GetAll", "Order");
+            return View();
+        }
+
+        public async Task<IActionResult> CompleteOrder(Guid id)
+        {
+            var response = await _orderApiClient.CompleteOrder(id);
+            if (response) return RedirectToAction("GetAll", "Order");
+            return View();
+        }
+        public async Task<IActionResult> CancelOrder(Guid id)
+        {
+            var response = await _orderApiClient.CancelOrder(id);
+            if (response) return RedirectToAction("GetAll", "Order");
+            return View();
         }
     }
 }

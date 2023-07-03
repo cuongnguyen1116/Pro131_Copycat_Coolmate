@@ -1,4 +1,4 @@
-﻿    @model IEnumerable<shop.ViewModels.Catalog.Orders.OrderVm>
+﻿@model IEnumerable<shop.ViewModels.Catalog.Orders.OrderVm>
 
 @{
     ViewData["Title"] = "GetAll";
@@ -103,9 +103,10 @@
                                     @Html.DisplayFor(modelItem => item.Status)
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails","Order", new {id = item.Id})">Chi tiết</a> | 
-                                    <a class="btn btn-success" href="@Url.Action()"> </a>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi Tiết</a>
+                                    <a class="btn btn-info" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Xác Nhận</a>
+                                    <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn Thành</a>
+                                    <a class="btn btn-danger" href="@Url.Action("CancelOrder", "Order", new {id = item.Id})">Hủy</a>
                                 </td>
                             </tr>
                         }

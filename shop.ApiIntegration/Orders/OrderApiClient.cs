@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using shop.Data.Enums;
 using shop.Utilities.Constants;
@@ -65,6 +66,32 @@ namespace shop.ApiIntegration.Orders
                 BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress])
             };
             string apiUrl = $"/api/orders/confirm-order/{id}";
+            var response = await httpClient.GetAsync(apiUrl);
+            string apiData = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<bool>(apiData);
+            return result;
+        }
+
+        public async Task<bool> CompleteOrder(Guid id)
+        {
+            var httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress])
+            };
+            string apiUrl = $"/api/orders/complete-order/{id}";
+            var response = await httpClient.GetAsync(apiUrl);
+            string apiData = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<bool>(apiData);
+            return result;
+        }
+
+        public async Task<bool> CancelOrder(Guid id)
+        {
+            var httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress])
+            };
+            string apiUrl = $"/api/orders/cancel-order/{id}";
             var response = await httpClient.GetAsync(apiUrl);
             string apiData = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<bool>(apiData);
