@@ -32,7 +32,7 @@ namespace shop.BackEndApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ColorVm vm)
         {
-            if(!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var result = await _colorServices.Create(vm);
             return Ok(result);
@@ -44,7 +44,7 @@ namespace shop.BackEndApi.Controllers
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var result = await _colorServices.Update(id, vm);
             return Ok(result);
-            
+
         }
 
         [HttpDelete("{id}")]
@@ -53,5 +53,5 @@ namespace shop.BackEndApi.Controllers
             var result = await _colorServices.Delete(id);
             return Ok(result);
         }
-    } 
+    }
 }

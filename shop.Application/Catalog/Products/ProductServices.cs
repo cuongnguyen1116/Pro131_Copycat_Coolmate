@@ -3,17 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using shop.Application.Common;
 using shop.Data.Context;
 using shop.Data.Entities;
-using System.IO;
-using shop.ViewModels.Catalog.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using shop.Utilities.Exceptions;
-using shop.ViewModels.Common;
 using shop.ViewModels.Catalog.Categories;
+using shop.ViewModels.Catalog.Products;
+using shop.ViewModels.Common;
+using System.Net.Http.Headers;
 
 namespace shop.Application.Catalog.Products;
 
@@ -105,8 +99,8 @@ public class ProductServices : IProductServices
     public async Task<bool> Update(ProductUpdateRequest request)
     {
         var productdetail = await _context.ProductDetails.FindAsync(request.Id);
-        
-        if (productdetail == null ) throw new ShopException($"Can't find a product with id: {request.Id}");
+
+        if (productdetail == null) throw new ShopException($"Can't find a product with id: {request.Id}");
         productdetail.Stock = request.Stock;
         productdetail.Price = request.Price;
         if (request.Stock == 0)
@@ -150,15 +144,15 @@ public class ProductServices : IProductServices
     public async Task<ProductVm> GetById(Guid productdetailId)
     {
         var productdetail = await _context.ProductDetails.FindAsync(productdetailId);
-        var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == productdetail.ProductId );
-        var size = await _context.Sizes.FirstOrDefaultAsync(x => x.Id == productdetail.SizeId );
-        var color = await _context.Colors.FirstOrDefaultAsync(x => x.Id == productdetail.ColorId );
-        var material = await _context.Materials.FirstOrDefaultAsync(x => x.Id == productdetail.MaterialId );
+        var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == productdetail.ProductId);
+        var size = await _context.Sizes.FirstOrDefaultAsync(x => x.Id == productdetail.SizeId);
+        var color = await _context.Colors.FirstOrDefaultAsync(x => x.Id == productdetail.ColorId);
+        var material = await _context.Materials.FirstOrDefaultAsync(x => x.Id == productdetail.MaterialId);
         var categories = await (from c in _context.Categories
                                 join pic in _context.ProductInCategories on c.Id equals pic.CategoryId
-                                where pic.ProductId == productdetailId 
+                                where pic.ProductId == productdetailId
                                 select c.Name).ToListAsync();
-      
+
         var image = await _context.ProductImages.Where(x => x.ProductDetailId == productdetailId && x.IsDefault == true).FirstOrDefaultAsync();
         var productDetailViewModel = new ProductVm()
         {
@@ -183,7 +177,7 @@ public class ProductServices : IProductServices
         return await _context.Products
                 .Select(i => new ProductPropVm()
                 {
-                    Id=i.Id,
+                    Id = i.Id,
                     Name = i.Name,
                     Description = i.Description,
                     Status = i.Status
@@ -230,7 +224,7 @@ public class ProductServices : IProductServices
         var product = await _context.Products.FindAsync(request.Id);
         if (product == null)
         {
-            throw  new ShopException("Can't find product");
+            throw new ShopException("Can't find product");
         }
         product.Name = request.Name;
         product.Description = request.Description;

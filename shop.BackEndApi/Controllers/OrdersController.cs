@@ -1,0 +1,63 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using shop.Application.Catalog.Orders;
+using shop.Data.Enums;
+
+namespace shop.BackEndApi.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class OrdersController : ControllerBase
+    {
+        private readonly IOrderServices _orderServices;
+
+        public OrdersController(IOrderServices orderServices)
+        {
+            _orderServices = orderServices;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var list = await _orderServices.GetAll();
+            return Ok(list);
+        }
+
+        [HttpGet("get-order-by-status/{status}")]
+        public async Task<IActionResult> GetOrderByStatus(OrderStatus status)
+        {
+            var list = await _orderServices.GetOrderByStatus(status);
+            return Ok(list);
+        }
+
+        [HttpGet("get-order-details/{id}")]
+        public async Task<IActionResult> GetOrderDetails(Guid id)
+        {
+            var list = await _orderServices.GetOrderDetails(id);
+            return Ok(list);
+        }
+
+        [HttpGet("confirm-order/{id}")]
+        public async Task<IActionResult> ConfirmOrder(Guid id)
+        {
+            var response = await _orderServices.ConfirmOrder(id);
+            if (response.IsSuccessed) return Ok(response.IsSuccessed);
+            return BadRequest(response.ResultObj);
+        }
+
+        [HttpGet("complete-order/{id}")]
+        public async Task<IActionResult> CompleteOrder(Guid id)
+        {
+            var response = await _orderServices.CompleteOrder(id);
+            if (response.IsSuccessed) return Ok(response.IsSuccessed);
+            return BadRequest(response.ResultObj);
+        }
+
+        [HttpGet("cancel-order/{id}")]
+        public async Task<IActionResult> CancelOrder(Guid id)
+        {
+            var response = await _orderServices.CancelOrder(id);
+            if (response.IsSuccessed) return Ok(response.IsSuccessed);
+            return BadRequest(response.ResultObj);
+        }
+    }
+}
