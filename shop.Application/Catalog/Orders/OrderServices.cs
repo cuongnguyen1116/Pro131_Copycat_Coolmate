@@ -16,6 +16,7 @@ namespace shop.Application.Catalog.Orders
         {
             var data = await _context.Orders
                 .Include(o => o.User)
+                .OrderBy(o => o.OrderStatus)
                 .Select(o => new OrderVm
                 {
                     Id = o.Id,
@@ -70,7 +71,23 @@ namespace shop.Application.Catalog.Orders
                 return new ApiErrorResult<bool>("Đơn hàng này có trạng thái khác trạng thái 'chờ'");
             }
 
+            existingOrder.ConfirmedDate = DateTime.Now;
             existingOrder.OrderStatus = OrderStatus.AwaitingShipment;
+            _context.Orders.Update(existingOrder);
+            await _context.SaveChangesAsync();
+
+            return new ApiSuccessResult<bool>();
+        }
+
+        public async Task<ApiResult<bool>> GetOrderToShipper(Guid id)
+        {
+            var existingOrder = await _context.Orders.FindAsync(id);
+            if (existingOrder == null)
+            {
+                return new ApiErrorResult<bool>($"Không tìm thấy đơn hàng có id {id}");
+            }
+
+            existingOrder.OrderStatus = OrderStatus.AWaitingPickup;
             _context.Orders.Update(existingOrder);
             await _context.SaveChangesAsync();
 
@@ -101,8 +118,10 @@ namespace shop.Application.Catalog.Orders
                 return new ApiErrorResult<bool>($"Không tìm thấy đơn hàng có id {id}");
             }
 
-            existingOrder.OrderStatus = OrderStatus.Canceled;
-            foreach (var item in existingOrder.OrderDetails)
+            existingOrder.OrderStatus = OrderStatus.Cancelled;
+            var existingorderDetails = _context.OrderDetails.Where(x => x.OrderId == id);
+
+            foreach (var item in existingorderDetails)
             {
                 item.Status = Status.Inactive;
                 _context.OrderDetails.Update(item);

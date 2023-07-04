@@ -214,7 +214,7 @@ public static class ModelBuilderExtensions
                 Id = productDetailId2,
                 ProductId = productId1,
                 Stock = 50,
-                Price = 199000,
+                Price = 209000,
                 OriginalPrice = 150000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
@@ -225,7 +225,7 @@ public static class ModelBuilderExtensions
                 Id = productDetailId3,
                 ProductId = productId1,
                 Stock = 50,
-                Price = 199000,
+                Price = 219000,
                 OriginalPrice = 150000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
@@ -237,7 +237,7 @@ public static class ModelBuilderExtensions
                 Id = productDetailId4,
                 ProductId = productId1,
                 Stock = 50,
-                Price = 299000,
+                Price = 229000,
                 OriginalPrice = 200000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
@@ -249,7 +249,7 @@ public static class ModelBuilderExtensions
                 Id = productDetailId5,
                 ProductId = productId1,
                 Stock = 50,
-                Price = 299000,
+                Price = 239000,
                 OriginalPrice = 200000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
@@ -260,7 +260,7 @@ public static class ModelBuilderExtensions
                 Id = productDetailId6,
                 ProductId = productId1,
                 Stock = 50,
-                Price = 299000,
+                Price = 249000,
                 OriginalPrice = 200000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
@@ -269,9 +269,9 @@ public static class ModelBuilderExtensions
             }, new ProductDetail
             {
                 Id = productDetailId7,
-                ProductId = productId1,
+                ProductId = productId2,
                 Stock = 50,
-                Price = 299000,
+                Price = 259000,
                 OriginalPrice = 200000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
@@ -280,9 +280,9 @@ public static class ModelBuilderExtensions
             }, new ProductDetail
             {
                 Id = productDetailId8,
-                ProductId = productId1,
+                ProductId = productId2,
                 Stock = 50,
-                Price = 299000,
+                Price = 269000,
                 OriginalPrice = 200000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
@@ -291,9 +291,9 @@ public static class ModelBuilderExtensions
             }, new ProductDetail
             {
                 Id = productDetailId9,
-                ProductId = productId1,
+                ProductId = productId2,
                 Stock = 50,
-                Price = 299000,
+                Price = 279000,
                 OriginalPrice = 200000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
@@ -302,9 +302,9 @@ public static class ModelBuilderExtensions
             }, new ProductDetail
             {
                 Id = productDetailId10,
-                ProductId = productId1,
+                ProductId = productId2,
                 Stock = 50,
-                Price = 299000,
+                Price = 289000,
                 OriginalPrice = 200000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
@@ -313,7 +313,7 @@ public static class ModelBuilderExtensions
             }, new ProductDetail
             {
                 Id = productDetailId11,
-                ProductId = productId1,
+                ProductId = productId2,
                 Stock = 50,
                 Price = 299000,
                 OriginalPrice = 200000,
@@ -324,9 +324,9 @@ public static class ModelBuilderExtensions
             }, new ProductDetail
             {
                 Id = productDetailId12,
-                ProductId = productId1,
+                ProductId = productId2,
                 Stock = 50,
-                Price = 299000,
+                Price = 309000,
                 OriginalPrice = 200000,
                 CreatedDate = DateTime.Now,
                 MaterialId = materialId1,
@@ -530,38 +530,38 @@ public static class ModelBuilderExtensions
         var orderId6 = new Guid("c9e9de6f-0e6f-4b3e-9f6c-3f8f3a0e6a1d");
         var orderId7 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
 
-        //DateTime currentTime = DateTime.Now;
-        //DateTime shipDate = currentTime.AddDays(1);
-        //DateTime completedDate = shipDate.AddDays(3);
         DateTime completedDate = DateTime.Now;
-        DateTime shipDate = completedDate.AddDays(-3);
-        DateTime currentTime = shipDate.AddDays(-4);
+        DateTime shipDate = completedDate.AddDays(-1);
+        DateTime paidDate = completedDate.AddDays(-3);
+        DateTime confirmedDate = completedDate.AddDays(-4);
+        DateTime createdDate = completedDate.AddDays(-5);
 
         builder.Entity<Order>().HasData(
             new Order
             {
                 Id = orderId1,
-                UserId = userId1,
+                UserId = userId4,
                 OrderCode = "230703DDKbiC3SyDB9pN",
-                CreatedDate = currentTime,
-                PaidDate = currentTime,
-                ShipDate = shipDate,
-                CompletedDate = completedDate,
+                CreatedDate = createdDate,
+                PaidDate = null,
+                ShipDate = null,
+                CompletedDate = null,
                 ShipName = "Alice",
                 ShipPhoneNumber = "0123456789",
                 ShipAddress = "123 Main St.",
                 Total = 1000000,
-                OrderStatus = OrderStatus.Completed
+                OrderStatus = OrderStatus.Pending
 
             },
             new Order
             {
                 Id = orderId2,
-                UserId = userId2,
+                UserId = userId5,
                 OrderCode = "230703PmyoqNWHK3LZe3",
-                CreatedDate = currentTime,
-                PaidDate = currentTime,
-                ShipDate = shipDate,
+                CreatedDate = createdDate,
+                ConfirmedDate = confirmedDate,
+                PaidDate = null,
+                ShipDate = null,
                 CompletedDate = null,
                 ShipName = "Alice",
                 ShipPhoneNumber = "0123456789",
@@ -572,9 +572,10 @@ public static class ModelBuilderExtensions
             }, new Order
             {
                 Id = orderId3,
-                UserId = userId3,
+                UserId = userId6,
                 OrderCode = "23070306w3xM7UGUxRrW",
-                CreatedDate = currentTime,
+                CreatedDate = createdDate,
+                ConfirmedDate = confirmedDate,
                 PaidDate = null,
                 ShipDate = null,
                 CompletedDate = null,
@@ -582,45 +583,45 @@ public static class ModelBuilderExtensions
                 ShipPhoneNumber = "0123456789",
                 ShipAddress = "1111 Pine Ln.",
                 Total = 3000000,
-                OrderStatus = OrderStatus.Pending
+                OrderStatus = OrderStatus.AwaitingShipment
 
             }, new Order
             {
                 Id = orderId4,
-                UserId = userId4,
+                UserId = userId7,
                 OrderCode = "230703dkb7wDTr8wQ2rR",
-                CreatedDate = currentTime,
-                PaidDate = currentTime,
-                ShipDate = shipDate,
-                CompletedDate = completedDate,
+                CreatedDate = createdDate,
+                PaidDate = null,
+                ShipDate = null,
+                CompletedDate = null,
                 ShipName = "Alice",
                 ShipPhoneNumber = "0123456789",
                 ShipAddress = "123 Main St.",
                 Total = 290000,
-                OrderStatus = OrderStatus.Completed
-
-            }, new Order
-            {
-                Id = orderId7,
-                UserId = userId7,
-                OrderCode = "230703kTwGUuaOxZ5sC1",
-                CreatedDate = currentTime,
-                PaidDate = null,
-                ShipDate = null,
-                CompletedDate = null,
-                ShipName = "0987654321",
-                ShipPhoneNumber = "0987654321",
-                ShipAddress = "456 Elm St.",
-                Total = 275000,
                 OrderStatus = OrderStatus.Pending
 
             }, new Order
             {
                 Id = orderId5,
+                UserId = userId7,
+                OrderCode = "230703kTwGUuaOxZ5sC1",
+                CreatedDate = createdDate,
+                PaidDate = paidDate,
+                ShipDate = shipDate,
+                CompletedDate = completedDate,
+                ShipName = "0987654321",
+                ShipPhoneNumber = "0987654321",
+                ShipAddress = "456 Elm St.",
+                Total = 275000,
+                OrderStatus = OrderStatus.Completed
+
+            }, new Order
+            {
+                Id = orderId6,
                 UserId = userId5,
                 OrderCode = "230703P1u8nabxMakypB",
-                CreatedDate = currentTime,
-                PaidDate = currentTime,
+                CreatedDate = createdDate,
+                PaidDate = paidDate,
                 ShipDate = shipDate,
                 CompletedDate = completedDate,
                 ShipName = "0987654321",
@@ -631,11 +632,11 @@ public static class ModelBuilderExtensions
 
             }, new Order
             {
-                Id = orderId6,
+                Id = orderId7,
                 UserId = userId6,
                 OrderCode = "230703i5B6qeJ2IbxBVu",
-                CreatedDate = currentTime,
-                PaidDate = currentTime,
+                CreatedDate = createdDate,
+                PaidDate = paidDate,
                 ShipDate = shipDate,
                 CompletedDate = completedDate,
                 ShipName = "Charlie",
@@ -669,7 +670,7 @@ public static class ModelBuilderExtensions
                 OrderId = orderId1,
                 ProductDetailId = productDetailId2,
                 Quantity = 5,
-                Price = 199000,
+                Price = 209000,
                 Status = Status.Active
             },
             new OrderDetail
@@ -678,7 +679,7 @@ public static class ModelBuilderExtensions
                 OrderId = orderId2,
                 ProductDetailId = productDetailId3,
                 Quantity = 5,
-                Price = 199000,
+                Price = 219000,
                 Status = Status.Active
             },
             new OrderDetail
@@ -687,40 +688,7 @@ public static class ModelBuilderExtensions
                 OrderId = orderId2,
                 ProductDetailId = productDetailId4,
                 Quantity = 5,
-                Price = 199000,
-                Status = Status.Active
-            },
-            new OrderDetail
-            {
-                OrderId = orderId4,
-                ProductDetailId = productDetailId5,
-                Quantity = 5,
-                Price = 290000,
-                Status = Status.Active
-            },
-            new OrderDetail
-            {
-                OrderId = orderId5,
-                ProductDetailId = productDetailId2,
-                Quantity = 5,
-                Price = 290000,
-                Status = Status.Active
-            }
-            ,
-            new OrderDetail
-            {
-                OrderId = orderId6,
-                ProductDetailId = productDetailId5,
-                Quantity = 5,
-                Price = 290000,
-                Status = Status.Active
-            },
-            new OrderDetail
-            {
-                OrderId = orderId7,
-                ProductDetailId = productDetailId5,
-                Quantity = 5,
-                Price = 290000,
+                Price = 229000,
                 Status = Status.Active
             },
             new OrderDetail
@@ -728,7 +696,48 @@ public static class ModelBuilderExtensions
                 OrderId = orderId3,
                 ProductDetailId = productDetailId5,
                 Quantity = 5,
-                Price = 199000,
+                Price = 239000,
+                Status = Status.Active
+            },
+            new OrderDetail
+            {
+                OrderId = orderId3,
+                ProductDetailId = productDetailId2,
+                Quantity = 5,
+                Price = 209000,
+                Status = Status.Active
+            }
+            ,
+            new OrderDetail
+            {
+                OrderId = orderId4,
+                ProductDetailId = productDetailId5,
+                Quantity = 5,
+                Price = 239000,
+                Status = Status.Active
+            },
+            new OrderDetail
+            {
+                OrderId = orderId5,
+                ProductDetailId = productDetailId5,
+                Quantity = 5,
+                Price = 239000,
+                Status = Status.Active
+            },
+            new OrderDetail
+            {
+                OrderId = orderId6,
+                ProductDetailId = productDetailId5,
+                Quantity = 5,
+                Price = 239000,
+                Status = Status.Active
+            },
+            new OrderDetail
+            {
+                OrderId = orderId7,
+                ProductDetailId = productDetailId10,
+                Quantity = 4,
+                Price = 289000,
                 Status = Status.Active
             });
         #endregion

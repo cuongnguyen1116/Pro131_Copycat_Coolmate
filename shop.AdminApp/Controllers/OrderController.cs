@@ -38,6 +38,13 @@ namespace shop.AdminApp.Controllers
             return View();
         }
 
+        public async Task<IActionResult> GetOrderToShipper(Guid id)
+        {
+            var response = await _orderApiClient.GetOrderToShipper(id);
+            if (response) return RedirectToAction("GetAll", "Order");
+            return View();
+        }
+
         public async Task<IActionResult> CompleteOrder(Guid id)
         {
             var response = await _orderApiClient.CompleteOrder(id);

@@ -6,6 +6,7 @@ using shop.Application.Catalog.Materials;
 using shop.Application.Catalog.Orders;
 using shop.Application.Catalog.Products;
 using shop.Application.Catalog.Sizes;
+using shop.Application.Catalog.Stats;
 using shop.Application.Common;
 using shop.Application.System.Roles;
 using shop.Application.System.Users;
@@ -31,6 +32,7 @@ builder.Services.AddTransient<IStorageService, FileStorageService>();
 builder.Services.AddTransient<IRoleServices, RoleServices>();
 builder.Services.AddTransient<IUserServices, UserServices>();
 builder.Services.AddTransient<IOrderServices, OrderServices>();
+builder.Services.AddTransient<IStatisticsServices, StatisticsServices>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

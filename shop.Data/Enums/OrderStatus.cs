@@ -6,7 +6,7 @@ public enum OrderStatus
     AwaitingShipment,
     AWaitingPickup,
     Completed,
-    Canceled,
+    Cancelled,
     Refunded,
     Disputed,
     ManualVerificationRequired

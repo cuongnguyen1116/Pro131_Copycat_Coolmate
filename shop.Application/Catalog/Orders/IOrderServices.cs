@@ -10,7 +10,8 @@ namespace shop.Application.Catalog.Orders
         Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status);
         Task<List<OrderDetailVm>> GetOrderDetails(Guid id);
         Task<ApiResult<bool>> ConfirmOrder(Guid id);
-        Task<ApiResult<bool>> CancelOrder(Guid id);
+        Task<ApiResult<bool>> GetOrderToShipper(Guid id);
         Task<ApiResult<bool>> CompleteOrder(Guid id);
+        Task<ApiResult<bool>> CancelOrder(Guid id);
     }
 }

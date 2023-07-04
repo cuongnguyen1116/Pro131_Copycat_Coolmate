@@ -1,5 +1,4 @@
-﻿@page
-@model IEnumerable<shop.ViewModels.Catalog.Orders.OrderVm>
+﻿@model IEnumerable<shop.ViewModels.Catalog.Orders.OrderVm>
 
 @{
     ViewData["Title"] = "GetAll";
@@ -23,19 +22,22 @@
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetAll","Order")">Tất Cả</a>
+            <a class="nav-link" href="@Url.Action("GetAll","Order")">Tất cả</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 0})">Đang Chờ</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 0})">Chờ xác nhận</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 1})">Chờ Giao Hàng</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 1})">Chờ lấy hàng</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 2})">Chờ Nhận Hàng</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 2})">Đang giao</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 3})">Hoàn Thành</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 3})">Hoàn thành</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 4})">Đã hủy</a>
         </li>
     </ul>
 
@@ -71,17 +73,18 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Mã Đơn Hàng</th>
-                            <th>Tên Khách Hàng</th>
-                            <th>Tổng Đơn Hàng</th>
-                            <th>Trạng Thái</th>
-                            <th>Hành Động</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Tên khách hàng</th>
+                            <th>Tổng đơn hàng</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr onclick="location.href='@Url.Action("GetOrderDetails", "Order", new { id = item.Id })'">
+                            @*<tr onclick="location.href='@Url.Action("GetOrderDetails", "Order", new { id = item.Id })'">*@
+                            <tr>
                                 <td>
                                     @{
                                         count++;
@@ -101,9 +104,10 @@
                                     @Html.DisplayFor(modelItem => item.Status)
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi Tiết</a>
-                                    <a class="btn btn-info" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Chuẩn Bị Hàng</a>
-                                    <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn Thành</a>
+                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
+                                    <a class="btn btn-warning" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Xác nhận</a>
+                                    <a class="btn btn-info" href="@Url.Action("GetOrderToShipper", "Order", new {id = item.Id})">Đã gửi hàng</a>
+                                    <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn thành</a>
                                     <a class="btn btn-danger" href="@Url.Action("CancelOrder", "Order", new {id = item.Id})">Hủy</a>
                                 </td>
                             </tr>

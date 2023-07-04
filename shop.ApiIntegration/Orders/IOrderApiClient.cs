@@ -9,6 +9,7 @@ namespace shop.ApiIntegration.Orders
         Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status);
         Task<List<OrderDetailVm>> GetOrderDetails(Guid id);
         Task<bool> ConfirmOrder(Guid id);
+        Task<bool> GetOrderToShipper(Guid id);
         Task<bool> CompleteOrder(Guid id);
         Task<bool> CancelOrder(Guid id);
     }
