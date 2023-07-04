@@ -15,4 +15,9 @@
     <ProjectReference Include="..\shop.ViewModels\shop.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Colors\" />
+    <Folder Include="Views\Materials\" />
+  </ItemGroup>
+
 </Project>
