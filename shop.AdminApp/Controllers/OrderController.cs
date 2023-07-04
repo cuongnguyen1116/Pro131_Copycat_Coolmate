@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using shop.ApiIntegration.Orders;
 using shop.Data.Enums;
-using shop.Utilities.Constants;
 
 namespace shop.AdminApp.Controllers
 {
@@ -22,9 +19,9 @@ namespace shop.AdminApp.Controllers
             return View(data);
         }
 
-        public async Task<IActionResult> GetOrderByStatus(OrderStatus status)
+        public async Task<IActionResult> GetOrdersByStatus(OrderStatus status)
         {
-            var data = await _orderApiClient.GetOrderByStatus(status);
+            var data = await _orderApiClient.GetOrdersByStatus(status);
             return View("GetAll", data);
         }
 

@@ -6,13 +6,10 @@ using shop.ViewModels.Catalog.Categories;
 
 namespace shop.Application.Catalog.Categories;
 
-public class CategoryServices : ICategoryServices
+public class CategoryServices : BaseServices, ICategoryServices
 {
-    private readonly ShopDbContext _context;
-
-    public CategoryServices(ShopDbContext context)
+    public CategoryServices(ShopDbContext context) : base(context)
     {
-        _context = context;
     }
 
     public async Task<bool> Create(CategoryVm vm)

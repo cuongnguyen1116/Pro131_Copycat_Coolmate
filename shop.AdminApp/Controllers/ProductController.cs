@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using shop.ApiIntegration;
+using shop.ApiIntegration.Categories;
+using shop.ApiIntegration.Products;
 using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Common;
@@ -27,8 +28,7 @@ namespace shop.AdminApp.Controllers
             }
             return View(data);
         }
-        #region  ProductDetail
-
+        //Bảng  productdetail
         public async Task<IActionResult> Create(Guid productPropId, Guid sizeId, Guid colorId, Guid materialId)
         {
             var productprops = _productApiClient.GetListProductProp();
@@ -106,7 +106,28 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Thêm sản phẩm thất bại");
             return View(request);
         }
+        //Bảng  product
+        public async Task<IActionResult> CreateProduct()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateProduct(ProductPropVm request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(ModelState);
+            }
+            var result = await _productApiClient.CreateProductProp(request);
+            if (result)
+            {
+                TempData["result"] = "Thêm mới sản phẩm thành công";
+                return RedirectToAction("ShowAllProductProp");
+            }
 
+            ModelState.AddModelError("", "Thêm sản phẩm thất bại");
+            return View(request);
+        }
         //Bảng  productdetail
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
@@ -140,63 +161,7 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Cập nhật sản phẩm thất bại");
             return View(request);
         }
-        public async Task<IActionResult> Delete(ProductDeleteRequest request)
-        {
-            if (!ModelState.IsValid)
-                return View();
-
-            var result = await _productApiClient.DeleteProduct(request);
-            if (result)
-            {
-                TempData["result"] = "Xóa sản phẩm thành công";
-                return RedirectToAction("Index");
-            }
-
-            ModelState.AddModelError("", "Xóa không thành công");
-            return View(request);
-        }
-        #endregion
-
-        #region Bảng Product
-        public async Task<IActionResult> ShowAllProductProp(Guid categoryId)
-
-        {
-            var data = await _productApiClient.GetListProductProp();
-            var categories = await _categoryApiClient.GetAll();
-            ViewBag.Categories = categories.Select(x => new SelectListItem()
-            {
-                Text = x.Name,
-                Value = x.Id.ToString(),
-                Selected = categoryId.ToString() == x.Id.ToString()
-            });
-            if (TempData["result"] != null)
-            {
-                ViewBag.SuccessMsg = TempData["result"];
-            }
-            return View(data);
-        }
-        public async Task<IActionResult> CreateProduct()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreateProduct(ProductPropVm request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(ModelState);
-            }
-            var result = await _productApiClient.CreateProductProp(request);
-            if (result)
-            {
-                TempData["result"] = "Thêm mới sản phẩm thành công";
-                return RedirectToAction("ShowAllProductProp");
-            }
-
-            ModelState.AddModelError("", "Thêm sản phẩm thất bại");
-            return View(request);
-        }
-        
+        //Bảng  product
         [HttpGet]
         public async Task<IActionResult> EditProduct(Guid id)
         {
@@ -222,7 +187,43 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Cập nhật sản phẩm thất bại");
             return View(request);
         }
-           
+        //Bảng  productdetail
+        public async Task<IActionResult> Delete(ProductDeleteRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _productApiClient.DeleteProduct(request);
+            if (result)
+            {
+                TempData["result"] = "Xóa sản phẩm thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Xóa không thành công");
+            return View(request);
+        }
+        //Bảng  product
+        //[HttpGet]
+        //public async Task<IActionResult> DeleteProduct(Guid id)
+        //{
+        //    var product = await _productApiClient.GetByIdProductProp(id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var productPropVm = new ProductPropVm
+        //    {
+        //        Id = product.Id,
+        //        Name = product.Name,
+        //        Description = product.Description,
+        //        Status = product.Status
+        //    };
+
+        //    return View(productPropVm);
+        //}
+        //[HttpPost]    
         public async Task<IActionResult> DeleteProduct(ProductPropVm vm)
         {
             if (!ModelState.IsValid)
@@ -237,10 +238,6 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Xóa không thành công");
             return View(vm);
         }
-
-        #endregion
-
-        #region Gán danh mục cho product
         private async Task<CategoryAssignRequest> GetCategoryAssignRequest(Guid id)
         {
 
@@ -258,6 +255,7 @@ namespace shop.AdminApp.Controllers
             }
             return categoryAssignRequest;
         }
+
         [HttpGet]
         public async Task<IActionResult> CategoryAssign(Guid id)
         {
@@ -284,8 +282,23 @@ namespace shop.AdminApp.Controllers
 
             return View(roleAssignRequest);
         }
-        #endregion
         //Bảng  product
-        
+        public async Task<IActionResult> ShowAllProductProp(Guid categoryId)
+
+        {
+            var data = await _productApiClient.GetListProductProp();
+            var categories = await _categoryApiClient.GetAll();
+            ViewBag.Categories = categories.Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+                Selected = categoryId.ToString() == x.Id.ToString()
+            });
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+            return View(data);
+        }
     }
 }

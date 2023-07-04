@@ -1,4 +1,5 @@
-﻿@model IEnumerable<shop.ViewModels.Catalog.Orders.OrderVm>
+﻿@page
+@model IEnumerable<shop.ViewModels.Catalog.Orders.OrderVm>
 
 @{
     ViewData["Title"] = "GetAll";
@@ -25,19 +26,16 @@
             <a class="nav-link" href="@Url.Action("GetAll","Order")">Tất Cả</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrderByStatus","Order", new {status = 0})">Đang Chờ</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 0})">Đang Chờ</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrderByStatus","Order", new {status = 1})">Đã Xác Nhận</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 1})">Chờ Giao Hàng</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrderByStatus","Order", new {status = 2})">Chờ Giao Hàng</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 2})">Chờ Nhận Hàng</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrderByStatus","Order", new {status = 3})">Chờ Nhận Hàng</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrderByStatus","Order", new {status = 4})">Hoàn Thành</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 3})">Hoàn Thành</a>
         </li>
     </ul>
 
@@ -104,7 +102,7 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi Tiết</a>
-                                    <a class="btn btn-info" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Xác Nhận</a>
+                                    <a class="btn btn-info" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Chuẩn Bị Hàng</a>
                                     <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn Thành</a>
                                     <a class="btn btn-danger" href="@Url.Action("CancelOrder", "Order", new {id = item.Id})">Hủy</a>
                                 </td>

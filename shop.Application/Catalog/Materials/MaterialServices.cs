@@ -6,13 +6,10 @@ using shop.ViewModels.Catalog.Materials;
 
 namespace shop.Application.Catalog.Materials;
 
-public class MaterialServices : IMaterialServices
+public class MaterialServices : BaseServices, IMaterialServices
 {
-    private readonly ShopDbContext _context;
-
-    public MaterialServices(ShopDbContext context)
+    public MaterialServices(ShopDbContext context) : base(context)
     {
-        _context = context;
     }
 
     public Task<List<MaterialVm>> GetAll()

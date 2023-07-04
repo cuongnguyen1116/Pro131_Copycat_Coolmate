@@ -8,6 +8,7 @@ using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Common;
 using System.Net.Http.Headers;
+
 namespace shop.Application.Catalog.Products;
 
 public class ProductServices : IProductServices
@@ -147,6 +148,10 @@ public class ProductServices : IProductServices
         var size = await _context.Sizes.FirstOrDefaultAsync(x => x.Id == productdetail.SizeId);
         var color = await _context.Colors.FirstOrDefaultAsync(x => x.Id == productdetail.ColorId);
         var material = await _context.Materials.FirstOrDefaultAsync(x => x.Id == productdetail.MaterialId);
+        var categories = await (from c in _context.Categories
+                                join pic in _context.ProductInCategories on c.Id equals pic.CategoryId
+                                where pic.ProductId == productdetailId
+                                select c.Name).ToListAsync();
 
         var image = await _context.ProductImages.Where(x => x.ProductDetailId == productdetailId && x.IsDefault == true).FirstOrDefaultAsync();
         var productDetailViewModel = new ProductVm()
@@ -182,12 +187,8 @@ public class ProductServices : IProductServices
 
     public async Task<ProductPropVm> GetByIdProductProp(Guid productPropId)
     {
-        var product = await _context.Products.FindAsync(productPropId);
-        var categories = await (from c in _context.Categories
-                                join pic in _context.ProductInCategories on c.Id equals pic.CategoryId
-                                where pic.ProductId == productPropId 
-                                select c.Name).ToListAsync();
-        if (product == null)
+        var c = await _context.Products.FindAsync(productPropId);
+        if (c == null)
         {
             throw new ShopException("Can't find product");
         }
@@ -195,11 +196,10 @@ public class ProductServices : IProductServices
         {
             var productProp = new ProductPropVm()
             {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Status = product.Status,
-                Categories = categories
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Status = c.Status
             };
             return productProp;
         }
@@ -250,7 +250,6 @@ public class ProductServices : IProductServices
     public async Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request)
     {
         var pro = await _context.Products.FindAsync(id);
-
         if (pro == null)
         {
             return new ApiErrorResult<bool>($"Sản phẩm với id {id} không tồn tại");
@@ -266,10 +265,11 @@ public class ProductServices : IProductServices
             }
             else if (productInCategory == null && category.Selected)
             {
-                _context.ProductInCategories.Add(new ProductInCategory()
+                await _context.ProductInCategories.AddAsync(new ProductInCategory()
                 {
                     CategoryId = Guid.Parse(category.Id),
                     ProductId = id
+
                 });
             }
         }

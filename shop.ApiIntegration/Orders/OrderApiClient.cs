@@ -1,45 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using shop.Data.Enums;
-using shop.Utilities.Constants;
 using shop.ViewModels.Catalog.Orders;
 
 namespace shop.ApiIntegration.Orders
 {
-    public class OrderApiClient : IOrderApiClient
+    public class OrderApiClient : BaseApiClient, IOrderApiClient
     {
-        private readonly IConfiguration _configuration;
-
-        public OrderApiClient(IConfiguration configuration)
+        public OrderApiClient(HttpClient httpClient, IConfiguration configuration) : base(httpClient, configuration)
         {
-            _configuration = configuration;
         }
 
         public async Task<List<OrderVm>> GetAll()
         {
-            var httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress])
-            };
             string apiUrl = "/api/orders";
 
-            var response = await httpClient.GetAsync(apiUrl);
+            var response = await _httpClient.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
             string apiData = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<List<OrderVm>>(apiData);
 
             return result;
         }
 
-        public async Task<List<OrderVm>> GetOrderByStatus(OrderStatus status)
+        public async Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status)
         {
-            var httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress])
-            };
-            string apiUrl = $"/api/Orders/get-order-by-status/{status}";
+            string apiUrl = $"/api/Orders/get-orders-by-status/{status}";
 
-            var response = await httpClient.GetAsync(apiUrl);
+            var response = await _httpClient.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
             string apiData = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<List<OrderVm>>(apiData);
 
@@ -48,25 +37,21 @@ namespace shop.ApiIntegration.Orders
 
         public async Task<List<OrderDetailVm>> GetOrderDetails(Guid id)
         {
-            var httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress])
-            };
             string apiUrl = $"/api/orders/get-order-details/{id}";
-            var response = await httpClient.GetAsync(apiUrl);
+
+            var response = await _httpClient.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
             string apiData = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<List<OrderDetailVm>>(apiData);
+
             return result;
         }
 
         public async Task<bool> ConfirmOrder(Guid id)
         {
-            var httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress])
-            };
             string apiUrl = $"/api/orders/confirm-order/{id}";
-            var response = await httpClient.GetAsync(apiUrl);
+            var response = await _httpClient.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
             string apiData = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<bool>(apiData);
             return result;
@@ -74,27 +59,25 @@ namespace shop.ApiIntegration.Orders
 
         public async Task<bool> CompleteOrder(Guid id)
         {
-            var httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress])
-            };
             string apiUrl = $"/api/orders/complete-order/{id}";
-            var response = await httpClient.GetAsync(apiUrl);
+
+            var response = await _httpClient.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
             string apiData = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<bool>(apiData);
+
             return result;
         }
 
         public async Task<bool> CancelOrder(Guid id)
         {
-            var httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress])
-            };
             string apiUrl = $"/api/orders/cancel-order/{id}";
-            var response = await httpClient.GetAsync(apiUrl);
+
+            var response = await _httpClient.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
             string apiData = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<bool>(apiData);
+
             return result;
         }
     }

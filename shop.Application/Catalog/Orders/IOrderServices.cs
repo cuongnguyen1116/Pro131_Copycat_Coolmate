@@ -7,7 +7,7 @@ namespace shop.Application.Catalog.Orders
     public interface IOrderServices
     {
         Task<List<OrderVm>> GetAll();
-        Task<List<OrderVm>> GetOrderByStatus(OrderStatus status);
+        Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status);
         Task<List<OrderDetailVm>> GetOrderDetails(Guid id);
         Task<ApiResult<bool>> ConfirmOrder(Guid id);
         Task<ApiResult<bool>> CancelOrder(Guid id);

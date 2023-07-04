@@ -22,10 +22,10 @@ namespace shop.BackEndApi.Controllers
             return Ok(list);
         }
 
-        [HttpGet("get-order-by-status/{status}")]
-        public async Task<IActionResult> GetOrderByStatus(OrderStatus status)
+        [HttpGet("get-orders-by-status/{status}")]
+        public async Task<IActionResult> GetOrdersByStatus(OrderStatus status)
         {
-            var list = await _orderServices.GetOrderByStatus(status);
+            var list = await _orderServices.GetOrdersByStatus(status);
             return Ok(list);
         }
 
