@@ -19,16 +19,16 @@ namespace shop.BackEndApi.Controllers
         }
         // Bảng ProductDetail
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] ProductPropRequest request)
         {
-            var result = await _productServices.GetAll();
+            var result = await _productServices.GetAll(request);
             return Ok(result);
         }
         //Bảng product
-        [HttpGet("propductprops/{keyword}&{categoryId}")]
-        public async Task<IActionResult> GetAllProductProp( string keyword, Guid? categoryId)
+        [HttpGet("propductprops")]/*?name={request.Keyword}&categoryId={request.CategoryId}*/
+        public async Task<IActionResult> GetAllProductProp([FromQuery]ProductPropRequest request)
         {
-            var result = await _productServices.GetAllProductProp(keyword,categoryId);
+            var result = await _productServices.GetAllProductProp(request);
             return Ok(result);
         }
         [HttpGet("listPropductProp")]

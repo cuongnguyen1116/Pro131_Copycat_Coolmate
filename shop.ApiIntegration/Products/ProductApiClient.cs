@@ -93,10 +93,10 @@ namespace shop.ApiIntegration.Products
             return response.IsSuccessStatusCode;
         }
         // Bảng ProductDetail
-        public async Task<List<ProductVm>> GetAll()
+        public async Task<List<ProductVm>> GetAll(ProductPropRequest request)
         {
             var httpClient = new HttpClient();
-            string apiURL = "https://localhost:5000/api/Products/";
+            string apiURL = $"https://localhost:5000/api/Products?keyword={request.Keyword}";
 
             var response = await httpClient.GetAsync(apiURL);
             string apiData = await response.Content.ReadAsStringAsync();
@@ -104,10 +104,10 @@ namespace shop.ApiIntegration.Products
             return result;
         }
 
-        public async Task<List<ProductPropVm>> GetAllProductProp(string keyword, Guid? categoryId)
+        public async Task<List<ProductPropVm>> GetAllProductProp(ProductPropRequest request)
         {
             var httpClient = new HttpClient();
-            string apiURL = $"https://localhost:5000/api/Products/propductprops/{keyword}&{categoryId}";
+            string apiURL = $"https://localhost:5000/api/Products/propductprops?keyword={request.Keyword}&categoryId={request.CategoryId}";
             var response = await httpClient.GetAsync(apiURL);
             string apiData = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<List<ProductPropVm>>(apiData);

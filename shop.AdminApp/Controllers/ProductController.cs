@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using shop.ApiIntegration.Categories;
 using shop.ApiIntegration.Products;
+using shop.Data.Entities;
 using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Common;
+using System.Drawing.Printing;
 
 namespace shop.AdminApp.Controllers
 {
@@ -18,10 +20,14 @@ namespace shop.AdminApp.Controllers
             _productApiClient = productApiClient;
             _categoryApiClient = categoryApiClient;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? keyword)
         {
-            var data = await _productApiClient.GetAll();
-
+            var request = new ProductPropRequest()
+            {
+                Keyword = keyword
+            };
+            var data = await _productApiClient.GetAll(request);
+            ViewBag.Keyword = keyword;
             if (TempData["result"] != null)
             {
                 ViewBag.SuccessMsg = TempData["result"];
@@ -203,7 +209,7 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Xóa không thành công");
             return View(request);
         }
-          
+
         public async Task<IActionResult> DeleteProduct(ProductPropVm vm)
         {
             if (!ModelState.IsValid)
@@ -263,10 +269,16 @@ namespace shop.AdminApp.Controllers
             return View(roleAssignRequest);
         }
         //Bảng  product
-        public async Task<IActionResult> ShowAllProductProp(string keyword,Guid? categoryId)
+        public async Task<IActionResult> ShowAllProductProp(string keyword, Guid? categoryId)
 
         {
-            var data = await _productApiClient.GetAllProductProp(keyword, categoryId);
+            var request = new ProductPropRequest()
+            {
+                Keyword = keyword,
+                CategoryId = categoryId
+            };
+            var data = await _productApiClient.GetAllProductProp(request);
+            ViewBag.Keyword = keyword;
             var categories = await _categoryApiClient.GetAll();
             ViewBag.Categories = categories.Select(x => new SelectListItem()
             {
