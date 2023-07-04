@@ -44,6 +44,14 @@ namespace shop.BackEndApi.Controllers
             return BadRequest(response.ResultObj);
         }
 
+        [HttpGet("get-order-to-shipper/{id}")]
+        public async Task<IActionResult> GetOrderToShipper(Guid id)
+        {
+            var response = await _orderServices.GetOrderToShipper(id);
+            if (response.IsSuccessed) return Ok(response.IsSuccessed);
+            return BadRequest(response.ResultObj);
+        }
+
         [HttpGet("complete-order/{id}")]
         public async Task<IActionResult> CompleteOrder(Guid id)
         {

@@ -15,8 +15,4 @@
     <ProjectReference Include="..\shop.ViewModels\shop.ViewModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Order\OrderComponents\" />
-  </ItemGroup>
-
 </Project>

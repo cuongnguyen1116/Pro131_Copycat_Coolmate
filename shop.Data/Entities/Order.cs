@@ -8,6 +8,7 @@ public class Order
     public string OrderCode { get; set; }
     public Guid? UserId { get; set; }
     public DateTime CreatedDate { get; set; }
+    public DateTime? ConfirmedDate { get; set; }
     public DateTime? PaidDate { get; set; }
     public DateTime? ShipDate { get; set; }
     public DateTime? CompletedDate { get; set; }

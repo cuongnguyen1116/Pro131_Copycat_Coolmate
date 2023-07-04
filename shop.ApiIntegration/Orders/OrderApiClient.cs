@@ -57,6 +57,16 @@ namespace shop.ApiIntegration.Orders
             return result;
         }
 
+        public async Task<bool> GetOrderToShipper(Guid id)
+        {
+            string apiUrl = $"/api/orders/get-order-to-shipper/{id}";
+            var response = await _httpClient.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
+            string apiData = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<bool>(apiData);
+            return result;
+        }
+
         public async Task<bool> CompleteOrder(Guid id)
         {
             string apiUrl = $"/api/orders/complete-order/{id}";

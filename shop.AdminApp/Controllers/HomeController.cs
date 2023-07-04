@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using shop.AdminApp.Models;
+using shop.ApiIntegration.Stats;
 using System.Diagnostics;
 
 namespace shop.AdminApp.Controllers;
@@ -7,15 +8,18 @@ namespace shop.AdminApp.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IStatisticsApiClient _statisticsApiClient;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IStatisticsApiClient statisticsApiClient)
     {
         _logger = logger;
+        _statisticsApiClient = statisticsApiClient;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var data = await _statisticsApiClient.GetStatistics();
+        return View(data);
     }
 
     public IActionResult Privacy()
