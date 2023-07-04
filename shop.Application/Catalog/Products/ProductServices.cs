@@ -72,6 +72,7 @@ public class ProductServices : IProductServices
             Stock = request.Stock,
             Status = request.Status,
             OriginalPrice = request.OriginalPrice,
+            Price = request.Price,
             CreatedDate = DateTime.Now
 
         };
@@ -148,10 +149,7 @@ public class ProductServices : IProductServices
         var size = await _context.Sizes.FirstOrDefaultAsync(x => x.Id == productdetail.SizeId);
         var color = await _context.Colors.FirstOrDefaultAsync(x => x.Id == productdetail.ColorId);
         var material = await _context.Materials.FirstOrDefaultAsync(x => x.Id == productdetail.MaterialId);
-        var categories = await (from c in _context.Categories
-                                join pic in _context.ProductInCategories on c.Id equals pic.CategoryId
-                                where pic.ProductId == productdetailId
-                                select c.Name).ToListAsync();
+        
 
         var image = await _context.ProductImages.Where(x => x.ProductDetailId == productdetailId && x.IsDefault == true).FirstOrDefaultAsync();
         var productDetailViewModel = new ProductVm()
@@ -166,29 +164,97 @@ public class ProductServices : IProductServices
             ColorName = color.Name,
             MaterialName = material.Name,
             SizeName = size.Name,
-            Status = productdetail.Status
+            Status = productdetail.Status,
+
         };
 
         return productDetailViewModel;
     }
 
-    public async Task<List<ProductPropVm>> GetAllProductProp()
+    public async Task<List<ProductPropVm>> GetAllProductProp(string keyword, Guid? categoryId)
+    {
+        var query = from p in _context.Products
+                    join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+                    from pic in ppic.DefaultIfEmpty()
+                    join c in _context.Categories on pic.CategoryId equals c.Id into picc
+                    from c in picc.DefaultIfEmpty()
+                    select new { p, pic };
+
+        if (!string.IsNullOrEmpty(keyword))
+        {
+            // Filter the query based on the keyword
+            query = query.Where(q => q.p.Name.Contains(keyword) ||
+                                        q.p.Description.Contains(keyword) ||
+                                        q.pic.Category.Name.Contains(keyword));
+        }
+
+        if (categoryId != null && categoryId != Guid.Empty)
+        {
+            // Filter the query based on the categoryId
+            query = query.Where(q => q.pic.CategoryId == categoryId.Value);
+        }
+
+        // Project the query to the view model
+        var productProps = await query.Select(q => new ProductPropVm
+        {
+            Id = q.p.Id,
+            Name = q.p.Name,
+            Description = q.p.Description,
+            Status = q.p.Status,
+        }).ToListAsync();
+
+        return productProps;
+    }
+    //public async Task<List<ProductPropVm>> GetAllProductProp(string? keyword, Guid categoryId)
+    //{
+    //    var query = from p in _context.Products
+    //                join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+    //                from pic in ppic.DefaultIfEmpty()
+    //                join c in _context.Categories on pic.CategoryId equals c.Id into picc
+    //                from c in picc.DefaultIfEmpty()
+    //                select new { p, pic };
+    //    if (!string.IsNullOrEmpty(keyword))
+    //        query = query.Where(x => x.p.Name.Contains(keyword));
+
+    //    if (categoryId != null)
+    //    {
+    //        query = query.Where(x => x.pic.CategoryId == categoryId);
+    //    }
+    //    //2. filter
+    //    var data = await query
+    //        .Select(x => new ProductPropVm()
+    //        {
+    //            Id = x.p.Id,
+    //            Name = x.p.Name,
+    //            Description = x.p.Description,
+    //            Status = x.p.Status,
+
+    //        }).ToListAsync();
+    //    return data;
+
+    //}
+
+    public async Task<List<ProductPropVm>> GetListProductProp()
     {
         return await _context.Products
-                .Select(i => new ProductPropVm()
-                {
-                    Id = i.Id,
-                    Name = i.Name,
-                    Description = i.Description,
-                    Status = i.Status
-                }
-            ).ToListAsync();
+               .Select(i => new ProductPropVm()
+               {
+                   Id = i.Id,
+                   Name = i.Name,
+                   Description = i.Description,
+                   Status = i.Status
+               }
+           ).ToListAsync();
     }
 
     public async Task<ProductPropVm> GetByIdProductProp(Guid productPropId)
     {
-        var c = await _context.Products.FindAsync(productPropId);
-        if (c == null)
+        var product = await _context.Products.FindAsync(productPropId);
+        var categories = await (from c in _context.Categories
+                                join pic in _context.ProductInCategories on c.Id equals pic.CategoryId
+                                where pic.ProductId == productPropId
+                                select c.Name).ToListAsync();
+        if (product == null)
         {
             throw new ShopException("Can't find product");
         }
@@ -196,10 +262,11 @@ public class ProductServices : IProductServices
         {
             var productProp = new ProductPropVm()
             {
-                Id = c.Id,
-                Name = c.Name,
-                Description = c.Description,
-                Status = c.Status
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Status = product.Status,
+                Categories = categories
             };
             return productProp;
         }

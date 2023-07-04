@@ -20,6 +20,7 @@ namespace shop.ApiIntegration.Products
         Task<bool> DeleteProductProp(ProductPropVm request);
         Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request);
         Task<List<ProductPropVm>> GetListProductProp();
+        Task<List<ProductPropVm>> GetAllProductProp(string keyword, Guid? categoryId);
         Task<List<MaterialVm>> GetListMaterial();
         Task<List<ColorVm>> GetListColor();
         Task<List<SizeVm>> GetListSize();

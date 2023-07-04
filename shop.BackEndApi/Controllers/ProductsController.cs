@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Products;
+using shop.Data.Entities;
 using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace shop.BackEndApi.Controllers
 {
@@ -22,10 +24,17 @@ namespace shop.BackEndApi.Controllers
             var result = await _productServices.GetAll();
             return Ok(result);
         }
-        [HttpGet("propductprops")]
-        public async Task<IActionResult> GetAllProductProp()
+        //Bảng product
+        [HttpGet("propductprops/{keyword}&{categoryId}")]
+        public async Task<IActionResult> GetAllProductProp( string keyword, Guid? categoryId)
         {
-            var result = await _productServices.GetAllProductProp();
+            var result = await _productServices.GetAllProductProp(keyword,categoryId);
+            return Ok(result);
+        }
+        [HttpGet("listPropductProp")]
+        public async Task<IActionResult> GetListProductProp()
+        {
+            var result = await _productServices.GetListProductProp();
             return Ok(result);
         }
         // Bảng ProductDetail

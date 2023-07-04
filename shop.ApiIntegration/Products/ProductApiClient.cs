@@ -104,6 +104,16 @@ namespace shop.ApiIntegration.Products
             return result;
         }
 
+        public async Task<List<ProductPropVm>> GetAllProductProp(string keyword, Guid? categoryId)
+        {
+            var httpClient = new HttpClient();
+            string apiURL = $"https://localhost:5000/api/Products/propductprops/{keyword}&{categoryId}";
+            var response = await httpClient.GetAsync(apiURL);
+            string apiData = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<List<ProductPropVm>>(apiData);
+            return result;
+        }
+
         // Bảng ProductDetail
         public async Task<ProductVm> GetById(Guid productDetailId)
         {
@@ -152,7 +162,7 @@ namespace shop.ApiIntegration.Products
         public async Task<List<ProductPropVm>> GetListProductProp()
         {
             var httpClient = new HttpClient();
-            string apiURL = "https://localhost:5000/api/Products/propductprops";
+            string apiURL = "https://localhost:5000/api/Products/listPropductProp";
             var response = await httpClient.GetAsync(apiURL);
             string apiData = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<List<ProductPropVm>>(apiData);

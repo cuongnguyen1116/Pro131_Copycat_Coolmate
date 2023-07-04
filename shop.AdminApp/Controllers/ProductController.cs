@@ -203,27 +203,7 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Xóa không thành công");
             return View(request);
         }
-        //Bảng  product
-        //[HttpGet]
-        //public async Task<IActionResult> DeleteProduct(Guid id)
-        //{
-        //    var product = await _productApiClient.GetByIdProductProp(id);
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var productPropVm = new ProductPropVm
-        //    {
-        //        Id = product.Id,
-        //        Name = product.Name,
-        //        Description = product.Description,
-        //        Status = product.Status
-        //    };
-
-        //    return View(productPropVm);
-        //}
-        //[HttpPost]    
+          
         public async Task<IActionResult> DeleteProduct(ProductPropVm vm)
         {
             if (!ModelState.IsValid)
@@ -283,10 +263,10 @@ namespace shop.AdminApp.Controllers
             return View(roleAssignRequest);
         }
         //Bảng  product
-        public async Task<IActionResult> ShowAllProductProp(Guid categoryId)
+        public async Task<IActionResult> ShowAllProductProp(string keyword,Guid? categoryId)
 
         {
-            var data = await _productApiClient.GetListProductProp();
+            var data = await _productApiClient.GetAllProductProp(keyword, categoryId);
             var categories = await _categoryApiClient.GetAll();
             ViewBag.Categories = categories.Select(x => new SelectListItem()
             {
