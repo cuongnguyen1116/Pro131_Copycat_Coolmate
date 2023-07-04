@@ -5,6 +5,7 @@ namespace shop.Data.Entities;
 public class Order
 {
     public Guid Id { get; set; }
+    public string OrderCode { get; set; }
     public Guid? UserId { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime? PaidDate { get; set; }
@@ -13,6 +14,7 @@ public class Order
     public string ShipName { get; set; }
     public string ShipAddress { get; set; }
     public string ShipPhoneNumber { get; set; }
+    public decimal Total { get; set; }
     public OrderStatus OrderStatus { get; set; }
     public virtual AppUser User { get; set; }
     public virtual ICollection<OrderDetail> OrderDetails { get; set; }

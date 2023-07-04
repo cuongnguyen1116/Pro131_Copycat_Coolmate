@@ -9,7 +9,7 @@ public static class ModelBuilderExtensions
 {
     public static void Seed(this ModelBuilder builder)
     {
-        // category
+        #region category
         var categoryId1 = new Guid("e785507b-109e-4c6e-b2f1-87a792896e3c");
         var categoryId2 = new Guid("d8eb1629-a276-4667-8da2-0926fc66de0c");
         builder.Entity<Category>().HasData(
@@ -23,8 +23,9 @@ public static class ModelBuilderExtensions
                 Id = categoryId2,
                 Name = "Áo polo"
             });
+        #endregion
 
-        // product
+        #region product
         var productId1 = new Guid("1dc01736-d7e2-4c24-94de-00844d5cb1f9");
         var productId2 = new Guid("3b997d7b-e67a-4b00-8e4a-043ce70b2844");
         builder.Entity<Product>().HasData(
@@ -42,8 +43,9 @@ public static class ModelBuilderExtensions
                 Description = "Sản phẩm trong Bộ sưu tập Summer. Chất liệu: 100% Cotton mềm mại. Định lượng vải: 200gsm, dày dặn. Dáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà. Hình in PET bền bỉ, không lo bong tróc, thoải mái giặt máy. Tự hào sản xuất tại Việt Nam",
                 Status = Status.Active
             });
+        #endregion
 
-        // color
+        #region color
         Guid colorId1 = new Guid("24f04c0b-34c3-428c-8767-0bb98da225e0");
         Guid colorId2 = new Guid("87513ccc-798f-485a-8206-0522f1d8b0ad");
         Guid colorId3 = new Guid("070139ef-2c91-4261-af8b-c07d2a5932b3");
@@ -77,36 +79,37 @@ public static class ModelBuilderExtensions
                 Name = "Đỏ",
             },
              new Color
-            {
-                Id = colorId5,
-                Name = "Xanh lá cây",
-            },
+             {
+                 Id = colorId5,
+                 Name = "Xanh lá cây",
+             },
              new Color
-            {
-                Id = colorId6,
-                Name = "Xanh dương",
-            }, new Color
-            {
-                Id = colorId7,
-                Name = "Vàng",
-            },
+             {
+                 Id = colorId6,
+                 Name = "Xanh dương",
+             }, new Color
+             {
+                 Id = colorId7,
+                 Name = "Vàng",
+             },
             new Color
             {
-             Id = colorId8,
-             Name = "Cam",
+                Id = colorId8,
+                Name = "Cam",
             },
             new Color
             {
                 Id = colorId9,
                 Name = "Hồng",
-            }, 
+            },
             new Color
             {
                 Id = colorId10,
                 Name = "Tím",
             });
+        #endregion
 
-        // material
+        #region material
         var materialId1 = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4");
         var materialId2 = new Guid("5cd1370c-dd94-4038-b33c-49a27aad25ab");
         var materialId3 = new Guid("99df0e16-bab3-4d8a-8916-72e4a03e99e4");
@@ -132,8 +135,9 @@ public static class ModelBuilderExtensions
                 Id = materialId4,
                 Name = "Vải Recycle"
             });
+        #endregion
 
-        // size
+        #region size
         var sizeId1 = new Guid("573566fb-4e8c-4dad-bb2c-b2d9a597d9f7");
         var sizeId2 = new Guid("966f5bf6-a0a7-4d88-a700-728eb8e32c85");
         var sizeId3 = new Guid("3cb61050-1fe6-4f5c-94a2-4db93e69c7ba");
@@ -177,9 +181,9 @@ public static class ModelBuilderExtensions
                 Name = "XXXL",
                 SortOrder = 6
             });
+        #endregion
 
-
-        // product detail
+        #region product detail
         var productDetailId1 = new Guid("9a6ccc00-6b1c-40c5-be61-eb71323c9151");
         var productDetailId2 = new Guid("3643727e-d49c-45f5-bfae-9cd4fbcebb45");
         var productDetailId3 = new Guid("b799297f-d21e-4280-8df9-a3c6788c806e");
@@ -204,7 +208,7 @@ public static class ModelBuilderExtensions
                 MaterialId = materialId1,
                 ColorId = colorId2,
                 SizeId = sizeId1,
-            }, 
+            },
             new ProductDetail
             {
                 Id = productDetailId2,
@@ -329,8 +333,9 @@ public static class ModelBuilderExtensions
                 ColorId = colorId1,
                 SizeId = sizeId6
             });
+        #endregion
 
-        // bảng trung gian
+        #region product in categories
         builder.Entity<ProductInCategory>().HasData(
             new ProductInCategory
             {
@@ -342,8 +347,9 @@ public static class ModelBuilderExtensions
                 ProductId = productId2,
                 CategoryId = categoryId2
             });
+        #endregion
 
-        // role
+        #region role
         var roleId1 = new Guid("1090dcdd-b383-417b-9523-d73f0373fbb0");
         var roleId2 = new Guid("4a1c9012-a602-46a9-8eba-05e85149fd81");
         var roleId3 = new Guid("66d310d2-f7e1-4aab-8003-4370144e3f8d");
@@ -366,8 +372,9 @@ public static class ModelBuilderExtensions
                 Name = "customer",
                 Description = "Customer role"
             });
+        #endregion
 
-
+        #region user
         var hasher = new PasswordHasher<AppUser>();
         // user
         var userId1 = new Guid("69BD714F-9576-45BA-B5B7-F00649BE00DE");
@@ -461,7 +468,7 @@ public static class ModelBuilderExtensions
                 FirstName = "Bob",
                 LastName = "Smith",
                 DoB = new DateTime(1985, 12, 31)
-            }, 
+            },
             new AppUser
             {
                 Id = userId7,
@@ -476,7 +483,9 @@ public static class ModelBuilderExtensions
                 LastName = "Smith",
                 DoB = new DateTime(1988, 10, 15)
             });
+        #endregion
 
+        #region user roles
         builder.Entity<IdentityUserRole<Guid>>().HasData(
             new IdentityUserRole<Guid>
             {
@@ -510,7 +519,9 @@ public static class ModelBuilderExtensions
                 RoleId = roleId3,
                 UserId = userId7
             });
-        
+        #endregion
+
+        #region order
         var orderId1 = new Guid("f602aed4-37de-446c-8b4d-d5e407a4bf33");
         var orderId2 = new Guid("4f31c9cd-6fdf-4d3a-9d8b-6f1d3d5c1c24");
         var orderId3 = new Guid("7afa0b0b-1c0d-4bd4-a1e8-9f1a38a5e5ab");
@@ -518,28 +529,36 @@ public static class ModelBuilderExtensions
         var orderId5 = new Guid("a60b3fd4-40a0-4f4e-8f5b-6e5a9a3d63e6");
         var orderId6 = new Guid("c9e9de6f-0e6f-4b3e-9f6c-3f8f3a0e6a1d");
         var orderId7 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
-        DateTime currentTime = DateTime.Now;
-        DateTime shipDate = currentTime.AddDays(1);
-        DateTime completedDate = shipDate.AddDays(3);
+
+        //DateTime currentTime = DateTime.Now;
+        //DateTime shipDate = currentTime.AddDays(1);
+        //DateTime completedDate = shipDate.AddDays(3);
+        DateTime completedDate = DateTime.Now;
+        DateTime shipDate = completedDate.AddDays(-3);
+        DateTime currentTime = shipDate.AddDays(-4);
+
         builder.Entity<Order>().HasData(
             new Order
             {
                 Id = orderId1,
-                UserId =userId1,
-                CreatedDate= currentTime,
+                UserId = userId1,
+                OrderCode = "230703DDKbiC3SyDB9pN",
+                CreatedDate = currentTime,
                 PaidDate = currentTime,
                 ShipDate = shipDate,
                 CompletedDate = completedDate,
                 ShipName = "Alice",
-                ShipPhoneNumber ="0123456789",
+                ShipPhoneNumber = "0123456789",
                 ShipAddress = "123 Main St.",
-                OrderStatus = OrderStatus.Success
+                Total = 1000000,
+                OrderStatus = OrderStatus.Completed
 
             },
             new Order
             {
                 Id = orderId2,
                 UserId = userId2,
+                OrderCode = "230703PmyoqNWHK3LZe3",
                 CreatedDate = currentTime,
                 PaidDate = currentTime,
                 ShipDate = shipDate,
@@ -547,12 +566,14 @@ public static class ModelBuilderExtensions
                 ShipName = "Alice",
                 ShipPhoneNumber = "0123456789",
                 ShipAddress = "1010 Oak Dr.",
-                OrderStatus = OrderStatus.Shipping
+                Total = 2000000,
+                OrderStatus = OrderStatus.AWaitingPickup
 
-            },new Order
+            }, new Order
             {
                 Id = orderId3,
                 UserId = userId3,
+                OrderCode = "23070306w3xM7UGUxRrW",
                 CreatedDate = currentTime,
                 PaidDate = null,
                 ShipDate = null,
@@ -560,12 +581,14 @@ public static class ModelBuilderExtensions
                 ShipName = "Alice",
                 ShipPhoneNumber = "0123456789",
                 ShipAddress = "1111 Pine Ln.",
-                OrderStatus = OrderStatus.InProgress
+                Total = 3000000,
+                OrderStatus = OrderStatus.Pending
 
-            },new Order
+            }, new Order
             {
                 Id = orderId4,
                 UserId = userId4,
+                OrderCode = "230703dkb7wDTr8wQ2rR",
                 CreatedDate = currentTime,
                 PaidDate = currentTime,
                 ShipDate = shipDate,
@@ -573,12 +596,14 @@ public static class ModelBuilderExtensions
                 ShipName = "Alice",
                 ShipPhoneNumber = "0123456789",
                 ShipAddress = "123 Main St.",
-                OrderStatus = OrderStatus.Success
+                Total = 290000,
+                OrderStatus = OrderStatus.Completed
 
-            },new Order
+            }, new Order
             {
                 Id = orderId7,
                 UserId = userId7,
+                OrderCode = "230703kTwGUuaOxZ5sC1",
                 CreatedDate = currentTime,
                 PaidDate = null,
                 ShipDate = null,
@@ -586,12 +611,14 @@ public static class ModelBuilderExtensions
                 ShipName = "0987654321",
                 ShipPhoneNumber = "0987654321",
                 ShipAddress = "456 Elm St.",
-                OrderStatus = OrderStatus.InProgress
+                Total = 275000,
+                OrderStatus = OrderStatus.Pending
 
-            },new Order
+            }, new Order
             {
                 Id = orderId5,
                 UserId = userId5,
+                OrderCode = "230703P1u8nabxMakypB",
                 CreatedDate = currentTime,
                 PaidDate = currentTime,
                 ShipDate = shipDate,
@@ -599,12 +626,14 @@ public static class ModelBuilderExtensions
                 ShipName = "0987654321",
                 ShipPhoneNumber = "0987654321",
                 ShipAddress = "789 Maple Ave.",
-                OrderStatus = OrderStatus.Success
+                Total = 129000,
+                OrderStatus = OrderStatus.Completed
 
-            },new Order
+            }, new Order
             {
                 Id = orderId6,
                 UserId = userId6,
+                OrderCode = "230703i5B6qeJ2IbxBVu",
                 CreatedDate = currentTime,
                 PaidDate = currentTime,
                 ShipDate = shipDate,
@@ -612,13 +641,18 @@ public static class ModelBuilderExtensions
                 ShipName = "Charlie",
                 ShipPhoneNumber = "0987654321",
                 ShipAddress = "1212 Cedar Blvd.",
-                OrderStatus = OrderStatus.Success
+                Total = 232000,
+                OrderStatus = OrderStatus.Completed
 
             });
-        var orderdetailId1 = new Guid("a9b9e7f3-6fb3-4c7c-8e2d-19f4c7d7d1ba");
-        var orderdetailId2 = new Guid("45b8fada-8d4b-4e8f-944c-0d4d2c4f760a");
-        var orderdetailId3 = new Guid("c5c4c8fa-7db7-4b5d-8e5f-5b8c4c7b618f");
-        var orderdetailId4 = new Guid("f4f4b1d2-fbc7-4c7a-a4b6-8d4d5e6f7a8b");
+        #endregion
+
+        //var orderdetailId1 = new Guid("a9b9e7f3-6fb3-4c7c-8e2d-19f4c7d7d1ba");
+        //var orderdetailId2 = new Guid("45b8fada-8d4b-4e8f-944c-0d4d2c4f760a");
+        //var orderdetailId3 = new Guid("c5c4c8fa-7db7-4b5d-8e5f-5b8c4c7b618f");
+        //var orderdetailId4 = new Guid("f4f4b1d2-fbc7-4c7a-a4b6-8d4d5e6f7a8b");
+
+        #region order detail
         builder.Entity<OrderDetail>().HasData(
             new OrderDetail
             {
@@ -626,7 +660,7 @@ public static class ModelBuilderExtensions
                 OrderId = orderId1,
                 ProductDetailId = productDetailId1,
                 Quantity = 5,
-                Price = 199000 * 5,
+                Price = 199000,
                 Status = Status.Active
             },
             new OrderDetail
@@ -635,7 +669,7 @@ public static class ModelBuilderExtensions
                 OrderId = orderId1,
                 ProductDetailId = productDetailId2,
                 Quantity = 5,
-                Price = 199000 * 5,
+                Price = 199000,
                 Status = Status.Active
             },
             new OrderDetail
@@ -644,7 +678,7 @@ public static class ModelBuilderExtensions
                 OrderId = orderId2,
                 ProductDetailId = productDetailId3,
                 Quantity = 5,
-                Price = 199000 * 5,
+                Price = 199000,
                 Status = Status.Active
             },
             new OrderDetail
@@ -653,9 +687,50 @@ public static class ModelBuilderExtensions
                 OrderId = orderId2,
                 ProductDetailId = productDetailId4,
                 Quantity = 5,
-                Price = 199000 * 5,
+                Price = 199000,
+                Status = Status.Active
+            },
+            new OrderDetail
+            {
+                OrderId = orderId4,
+                ProductDetailId = productDetailId5,
+                Quantity = 5,
+                Price = 290000,
+                Status = Status.Active
+            },
+            new OrderDetail
+            {
+                OrderId = orderId5,
+                ProductDetailId = productDetailId2,
+                Quantity = 5,
+                Price = 290000,
+                Status = Status.Active
+            }
+            ,
+            new OrderDetail
+            {
+                OrderId = orderId6,
+                ProductDetailId = productDetailId5,
+                Quantity = 5,
+                Price = 290000,
+                Status = Status.Active
+            },
+            new OrderDetail
+            {
+                OrderId = orderId7,
+                ProductDetailId = productDetailId5,
+                Quantity = 5,
+                Price = 290000,
+                Status = Status.Active
+            },
+            new OrderDetail
+            {
+                OrderId = orderId3,
+                ProductDetailId = productDetailId5,
+                Quantity = 5,
+                Price = 199000,
                 Status = Status.Active
             });
-
+        #endregion
     }
 }

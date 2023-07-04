@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Categories;
 using shop.ViewModels.Catalog.Categories;
 

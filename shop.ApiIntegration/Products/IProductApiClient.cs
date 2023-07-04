@@ -4,17 +4,11 @@ using shop.ViewModels.Catalog.Materials;
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Catalog.Sizes;
 using shop.ViewModels.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace shop.ApiIntegration
+namespace shop.ApiIntegration.Products
 {
     public interface IProductApiClient
     {
-        
         Task<bool> CreateProduct(ProductCreateRequest request, Guid productPropId, Guid sizeId, Guid colorId, Guid materialId);
         Task<bool> UpdateProduct(ProductUpdateRequest request);
         Task<bool> DeleteProduct(ProductDeleteRequest request);
@@ -29,7 +23,5 @@ namespace shop.ApiIntegration
         Task<List<MaterialVm>> GetListMaterial();
         Task<List<ColorVm>> GetListColor();
         Task<List<SizeVm>> GetListSize();
-
-        
     }
 }

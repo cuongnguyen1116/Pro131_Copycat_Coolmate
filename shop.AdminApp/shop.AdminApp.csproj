@@ -16,8 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Colors\" />
-    <Folder Include="Views\Materials\" />
+    <Folder Include="Views\Order\OrderComponents\" />
   </ItemGroup>
 
 </Project>

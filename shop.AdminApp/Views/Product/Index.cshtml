@@ -48,7 +48,7 @@
                 }
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>
@@ -83,30 +83,30 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
+                                        @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.MaterialName)
+                                        @Html.DisplayFor(modelItem => item.MaterialName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.SizeName)
+                                        @Html.DisplayFor(modelItem => item.SizeName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ColorName)
+                                        @Html.DisplayFor(modelItem => item.ColorName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.OriginalPrice)
+                                        @Html.DisplayFor(modelItem => item.OriginalPrice)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Price)
+                                        @Html.DisplayFor(modelItem => item.Price)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Stock)
+                                        @Html.DisplayFor(modelItem => item.Stock)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) 
-                                    
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
                                 </td>
                             </tr>
                         }

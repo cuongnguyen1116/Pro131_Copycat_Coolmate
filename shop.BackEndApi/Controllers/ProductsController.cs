@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Products;
 using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
@@ -17,7 +15,7 @@ namespace shop.BackEndApi.Controllers
         {
             _productServices = productServices;
         }
-
+        // Bảng ProductDetail
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -30,6 +28,7 @@ namespace shop.BackEndApi.Controllers
             var result = await _productServices.GetAllProductProp();
             return Ok(result);
         }
+        // Bảng ProductDetail
         [HttpPost("create")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
@@ -47,9 +46,10 @@ namespace shop.BackEndApi.Controllers
                 return Ok(request);
             }
         }
+        // Bảng ProductDetail
         [HttpPut("update/{productDetailId}")]
         [Consumes("multipart/form-data")]
-        
+
         public async Task<IActionResult> Update([FromRoute] Guid productDetailId, [FromForm] ProductUpdateRequest request)
         {
             if (!ModelState.IsValid)
@@ -62,6 +62,7 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest();
             return Ok();
         }
+        // Bảng ProductDetail
         [HttpDelete("delete/{productDetailId}")]
         public async Task<IActionResult> Delete(Guid productDetailId)
         {
@@ -70,6 +71,7 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest();
             return Ok();
         }
+        // Bảng ProductDetail
         [HttpGet("product/{productDetailId}")]
         public async Task<IActionResult> GetById(Guid productDetailId)
         {
@@ -80,8 +82,7 @@ namespace shop.BackEndApi.Controllers
             }
             return Ok(product);
         }
-
-
+        //Bang Product
         [HttpPost("createproductprop")]
         public async Task<IActionResult> CreateProductProp([FromBody] ProductPropVm request)
         {
@@ -98,6 +99,7 @@ namespace shop.BackEndApi.Controllers
                 return Ok(request);
             }
         }
+        //Bang Product
         [HttpPut("updateProductProp/{productPropId}")]
         public async Task<IActionResult> UpdateProductProp([FromRoute] Guid productPropId, ProductPropVm request)
         {
@@ -111,6 +113,7 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest();
             return Ok();
         }
+        //Bang Product
         [HttpDelete("deleteProductProp/{productPropId}")]
         public async Task<IActionResult> DeleteProductProp(Guid productPropId)
         {
@@ -119,6 +122,7 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest();
             return Ok();
         }
+        //Bang Product
         [HttpGet("productprop/{productPropId}")]
         public async Task<IActionResult> GetByIdProductProp(Guid productPropId)
         {

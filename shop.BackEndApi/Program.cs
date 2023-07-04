@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using shop.Application.Catalog.Categories;
 using shop.Application.Catalog.Colors;
 using shop.Application.Catalog.Materials;
+using shop.Application.Catalog.Orders;
 using shop.Application.Catalog.Products;
 using shop.Application.Catalog.Sizes;
 using shop.Application.Common;
@@ -27,9 +28,9 @@ builder.Services.AddTransient<ISizeServices, SizeServices>();
 builder.Services.AddTransient<IProductServices, ProductServices>();
 builder.Services.AddTransient<ICategoryServices, CategoryServices>();
 builder.Services.AddTransient<IStorageService, FileStorageService>();
-builder.Services.AddTransient<IRoleServices,RoleServices>();
+builder.Services.AddTransient<IRoleServices, RoleServices>();
 builder.Services.AddTransient<IUserServices, UserServices>();
-
+builder.Services.AddTransient<IOrderServices, OrderServices>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

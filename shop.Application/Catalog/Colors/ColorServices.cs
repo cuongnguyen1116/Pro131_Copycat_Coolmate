@@ -6,13 +6,10 @@ using shop.ViewModels.Catalog.Colors;
 
 namespace shop.Application.Catalog.Colors;
 
-public class ColorServices : IColorServices
+public class ColorServices : BaseServices, IColorServices
 {
-    private readonly ShopDbContext _context;
-
-    public ColorServices(ShopDbContext context)
+    public ColorServices(ShopDbContext context) : base(context)
     {
-        _context = context;
     }
 
     public async Task<bool> Create(ColorVm request)

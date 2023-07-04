@@ -5,13 +5,10 @@ using shop.ViewModels.Catalog.Sizes;
 
 namespace shop.Application.Catalog.Sizes;
 
-public class SizeServices : ISizeServices
+public class SizeServices : BaseServices, ISizeServices
 {
-    private readonly ShopDbContext _context;
-
-    public SizeServices(ShopDbContext context)
+    public SizeServices(ShopDbContext context) : base(context)
     {
-        _context = context;
     }
 
     public async Task<List<SizeVm>> GetAll()
