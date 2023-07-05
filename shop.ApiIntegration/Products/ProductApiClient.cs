@@ -93,7 +93,7 @@ namespace shop.ApiIntegration.Products
             return response.IsSuccessStatusCode;
         }
         // Bảng ProductDetail
-        public async Task<List<ProductVm>> GetAll(ProductPropRequest request)
+        public async Task<List<ProductVm>> GetAll(ProductPagingRequest request)
         {
             var httpClient = new HttpClient();
             string apiURL = $"https://localhost:5000/api/Products?keyword={request.Keyword}";
@@ -104,7 +104,7 @@ namespace shop.ApiIntegration.Products
             return result;
         }
 
-        public async Task<List<ProductPropVm>> GetAllProductProp(ProductPropRequest request)
+        public async Task<List<ProductPropVm>> GetAllProductProp(ProductPagingRequest request)
         {
             var httpClient = new HttpClient();
             string apiURL = $"https://localhost:5000/api/Products/propductprops?keyword={request.Keyword}&categoryId={request.CategoryId}";

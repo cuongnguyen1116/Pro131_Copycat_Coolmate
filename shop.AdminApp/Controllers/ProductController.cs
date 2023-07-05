@@ -22,7 +22,7 @@ namespace shop.AdminApp.Controllers
         }
         public async Task<IActionResult> Index(string? keyword)
         {
-            var request = new ProductPropRequest()
+            var request = new ProductPagingRequest()
             {
                 Keyword = keyword
             };
@@ -272,7 +272,7 @@ namespace shop.AdminApp.Controllers
         public async Task<IActionResult> ShowAllProductProp(string keyword, Guid? categoryId)
 
         {
-            var request = new ProductPropRequest()
+            var request = new ProductPagingRequest()
             {
                 Keyword = keyword,
                 CategoryId = categoryId

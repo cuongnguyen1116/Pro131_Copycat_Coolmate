@@ -6,13 +6,13 @@ namespace shop.Application.Catalog.Products;
 
 public interface IProductServices
 {
-    Task<List<ProductVm>> GetAll(ProductPropRequest request);
+    Task<List<ProductVm>> GetAll(ProductPagingRequest request);
     Task<ProductVm> GetById(Guid productdetailId);
     Task<bool> Create(ProductCreateRequest request);
     Task<bool> Update(ProductUpdateRequest request);
     Task<bool> Delete(Guid productdetailId);
     Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request);
-    Task<List<ProductPropVm>> GetAllProductProp(ProductPropRequest request);
+    Task<List<ProductPropVm>> GetAllProductProp(ProductPagingRequest request);
     Task<List<ProductPropVm>> GetListProductProp();
     Task<ProductPropVm> GetByIdProductProp(Guid productPropId);
     Task<bool> CreateProductProp(ProductPropVm request);

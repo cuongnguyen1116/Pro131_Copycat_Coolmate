@@ -14,13 +14,13 @@ namespace shop.ApiIntegration.Products
         Task<bool> DeleteProduct(ProductDeleteRequest request);
         Task<ProductVm> GetById(Guid productDetailId);
         Task<ProductPropVm> GetByIdProductProp(Guid productPropId);
-        Task<List<ProductVm>> GetAll(ProductPropRequest request);
+        Task<List<ProductVm>> GetAll(ProductPagingRequest request);
         Task<bool> CreateProductProp(ProductPropVm request);
         Task<bool> UpdateProductProp(ProductPropVm request);
         Task<bool> DeleteProductProp(ProductPropVm request);
         Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request);
         Task<List<ProductPropVm>> GetListProductProp();
-        Task<List<ProductPropVm>> GetAllProductProp(ProductPropRequest request);
+        Task<List<ProductPropVm>> GetAllProductProp(ProductPagingRequest request);
         Task<List<MaterialVm>> GetListMaterial();
         Task<List<ColorVm>> GetListColor();
         Task<List<SizeVm>> GetListSize();

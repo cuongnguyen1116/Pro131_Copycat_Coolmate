@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace shop.ViewModels.Catalog.Products
 {
-    public class ProductPropRequest
+    public class ProductPagingRequest
     {
         public string? Keyword { get; set; }
         

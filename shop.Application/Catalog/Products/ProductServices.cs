@@ -24,7 +24,7 @@ public class ProductServices : IProductServices
         _storageService = storageService;
     }
 
-    public async Task<List<ProductVm>> GetAll(ProductPropRequest request)
+    public async Task<List<ProductVm>> GetAll(ProductPagingRequest request)
     {
         var query = from pd in _context.ProductDetails
                     join p in _context.Products on pd.ProductId equals p.Id
@@ -176,7 +176,7 @@ public class ProductServices : IProductServices
         return productDetailViewModel;
     }
 
-    public async Task<List<ProductPropVm>> GetAllProductProp(ProductPropRequest request)
+    public async Task<List<ProductPropVm>> GetAllProductProp(ProductPagingRequest request)
     {
         var query = from p in _context.Products
                     join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
