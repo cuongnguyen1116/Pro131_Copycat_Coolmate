@@ -8,9 +8,10 @@
             ResultObj = resultObj;
         }
 
-        public ApiSuccessResult()
+        public ApiSuccessResult(string message)
         {
             IsSuccessed = true;
+            Message = message;
         }
     }
 }

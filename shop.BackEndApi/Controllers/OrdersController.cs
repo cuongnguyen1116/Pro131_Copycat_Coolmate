@@ -15,13 +15,6 @@ namespace shop.BackEndApi.Controllers
             _orderServices = orderServices;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var list = await _orderServices.GetAll();
-            return Ok(list);
-        }
-
         [HttpGet("get-orders-by-status/{status}")]
         public async Task<IActionResult> GetOrdersByStatus(OrderStatus status)
         {
@@ -40,7 +33,7 @@ namespace shop.BackEndApi.Controllers
         public async Task<IActionResult> ConfirmOrder(Guid id)
         {
             var response = await _orderServices.ConfirmOrder(id);
-            if (response.IsSuccessed) return Ok(response.IsSuccessed);
+            if (response.IsSuccessed) return Ok(response);
             return BadRequest(response.ResultObj);
         }
 
@@ -48,7 +41,7 @@ namespace shop.BackEndApi.Controllers
         public async Task<IActionResult> GetOrderToShipper(Guid id)
         {
             var response = await _orderServices.GetOrderToShipper(id);
-            if (response.IsSuccessed) return Ok(response.IsSuccessed);
+            if (response.IsSuccessed) return Ok(response);
             return BadRequest(response.ResultObj);
         }
 
@@ -56,7 +49,7 @@ namespace shop.BackEndApi.Controllers
         public async Task<IActionResult> CompleteOrder(Guid id)
         {
             var response = await _orderServices.CompleteOrder(id);
-            if (response.IsSuccessed) return Ok(response.IsSuccessed);
+            if (response.IsSuccessed) return Ok(response);
             return BadRequest(response.ResultObj);
         }
 
@@ -64,7 +57,7 @@ namespace shop.BackEndApi.Controllers
         public async Task<IActionResult> CancelOrder(Guid id)
         {
             var response = await _orderServices.CancelOrder(id);
-            if (response.IsSuccessed) return Ok(response.IsSuccessed);
+            if (response.IsSuccessed) return Ok(response);
             return BadRequest(response.ResultObj);
         }
     }

@@ -34,8 +34,8 @@ namespace shop.Application.Catalog.Orders
         public async Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status)
         {
             var data = await GetAll();
-            var list = data.Where(x => x.Status == status).ToList();
-            return list;
+            if (status == OrderStatus.None) return data.ToList();
+            else return data.Where(x => x.Status == status).ToList();
         }
 
         public async Task<List<OrderDetailVm>> GetOrderDetails(Guid id)
@@ -76,7 +76,7 @@ namespace shop.Application.Catalog.Orders
             _context.Orders.Update(existingOrder);
             await _context.SaveChangesAsync();
 
-            return new ApiSuccessResult<bool>();
+            return new ApiSuccessResult<bool>($"Xác nhận thành công đơn hàng: {existingOrder.OrderCode}");
         }
 
         public async Task<ApiResult<bool>> GetOrderToShipper(Guid id)
@@ -91,7 +91,7 @@ namespace shop.Application.Catalog.Orders
             _context.Orders.Update(existingOrder);
             await _context.SaveChangesAsync();
 
-            return new ApiSuccessResult<bool>();
+            return new ApiSuccessResult<bool>($"Đã gửi đơn hàng {existingOrder.OrderCode} tới đơn vị vận chuyển");
         }
 
         public async Task<ApiResult<bool>> CompleteOrder(Guid id)
@@ -107,7 +107,7 @@ namespace shop.Application.Catalog.Orders
             _context.Orders.Update(existingOrder);
             await _context.SaveChangesAsync();
 
-            return new ApiSuccessResult<bool>();
+            return new ApiSuccessResult<bool>($"Đã hoàn thành đơn hàng {existingOrder.OrderCode}");
         }
 
         public async Task<ApiResult<bool>> CancelOrder(Guid id)
@@ -130,7 +130,7 @@ namespace shop.Application.Catalog.Orders
             _context.Orders.Update(existingOrder);
             await _context.SaveChangesAsync();
 
-            return new ApiSuccessResult<bool>();
+            return new ApiSuccessResult<bool>($"Đã hủy đơn hàng {existingOrder.OrderCode}");
         }
 
     }

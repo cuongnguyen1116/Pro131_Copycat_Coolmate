@@ -13,16 +13,14 @@ namespace shop.AdminApp.Controllers
             _orderApiClient = orderApiClient;
         }
 
-        public async Task<IActionResult> GetAll()
-        {
-            var data = await _orderApiClient.GetAll();
-            return View(data);
-        }
-
         public async Task<IActionResult> GetOrdersByStatus(OrderStatus status)
         {
             var data = await _orderApiClient.GetOrdersByStatus(status);
-            return View("GetAll", data);
+            if (TempData["result"] != null)
+            {
+                ViewBag.SuccessMsg = TempData["result"];
+            }
+            return View(data);
         }
 
         public async Task<IActionResult> GetOrderDetails(Guid id)
@@ -34,27 +32,43 @@ namespace shop.AdminApp.Controllers
         public async Task<IActionResult> ConfirmOrder(Guid id)
         {
             var response = await _orderApiClient.ConfirmOrder(id);
-            if (response) return RedirectToAction("GetAll", "Order");
+            if (response.IsSuccessed)
+            {
+                TempData["result"] = response.Message;
+                return RedirectToAction("GetOrdersByStatus", "Order", new { status = 6 });
+            }
             return View();
         }
 
         public async Task<IActionResult> GetOrderToShipper(Guid id)
         {
             var response = await _orderApiClient.GetOrderToShipper(id);
-            if (response) return RedirectToAction("GetAll", "Order");
+            if (response.IsSuccessed)
+            {
+                TempData["result"] = response.Message;
+                return RedirectToAction("GetOrdersByStatus", "Order", new { status = 6 });
+            }
             return View();
         }
 
         public async Task<IActionResult> CompleteOrder(Guid id)
         {
             var response = await _orderApiClient.CompleteOrder(id);
-            if (response) return RedirectToAction("GetAll", "Order");
+            if (response.IsSuccessed)
+            {
+                TempData["result"] = response.Message;
+                return RedirectToAction("GetOrdersByStatus", "Order", new { status = 6 });
+            }
             return View();
         }
         public async Task<IActionResult> CancelOrder(Guid id)
         {
             var response = await _orderApiClient.CancelOrder(id);
-            if (response) return RedirectToAction("GetAll", "Order");
+            if (response.IsSuccessed)
+            {
+                TempData["result"] = response.Message;
+                return RedirectToAction("GetOrdersByStatus", "Order", new { status = 6 });
+            }
             return View();
         }
     }
