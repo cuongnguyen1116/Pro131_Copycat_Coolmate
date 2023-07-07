@@ -8,6 +8,5 @@ public enum OrderStatus
     Completed,
     Cancelled,
     Refunded,
-    Disputed,
-    ManualVerificationRequired
+    None
 }

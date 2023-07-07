@@ -22,7 +22,7 @@
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetAll","Order")">Tất cả</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 6})">Tất cả</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 0})">Chờ xác nhận</a>
@@ -63,7 +63,7 @@
             <div class="row">
                 @if (ViewBag.SuccessMsg != null)
                 {
-                    <div id="msgAlert" class="alert alert-success" role="alert">
+                    <div id="msgAlert" class="alert alert-success" role="alert" style="color:red">
                         @ViewBag.SuccessMsg
                     </div>
                 }
@@ -103,12 +103,44 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Status)
                                 </td>
-                                <td>
+                               @* <td>
                                     <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
-                                    <a class="btn btn-warning" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Xác nhận</a>
-                                    <a class="btn btn-info" href="@Url.Action("GetOrderToShipper", "Order", new {id = item.Id})">Đã gửi hàng</a>
-                                    <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn thành</a>
+                                    @if (item.Status == shop.Data.Enums.OrderStatus.Pending)
+                                    {
+                                        <a class="btn btn-warning" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Xác nhận</a>
+                                    }
+                                    else if (item.Status == shop.Data.Enums.OrderStatus.AwaitingShipment)
+                                    {
+                                        <a class="btn btn-info" href="@Url.Action("GetOrderToShipper", "Order", new {id = item.Id})">Đã gửi hàng</a>
+                                    }
+                                    else if (item.Status == shop.Data.Enums.OrderStatus.AWaitingPickup)
+                                    {
+                                        <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn thành</a>
+                                    }
                                     <a class="btn btn-danger" href="@Url.Action("CancelOrder", "Order", new {id = item.Id})">Hủy</a>
+                                </td>*@
+                                <td>                                   
+                                    @if (item.Status == shop.Data.Enums.OrderStatus.Cancelled || item.Status == shop.Data.Enums.OrderStatus.Completed)
+                                    {
+                                        <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
+                                        @if (item.Status == shop.Data.Enums.OrderStatus.Pending)
+                                        {
+                                            <a class="btn btn-warning" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Xác nhận</a>
+                                        }
+                                        else if (item.Status == shop.Data.Enums.OrderStatus.AwaitingShipment)
+                                        {
+                                            <a class="btn btn-info" href="@Url.Action("GetOrderToShipper", "Order", new {id = item.Id})">Đã gửi hàng</a>
+                                        }
+                                        else if (item.Status == shop.Data.Enums.OrderStatus.AWaitingPickup)
+                                        {
+                                            <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn thành</a>
+                                        }
+                                        <a class="btn btn-danger" href="@Url.Action("CancelOrder", "Order", new {id = item.Id})">Hủy</a>
+                                    }
                                 </td>
                             </tr>
                         }

@@ -12,7 +12,7 @@ using shop.Data.Context;
 namespace shop.Data.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20230704021442_Initial")]
+    [Migration("20230706015124_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -186,21 +186,21 @@ namespace shop.Data.Migrations
                         new
                         {
                             Id = new Guid("1090dcdd-b383-417b-9523-d73f0373fbb0"),
-                            ConcurrencyStamp = "420cf7a3-7d09-40b1-b143-a0602fe1baaa",
+                            ConcurrencyStamp = "7e654e5f-a159-4c29-a8c1-9cbe05818aa8",
                             Description = "Administrator role",
                             Name = "admin"
                         },
                         new
                         {
                             Id = new Guid("4a1c9012-a602-46a9-8eba-05e85149fd81"),
-                            ConcurrencyStamp = "250f7c2f-bf09-4ea8-a9d7-200b9d35b2bd",
+                            ConcurrencyStamp = "612b8c78-6e79-4244-8e5f-39586bb8ecab",
                             Description = "Employee role",
                             Name = "employee"
                         },
                         new
                         {
                             Id = new Guid("66d310d2-f7e1-4aab-8003-4370144e3f8d"),
-                            ConcurrencyStamp = "a17c6ecc-272e-4c02-ab3c-cd2caa884a73",
+                            ConcurrencyStamp = "422b45cc-2bdc-4ce6-bf4b-877619c00f4e",
                             Description = "Customer role",
                             Name = "customer"
                         });
@@ -276,7 +276,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "404ff4a1-8f7c-4d43-8507-5bd52c9b2406",
+                            ConcurrencyStamp = "5dbf47b3-cdcb-4e5e-8694-b46b157d7a06",
                             DoB = new DateTime(2003, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "cuongnguyenpm1116@gmail.com",
                             EmailConfirmed = true,
@@ -285,7 +285,7 @@ namespace shop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "cuongnguyenpm1116@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHILD5KqOsluW3oJG92wp8RlZSOXnWXOr5wERL2lpqPhum6Cx8peNTOWEm8O5vZnVQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG59jDOcaESt+D7j9pEQVUR4k5Nn8Phz9ni2jtk313IL9a+5QfFOYIUFwzOrguLXWQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -295,7 +295,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("c2ec6dd4-8170-4b6d-acf4-33d52a128789"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c0ffb1f6-0c61-461b-a324-622c13aa6a34",
+                            ConcurrencyStamp = "97a1dc4e-e388-403a-a661-e47666f12f04",
                             DoB = new DateTime(2003, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hq37na@gmail.com",
                             EmailConfirmed = true,
@@ -304,7 +304,7 @@ namespace shop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "hq37na@gmail.com",
                             NormalizedUserName = "kimhoc1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI8KPZ1x8YOdXJPMLdpxBX5heHvmaRokaO/+eqLnWuQym3WSDO6IU7LRVXpBHjoCxQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHjKZTPaROsknqZUJl1OCu3KsIqN1v8cxty1xqWke5MDkDyuRLf67+HjsSlFuVBdyg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -314,7 +314,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("3b294e1f-c3f7-4f71-9be6-11c614fbdce5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "59ef64e6-33e0-46c6-a12a-291fcc29fc72",
+                            ConcurrencyStamp = "09dc8c92-5dc3-4e00-9a85-b82b72a8fac5",
                             DoB = new DateTime(2003, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "lusdeer@gmail.com",
                             EmailConfirmed = true,
@@ -323,7 +323,7 @@ namespace shop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "lusdeer@gmail.com",
                             NormalizedUserName = "lmaohieu1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFhJfWPj4cdqVtM2fCMJV1/BaaHvX7xDaRSMmyCoUSV7/u6Y1cpd+0R8kAq0/02BhQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDgBQa1LJ0Z6RSCy6Ve2wCo1BvDDEL4xuD0J6TQsT9vGJ5lOjTgJddosT+XadT0Dog==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -333,7 +333,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("a2d98f29-7a98-4d0d-ba21-aa1d88c4e5c2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aa6f9912-7cb3-405b-8eb9-055fca221e96",
+                            ConcurrencyStamp = "a3faf284-dc0d-4130-addf-30fb86138014",
                             DoB = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "john.doe@example.com",
                             EmailConfirmed = true,
@@ -342,7 +342,7 @@ namespace shop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHN.DOE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPRSU7cInLZdHNyRrQCx4/1ITChwbsF2eTgEnN+bL2Peg0OJ0CNFX64y2F+kHLsBkA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFP+CA50VmmVeQmYWLXvZngh/MvZ2EpM8ouWUob0aB39Kz+rCUS1YEcUb7R4urGYog==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -352,7 +352,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("b6c75c5f-9d1b-4a0d-9c6d-3e7d3ce2a2a7"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3092bcb2-4b17-4a81-9612-3c69e13c6fee",
+                            ConcurrencyStamp = "2d17b2f1-cefb-494f-a1fe-a74223ef4c1d",
                             DoB = new DateTime(1995, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jane.doe@example.com",
                             EmailConfirmed = true,
@@ -361,7 +361,7 @@ namespace shop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JANE.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JANE.DOE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBjaTzI6mvVZytSRsPyONsnOkB6ibeu/Q73s5AU6aS73W1MSkArampZ/jxX6DFEBGw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG33Vv5ZlhgAW1wYazmABgoIAwBTsa9h+g6ybAcXmnY74oHKOF3pRE9j/1+1QwHaeg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -371,7 +371,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("e3e4e9f8-cd6d-4299-9d8f-fb5e8ef6d0d5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "78a66e49-065b-4ed1-899e-b7cdfbd14d25",
+                            ConcurrencyStamp = "ee5ac32d-854c-4d74-a072-1f36bacd7624",
                             DoB = new DateTime(1985, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "bob.smith@example.com",
                             EmailConfirmed = true,
@@ -380,7 +380,7 @@ namespace shop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BOB.SMITH@EXAMPLE.COM",
                             NormalizedUserName = "BOB.SMITH",
-                            PasswordHash = "AQAAAAEAACcQAAAAENibGWc4xgPWTtHZD3jNKNW+M13uoerN0Y6VeR6KFLXqNsXAyq0N5i5BAenOSLgNJg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECLFQ8H366ItS6ncjBVRcwzQNyX0RBwGS0mfHQSRzPqMly4N8AGfo6OA5OWn5XWu3g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -390,7 +390,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("2f00b6e3-2583-4b5f-a92f-9d8f2b8d4d7f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d6613267-db60-4926-9a65-16c4ce01b416",
+                            ConcurrencyStamp = "1f810836-0742-4ca6-9c41-2e54c26d63dc",
                             DoB = new DateTime(1988, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "jennifer.smith@example.com",
                             EmailConfirmed = true,
@@ -399,7 +399,7 @@ namespace shop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JENNIFER.SMITH@EXAMPLE.COM",
                             NormalizedUserName = "JENNIFER.SMITH",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEjKfsnqapOMUrWaqU6l4cGyLnD39Ebf2dbL/41nBg8gyoR/+CH2TVWXQd2QUE5Wcw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC/reqaHy0R1SfxtptMsxqygQsPUu4bVWA62Lm+3rtBRQ/E491JNeyVEuDGIu7Anpw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -647,7 +647,7 @@ namespace shop.Data.Migrations
                         new
                         {
                             Id = new Guid("f602aed4-37de-446c-8b4d-d5e407a4bf33"),
-                            CreatedDate = new DateTime(2023, 6, 29, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            CreatedDate = new DateTime(2023, 7, 1, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             OrderCode = "230703DDKbiC3SyDB9pN",
                             OrderStatus = 0,
                             ShipAddress = "123 Main St.",
@@ -659,8 +659,8 @@ namespace shop.Data.Migrations
                         new
                         {
                             Id = new Guid("4f31c9cd-6fdf-4d3a-9d8b-6f1d3d5c1c24"),
-                            ConfirmedDate = new DateTime(2023, 6, 30, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
-                            CreatedDate = new DateTime(2023, 6, 29, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            ConfirmedDate = new DateTime(2023, 7, 2, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
+                            CreatedDate = new DateTime(2023, 7, 1, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             OrderCode = "230703PmyoqNWHK3LZe3",
                             OrderStatus = 2,
                             ShipAddress = "1010 Oak Dr.",
@@ -672,8 +672,8 @@ namespace shop.Data.Migrations
                         new
                         {
                             Id = new Guid("7afa0b0b-1c0d-4bd4-a1e8-9f1a38a5e5ab"),
-                            ConfirmedDate = new DateTime(2023, 6, 30, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
-                            CreatedDate = new DateTime(2023, 6, 29, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            ConfirmedDate = new DateTime(2023, 7, 2, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
+                            CreatedDate = new DateTime(2023, 7, 1, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             OrderCode = "23070306w3xM7UGUxRrW",
                             OrderStatus = 1,
                             ShipAddress = "1111 Pine Ln.",
@@ -685,7 +685,7 @@ namespace shop.Data.Migrations
                         new
                         {
                             Id = new Guid("8fd4f3f5-4f1a-4f23-a2b0-1dbf8e9d7a9c"),
-                            CreatedDate = new DateTime(2023, 6, 29, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            CreatedDate = new DateTime(2023, 7, 1, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             OrderCode = "230703dkb7wDTr8wQ2rR",
                             OrderStatus = 0,
                             ShipAddress = "123 Main St.",
@@ -697,13 +697,13 @@ namespace shop.Data.Migrations
                         new
                         {
                             Id = new Guid("a60b3fd4-40a0-4f4e-8f5b-6e5a9a3d63e6"),
-                            CompletedDate = new DateTime(2023, 7, 4, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
-                            CreatedDate = new DateTime(2023, 6, 29, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            CompletedDate = new DateTime(2023, 7, 6, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
+                            CreatedDate = new DateTime(2023, 7, 1, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             OrderCode = "230703kTwGUuaOxZ5sC1",
                             OrderStatus = 3,
-                            PaidDate = new DateTime(2023, 7, 1, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            PaidDate = new DateTime(2023, 7, 3, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             ShipAddress = "456 Elm St.",
-                            ShipDate = new DateTime(2023, 7, 3, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            ShipDate = new DateTime(2023, 7, 5, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             ShipName = "0987654321",
                             ShipPhoneNumber = "0987654321",
                             Total = 275000m,
@@ -712,13 +712,13 @@ namespace shop.Data.Migrations
                         new
                         {
                             Id = new Guid("c9e9de6f-0e6f-4b3e-9f6c-3f8f3a0e6a1d"),
-                            CompletedDate = new DateTime(2023, 7, 4, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
-                            CreatedDate = new DateTime(2023, 6, 29, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            CompletedDate = new DateTime(2023, 7, 6, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
+                            CreatedDate = new DateTime(2023, 7, 1, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             OrderCode = "230703P1u8nabxMakypB",
                             OrderStatus = 3,
-                            PaidDate = new DateTime(2023, 7, 1, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            PaidDate = new DateTime(2023, 7, 3, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             ShipAddress = "789 Maple Ave.",
-                            ShipDate = new DateTime(2023, 7, 3, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            ShipDate = new DateTime(2023, 7, 5, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             ShipName = "0987654321",
                             ShipPhoneNumber = "0987654321",
                             Total = 129000m,
@@ -727,13 +727,13 @@ namespace shop.Data.Migrations
                         new
                         {
                             Id = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af"),
-                            CompletedDate = new DateTime(2023, 7, 4, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
-                            CreatedDate = new DateTime(2023, 6, 29, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            CompletedDate = new DateTime(2023, 7, 6, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
+                            CreatedDate = new DateTime(2023, 7, 1, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             OrderCode = "230703i5B6qeJ2IbxBVu",
                             OrderStatus = 3,
-                            PaidDate = new DateTime(2023, 7, 1, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            PaidDate = new DateTime(2023, 7, 3, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             ShipAddress = "1212 Cedar Blvd.",
-                            ShipDate = new DateTime(2023, 7, 3, 9, 14, 42, 203, DateTimeKind.Local).AddTicks(7168),
+                            ShipDate = new DateTime(2023, 7, 5, 8, 51, 23, 885, DateTimeKind.Local).AddTicks(3287),
                             ShipName = "Charlie",
                             ShipPhoneNumber = "0987654321",
                             Total = 232000m,
@@ -945,7 +945,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("9a6ccc00-6b1c-40c5-be61-eb71323c9151"),
                             ColorId = new Guid("87513ccc-798f-485a-8206-0522f1d8b0ad"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(283),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8139),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 150000m,
                             Price = 199000m,
@@ -958,7 +958,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("3643727e-d49c-45f5-bfae-9cd4fbcebb45"),
                             ColorId = new Guid("87513ccc-798f-485a-8206-0522f1d8b0ad"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(298),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8151),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 150000m,
                             Price = 209000m,
@@ -971,7 +971,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("b799297f-d21e-4280-8df9-a3c6788c806e"),
                             ColorId = new Guid("87513ccc-798f-485a-8206-0522f1d8b0ad"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(299),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8153),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 150000m,
                             Price = 219000m,
@@ -984,7 +984,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("e3acb616-dd2c-44ee-93f0-754c68503b38"),
                             ColorId = new Guid("87513ccc-798f-485a-8206-0522f1d8b0ad"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(301),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8159),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 200000m,
                             Price = 229000m,
@@ -997,7 +997,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("f1e33f26-6797-43ae-83c5-dabb932a880e"),
                             ColorId = new Guid("87513ccc-798f-485a-8206-0522f1d8b0ad"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(303),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8160),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 200000m,
                             Price = 239000m,
@@ -1010,7 +1010,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("9610c212-5a16-4a70-8703-6bc7f1224be0"),
                             ColorId = new Guid("87513ccc-798f-485a-8206-0522f1d8b0ad"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(304),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8162),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 200000m,
                             Price = 249000m,
@@ -1023,7 +1023,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("28c12878-b191-4d42-974a-7b823de70a06"),
                             ColorId = new Guid("24f04c0b-34c3-428c-8767-0bb98da225e0"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(306),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8164),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 200000m,
                             Price = 259000m,
@@ -1036,7 +1036,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("a6767d22-3ea0-4a00-ad31-9dce1d67184e"),
                             ColorId = new Guid("24f04c0b-34c3-428c-8767-0bb98da225e0"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(312),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8165),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 200000m,
                             Price = 269000m,
@@ -1049,7 +1049,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("423f83df-dc6c-4b41-aa09-2fe30e841aa6"),
                             ColorId = new Guid("24f04c0b-34c3-428c-8767-0bb98da225e0"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(313),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8171),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 200000m,
                             Price = 279000m,
@@ -1062,7 +1062,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("18cd05cb-f995-4b13-9fa4-a9e1f1c43862"),
                             ColorId = new Guid("24f04c0b-34c3-428c-8767-0bb98da225e0"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(314),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8172),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 200000m,
                             Price = 289000m,
@@ -1075,7 +1075,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("0976ba79-d822-408a-86cb-e05045db09ed"),
                             ColorId = new Guid("24f04c0b-34c3-428c-8767-0bb98da225e0"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(316),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8174),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 200000m,
                             Price = 299000m,
@@ -1088,7 +1088,7 @@ namespace shop.Data.Migrations
                         {
                             Id = new Guid("6a008d16-196e-40fe-ada5-2acf339fbede"),
                             ColorId = new Guid("24f04c0b-34c3-428c-8767-0bb98da225e0"),
-                            CreatedDate = new DateTime(2023, 7, 4, 9, 14, 42, 194, DateTimeKind.Local).AddTicks(317),
+                            CreatedDate = new DateTime(2023, 7, 6, 8, 51, 23, 875, DateTimeKind.Local).AddTicks(8175),
                             MaterialId = new Guid("042237d8-ce3e-4f5e-b79d-daad510a1dc4"),
                             OriginalPrice = 200000m,
                             Price = 309000m,
