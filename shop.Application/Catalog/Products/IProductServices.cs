@@ -18,5 +18,8 @@ public interface IProductServices
     Task<bool> CreateProductProp(ProductPropVm request);
     Task<bool> UpdateProductProp(ProductPropVm request);
     Task<bool> DeleteProductProp(Guid productPropId);
+    Task<ApiResult<bool>> AddImages( ProductImageRequest request);
+    //Task<int> RemoveImages(Guid imageId);
+    //Task<int> UpdateImages(Guid imageId, ProductImageRequest request);
 
 }

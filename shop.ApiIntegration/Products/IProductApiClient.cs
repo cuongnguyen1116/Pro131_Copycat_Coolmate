@@ -24,5 +24,6 @@ namespace shop.ApiIntegration.Products
         Task<List<MaterialVm>> GetListMaterial();
         Task<List<ColorVm>> GetListColor();
         Task<List<SizeVm>> GetListSize();
+        Task<ApiResult<bool>> CreateImage(ProductImageRequest request, Guid productdetailid);
     }
 }
