@@ -14,7 +14,6 @@ namespace shop.ApiIntegration.Orders
         public async Task<List<OrderVm>> GetAll()
         {
             string apiUrl = "/api/orders";
-
             var response = await _httpClient.GetAsync(apiUrl);
             response.EnsureSuccessStatusCode();
             string apiData = await response.Content.ReadAsStringAsync();

@@ -31,7 +31,10 @@ public class ProductServices : IProductServices
                     join c in _context.Colors on pd.ColorId equals c.Id
                     join m in _context.Materials on pd.MaterialId equals m.Id
                     join s in _context.Sizes on pd.SizeId equals s.Id
-                    select new { pd, p, c, m, s };
+                    join pi in _context.ProductImages on pd.Id equals pi.ProductDetailId into ppi
+                    from pi in ppi.DefaultIfEmpty()
+                        /*where pi.IsDefault == true*/
+                    select new { pd, p, c, m, s, pi };
         if (!string.IsNullOrEmpty(request.Keyword))
         {
             // Filter the query based on the keyword
@@ -49,8 +52,8 @@ public class ProductServices : IProductServices
             ColorName = x.c.Name,
             MaterialName = x.m.Name,
             SizeName = x.s.Name,
-            Status = x.pd.Status
-            //ThumbnailImage = x.pi.ImagePath,
+            Status = x.pd.Status,
+            ThumbnailImage = x.pi.ImagePath
 
         }).ToListAsync();
 
@@ -104,27 +107,55 @@ public class ProductServices : IProductServices
 
     public async Task<bool> Update(ProductUpdateRequest request)
     {
-        var productdetail = await _context.ProductDetails.FindAsync(request.Id);
+        var productdetail = await _context.ProductDetails
+        .Include(pd => pd.ProductImages)
+        .AsNoTracking()
+        .FirstOrDefaultAsync(pd => pd.Id == request.Id);
 
-        if (productdetail == null) throw new ShopException($"Can't find a product with id: {request.Id}");
+        if (productdetail == null)
+        {
+            throw new ShopException($"Can't find a product with id: {request.Id}");
+        }
+
         productdetail.Stock = request.Stock;
         productdetail.Price = request.Price;
+
         if (request.Stock == 0)
         {
             productdetail.Status = Data.Enums.Status.Inactive;
         }
-        //Save image
+
+        // Save thumbnail image
         if (request.ThumbnailImage != null)
         {
-            var thumbnailImage = await _context.ProductImages.FirstOrDefaultAsync(i => i.IsDefault == true && i.ProductDetailId == request.Id);
+            var thumbnailImage = productdetail.ProductImages
+                .FirstOrDefault(pi => pi.IsDefault);
+
             if (thumbnailImage != null)
             {
                 thumbnailImage.ImagePath = await this.SaveFile(request.ThumbnailImage);
                 _context.ProductImages.Update(thumbnailImage);
             }
+            else
+            {
+                productdetail.ProductImages = new List<ProductImage>()
+                {
+                    new ProductImage()
+                    {
+                        Id= Guid.NewGuid(),
+                        Caption = "Thumbnail image",
+                        ImagePath = await this.SaveFile(request.ThumbnailImage),
+                        IsDefault = true,
+                        SortOrder = 1
+                    }
+                };
+                _context.ProductDetails.Add(productdetail);
+            }
         }
+
         _context.ProductDetails.Update(productdetail);
         await _context.SaveChangesAsync();
+
         return true;
     }
 
@@ -170,6 +201,7 @@ public class ProductServices : IProductServices
             MaterialName = material.Name,
             SizeName = size.Name,
             Status = productdetail.Status,
+            ThumbnailImage = image != null ? image.ImagePath : "no-image.jpg"
 
         };
 
@@ -209,7 +241,7 @@ public class ProductServices : IProductServices
 
         return productProps;
     }
-    
+
     public async Task<List<ProductPropVm>> GetListProductProp()
     {
         return await _context.Products
@@ -318,5 +350,25 @@ public class ProductServices : IProductServices
         }
         await _context.SaveChangesAsync();
         return new ApiSuccessResult<bool>();
+    }
+
+    public async Task<ApiResult<bool>> AddImages( ProductImageRequest request)
+    {
+        var productImage = new ProductImage()
+        {
+            Id = Guid.NewGuid(),
+            Caption = request.Caption,
+            IsDefault = request.IsDefault,
+            ProductDetailId = request.ProductDetailId,
+            SortOrder = request.SortOrder
+        };
+
+        if (request.ImageFile != null)
+        {
+            productImage.ImagePath = await this.SaveFile(request.ImageFile);
+        }
+        _context.ProductImages.Add(productImage);
+        await _context.SaveChangesAsync();
+        return new ApiSuccessResult<bool>(); 
     }
 }

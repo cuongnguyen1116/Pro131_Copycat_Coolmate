@@ -47,7 +47,7 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest(ModelState);
             }
             var sanphamId = await _productServices.Create(request);
-            if (sanphamId == null)
+            if (sanphamId == false)
                 return BadRequest();
             else
             {
@@ -67,7 +67,7 @@ namespace shop.BackEndApi.Controllers
             }
             request.Id = productDetailId;
             var check = await _productServices.Update(request);
-            if (check == null)
+            if (check == false)
                 return BadRequest();
             return Ok();
         }
@@ -76,7 +76,7 @@ namespace shop.BackEndApi.Controllers
         public async Task<IActionResult> Delete(Guid productDetailId)
         {
             var check = await _productServices.Delete(productDetailId);
-            if (check == null)
+            if (check == false)
                 return BadRequest();
             return Ok();
         }
@@ -100,7 +100,7 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest(ModelState);
             }
             var sanphamId = await _productServices.CreateProductProp(request);
-            if (sanphamId == null)
+            if (sanphamId == false)
                 return BadRequest();
             else
             {
@@ -118,7 +118,7 @@ namespace shop.BackEndApi.Controllers
             }
             request.Id = productPropId;
             var check = await _productServices.UpdateProductProp(request);
-            if (check == null)
+            if (check == false)
                 return BadRequest();
             return Ok();
         }
@@ -127,7 +127,7 @@ namespace shop.BackEndApi.Controllers
         public async Task<IActionResult> DeleteProductProp(Guid productPropId)
         {
             var check = await _productServices.DeleteProductProp(productPropId);
-            if (check == null)
+            if (check == false)
                 return BadRequest();
             return Ok();
         }
@@ -154,6 +154,23 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest(result);
             }
             return Ok(result);
+        }
+        [HttpPost("create-image")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> CreateImage([FromForm] ProductImageRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var productImage = await _productServices.AddImages(request);
+            if (!productImage.IsSuccessed)
+                return BadRequest();
+            else
+            {
+                HttpContext.Response.StatusCode = 201;
+                return Ok(request);
+            }
         }
     }
 }

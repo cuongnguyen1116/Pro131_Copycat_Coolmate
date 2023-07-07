@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using shop.ApiIntegration.Categories;
 using shop.ApiIntegration.Products;
 using shop.Data.Entities;
+using shop.Utilities.Constants;
 using shop.ViewModels.Catalog.Categories;
+using shop.ViewModels.Catalog.Materials;
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Common;
 using System.Drawing.Printing;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace shop.AdminApp.Controllers
 {
@@ -34,7 +37,54 @@ namespace shop.AdminApp.Controllers
             }
             return View(data);
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await _productApiClient.GetById(id);
+            return View(result);
+        }
         //Bảng  productdetail
+        public async Task<IActionResult> CreateImage(string? keyword, Guid id)
+        {
+            var request = new ProductPagingRequest()
+            {
+                Keyword = keyword
+            };
+            var data = await _productApiClient.GetAll(request);
+            ViewBag.ProductImage = data.Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+                Selected = id.ToString() == x.Id.ToString()
+            });
+            return View();
+        }
+        [HttpPost]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> CreateImage([FromForm] ProductImageRequest request, Guid productdetailid, string? keyword)
+        {
+            if (!ModelState.IsValid){ return View(); }
+            var ppr = new ProductPagingRequest()
+            {
+                Keyword = keyword
+            };
+            var data = await _productApiClient.GetAll(ppr);
+            ViewBag.ProductImage = data.Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+                Selected = productdetailid.ToString() == x.Id.ToString()
+            });
+            var result = await _productApiClient.CreateImage(request,productdetailid);
+            if (result.IsSuccessed)
+            {
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Thêm sản phẩm thất bại");
+            return View(request);
+
+        }
         public async Task<IActionResult> Create(Guid productPropId, Guid sizeId, Guid colorId, Guid materialId)
         {
             var productprops = _productApiClient.GetListProductProp();
