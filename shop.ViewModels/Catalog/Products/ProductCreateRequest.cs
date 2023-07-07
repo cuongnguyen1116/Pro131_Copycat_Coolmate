@@ -11,7 +11,6 @@ namespace shop.ViewModels.Catalog.Products
         public Guid? SizeId { get; set; }
         public int Stock { get; set; }
         public decimal Price { get; set; }
-        public IFormFile ThumbnailImage { get; set; }
         public decimal OriginalPrice { get; set; }
         public Status Status { get; set; }
     }

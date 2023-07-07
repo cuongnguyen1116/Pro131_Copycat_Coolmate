@@ -9,6 +9,7 @@ using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Common;
 using System.Net.Http.Headers;
 using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace shop.Application.Catalog.Products;
 
@@ -24,43 +25,55 @@ public class ProductServices : IProductServices
         _storageService = storageService;
     }
 
-    public async Task<List<ProductVm>> GetAll(ProductPagingRequest request)
+    //Phân trang list sản phẩm
+    public async Task<PagedResult<ProductVm>> GetAll(ProductPagingRequest request)
     {
         var query = from pd in _context.ProductDetails
                     join p in _context.Products on pd.ProductId equals p.Id
                     join c in _context.Colors on pd.ColorId equals c.Id
                     join m in _context.Materials on pd.MaterialId equals m.Id
                     join s in _context.Sizes on pd.SizeId equals s.Id
-                    join pi in _context.ProductImages on pd.Id equals pi.ProductDetailId into ppi
+                    join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                     from pi in ppi.DefaultIfEmpty()
-                        /*where pi.IsDefault == true*/
+                        //where pi.IsDefault == true
                     select new { pd, p, c, m, s, pi };
         if (!string.IsNullOrEmpty(request.Keyword))
         {
             // Filter the query based on the keyword
             query = query.Where(q => q.p.Name.Contains(request.Keyword));
         }
-        var data = await query.Select(x => new ProductVm
+        int totalRow = await query.CountAsync();
+        //gán productvm với data từ query
+        var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(x => new ProductVm
+                {
+                    Id = x.pd.Id,
+                    Price = x.pd.Price,
+                    OriginalPrice = x.pd.OriginalPrice,
+                    Stock = x.pd.Stock,
+                    Name = x.p.Name,
+                    CreatedDate = x.pd.CreatedDate,
+                    Description = x.p.Description,
+                    ColorName = x.c.Name,
+                    MaterialName = x.m.Name,
+                    SizeName = x.s.Name,
+                    Status = x.pd.Status,
+                    ThumbnailImage = x.pi.ImagePath
+                }).ToListAsync();
+
+        //lấy data gán vào list item
+        var pagedResult = new PagedResult<ProductVm>()
         {
-            Id = x.pd.Id,
-            Price = x.pd.Price,
-            OriginalPrice = x.pd.OriginalPrice,
-            Stock = x.pd.Stock,
-            Name = x.p.Name,
-            CreatedDate = x.pd.CreatedDate,
-            Description = x.p.Description,
-            ColorName = x.c.Name,
-            MaterialName = x.m.Name,
-            SizeName = x.s.Name,
-            Status = x.pd.Status,
-            ThumbnailImage = x.pi.ImagePath
+            TotalRecords = totalRow,
+            PageSize = request.PageSize,
+            PageIndex = request.PageIndex,
+            Items = data
+        };
 
-        }).ToListAsync();
-
-        //int x = data.Count;
-
-        return data;
+        return pagedResult;
     }
+    //Lưu ảnh vào thư mục user-content ở backend api
     private async Task<string> SaveFile(IFormFile file)
     {
         var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
@@ -84,21 +97,7 @@ public class ProductServices : IProductServices
             CreatedDate = DateTime.Now
 
         };
-        //save image
-        if (request.ThumbnailImage != null)
-        {
-            productDetail.ProductImages = new List<ProductImage>()
-                {
-                    new ProductImage()
-                    {
-                        Id= Guid.NewGuid(),
-                        Caption = "Thumbnail image",
-                        ImagePath = await this.SaveFile(request.ThumbnailImage),
-                        IsDefault = true,
-                        SortOrder = 1
-                    }
-                };
-        }
+        
         _context.ProductDetails.Add(productDetail);
         await _context.SaveChangesAsync();
         return true;
@@ -107,10 +106,7 @@ public class ProductServices : IProductServices
 
     public async Task<bool> Update(ProductUpdateRequest request)
     {
-        var productdetail = await _context.ProductDetails
-        .Include(pd => pd.ProductImages)
-        .AsNoTracking()
-        .FirstOrDefaultAsync(pd => pd.Id == request.Id);
+        var productdetail = await _context.ProductDetails.FirstOrDefaultAsync(pd => pd.Id == request.Id);
 
         if (productdetail == null)
         {
@@ -125,33 +121,6 @@ public class ProductServices : IProductServices
             productdetail.Status = Data.Enums.Status.Inactive;
         }
 
-        // Save thumbnail image
-        if (request.ThumbnailImage != null)
-        {
-            var thumbnailImage = productdetail.ProductImages
-                .FirstOrDefault(pi => pi.IsDefault);
-
-            if (thumbnailImage != null)
-            {
-                thumbnailImage.ImagePath = await this.SaveFile(request.ThumbnailImage);
-                _context.ProductImages.Update(thumbnailImage);
-            }
-            else
-            {
-                productdetail.ProductImages = new List<ProductImage>()
-                {
-                    new ProductImage()
-                    {
-                        Id= Guid.NewGuid(),
-                        Caption = "Thumbnail image",
-                        ImagePath = await this.SaveFile(request.ThumbnailImage),
-                        IsDefault = true,
-                        SortOrder = 1
-                    }
-                };
-                _context.ProductDetails.Add(productdetail);
-            }
-        }
 
         _context.ProductDetails.Update(productdetail);
         await _context.SaveChangesAsync();
@@ -167,11 +136,7 @@ public class ProductServices : IProductServices
         {
             throw new ShopException($"Can't find a product : {productdetailId}");
         }
-        var images = _context.ProductImages.Where(i => i.ProductDetailId == productdetailId);
-        foreach (var image in images)
-        {
-            await _storageService.DeleteFileAsync(image.ImagePath);
-        }
+        
 
         _context.ProductDetails.Remove(productdetail);
         await _context.SaveChangesAsync();
@@ -185,9 +150,12 @@ public class ProductServices : IProductServices
         var size = await _context.Sizes.FirstOrDefaultAsync(x => x.Id == productdetail.SizeId);
         var color = await _context.Colors.FirstOrDefaultAsync(x => x.Id == productdetail.ColorId);
         var material = await _context.Materials.FirstOrDefaultAsync(x => x.Id == productdetail.MaterialId);
+        var images = await (from pi in _context.ProductImages
+                           join p in _context.Products on pi.ProductId equals p.Id
+                           where pi.ProductId == product.Id
+                           select pi.ImagePath).ToListAsync();
 
-
-        var image = await _context.ProductImages.Where(x => x.ProductDetailId == productdetailId && x.IsDefault == true).FirstOrDefaultAsync();
+        //var image = await _context.ProductImages.Where(x => x.ProductId == product.Id && x.IsDefault == true).FirstOrDefaultAsync();
         var productDetailViewModel = new ProductVm()
         {
             Id = productdetailId,
@@ -201,13 +169,14 @@ public class ProductServices : IProductServices
             MaterialName = material.Name,
             SizeName = size.Name,
             Status = productdetail.Status,
-            ThumbnailImage = image != null ? image.ImagePath : "no-image.jpg"
+            Images = images
+            
 
         };
 
         return productDetailViewModel;
     }
-
+    //Lấy tên sản phẩm
     public async Task<List<ProductPropVm>> GetAllProductProp(ProductPagingRequest request)
     {
         var query = from p in _context.Products
@@ -289,6 +258,21 @@ public class ProductServices : IProductServices
             Description = request.Description,
             Status = request.Status
         };
+        //save image
+        if (request.ThumbnailImage != null)
+        {
+            product.ProductImages = new List<ProductImage>()
+                {
+                    new ProductImage()
+                    {
+                        Id= Guid.NewGuid(),
+                        Caption = "Thumbnail image",
+                        ImagePath = await this.SaveFile(request.ThumbnailImage),
+                        IsDefault = true,
+                        SortOrder = 1
+                    }
+                };
+        }
         _context.Products.Add(product);
         await _context.SaveChangesAsync();
         return true;
@@ -296,7 +280,10 @@ public class ProductServices : IProductServices
 
     public async Task<bool> UpdateProductProp(ProductPropVm request)
     {
-        var product = await _context.Products.FindAsync(request.Id);
+        var product = await _context.Products
+            .Include(p=>p.ProductImages)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(p=>p.Id == request.Id);
         if (product == null)
         {
             throw new ShopException("Can't find product");
@@ -304,6 +291,33 @@ public class ProductServices : IProductServices
         product.Name = request.Name;
         product.Description = request.Description;
         product.Status = request.Status;
+        // Save thumbnail image
+        if (request.ThumbnailImage != null)
+        {
+            var thumbnailImage = product.ProductImages
+                .FirstOrDefault(pi => pi.IsDefault);
+
+            if (thumbnailImage != null)
+            {
+                thumbnailImage.ImagePath = await this.SaveFile(request.ThumbnailImage);
+                _context.ProductImages.Update(thumbnailImage);
+            }
+            else
+            {
+                product.ProductImages = new List<ProductImage>()
+                {
+                    new ProductImage()
+                    {
+                        Id= Guid.NewGuid(),
+                        Caption = "Thumbnail image",
+                        ImagePath = await this.SaveFile(request.ThumbnailImage),
+                        IsDefault = true,
+                        SortOrder = 1
+                    }
+                };
+                _context.Products.Add(product);
+            }
+        }
         _context.Products.Update(product);
         await _context.SaveChangesAsync();
         return true;
@@ -315,6 +329,11 @@ public class ProductServices : IProductServices
         if (product == null)
         {
             throw new ShopException("Can't find product");
+        }
+        var images = _context.ProductImages.Where(i => i.ProductId == productPropId);
+        foreach (var image in images)
+        {
+            await _storageService.DeleteFileAsync(image.ImagePath);
         }
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
@@ -352,14 +371,14 @@ public class ProductServices : IProductServices
         return new ApiSuccessResult<bool>();
     }
 
-    public async Task<ApiResult<bool>> AddImages( ProductImageRequest request)
+    public async Task<ApiResult<bool>> AddImages(ProductImageRequest request)
     {
         var productImage = new ProductImage()
         {
             Id = Guid.NewGuid(),
             Caption = request.Caption,
             IsDefault = request.IsDefault,
-            ProductDetailId = request.ProductDetailId,
+            ProductId = request.ProductId,
             SortOrder = request.SortOrder
         };
 
@@ -369,6 +388,6 @@ public class ProductServices : IProductServices
         }
         _context.ProductImages.Add(productImage);
         await _context.SaveChangesAsync();
-        return new ApiSuccessResult<bool>(); 
+        return new ApiSuccessResult<bool>();
     }
 }

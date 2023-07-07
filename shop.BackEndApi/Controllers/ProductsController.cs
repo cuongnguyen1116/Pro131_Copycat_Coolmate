@@ -25,7 +25,7 @@ namespace shop.BackEndApi.Controllers
             return Ok(result);
         }
         //Bảng product
-        [HttpGet("propductprops")]/*?name={request.Keyword}&categoryId={request.CategoryId}*/
+        [HttpGet("propductprops")]/*?keyword={request.Keyword}&categoryId={request.CategoryId}*/
         public async Task<IActionResult> GetAllProductProp([FromQuery]ProductPagingRequest request)
         {
             var result = await _productServices.GetAllProductProp(request);
@@ -93,7 +93,8 @@ namespace shop.BackEndApi.Controllers
         }
         //Bang Product
         [HttpPost("createproductprop")]
-        public async Task<IActionResult> CreateProductProp([FromBody] ProductPropVm request)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> CreateProductProp([FromForm] ProductPropVm request)
         {
             if (!ModelState.IsValid)
             {
@@ -110,7 +111,8 @@ namespace shop.BackEndApi.Controllers
         }
         //Bang Product
         [HttpPut("updateProductProp/{productPropId}")]
-        public async Task<IActionResult> UpdateProductProp([FromRoute] Guid productPropId, ProductPropVm request)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateProductProp([FromRoute] Guid productPropId,[FromForm] ProductPropVm request)
         {
             if (!ModelState.IsValid)
             {

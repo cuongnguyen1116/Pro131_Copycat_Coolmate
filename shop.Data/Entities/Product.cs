@@ -10,4 +10,5 @@ public class Product
     public Status Status { get; set; }
     public virtual ICollection<ProductInCategory> ProductInCategories { get; set; }
     public virtual ICollection<ProductDetail> ProductDetails { get; set; }
+    public virtual ICollection<ProductImage> ProductImages { get; set; }
 }

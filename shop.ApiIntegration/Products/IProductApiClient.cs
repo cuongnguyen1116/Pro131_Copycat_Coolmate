@@ -14,7 +14,7 @@ namespace shop.ApiIntegration.Products
         Task<bool> DeleteProduct(ProductDeleteRequest request);
         Task<ProductVm> GetById(Guid productDetailId);
         Task<ProductPropVm> GetByIdProductProp(Guid productPropId);
-        Task<List<ProductVm>> GetAll(ProductPagingRequest request);
+        Task<PagedResult<ProductVm>> GetAll(ProductPagingRequest request);
         Task<bool> CreateProductProp(ProductPropVm request);
         Task<bool> UpdateProductProp(ProductPropVm request);
         Task<bool> DeleteProductProp(ProductPropVm request);
@@ -24,6 +24,6 @@ namespace shop.ApiIntegration.Products
         Task<List<MaterialVm>> GetListMaterial();
         Task<List<ColorVm>> GetListColor();
         Task<List<SizeVm>> GetListSize();
-        Task<ApiResult<bool>> CreateImage(ProductImageRequest request, Guid productdetailid);
+        Task<ApiResult<bool>> CreateImage(ProductImageRequest request, Guid productdid);
     }
 }

@@ -20,5 +20,5 @@ public class ProductDetail
     public virtual Size Size { get; set; }
     public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     public virtual ICollection<CartDetail> CartDetails { get; set; }
-    public virtual ICollection<ProductImage> ProductImages { get; set; }
+    
 }
