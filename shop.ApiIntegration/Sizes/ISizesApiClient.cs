@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace shop.ApiIntegration
+namespace shop.ApiIntegration.Sizes
 {
     public interface ISizesApiClient
     {

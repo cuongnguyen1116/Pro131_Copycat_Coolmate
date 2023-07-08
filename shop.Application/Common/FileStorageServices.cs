@@ -26,9 +26,6 @@ public class FileStorageService : IStorageService
     public async Task DeleteFileAsync(string fileName)
     {
         var filePath = Path.Combine(_userContentFolder, fileName);
-        if (File.Exists(filePath))
-        {
-            await Task.Run(() => File.Delete(filePath));
-        }
+        if (File.Exists(filePath)) await Task.Run(() => File.Delete(filePath));
     }
 }

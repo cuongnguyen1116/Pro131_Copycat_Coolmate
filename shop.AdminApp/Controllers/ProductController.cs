@@ -23,6 +23,7 @@ namespace shop.AdminApp.Controllers
             _productApiClient = productApiClient;
             _categoryApiClient = categoryApiClient;
         }
+
         public async Task<IActionResult> Index(string? keyword)
         {
             var request = new ProductPagingRequest()
@@ -37,12 +38,14 @@ namespace shop.AdminApp.Controllers
             }
             return View(data);
         }
+
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
             var result = await _productApiClient.GetById(id);
             return View(result);
         }
+
         //Bảng  productdetail
         public async Task<IActionResult> CreateImage(string? keyword, Guid id)
         {
@@ -59,6 +62,7 @@ namespace shop.AdminApp.Controllers
             });
             return View();
         }
+
         [HttpPost]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> CreateImage([FromForm] ProductImageRequest request, Guid productdetailid, string? keyword)

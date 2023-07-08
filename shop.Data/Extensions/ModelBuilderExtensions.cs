@@ -384,105 +384,241 @@ public static class ModelBuilderExtensions
         var userId5 = new Guid("b6c75c5f-9d1b-4a0d-9c6d-3e7d3ce2a2a7");
         var userId6 = new Guid("e3e4e9f8-cd6d-4299-9d8f-fb5e8ef6d0d5");
         var userId7 = new Guid("2f00b6e3-2583-4b5f-a92f-9d8f2b8d4d7f");
-        builder.Entity<AppUser>().HasData(
-            new AppUser
-            {
-                Id = userId1,
-                UserName = "admin",
-                NormalizedUserName = "admin",
-                Email = "cuongnguyenpm1116@gmail.com",
-                NormalizedEmail = "cuongnguyenpm1116@gmail.com",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
-                SecurityStamp = string.Empty,
-                FirstName = "Cuong",
-                LastName = "Nguyen Phuc Minh",
-                DoB = new DateTime(2003, 11, 16)
-            },
-            new AppUser
-            {
-                Id = userId2,
-                UserName = "kimhoc1",
-                NormalizedUserName = "kimhoc1",
-                Email = "hq37na@gmail.com",
-                NormalizedEmail = "hq37na@gmail.com",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
-                SecurityStamp = string.Empty,
-                FirstName = "Hoc",
-                LastName = "Nguyen Kim",
-                DoB = new DateTime(2003, 07, 19)
-            },
-            new AppUser
-            {
-                Id = userId3,
-                UserName = "lmaohieu1",
-                NormalizedUserName = "lmaohieu1",
-                Email = "lusdeer@gmail.com",
-                NormalizedEmail = "lusdeer@gmail.com",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
-                SecurityStamp = string.Empty,
-                FirstName = "Hieu",
-                LastName = "Le Minh",
-                DoB = new DateTime(2003, 03, 18)
-            },
-            new AppUser
-            {
-                Id = userId4,
-                UserName = "john.doe",
-                NormalizedUserName = "JOHN.DOE",
-                Email = "john.doe@example.com",
-                NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "Password123!"),
-                SecurityStamp = string.Empty,
-                FirstName = "John",
-                LastName = "Doe",
-                DoB = new DateTime(1990, 01, 01)
-            },
-            new AppUser
-            {
-                Id = userId5,
-                UserName = "jane.doe",
-                NormalizedUserName = "JANE.DOE",
-                Email = "jane.doe@example.com",
-                NormalizedEmail = "JANE.DOE@EXAMPLE.COM",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "Password123!"),
-                SecurityStamp = string.Empty,
-                FirstName = "Jane",
-                LastName = "Doe",
-                DoB = new DateTime(1995, 05, 05)
-            },
-            new AppUser
-            {
-                Id = userId6,
-                UserName = "bob.smith",
-                NormalizedUserName = "BOB.SMITH",
-                Email = "bob.smith@example.com",
-                NormalizedEmail = "BOB.SMITH@EXAMPLE.COM",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "Password123!"),
-                SecurityStamp = string.Empty,
-                FirstName = "Bob",
-                LastName = "Smith",
-                DoB = new DateTime(1985, 12, 31)
-            },
-            new AppUser
-            {
-                Id = userId7,
-                UserName = "jennifer.smith",
-                NormalizedUserName = "JENNIFER.SMITH",
-                Email = "jennifer.smith@example.com",
-                NormalizedEmail = "JENNIFER.SMITH@EXAMPLE.COM",
-                EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "Password123!"),
-                SecurityStamp = string.Empty,
-                FirstName = "Jennifer",
-                LastName = "Smith",
-                DoB = new DateTime(1988, 10, 15)
-            });
+        var userId8 = new Guid("66c7e036-0cbd-4350-9afe-5e1e0c959bcf");
+        var userId9 = new Guid("7ee56101-aff6-4d71-8112-e118ada30353");
+        var userId10 = new Guid("c7378d1c-47f6-4cc5-b800-281023b6699a");
+        var userId11 = new Guid("513b6e27-9ec8-4339-8cd2-ce42a2c6a01e");
+        var userId12 = new Guid("8db920d7-5115-432c-a9ad-3039dfed3244");
+        var userId13 = new Guid("873c3aed-38c2-41ef-b03a-4e142dae542c");
+        var userId14 = new Guid("598ded7d-1f81-43a9-861c-21a026294eb1");
+        var userId15 = new Guid("a72558d6-0e2f-463f-9ce9-c7a232b7eb89");
+
+        var user1 = new AppUser
+        {
+            Id = userId1,
+            UserName = "admin",
+            NormalizedUserName = "admin",
+            Email = "cuongnguyenpm1116@gmail.com",
+            NormalizedEmail = "cuongnguyenpm1116@gmail.com",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Cuong",
+            LastName = "Nguyen Phuc Minh",
+            DoB = new DateTime(2003, 11, 16)
+        };
+
+        var user2 = new AppUser
+        {
+            Id = userId2,
+            UserName = "kimhoc1",
+            NormalizedUserName = "kimhoc1",
+            Email = "hq37na@gmail.com",
+            NormalizedEmail = "hq37na@gmail.com",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Hoc",
+            LastName = "Nguyen Kim",
+            DoB = new DateTime(2003, 07, 19)
+        };
+
+        var user3 = new AppUser
+        {
+            Id = userId3,
+            UserName = "lmaohieu1",
+            NormalizedUserName = "lmaohieu1",
+            Email = "lusdeer@gmail.com",
+            NormalizedEmail = "lusdeer@gmail.com",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Hieu",
+            LastName = "Le Minh",
+            DoB = new DateTime(2003, 03, 18)
+        };
+
+        var user4 = new AppUser
+        {
+            Id = userId4,
+            UserName = "doesnot90",
+            NormalizedUserName = "doesnot90",
+            Email = "john.doe@example.com",
+            NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "John",
+            LastName = "Doe",
+            DoB = new DateTime(1990, 01, 01)
+        };
+
+        var user5 = new AppUser
+        {
+            Id = userId5,
+            UserName = "janenotlost123",
+            NormalizedUserName = "janenotlost123",
+            Email = "jane.doe@example.com",
+            NormalizedEmail = "JANE.DOE@EXAMPLE.COM",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Jane",
+            LastName = "Doe",
+            DoB = new DateTime(1995, 05, 05)
+        };
+
+        var user6 = new AppUser
+        {
+            Id = userId6,
+            UserName = "bobthebuilder98",
+            NormalizedUserName = "bobthebuilder98",
+            Email = "bob.smith@example.com",
+            NormalizedEmail = "BOB.SMITH@EXAMPLE.COM",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Bob",
+            LastName = "Smith",
+            DoB = new DateTime(1998, 12, 31)
+        };
+
+        var user7 = new AppUser
+        {
+            Id = userId7,
+            UserName = "beautysmithlady159",
+            NormalizedUserName = "beautysmithlady159",
+            Email = "jennifer.smith@example.com",
+            NormalizedEmail = "JENNIFER.SMITH@EXAMPLE.COM",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Jennifer",
+            LastName = "Smith",
+            DoB = new DateTime(1988, 10, 15)
+        };
+
+        var user8 = new AppUser
+        {
+            Id = userId8,
+            UserName = "notmylover199",
+            NormalizedUserName = "notmylover199",
+            Email = "jennifer.smith@example.com",
+            NormalizedEmail = "JENNIFER.SMITH@EXAMPLE.COM",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Billie",
+            LastName = "Jean",
+            DoB = new DateTime(1988, 10, 15)
+        };
+
+        var user9 = new AppUser
+        {
+            Id = userId9,
+            UserName = "michaelthoangmong1",
+            NormalizedUserName = "michaelthoangmong1",
+            Email = "michealthoangmong@gmail.com",
+            NormalizedEmail = "MICHAELTHOANGMONG1@GMAIL.COM",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Michael",
+            LastName = "Jackson",
+            DoB = new DateTime(1988, 10, 15)
+        };
+
+        var user10 = new AppUser
+        {
+            Id = userId10,
+            UserName = "michaelthoangmong1",
+            NormalizedUserName = "michaelthoangmong1",
+            Email = "michealthoangmong@gmail.com",
+            NormalizedEmail = "MICHAELTHOANGMONG1@GMAIL.COM",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Michael",
+            LastName = "Jackson",
+            DoB = new DateTime(1988, 10, 15)
+        };
+
+        var user11 = new AppUser
+        {
+            Id = userId11,
+            UserName = "taylorswift109",
+            NormalizedUserName = "taylorswift109",
+            Email = "taylorswift109@gmail.com",
+            NormalizedEmail = "TAYLORSWIFT109@gmail.com",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Thúy",
+            LastName = "Loan",
+            DoB = new DateTime(1988, 10, 15)
+        };
+
+        var user12 = new AppUser
+        {
+            Id = userId12,
+            UserName = "grande145",
+            NormalizedUserName = "grande145",
+            Email = "grande145@gmail.com",
+            NormalizedEmail = "GRANDE145@gmail.com",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Ariana",
+            LastName = "Grande",
+            DoB = new DateTime(1988, 10, 15)
+        };
+
+        var user13 = new AppUser
+        {
+            Id = userId13,
+            UserName = "camila119",
+            NormalizedUserName = "camila119",
+            Email = "camila119@gmail.com",
+            NormalizedEmail = "CAMILA119@gmail.com",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Karla Camila",
+            LastName = " Cabello Estrabao",
+            DoB = new DateTime(1988, 10, 15)
+        };
+
+        var user14 = new AppUser
+        {
+            Id = userId14,
+            UserName = "miley987",
+            NormalizedUserName = "miley987",
+            Email = "miley987@gmail.com",
+            NormalizedEmail = "MILEY987@gmail.com",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Robyn",
+            LastName = "Fenty",
+            DoB = new DateTime(1988, 10, 15)
+        };
+
+        var user15 = new AppUser
+        {
+            Id = userId15,
+            UserName = "drake123",
+            NormalizedUserName = "drake123",
+            Email = "drake123@gmail.com",
+            NormalizedEmail = "DRAKE123@gmail.com",
+            EmailConfirmed = true,
+            PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
+            SecurityStamp = string.Empty,
+            FirstName = "Aubrey",
+            LastName = "Drake Graham",
+            DoB = new DateTime(1988, 10, 15)
+        };
+
+        builder.Entity<AppUser>().HasData(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12, user13, user14, user15);
         #endregion
 
         #region user roles
@@ -506,11 +642,13 @@ public static class ModelBuilderExtensions
             {
                 RoleId = roleId3,
                 UserId = userId4
-            }, new IdentityUserRole<Guid>
+            },
+            new IdentityUserRole<Guid>
             {
                 RoleId = roleId3,
                 UserId = userId5
-            }, new IdentityUserRole<Guid>
+            },
+            new IdentityUserRole<Guid>
             {
                 RoleId = roleId3,
                 UserId = userId6
@@ -518,6 +656,39 @@ public static class ModelBuilderExtensions
             {
                 RoleId = roleId3,
                 UserId = userId7
+            }, new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId8
+            }, new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId9
+            }, new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId10
+            }, new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId11
+            }, new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId12
+            }, new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId13
+            }, new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId14
+            },
+            new IdentityUserRole<Guid>
+            {
+                RoleId = roleId3,
+                UserId = userId15
             });
         #endregion
 
@@ -529,217 +700,277 @@ public static class ModelBuilderExtensions
         var orderId5 = new Guid("a60b3fd4-40a0-4f4e-8f5b-6e5a9a3d63e6");
         var orderId6 = new Guid("c9e9de6f-0e6f-4b3e-9f6c-3f8f3a0e6a1d");
         var orderId7 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
+        var orderId8 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
+        var orderId9 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
+        var orderId10 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
+        var orderId11 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
+        var orderId12 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
+        var orderId13 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
+        var orderId14 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
+        var orderId15 = new Guid("e9e8d2a6-0d6c-4e28-9e9c-3d2dd6b3c5af");
 
-        DateTime completedDate = DateTime.Now;
-        DateTime shipDate = completedDate.AddDays(-1);
-        DateTime paidDate = completedDate.AddDays(-3);
-        DateTime confirmedDate = completedDate.AddDays(-4);
-        DateTime createdDate = completedDate.AddDays(-5);
+        DateTime createdDate = DateTime.Now;
 
-        builder.Entity<Order>().HasData(
-            new Order
-            {
-                Id = orderId1,
-                UserId = userId4,
-                OrderCode = "230703DDKbiC3SyDB9pN",
-                CreatedDate = createdDate,
-                PaidDate = null,
-                ShipDate = null,
-                CompletedDate = null,
-                ShipName = "Alice",
-                ShipPhoneNumber = "0123456789",
-                ShipAddress = "123 Main St.",
-                Total = 1000000,
-                OrderStatus = OrderStatus.Pending
+        var order1 = new Order
+        {
+            Id = orderId1,
+            UserId = userId4,
+            OrderCode = "230703DDKbiC3SyDB9pN",
+            CreatedDate = createdDate,
+            PaidDate = null,
+            ShipDate = null,
+            CompletedDate = null,
+            ShipName = "Alice",
+            ShipPhoneNumber = "0123456789",
+            ShipAddress = "123 Main St.",
+            Total = 1000000,
+            OrderStatus = OrderStatus.Pending
+        };
 
-            },
-            new Order
-            {
-                Id = orderId2,
-                UserId = userId5,
-                OrderCode = "230703PmyoqNWHK3LZe3",
-                CreatedDate = createdDate,
-                ConfirmedDate = confirmedDate,
-                PaidDate = null,
-                ShipDate = null,
-                CompletedDate = null,
-                ShipName = "Alice",
-                ShipPhoneNumber = "0123456789",
-                ShipAddress = "1010 Oak Dr.",
-                Total = 2000000,
-                OrderStatus = OrderStatus.AWaitingPickup
+        var order2 = new Order
+        {
+            Id = orderId2,
+            UserId = userId5,
+            OrderCode = "230703PmyoqNWHK3LZe3",
+            CreatedDate = createdDate,
+            ConfirmedDate = createdDate,
+            PaidDate = null,
+            ShipDate = null,
+            CompletedDate = null,
+            ShipName = "Alice",
+            ShipPhoneNumber = "0123456789",
+            ShipAddress = "1010 Oak Dr.",
+            Total = 2000000,
+            OrderStatus = OrderStatus.Pending
 
-            }, new Order
-            {
-                Id = orderId3,
-                UserId = userId6,
-                OrderCode = "23070306w3xM7UGUxRrW",
-                CreatedDate = createdDate,
-                ConfirmedDate = confirmedDate,
-                PaidDate = null,
-                ShipDate = null,
-                CompletedDate = null,
-                ShipName = "Alice",
-                ShipPhoneNumber = "0123456789",
-                ShipAddress = "1111 Pine Ln.",
-                Total = 3000000,
-                OrderStatus = OrderStatus.AwaitingShipment
+        };
 
-            }, new Order
-            {
-                Id = orderId4,
-                UserId = userId7,
-                OrderCode = "230703dkb7wDTr8wQ2rR",
-                CreatedDate = createdDate,
-                PaidDate = null,
-                ShipDate = null,
-                CompletedDate = null,
-                ShipName = "Alice",
-                ShipPhoneNumber = "0123456789",
-                ShipAddress = "123 Main St.",
-                Total = 290000,
-                OrderStatus = OrderStatus.Pending
+        var order3 = new Order
+        {
+            Id = orderId3,
+            UserId = userId6,
+            OrderCode = "23070306w3xM7UGUxRrW",
+            CreatedDate = createdDate,
+            PaidDate = null,
+            ShipDate = null,
+            CompletedDate = null,
+            ShipName = "Alice",
+            ShipPhoneNumber = "0123456789",
+            ShipAddress = "1111 Pine Ln.",
+            Total = 3000000,
+            OrderStatus = OrderStatus.Pending
+        };
 
-            }, new Order
-            {
-                Id = orderId5,
-                UserId = userId7,
-                OrderCode = "230703kTwGUuaOxZ5sC1",
-                CreatedDate = createdDate,
-                PaidDate = paidDate,
-                ShipDate = shipDate,
-                CompletedDate = completedDate,
-                ShipName = "0987654321",
-                ShipPhoneNumber = "0987654321",
-                ShipAddress = "456 Elm St.",
-                Total = 275000,
-                OrderStatus = OrderStatus.Completed
+        var order4 = new Order
+        {
+            Id = orderId4,
+            UserId = userId7,
+            OrderCode = "230703dkb7wDTr8wQ2rR",
+            CreatedDate = createdDate,
+            PaidDate = null,
+            ShipDate = null,
+            CompletedDate = null,
+            ShipName = "Alice",
+            ShipPhoneNumber = "0123456789",
+            ShipAddress = "123 Main St.",
+            Total = 290000,
+            OrderStatus = OrderStatus.Pending
+        };
 
-            }, new Order
-            {
-                Id = orderId6,
-                UserId = userId5,
-                OrderCode = "230703P1u8nabxMakypB",
-                CreatedDate = createdDate,
-                PaidDate = paidDate,
-                ShipDate = shipDate,
-                CompletedDate = completedDate,
-                ShipName = "0987654321",
-                ShipPhoneNumber = "0987654321",
-                ShipAddress = "789 Maple Ave.",
-                Total = 129000,
-                OrderStatus = OrderStatus.Completed
+        var order5 = new Order
+        {
+            Id = orderId5,
+            UserId = userId8,
+            OrderCode = "230703kTwGUuaOxZ5sC1",
+            CreatedDate = createdDate,
+            ShipName = "0987654321",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "456 Elm St.",
+            Total = 275000,
+            OrderStatus = OrderStatus.Pending
+        };
 
-            }, new Order
-            {
-                Id = orderId7,
-                UserId = userId6,
-                OrderCode = "230703i5B6qeJ2IbxBVu",
-                CreatedDate = createdDate,
-                PaidDate = paidDate,
-                ShipDate = shipDate,
-                CompletedDate = completedDate,
-                ShipName = "Charlie",
-                ShipPhoneNumber = "0987654321",
-                ShipAddress = "1212 Cedar Blvd.",
-                Total = 232000,
-                OrderStatus = OrderStatus.Completed
+        var order6 = new Order
+        {
+            Id = orderId6,
+            UserId = userId9,
+            OrderCode = "230703P1u8nabxMakypB",
+            CreatedDate = createdDate,
+            ShipName = "0987654321",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "789 Maple Ave.",
+            Total = 129000,
+            OrderStatus = OrderStatus.Pending
+        };
 
-            });
+        var order7 = new Order
+        {
+            Id = orderId7,
+            UserId = userId10,
+            OrderCode = "230707Tu7QJBJH2oY0Hd",
+            CreatedDate = createdDate,
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 232000,
+            OrderStatus = OrderStatus.Pending
+        };
+
+        var order8 = new Order
+        {
+            Id = orderId7,
+            UserId = userId11,
+            OrderCode = "230703i5B6qeJ2IbxBVu",
+            CreatedDate = createdDate,
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 232000,
+            OrderStatus = OrderStatus.Pending
+        };
+
+        var order9 = new Order
+        {
+            Id = orderId7,
+            UserId = userId12,
+            OrderCode = "230707yM2UVPAfwmGRxX",
+            CreatedDate = createdDate,
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 232000,
+            OrderStatus = OrderStatus.Pending
+        };
+
+        var order10 = new Order
+        {
+            Id = orderId7,
+            UserId = userId13,
+            OrderCode = "230707hIlOvA0CTr0i7f",
+            CreatedDate = createdDate,
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 232000,
+            OrderStatus = OrderStatus.Pending
+        };
+
+        var order11 = new Order
+        {
+            Id = orderId7,
+            UserId = userId14,
+            OrderCode = "230707FYufCS6av9hB9Q",
+            CreatedDate = createdDate,
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 232000,
+            OrderStatus = OrderStatus.Pending
+        };
+
+        var order12 = new Order
+        {
+            Id = orderId7,
+            UserId = userId15,
+            OrderCode = "230707LZwAHJX5VmjwWx",
+            CreatedDate = createdDate,
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 232000,
+            OrderStatus = OrderStatus.Pending
+        };
+
+        builder.Entity<Order>().HasData(order1, order2, order3, order4, order5, order6, order7, order8, order9, order10, order11, order12);
         #endregion
 
-        //var orderdetailId1 = new Guid("a9b9e7f3-6fb3-4c7c-8e2d-19f4c7d7d1ba");
-        //var orderdetailId2 = new Guid("45b8fada-8d4b-4e8f-944c-0d4d2c4f760a");
-        //var orderdetailId3 = new Guid("c5c4c8fa-7db7-4b5d-8e5f-5b8c4c7b618f");
-        //var orderdetailId4 = new Guid("f4f4b1d2-fbc7-4c7a-a4b6-8d4d5e6f7a8b");
-
         #region order detail
-        builder.Entity<OrderDetail>().HasData(
-            new OrderDetail
-            {
-                //Id = orderdetailId1,
-                OrderId = orderId1,
-                ProductDetailId = productDetailId1,
-                Quantity = 5,
-                Price = 199000,
-                Status = Status.Active
-            },
-            new OrderDetail
-            {
-                //Id = orderdetailId2,
-                OrderId = orderId1,
-                ProductDetailId = productDetailId2,
-                Quantity = 5,
-                Price = 209000,
-                Status = Status.Active
-            },
-            new OrderDetail
-            {
-                //Id = orderdetailId3,
-                OrderId = orderId2,
-                ProductDetailId = productDetailId3,
-                Quantity = 5,
-                Price = 219000,
-                Status = Status.Active
-            },
-            new OrderDetail
-            {
-                //Id = orderdetailId4,
-                OrderId = orderId2,
-                ProductDetailId = productDetailId4,
-                Quantity = 5,
-                Price = 229000,
-                Status = Status.Active
-            },
-            new OrderDetail
-            {
-                OrderId = orderId3,
-                ProductDetailId = productDetailId5,
-                Quantity = 5,
-                Price = 239000,
-                Status = Status.Active
-            },
-            new OrderDetail
-            {
-                OrderId = orderId3,
-                ProductDetailId = productDetailId2,
-                Quantity = 5,
-                Price = 209000,
-                Status = Status.Active
-            }
-            ,
-            new OrderDetail
-            {
-                OrderId = orderId4,
-                ProductDetailId = productDetailId5,
-                Quantity = 5,
-                Price = 239000,
-                Status = Status.Active
-            },
-            new OrderDetail
-            {
-                OrderId = orderId5,
-                ProductDetailId = productDetailId5,
-                Quantity = 5,
-                Price = 239000,
-                Status = Status.Active
-            },
-            new OrderDetail
-            {
-                OrderId = orderId6,
-                ProductDetailId = productDetailId5,
-                Quantity = 5,
-                Price = 239000,
-                Status = Status.Active
-            },
-            new OrderDetail
-            {
-                OrderId = orderId7,
-                ProductDetailId = productDetailId10,
-                Quantity = 4,
-                Price = 289000,
-                Status = Status.Active
-            });
+        var orderDetail1 = new OrderDetail
+        {
+            OrderId = orderId1,
+            ProductDetailId = productDetailId1,
+            Quantity = 5,
+            Price = 199000,
+            Status = Status.Active
+        };
+
+        var orderDetail2 = new OrderDetail
+        {
+            //Id = orderdetailId2,
+            OrderId = orderId1,
+            ProductDetailId = productDetailId2,
+            Quantity = 5,
+            Price = 209000,
+            Status = Status.Active
+        };
+        var orderDetail3 = new OrderDetail
+        {
+            //Id = orderdetailId3,
+            OrderId = orderId2,
+            ProductDetailId = productDetailId3,
+            Quantity = 5,
+            Price = 219000,
+            Status = Status.Active
+        };
+        var orderDetail4 = new OrderDetail
+        {
+            //Id = orderdetailId4,
+            OrderId = orderId2,
+            ProductDetailId = productDetailId4,
+            Quantity = 5,
+            Price = 229000,
+            Status = Status.Active
+        };
+        var orderDetail5 = new OrderDetail
+        {
+            OrderId = orderId3,
+            ProductDetailId = productDetailId5,
+            Quantity = 5,
+            Price = 239000,
+            Status = Status.Active
+        };
+        var orderDetail6 = new OrderDetail
+        {
+            OrderId = orderId3,
+            ProductDetailId = productDetailId2,
+            Quantity = 5,
+            Price = 209000,
+            Status = Status.Active
+        };
+        var orderDetail7 = new OrderDetail
+        {
+            OrderId = orderId4,
+            ProductDetailId = productDetailId5,
+            Quantity = 5,
+            Price = 239000,
+            Status = Status.Active
+        };
+        var orderDetail8 = new OrderDetail
+        {
+            OrderId = orderId5,
+            ProductDetailId = productDetailId5,
+            Quantity = 5,
+            Price = 239000,
+            Status = Status.Active
+        };
+        var orderDetail9 = new OrderDetail
+        {
+            OrderId = orderId6,
+            ProductDetailId = productDetailId5,
+            Quantity = 5,
+            Price = 239000,
+            Status = Status.Active
+        };
+        var orderDetail10 = new OrderDetail
+        {
+            OrderId = orderId7,
+            ProductDetailId = productDetailId10,
+            Quantity = 4,
+            Price = 289000,
+            Status = Status.Active
+        };
+
+        builder.Entity<OrderDetail>().HasData(orderDetail1, orderDetail2, orderDetail3, orderDetail4, orderDetail5, orderDetail6, orderDetail7, orderDetail8, orderDetail9, orderDetail10);
         #endregion
     }
 }

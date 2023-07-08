@@ -103,22 +103,6 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Status)
                                 </td>
-                               @* <td>
-                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
-                                    @if (item.Status == shop.Data.Enums.OrderStatus.Pending)
-                                    {
-                                        <a class="btn btn-warning" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Xác nhận</a>
-                                    }
-                                    else if (item.Status == shop.Data.Enums.OrderStatus.AwaitingShipment)
-                                    {
-                                        <a class="btn btn-info" href="@Url.Action("GetOrderToShipper", "Order", new {id = item.Id})">Đã gửi hàng</a>
-                                    }
-                                    else if (item.Status == shop.Data.Enums.OrderStatus.AWaitingPickup)
-                                    {
-                                        <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn thành</a>
-                                    }
-                                    <a class="btn btn-danger" href="@Url.Action("CancelOrder", "Order", new {id = item.Id})">Hủy</a>
-                                </td>*@
                                 <td>                                   
                                     @if (item.Status == shop.Data.Enums.OrderStatus.Cancelled || item.Status == shop.Data.Enums.OrderStatus.Completed)
                                     {

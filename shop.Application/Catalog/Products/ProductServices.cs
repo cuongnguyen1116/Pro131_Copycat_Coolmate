@@ -369,6 +369,6 @@ public class ProductServices : IProductServices
         }
         _context.ProductImages.Add(productImage);
         await _context.SaveChangesAsync();
-        return new ApiSuccessResult<bool>(); 
+        return new ApiSuccessResult<bool>(""); 
     }
 }

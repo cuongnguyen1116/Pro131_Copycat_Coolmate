@@ -12,28 +12,22 @@ namespace shop.Application.Catalog.Orders
         {
         }
 
-        public async Task<List<OrderVm>> GetAll()
-        {
-            var data = await _context.Orders
-                .Include(o => o.User)
-                .OrderBy(o => o.OrderStatus)
-                .Select(o => new OrderVm
-                {
-                    Id = o.Id,
-                    CustomerId = (Guid)o.UserId,
-                    OrderCode = o.OrderCode,
-                    CustomerName = $"{o.User.LastName} {o.User.FirstName}",
-                    Total = o.Total,
-                    Status = o.OrderStatus
-                })
-                .ToListAsync();
-
-            return data;
-        }
-
         public async Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status)
         {
-            var data = await GetAll();
+            var data = await _context.Orders
+               .Include(o => o.User)
+               .OrderBy(o => o.OrderStatus)
+               .Select(o => new OrderVm
+               {
+                   Id = o.Id,
+                   CustomerId = (Guid)o.UserId,
+                   OrderCode = o.OrderCode,
+                   CustomerName = $"{o.User.LastName} {o.User.FirstName}",
+                   Total = o.Total,
+                   Status = o.OrderStatus
+               })
+               .ToListAsync();
+
             if (status == OrderStatus.None) return data.ToList();
             else return data.Where(x => x.Status == status).ToList();
         }
@@ -44,15 +38,23 @@ namespace shop.Application.Catalog.Orders
                 .Include(o => o.OrderDetails)
                     .ThenInclude(od => od.ProductDetail)
                         .ThenInclude(pd => pd.Product)
-                .Where(o => o.Id == id)
+                .Join(
+                    _context.Users,
+                    o => o.UserId,
+                    u => u.Id,
+                    (o, u) => new { Order = o, User = u }
+                )
+                .Where(o => o.Order.Id == id)
                 .Select(o => new OrderDetailVm
                 {
-                    OrderId = o.Id,
-                    ProductDetailId = o.User.Id,
-                    ProductName = o.OrderDetails.Select(od => od.ProductDetail.Product.Name).FirstOrDefault(),
-                    Price = o.OrderDetails.Select(od => od.Price).FirstOrDefault(),
-                    Quantity = o.OrderDetails.Select(od => od.Quantity).FirstOrDefault(),
-                    SubTotal = o.OrderDetails.Select(od => od.Price * od.Quantity).FirstOrDefault()
+                    OrderId = o.Order.Id,
+                    ProductDetailId = o.Order.User.Id,
+                    ProductName = o.Order.OrderDetails.Select(od => od.ProductDetail.Product.Name).FirstOrDefault(),
+                    Price = o.Order.OrderDetails.Select(od => od.Price).FirstOrDefault(),
+                    Quantity = o.Order.OrderDetails.Select(od => od.Quantity).FirstOrDefault(),
+                    SubTotal = o.Order.OrderDetails.Select(od => od.Price * od.Quantity).FirstOrDefault(),
+                    CustomerName = $"{o.User.FirstName} {o.User.LastName}",
+                    OrderCode = o.Order.OrderCode
                 })
                 .ToListAsync();
 
@@ -132,6 +134,5 @@ namespace shop.Application.Catalog.Orders
 
             return new ApiSuccessResult<bool>($"Đã hủy đơn hàng {existingOrder.OrderCode}");
         }
-
     }
 }

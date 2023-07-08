@@ -6,7 +6,6 @@ namespace shop.Application.Catalog.Orders
 {
     public interface IOrderServices
     {
-        Task<List<OrderVm>> GetAll();
         Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status);
         Task<List<OrderDetailVm>> GetOrderDetails(Guid id);
         Task<ApiResult<bool>> ConfirmOrder(Guid id);

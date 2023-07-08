@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using shop.ApiIntegration;
+using shop.ApiIntegration.Sizes;
 using shop.ViewModels.Catalog.Sizes;
 using System.Text;
 
