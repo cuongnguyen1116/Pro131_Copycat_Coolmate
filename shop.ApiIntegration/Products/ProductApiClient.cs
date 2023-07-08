@@ -12,7 +12,7 @@ using System.Text;
 
 namespace shop.ApiIntegration.Products
 {
-    public class ProductApiClient : BaseApiClient,IProductApiClient
+    public class ProductApiClient : BaseApiClient, IProductApiClient
     {
 
         public ProductApiClient(HttpClient httpClient, IConfiguration configuration) : base(httpClient, configuration)
@@ -27,30 +27,20 @@ namespace shop.ApiIntegration.Products
 
             var response = await _httpClient.PutAsync(apiURL, httpContent);
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
+            string result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+                return JsonConvert.DeserializeObject<ApiResult<bool>>(result);
 
-            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+            return JsonConvert.DeserializeObject<ApiResult<bool>>(result);
         }
         // Bảng ProductDetail
         public async Task<bool> CreateProduct(ProductCreateRequest request, Guid productPropId, Guid sizeId, Guid colorId, Guid materialId)
         {
-            
+
             string apiURL = "/api/Products/create/";
 
             var requestContent = new MultipartFormDataContent();
 
-            //if (request.ThumbnailImage != null)
-            //{
-            //    byte[] data;
-            //    using (var br = new BinaryReader(request.ThumbnailImage.OpenReadStream()))
-            //    {
-            //        data = br.ReadBytes((int)request.ThumbnailImage.OpenReadStream().Length);
-            //    }
-            //    ByteArrayContent bytes = new ByteArrayContent(data);
-            //    requestContent.Add(bytes, "ThumbnailImage", request.ThumbnailImage.FileName);
-            //}
             request.ProductId = productPropId;
             request.SizeId = sizeId;
             request.ColorId = colorId;
@@ -98,7 +88,7 @@ namespace shop.ApiIntegration.Products
         //Bảng  product
         public async Task<bool> CreateProductProp(ProductPropVm request)
         {
-            
+
             string url = $"/api/Products/createproductprop/";
             var requestContent = new MultipartFormDataContent();
 
@@ -122,7 +112,7 @@ namespace shop.ApiIntegration.Products
         // Bảng ProductDetail
         public async Task<bool> DeleteProduct(ProductDeleteRequest request)
         {
-            
+
             string apiURL = $"/api/Products/delete/{request.Id}";
             var response = await _httpClient.DeleteAsync(apiURL);
             response.EnsureSuccessStatusCode();
@@ -132,7 +122,7 @@ namespace shop.ApiIntegration.Products
         //Bảng  product
         public async Task<bool> DeleteProductProp(ProductPropVm request)
         {
-            
+
             string apiURL = $"/api/Products/deleteProductProp/{request.Id}";
             var response = await _httpClient.DeleteAsync(apiURL);
             response.EnsureSuccessStatusCode();
@@ -141,7 +131,7 @@ namespace shop.ApiIntegration.Products
         // Bảng ProductDetail
         public async Task<PagedResult<ProductVm>> GetAll(ProductPagingRequest request)
         {
-            
+
             string apiURL = $"/api/Products?pageindex={request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}";
             var response = await _httpClient.GetAsync(apiURL);
             response.EnsureSuccessStatusCode();
@@ -152,7 +142,7 @@ namespace shop.ApiIntegration.Products
 
         public async Task<List<ProductPropVm>> GetAllProductProp(ProductPagingRequest request)
         {
-            
+
             string apiURL = $"/api/Products/propductprops?keyword={request.Keyword}&categoryId={request.CategoryId}";
             var response = await _httpClient.GetAsync(apiURL);
             response.EnsureSuccessStatusCode();
@@ -164,7 +154,7 @@ namespace shop.ApiIntegration.Products
         // Bảng ProductDetail
         public async Task<ProductVm> GetById(Guid productDetailId)
         {
-            
+
 
             string apiURL = $"/api/Products/product/{productDetailId}";
             var response = await _httpClient.GetAsync(apiURL);
@@ -176,7 +166,7 @@ namespace shop.ApiIntegration.Products
         //Bảng  product
         public async Task<ProductPropVm> GetByIdProductProp(Guid productPropId)
         {
-           
+
 
             string apiURL = $"/api/Products/productprop/{productPropId}";
             var response = await _httpClient.GetAsync(apiURL);
@@ -188,7 +178,7 @@ namespace shop.ApiIntegration.Products
         // Lấy danh sách màu
         public async Task<List<ColorVm>> GetListColor()
         {
-            
+
             string apiURL = "/api/Colors/";
 
             var response = await _httpClient.GetAsync(apiURL);
@@ -200,7 +190,7 @@ namespace shop.ApiIntegration.Products
         //Lấy danh sách chất liệu
         public async Task<List<MaterialVm>> GetListMaterial()
         {
-            
+
             string apiURL = "/api/Materials/";
 
             var response = await _httpClient.GetAsync(apiURL);
@@ -212,7 +202,7 @@ namespace shop.ApiIntegration.Products
         //Lấy danh sách tên san phẩm
         public async Task<List<ProductPropVm>> GetListProductProp()
         {
-            
+
             string apiURL = "/api/Products/listPropductProp";
             var response = await _httpClient.GetAsync(apiURL);
             response.EnsureSuccessStatusCode();
@@ -223,7 +213,7 @@ namespace shop.ApiIntegration.Products
         //Lấy danh sách size
         public async Task<List<SizeVm>> GetListSize()
         {
-            
+
             string apiURL = "/api/Sizes/";
 
             var response = await _httpClient.GetAsync(apiURL);
@@ -233,11 +223,11 @@ namespace shop.ApiIntegration.Products
             return result;
         }
         // Bảng ProductDetail
-       
+
         //Bảng  product
         public async Task<bool> UpdateProductProp(ProductPropVm request)
         {
-            
+
             string url = $"/api/Products/updateProductProp/{request.Id}";
             var requestContent = new MultipartFormDataContent();
 
@@ -285,7 +275,8 @@ namespace shop.ApiIntegration.Products
 
             var response = await _httpClient.PostAsync(apiURL, requestContent);
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
+            
+            string result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<ApiResult<bool>>(result);
 

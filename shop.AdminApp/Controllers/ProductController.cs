@@ -85,6 +85,7 @@ namespace shop.AdminApp.Controllers
             var result = await _productApiClient.CreateImage(request,productid);
             if (result.IsSuccessed)
             {
+                TempData["result"] = $"Thêm ảnh có caption {request.Caption} thành công";
                 return RedirectToAction("Index");
             }
 
@@ -316,7 +317,7 @@ namespace shop.AdminApp.Controllers
 
             if (result.IsSuccessed)
             {
-                TempData["result"] = "Cập nhật danh mục thành công";
+                TempData["result"] = "Gán danh mục thành công";
                 return RedirectToAction("ShowAllProductProp");
             }
 

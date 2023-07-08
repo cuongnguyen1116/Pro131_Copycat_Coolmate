@@ -367,7 +367,7 @@ public class ProductServices : IProductServices
             }
         }
         await _context.SaveChangesAsync();
-        return new ApiSuccessResult<bool>("");
+        return new ApiSuccessResult<bool>("Gán danh mục thành công");
     }
 
     public async Task<ApiResult<bool>> AddImages(ProductImageRequest request)

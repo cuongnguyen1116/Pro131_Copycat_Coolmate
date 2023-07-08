@@ -1,7 +1,7 @@
 ﻿using System.Text;
-using ZXing.Common;
-using ZXing;
-using ZXing.QrCode;
+//using ZXing.Common;
+//using ZXing;
+//using ZXing.QrCode;
 using System.Drawing;
 
 namespace shop.Application.Common.Utilities

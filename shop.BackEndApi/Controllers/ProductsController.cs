@@ -151,11 +151,12 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest(ModelState);
 
             var result = await _productServices.CategoryAssign(id, request);
-            if (!result.IsSuccessed)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            if (result.IsSuccessed) 
+                return Ok(result);
+
+            return BadRequest(result);
+            
+            
         }
         [HttpPost("create-image")]
         [Consumes("multipart/form-data")]
@@ -166,13 +167,10 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest(ModelState);
             }
             var productImage = await _productServices.AddImages(request);
-            if (!productImage.IsSuccessed)
-                return BadRequest();
-            else
-            {
-                HttpContext.Response.StatusCode = 201;
-                return Ok(request);
-            }
+            if (productImage.IsSuccessed)   
+                return Ok(productImage);
+            return BadRequest();
+              
         }
     }
 }
