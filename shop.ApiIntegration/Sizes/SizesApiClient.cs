@@ -14,7 +14,7 @@ namespace shop.ApiIntegration.Sizes
         public async Task<List<SizeVm>> GetAll()
         {
             var httpClient = new HttpClient();
-            string apiURL = "https://localhost:5000/api/Sizes/";
+            string apiURL = "https://localhost:5001/api/Sizes/";
 
             var response = await httpClient.GetAsync(apiURL);
             string apiData = await response.Content.ReadAsStringAsync();
@@ -26,7 +26,7 @@ namespace shop.ApiIntegration.Sizes
         {
             var httpClient = new HttpClient();
 
-            string apiURL = $"https://localhost:5000/api/Sizes/{id}";
+            string apiURL = $"https://localhost:5001/api/Sizes/{id}";
             var response = await httpClient.GetAsync(apiURL);
             string apiData = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<SizeVm>(apiData);

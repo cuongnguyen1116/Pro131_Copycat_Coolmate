@@ -16,6 +16,6 @@ public class ProductVm
     public string MaterialName { get; set; }
     public string ColorName { get; set; }
     public Status Status { get; set; }
-
+    public List<string> Images { get; set; } = new List<string>();
 
 }

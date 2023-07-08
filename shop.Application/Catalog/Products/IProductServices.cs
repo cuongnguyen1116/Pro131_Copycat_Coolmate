@@ -6,7 +6,7 @@ namespace shop.Application.Catalog.Products;
 
 public interface IProductServices
 {
-    Task<List<ProductVm>> GetAll(ProductPagingRequest request);
+    Task<PagedResult<ProductVm>> GetAll(ProductPagingRequest request);
     Task<ProductVm> GetById(Guid productdetailId);
     Task<bool> Create(ProductCreateRequest request);
     Task<bool> Update(ProductUpdateRequest request);

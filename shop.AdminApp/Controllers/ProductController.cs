@@ -23,12 +23,13 @@ namespace shop.AdminApp.Controllers
             _productApiClient = productApiClient;
             _categoryApiClient = categoryApiClient;
         }
-
-        public async Task<IActionResult> Index(string? keyword)
+        public async Task<IActionResult> Index(string? keyword, int pageIndex = 1, int pageSize = 10)
         {
             var request = new ProductPagingRequest()
             {
-                Keyword = keyword
+                Keyword = keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize
             };
             var data = await _productApiClient.GetAll(request);
             ViewBag.Keyword = keyword;
@@ -43,6 +44,7 @@ namespace shop.AdminApp.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var result = await _productApiClient.GetById(id);
+            ViewBag.ImagePath = result.Images;
             return View(result);
         }
 
@@ -53,7 +55,7 @@ namespace shop.AdminApp.Controllers
             {
                 Keyword = keyword
             };
-            var data = await _productApiClient.GetAll(request);
+            var data = await _productApiClient.GetAllProductProp(request);
             ViewBag.ProductImage = data.Select(x => new SelectListItem()
             {
                 Text = x.Name,
@@ -65,27 +67,28 @@ namespace shop.AdminApp.Controllers
 
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> CreateImage([FromForm] ProductImageRequest request, Guid productdetailid, string? keyword)
+        public async Task<IActionResult> CreateImage([FromForm] ProductImageRequest request, Guid productid, string? keyword)
         {
             if (!ModelState.IsValid){ return View(); }
             var ppr = new ProductPagingRequest()
             {
                 Keyword = keyword
             };
-            var data = await _productApiClient.GetAll(ppr);
+            var data = await _productApiClient.GetAllProductProp(ppr);
             ViewBag.ProductImage = data.Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString(),
-                Selected = productdetailid.ToString() == x.Id.ToString()
+                Selected = productid.ToString() == x.Id.ToString()
             });
-            var result = await _productApiClient.CreateImage(request,productdetailid);
+
+            var result = await _productApiClient.CreateImage(request,productid);
             if (result.IsSuccessed)
             {
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Thêm sản phẩm thất bại");
+            ModelState.AddModelError("", "Thêm ảnh sản phẩm thất bại");
             return View(request);
 
         }

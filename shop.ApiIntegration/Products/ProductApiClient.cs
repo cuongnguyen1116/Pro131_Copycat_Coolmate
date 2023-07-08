@@ -7,6 +7,7 @@ using shop.ViewModels.Catalog.Materials;
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Catalog.Sizes;
 using shop.ViewModels.Common;
+using System.Drawing;
 using System.Text;
 
 namespace shop.ApiIntegration.Products
@@ -40,16 +41,16 @@ namespace shop.ApiIntegration.Products
 
             var requestContent = new MultipartFormDataContent();
 
-            if (request.ThumbnailImage != null)
-            {
-                byte[] data;
-                using (var br = new BinaryReader(request.ThumbnailImage.OpenReadStream()))
-                {
-                    data = br.ReadBytes((int)request.ThumbnailImage.OpenReadStream().Length);
-                }
-                ByteArrayContent bytes = new ByteArrayContent(data);
-                requestContent.Add(bytes, "ThumbnailImage", request.ThumbnailImage.FileName);
-            }
+            //if (request.ThumbnailImage != null)
+            //{
+            //    byte[] data;
+            //    using (var br = new BinaryReader(request.ThumbnailImage.OpenReadStream()))
+            //    {
+            //        data = br.ReadBytes((int)request.ThumbnailImage.OpenReadStream().Length);
+            //    }
+            //    ByteArrayContent bytes = new ByteArrayContent(data);
+            //    requestContent.Add(bytes, "ThumbnailImage", request.ThumbnailImage.FileName);
+            //}
             request.ProductId = productPropId;
             request.SizeId = sizeId;
             request.ColorId = colorId;
@@ -74,16 +75,16 @@ namespace shop.ApiIntegration.Products
 
             var requestContent = new MultipartFormDataContent();
 
-            if (request.ThumbnailImage != null)
-            {
-                byte[] data;
-                using (var br = new BinaryReader(request.ThumbnailImage.OpenReadStream()))
-                {
-                    data = br.ReadBytes((int)request.ThumbnailImage.OpenReadStream().Length);
-                }
-                ByteArrayContent bytes = new ByteArrayContent(data);
-                requestContent.Add(bytes, "ThumbnailImage", request.ThumbnailImage.FileName);
-            }
+            //if (request.ThumbnailImage != null)
+            //{
+            //    byte[] data;
+            //    using (var br = new BinaryReader(request.ThumbnailImage.OpenReadStream()))
+            //    {
+            //        data = br.ReadBytes((int)request.ThumbnailImage.OpenReadStream().Length);
+            //    }
+            //    ByteArrayContent bytes = new ByteArrayContent(data);
+            //    requestContent.Add(bytes, "ThumbnailImage", request.ThumbnailImage.FileName);
+            //}
 
             requestContent.Add(new StringContent(request.Price.ToString()), "price");
             requestContent.Add(new StringContent(request.Stock.ToString()), "stock");
@@ -99,12 +100,24 @@ namespace shop.ApiIntegration.Products
         {
             
             string url = $"/api/Products/createproductprop/";
-            var json = JsonConvert.SerializeObject(request);
-            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(url, httpContent);
+            var requestContent = new MultipartFormDataContent();
+
+            if (request.ThumbnailImage != null)
+            {
+                byte[] data;
+                using (var br = new BinaryReader(request.ThumbnailImage.OpenReadStream()))
+                {
+                    data = br.ReadBytes((int)request.ThumbnailImage.OpenReadStream().Length);
+                }
+                ByteArrayContent bytes = new ByteArrayContent(data);
+                requestContent.Add(bytes, "ThumbnailImage", request.ThumbnailImage.FileName);
+            }
+            requestContent.Add(new StringContent(request.Description.ToString()), "Description");
+            requestContent.Add(new StringContent(request.Name.ToString()), "Name");
+            requestContent.Add(new StringContent(request.Status.ToString()), "Status");
+            var response = await _httpClient.PostAsync(url, requestContent);
             response.EnsureSuccessStatusCode();
             return response.IsSuccessStatusCode;
-
         }
         // Bảng ProductDetail
         public async Task<bool> DeleteProduct(ProductDeleteRequest request)
@@ -126,14 +139,14 @@ namespace shop.ApiIntegration.Products
             return response.IsSuccessStatusCode;
         }
         // Bảng ProductDetail
-        public async Task<List<ProductVm>> GetAll(ProductPagingRequest request)
+        public async Task<PagedResult<ProductVm>> GetAll(ProductPagingRequest request)
         {
             
-            string apiURL = $"/api/Products?keyword={request.Keyword}";
+            string apiURL = $"/api/Products?pageindex={request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}";
             var response = await _httpClient.GetAsync(apiURL);
             response.EnsureSuccessStatusCode();
             string apiData = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<List<ProductVm>>(apiData);
+            var result = JsonConvert.DeserializeObject<PagedResult<ProductVm>>(apiData);
             return result;
         }
 
@@ -226,14 +239,29 @@ namespace shop.ApiIntegration.Products
         {
             
             string url = $"/api/Products/updateProductProp/{request.Id}";
-            var json = JsonConvert.SerializeObject(request);
-            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync(url, httpContent);
+            var requestContent = new MultipartFormDataContent();
+
+            if (request.ThumbnailImage != null)
+            {
+                byte[] data;
+                using (var br = new BinaryReader(request.ThumbnailImage.OpenReadStream()))
+                {
+                    data = br.ReadBytes((int)request.ThumbnailImage.OpenReadStream().Length);
+                }
+                ByteArrayContent bytes = new ByteArrayContent(data);
+                requestContent.Add(bytes, "ThumbnailImage", request.ThumbnailImage.FileName);
+            }
+
+            requestContent.Add(new StringContent(request.Status.ToString()), "Status");
+            requestContent.Add(new StringContent(request.Description.ToString()), "Description");
+            requestContent.Add(new StringContent(request.Name.ToString()), "Name");
+
+            var response = await _httpClient.PutAsync(url, requestContent);
             response.EnsureSuccessStatusCode();
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<ApiResult<bool>> CreateImage(ProductImageRequest request, Guid productdetailid)
+        public async Task<ApiResult<bool>> CreateImage(ProductImageRequest request, Guid productid)
         {
             string apiURL = $"/api/Products/create-image/";
 
@@ -249,9 +277,9 @@ namespace shop.ApiIntegration.Products
                 ByteArrayContent bytes = new ByteArrayContent(data);
                 requestContent.Add(bytes, "ImageFile", request.ImageFile.FileName);
             }
-            request.ProductDetailId = productdetailid;
+            request.ProductId = productid;
             requestContent.Add(new StringContent(request.Caption.ToString()), "caption");
-            requestContent.Add(new StringContent(request.ProductDetailId.ToString()), "productdetailid");
+            requestContent.Add(new StringContent(request.ProductId.ToString()), "productid");
             requestContent.Add(new StringContent(request.SortOrder.ToString()), "SortOrder");
             requestContent.Add(new StringContent(request.IsDefault.ToString()), "isdefault");
 
