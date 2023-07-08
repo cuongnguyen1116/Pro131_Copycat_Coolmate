@@ -1,4 +1,4 @@
-﻿namespace shop.Application.Common;
+﻿namespace shop.Application.Common.StoreFile;
 
 public interface IStorageService
 {

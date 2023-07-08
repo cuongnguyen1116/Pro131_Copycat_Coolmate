@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using shop.Application.Common;
+using shop.Application.Common.StoreFile;
 using shop.Data.Context;
 using shop.Data.Entities;
 using shop.Utilities.Exceptions;
@@ -153,6 +153,7 @@ public class ProductServices : IProductServices
         var images = await (from pi in _context.ProductImages
                            join p in _context.Products on pi.ProductId equals p.Id
                            where pi.ProductId == product.Id
+                           orderby pi.SortOrder
                            select pi.ImagePath).ToListAsync();
 
         //var image = await _context.ProductImages.Where(x => x.ProductId == product.Id && x.IsDefault == true).FirstOrDefaultAsync();
@@ -170,8 +171,6 @@ public class ProductServices : IProductServices
             SizeName = size.Name,
             Status = productdetail.Status,
             Images = images
-            
-
         };
 
         return productDetailViewModel;
@@ -384,10 +383,10 @@ public class ProductServices : IProductServices
 
         if (request.ImageFile != null)
         {
-            productImage.ImagePath = await this.SaveFile(request.ImageFile);
+            productImage.ImagePath = await SaveFile(request.ImageFile);
         }
         _context.ProductImages.Add(productImage);
         await _context.SaveChangesAsync();
-        return new ApiSuccessResult<bool>("");
+        return new ApiSuccessResult<bool>($"Thêm ảnh có caption {productImage.Caption} thành công");
     }
 }

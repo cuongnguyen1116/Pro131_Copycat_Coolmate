@@ -7,7 +7,7 @@ using shop.Application.Catalog.Orders;
 using shop.Application.Catalog.Products;
 using shop.Application.Catalog.Sizes;
 using shop.Application.Catalog.Stats;
-using shop.Application.Common;
+using shop.Application.Common.StoreFile;
 using shop.Application.System.Roles;
 using shop.Application.System.Users;
 using shop.Data.Context;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 
-namespace shop.Application.Common;
+namespace shop.Application.Common.StoreFile;
 
 public class FileStorageService : IStorageService
 {

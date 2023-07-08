@@ -274,7 +274,7 @@ namespace shop.ApiIntegration.Products
                 {
                     data = br.ReadBytes((int)request.ImageFile.OpenReadStream().Length);
                 }
-                ByteArrayContent bytes = new ByteArrayContent(data);
+                ByteArrayContent bytes = new(data);
                 requestContent.Add(bytes, "ImageFile", request.ImageFile.FileName);
             }
             request.ProductId = productid;
@@ -287,9 +287,9 @@ namespace shop.ApiIntegration.Products
             response.EnsureSuccessStatusCode();
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+                return JsonConvert.DeserializeObject<ApiResult<bool>>(result);
 
-            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+            return JsonConvert.DeserializeObject<ApiResult<bool>>(result);
         }
     }
 }
