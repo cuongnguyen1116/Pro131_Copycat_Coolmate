@@ -14,13 +14,13 @@ namespace shop.Application.Catalog.Stats
         public async Task<StatsVm> GetStatistics()
         {
             var orders = await _context.Orders
-    .GroupBy(o => o.OrderStatus)
-    .Select(g => new
-    {
-        OrderStatus = g.Key,
-        Count = g.Count()
-    })
-    .ToListAsync();
+                        .GroupBy(o => o.OrderStatus)
+                        .Select(g => new
+                        {
+                            OrderStatus = g.Key,
+                            Count = g.Count()
+                        })
+                        .ToListAsync();
 
             decimal revenue = await _context.Orders
                 .Where(o => o.OrderStatus == OrderStatus.Completed)
