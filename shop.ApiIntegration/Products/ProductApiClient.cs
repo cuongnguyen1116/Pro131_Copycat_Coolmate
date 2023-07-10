@@ -25,11 +25,11 @@ namespace shop.ApiIntegration.Products
 
             var response = await _httpClient.PutAsync(apiURL, httpContent);
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
+            string result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
-                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+                return JsonConvert.DeserializeObject<ApiResult<bool>>(result);
 
-            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+            return JsonConvert.DeserializeObject<ApiResult<bool>>(result);
         }
         // Bảng ProductDetail
         public async Task<bool> CreateProduct(ProductCreateRequest request, Guid productPropId, Guid sizeId, Guid colorId, Guid materialId)
@@ -39,16 +39,6 @@ namespace shop.ApiIntegration.Products
 
             var requestContent = new MultipartFormDataContent();
 
-            //if (request.ThumbnailImage != null)
-            //{
-            //    byte[] data;
-            //    using (var br = new BinaryReader(request.ThumbnailImage.OpenReadStream()))
-            //    {
-            //        data = br.ReadBytes((int)request.ThumbnailImage.OpenReadStream().Length);
-            //    }
-            //    ByteArrayContent bytes = new ByteArrayContent(data);
-            //    requestContent.Add(bytes, "ThumbnailImage", request.ThumbnailImage.FileName);
-            //}
             request.ProductId = productPropId;
             request.SizeId = sizeId;
             request.ColorId = colorId;
@@ -283,7 +273,8 @@ namespace shop.ApiIntegration.Products
 
             var response = await _httpClient.PostAsync(apiURL, requestContent);
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
+            
+            string result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<ApiResult<bool>>(result);
 
