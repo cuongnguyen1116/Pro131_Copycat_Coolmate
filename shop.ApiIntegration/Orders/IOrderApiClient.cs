@@ -6,6 +6,7 @@ namespace shop.ApiIntegration.Orders
 {
     public interface IOrderApiClient
     {
+        Task<PagedResult<OrderVm>> GetOrdersPaging(OrderPagingRequest request);
         Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status);
         Task<List<OrderDetailVm>> GetOrderDetails(Guid id);
         Task<ApiResult<bool>> ConfirmOrder(Guid id);

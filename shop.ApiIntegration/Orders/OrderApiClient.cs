@@ -12,6 +12,17 @@ namespace shop.ApiIntegration.Orders
         {
         }
 
+        // slug: /api/Orders/get-orders-paging?Status=0&KeyWord=23&PageIndex=1&PageSize=10
+        public async Task<PagedResult<OrderVm>> GetOrdersPaging(OrderPagingRequest request)
+        {
+            string apiUrl = $"/api/Orders/get-orders-paging?Status={request.Status}&KeyWord={request.KeyWord}&PageIndex={request.PageIndex}&PageSize={request.PageSize}";
+            var response = await _httpClient.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
+            string apiData = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<PagedResult<OrderVm>>(apiData);
+            return result;
+        }
+
         public async Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status)
         {
             string apiUrl = $"/api/Orders/get-orders-by-status/{status}";

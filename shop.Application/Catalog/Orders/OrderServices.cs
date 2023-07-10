@@ -12,24 +12,53 @@ namespace shop.Application.Catalog.Orders
         {
         }
 
-        public async Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status)
+        public async Task<PagedResult<OrderVm>> GetOrdersPaging(OrderPagingRequest request)
         {
-            var data = await _context.Orders
-               .Include(o => o.User)
-               .OrderBy(o => o.OrderStatus)
-               .Select(o => new OrderVm
-               {
-                   Id = o.Id,
-                   CustomerId = (Guid)o.UserId,
-                   OrderCode = o.OrderCode,
-                   CustomerName = $"{o.User.LastName} {o.User.FirstName}",
-                   Total = o.Total,
-                   Status = o.OrderStatus
-               })
-               .ToListAsync();
+            var query = _context.Orders
+                                 .Include(o => o.User)
+                                 .OrderBy(o => o.CreatedDate)
+                                 .AsQueryable();
 
-            if (status == OrderStatus.None) return data.ToList();
-            else return data.Where(x => x.Status == status).ToList();
+            if (!string.IsNullOrEmpty(request.KeyWord))
+            {
+                var keyword = request.KeyWord.ToLower(); // Convert the keyword to lowercase
+
+                query = query.Where(o =>
+                    o.OrderCode.ToLower().Contains(keyword) ||
+                    o.User.FirstName.ToLower().Contains(keyword) ||
+                    o.User.LastName.ToLower().Contains(keyword)
+                );
+            }
+
+            if (request.Status != OrderStatus.None)
+            {
+                query = query.Where(o => o.OrderStatus == request.Status);
+            }
+
+            int totalRow = await query.CountAsync();
+
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(o => new OrderVm
+                {
+                    Id = o.Id,
+                    CustomerId = (Guid)o.UserId,
+                    OrderCode = o.OrderCode,
+                    CustomerName = $"{o.User.FirstName} {o.User.LastName}",
+                    Total = o.Total,
+                    Status = o.OrderStatus
+                })
+                .ToListAsync();
+
+            var pagedResult = new PagedResult<OrderVm>()
+            {
+                TotalRecords = totalRow,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                Items = data
+            };
+
+            return pagedResult;
         }
 
         public async Task<List<OrderDetailVm>> GetOrderDetails(Guid id)

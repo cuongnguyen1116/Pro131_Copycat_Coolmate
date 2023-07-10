@@ -1,13 +1,10 @@
 ﻿using System.Text;
-using ZXing.Common;
-using ZXing;
-using ZXing.QrCode;
-using System.Drawing;
 
 namespace shop.Application.Common.Utilities
 {
-    public static class Utilities
+    public static class UtilityServices
     {
+        // This method will create a random string starts with the day it created in "yyMMdd" add 'length' character in Characters
         public static string RandomString(int length)
         {
             Random Random = new();
@@ -25,6 +22,5 @@ namespace shop.Application.Common.Utilities
 
             return dateString + randomString.ToString();
         }
-
     }
 }

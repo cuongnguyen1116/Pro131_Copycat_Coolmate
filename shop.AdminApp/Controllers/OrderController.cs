@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using shop.ApiIntegration.Orders;
 using shop.Data.Enums;
+using shop.ViewModels.Catalog.Orders;
 
 namespace shop.AdminApp.Controllers
 {
@@ -13,9 +14,18 @@ namespace shop.AdminApp.Controllers
             _orderApiClient = orderApiClient;
         }
 
-        public async Task<IActionResult> GetOrdersByStatus(OrderStatus status)
+        public async Task<IActionResult> GetOrdersPaging(string? keyword, OrderStatus status, int pageIndex = 1, int pageSize = 10)
         {
-            var data = await _orderApiClient.GetOrdersByStatus(status);
+            var request = new OrderPagingRequest
+            {
+                KeyWord = keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                Status = status
+            };
+
+            var data = await _orderApiClient.GetOrdersPaging(request);
+            ViewBag.Keyword = keyword;
             if (TempData["result"] != null)
             {
                 ViewBag.SuccessMsg = TempData["result"];
@@ -35,7 +45,7 @@ namespace shop.AdminApp.Controllers
             if (response.IsSuccessed)
             {
                 TempData["result"] = response.Message;
-                return RedirectToAction("GetOrdersByStatus", "Order", new { status = 6 });
+                return RedirectToAction("GetOrdersPaging", "Order");
             }
             return View();
         }
@@ -46,7 +56,7 @@ namespace shop.AdminApp.Controllers
             if (response.IsSuccessed)
             {
                 TempData["result"] = response.Message;
-                return RedirectToAction("GetOrdersByStatus", "Order", new { status = 6 });
+                return RedirectToAction("GetOrdersPaging", "Order");
             }
             return View();
         }
@@ -57,7 +67,7 @@ namespace shop.AdminApp.Controllers
             if (response.IsSuccessed)
             {
                 TempData["result"] = response.Message;
-                return RedirectToAction("GetOrdersByStatus", "Order", new { status = 6 });
+                return RedirectToAction("GetOrdersPaging", "Order");
             }
             return View();
         }
@@ -67,7 +77,7 @@ namespace shop.AdminApp.Controllers
             if (response.IsSuccessed)
             {
                 TempData["result"] = response.Message;
-                return RedirectToAction("GetOrdersByStatus", "Order", new { status = 6 });
+                return RedirectToAction("GetOrdersPaging", "Order");
             }
             return View();
         }

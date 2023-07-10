@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Products;
-using shop.Data.Entities;
 using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
-using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace shop.BackEndApi.Controllers
 {
@@ -17,6 +15,7 @@ namespace shop.BackEndApi.Controllers
         {
             _productServices = productServices;
         }
+
         // Bảng ProductDetail
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] ProductPagingRequest request)
@@ -24,19 +23,22 @@ namespace shop.BackEndApi.Controllers
             var result = await _productServices.GetAll(request);
             return Ok(result);
         }
+
         //Bảng product
         [HttpGet("propductprops")]/*?keyword={request.Keyword}&categoryId={request.CategoryId}*/
-        public async Task<IActionResult> GetAllProductProp([FromQuery]ProductPagingRequest request)
+        public async Task<IActionResult> GetAllProductProp([FromQuery] ProductPagingRequest request)
         {
             var result = await _productServices.GetAllProductProp(request);
             return Ok(result);
         }
+
         [HttpGet("listPropductProp")]
         public async Task<IActionResult> GetListProductProp()
         {
             var result = await _productServices.GetListProductProp();
             return Ok(result);
         }
+
         // Bảng ProductDetail
         [HttpPost("create")]
         [Consumes("multipart/form-data")]
@@ -55,10 +57,10 @@ namespace shop.BackEndApi.Controllers
                 return Ok(request);
             }
         }
+
         // Bảng ProductDetail
         [HttpPut("update/{productDetailId}")]
         [Consumes("multipart/form-data")]
-
         public async Task<IActionResult> Update([FromRoute] Guid productDetailId, [FromForm] ProductUpdateRequest request)
         {
             if (!ModelState.IsValid)
@@ -71,6 +73,7 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest();
             return Ok();
         }
+
         // Bảng ProductDetail
         [HttpDelete("delete/{productDetailId}")]
         public async Task<IActionResult> Delete(Guid productDetailId)
@@ -80,6 +83,7 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest();
             return Ok();
         }
+
         // Bảng ProductDetail
         [HttpGet("product/{productDetailId}")]
         public async Task<IActionResult> GetById(Guid productDetailId)
@@ -91,6 +95,7 @@ namespace shop.BackEndApi.Controllers
             }
             return Ok(product);
         }
+
         //Bang Product
         [HttpPost("createproductprop")]
         [Consumes("multipart/form-data")]
@@ -109,10 +114,11 @@ namespace shop.BackEndApi.Controllers
                 return Ok(request);
             }
         }
+
         //Bang Product
         [HttpPut("updateProductProp/{productPropId}")]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> UpdateProductProp([FromRoute] Guid productPropId,[FromForm] ProductPropVm request)
+        public async Task<IActionResult> UpdateProductProp([FromRoute] Guid productPropId, [FromForm] ProductPropVm request)
         {
             if (!ModelState.IsValid)
             {
@@ -124,6 +130,7 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest();
             return Ok();
         }
+
         //Bang Product
         [HttpDelete("deleteProductProp/{productPropId}")]
         public async Task<IActionResult> DeleteProductProp(Guid productPropId)
@@ -133,6 +140,7 @@ namespace shop.BackEndApi.Controllers
                 return BadRequest();
             return Ok();
         }
+
         //Bang Product
         [HttpGet("productprop/{productPropId}")]
         public async Task<IActionResult> GetByIdProductProp(Guid productPropId)
@@ -144,6 +152,7 @@ namespace shop.BackEndApi.Controllers
             }
             return Ok(product);
         }
+
         [HttpPut("productProp/{id}/categories")]
         public async Task<IActionResult> CategoryAssign(Guid id, [FromBody] CategoryAssignRequest request)
         {
@@ -157,6 +166,7 @@ namespace shop.BackEndApi.Controllers
             }
             return Ok(result);
         }
+
         [HttpPost("create-image")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> CreateImage([FromForm] ProductImageRequest request)

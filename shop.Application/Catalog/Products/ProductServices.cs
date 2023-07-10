@@ -8,8 +8,6 @@ using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Common;
 using System.Net.Http.Headers;
-using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace shop.Application.Catalog.Products;
 
@@ -73,6 +71,7 @@ public class ProductServices : IProductServices
 
         return pagedResult;
     }
+
     //Lưu ảnh vào thư mục user-content ở backend api
     private async Task<string> SaveFile(IFormFile file)
     {
@@ -81,6 +80,7 @@ public class ProductServices : IProductServices
         await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
         return "/" + USER_CONTENT_FOLDER_NAME + "/" + fileName;
     }
+
     public async Task<bool> Create(ProductCreateRequest request)
     {
         var productDetail = new ProductDetail()
@@ -97,22 +97,15 @@ public class ProductServices : IProductServices
             CreatedDate = DateTime.Now
 
         };
-        
+
         _context.ProductDetails.Add(productDetail);
         await _context.SaveChangesAsync();
         return true;
-
     }
 
     public async Task<bool> Update(ProductUpdateRequest request)
     {
-        var productdetail = await _context.ProductDetails.FirstOrDefaultAsync(pd => pd.Id == request.Id);
-
-        if (productdetail == null)
-        {
-            throw new ShopException($"Can't find a product with id: {request.Id}");
-        }
-
+        var productdetail = await _context.ProductDetails.FirstOrDefaultAsync(pd => pd.Id == request.Id) ?? throw new ShopException($"Can't find a product with id: {request.Id}");
         productdetail.Stock = request.Stock;
         productdetail.Price = request.Price;
 
@@ -121,10 +114,8 @@ public class ProductServices : IProductServices
             productdetail.Status = Data.Enums.Status.Inactive;
         }
 
-
         _context.ProductDetails.Update(productdetail);
         await _context.SaveChangesAsync();
-
         return true;
     }
 
@@ -136,7 +127,7 @@ public class ProductServices : IProductServices
         {
             throw new ShopException($"Can't find a product : {productdetailId}");
         }
-        
+
 
         _context.ProductDetails.Remove(productdetail);
         await _context.SaveChangesAsync();
@@ -151,10 +142,10 @@ public class ProductServices : IProductServices
         var color = await _context.Colors.FirstOrDefaultAsync(x => x.Id == productdetail.ColorId);
         var material = await _context.Materials.FirstOrDefaultAsync(x => x.Id == productdetail.MaterialId);
         var images = await (from pi in _context.ProductImages
-                           join p in _context.Products on pi.ProductId equals p.Id
-                           where pi.ProductId == product.Id
-                           orderby pi.SortOrder
-                           select pi.ImagePath).ToListAsync();
+                            join p in _context.Products on pi.ProductId equals p.Id
+                            where pi.ProductId == product.Id
+                            orderby pi.SortOrder
+                            select pi.ImagePath).ToListAsync();
 
         //var image = await _context.ProductImages.Where(x => x.ProductId == product.Id && x.IsDefault == true).FirstOrDefaultAsync();
         var productDetailViewModel = new ProductVm()
@@ -280,9 +271,9 @@ public class ProductServices : IProductServices
     public async Task<bool> UpdateProductProp(ProductPropVm request)
     {
         var product = await _context.Products
-            .Include(p=>p.ProductImages)
+            .Include(p => p.ProductImages)
             .AsNoTracking()
-            .FirstOrDefaultAsync(p=>p.Id == request.Id);
+            .FirstOrDefaultAsync(p => p.Id == request.Id);
         if (product == null)
         {
             throw new ShopException("Can't find product");
@@ -324,11 +315,7 @@ public class ProductServices : IProductServices
 
     public async Task<bool> DeleteProductProp(Guid productPropId)
     {
-        var product = await _context.Products.FindAsync(productPropId);
-        if (product == null)
-        {
-            throw new ShopException("Can't find product");
-        }
+        var product = await _context.Products.FindAsync(productPropId) ?? throw new ShopException("Can't find product");
         var images = _context.ProductImages.Where(i => i.ProductId == productPropId);
         foreach (var image in images)
         {
@@ -339,6 +326,7 @@ public class ProductServices : IProductServices
         return true;
 
     }
+
     //gans category voi bang product
     public async Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request)
     {

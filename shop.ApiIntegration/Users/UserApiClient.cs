@@ -2,11 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using shop.ViewModels.Common;
 using shop.ViewModels.System.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace shop.ApiIntegration.Users
 {
@@ -22,6 +17,6 @@ namespace shop.ApiIntegration.Users
         {
             //var session = _contextAccessor.HttpContext.Session.getstring()
             return null;
-        } 
+        }
     }
 }

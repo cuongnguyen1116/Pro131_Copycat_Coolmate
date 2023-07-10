@@ -1,12 +1,11 @@
-﻿using shop.Data.Enums;
-using shop.ViewModels.Catalog.Orders;
+﻿using shop.ViewModels.Catalog.Orders;
 using shop.ViewModels.Common;
 
 namespace shop.Application.Catalog.Orders
 {
     public interface IOrderServices
     {
-        Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status);
+        Task<PagedResult<OrderVm>> GetOrdersPaging(OrderPagingRequest request);
         Task<List<OrderDetailVm>> GetOrderDetails(Guid id);
         Task<ApiResult<bool>> ConfirmOrder(Guid id);
         Task<ApiResult<bool>> GetOrderToShipper(Guid id);

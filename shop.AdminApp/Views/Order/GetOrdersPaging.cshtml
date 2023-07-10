@@ -1,7 +1,9 @@
-﻿@model IEnumerable<shop.ViewModels.Catalog.Orders.OrderVm>
+﻿@using shop.ViewModels.Common
+
+@model PagedResult<shop.ViewModels.Catalog.Orders.OrderVm>
 
 @{
-    ViewData["Title"] = "GetAll";
+    ViewData["Title"] = "Order";
     int count = 0;
 }
 
@@ -22,22 +24,22 @@
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 6})">Tất cả</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order")">Tất cả</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 0})">Chờ xác nhận</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order", new {status = 1})">Chờ xác nhận</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 1})">Chờ lấy hàng</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order", new {status = 2})">Chờ lấy hàng</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 2})">Đang giao</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order", new {status = 3})">Đang giao</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 3})">Hoàn thành</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order", new {status = 4})">Hoàn thành</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("GetOrdersByStatus","Order", new {status = 4})">Đã hủy</a>
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order", new {status = 5})">Đã hủy</a>
         </li>
     </ul>
 
@@ -45,13 +47,14 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6 col-xs-12">
-                    <form asp-action="Index" method="get">
+                    <form asp-action="GetOrdersPaging" method="get">
                         <div class="row">
                             <div class="col-md-4">
                                 <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
                             </div>
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary">Tìm</button>
+                                <button type="button" onclick="window.location.href='/Product/Index'" class="btn btn-dark">Reset</button>
                             </div>
                         </div>
                     </form>
@@ -63,7 +66,7 @@
             <div class="row">
                 @if (ViewBag.SuccessMsg != null)
                 {
-                    <div id="msgAlert" class="alert alert-success" role="alert" style="color:red">
+                    <div id="msgAlert" class="alert alert-success" role="alert">
                         @ViewBag.SuccessMsg
                     </div>
                 }
@@ -81,7 +84,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Items)
                         {
                             @*<tr onclick="location.href='@Url.Action("GetOrderDetails", "Order", new { id = item.Id })'">*@
                             <tr>
@@ -103,7 +106,7 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Status)
                                 </td>
-                                <td>                                   
+                                <td>
                                     @if (item.Status == shop.Data.Enums.OrderStatus.Cancelled || item.Status == shop.Data.Enums.OrderStatus.Completed)
                                     {
                                         <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
@@ -131,6 +134,7 @@
                     </tbody>
                 </table>
             </div>
+            @await Component.InvokeAsync("Pager",Model)
         </div>
     </div>
 </div>

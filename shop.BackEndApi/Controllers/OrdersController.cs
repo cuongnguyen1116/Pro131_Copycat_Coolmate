@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Orders;
-using shop.Data.Enums;
+using shop.ViewModels.Catalog.Orders;
 
 namespace shop.BackEndApi.Controllers
 {
@@ -15,11 +15,12 @@ namespace shop.BackEndApi.Controllers
             _orderServices = orderServices;
         }
 
-        [HttpGet("get-orders-by-status/{status}")]
-        public async Task<IActionResult> GetOrdersByStatus(OrderStatus status)
+        // slug: /api/Orders/get-orders-paging?Status=0&KeyWord=23&PageIndex=1&PageSize=10
+        [HttpGet("get-orders-paging")]
+        public async Task<IActionResult> GetOrdersPaging([FromQuery] OrderPagingRequest request)
         {
-            var list = await _orderServices.GetOrdersByStatus(status);
-            return Ok(list);
+            var result = await _orderServices.GetOrdersPaging(request);
+            return Ok(result);
         }
 
         [HttpGet("get-order-details/{id}")]

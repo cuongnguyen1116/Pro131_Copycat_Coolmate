@@ -2,14 +2,9 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using shop.ApiIntegration.Categories;
 using shop.ApiIntegration.Products;
-using shop.Data.Entities;
-using shop.Utilities.Constants;
 using shop.ViewModels.Catalog.Categories;
-using shop.ViewModels.Catalog.Materials;
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Common;
-using System.Drawing.Printing;
-using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace shop.AdminApp.Controllers
 {
@@ -23,6 +18,7 @@ namespace shop.AdminApp.Controllers
             _productApiClient = productApiClient;
             _categoryApiClient = categoryApiClient;
         }
+
         public async Task<IActionResult> Index(string? keyword, int pageIndex = 1, int pageSize = 10)
         {
             var request = new ProductPagingRequest()
@@ -69,7 +65,7 @@ namespace shop.AdminApp.Controllers
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> CreateImage([FromForm] ProductImageRequest request, Guid productid, string? keyword)
         {
-            if (!ModelState.IsValid){ return View(); }
+            if (!ModelState.IsValid) { return View(); }
             var ppr = new ProductPagingRequest()
             {
                 Keyword = keyword
@@ -82,7 +78,7 @@ namespace shop.AdminApp.Controllers
                 Selected = productid.ToString() == x.Id.ToString()
             });
 
-            var result = await _productApiClient.CreateImage(request,productid);
+            var result = await _productApiClient.CreateImage(request, productid);
             if (result.IsSuccessed)
             {
                 return RedirectToAction("Index");
@@ -92,6 +88,7 @@ namespace shop.AdminApp.Controllers
             return View(request);
 
         }
+
         public async Task<IActionResult> Create(Guid productPropId, Guid sizeId, Guid colorId, Guid materialId)
         {
             var productprops = _productApiClient.GetListProductProp();
@@ -169,11 +166,13 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Thêm sản phẩm thất bại");
             return View(request);
         }
+
         //Bảng  product
-        public async Task<IActionResult> CreateProduct()
+        public IActionResult CreateProduct()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateProduct(ProductPropVm request)
         {
@@ -191,6 +190,7 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Thêm sản phẩm thất bại");
             return View(request);
         }
+
         //Bảng  productdetail
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
@@ -224,6 +224,7 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Cập nhật sản phẩm thất bại");
             return View(request);
         }
+
         //Bảng  product
         [HttpGet]
         public async Task<IActionResult> EditProduct(Guid id)
@@ -234,7 +235,6 @@ namespace shop.AdminApp.Controllers
         }
 
         [HttpPost]
-
         public async Task<IActionResult> EditProduct(ProductPropVm request)
         {
             if (!ModelState.IsValid)
@@ -250,6 +250,7 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Cập nhật sản phẩm thất bại");
             return View(request);
         }
+
         //Bảng  productdetail
         public async Task<IActionResult> Delete(ProductDeleteRequest request)
         {
@@ -281,6 +282,7 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Xóa không thành công");
             return View(vm);
         }
+
         private async Task<CategoryAssignRequest> GetCategoryAssignRequest(Guid id)
         {
 
@@ -325,9 +327,9 @@ namespace shop.AdminApp.Controllers
 
             return View(roleAssignRequest);
         }
+
         //Bảng  product
         public async Task<IActionResult> ShowAllProductProp(string keyword, Guid? categoryId)
-
         {
             var request = new ProductPagingRequest()
             {

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using shop.Data.Enums;
+﻿using shop.Data.Enums;
 
 namespace shop.ViewModels.Catalog.Products
 {

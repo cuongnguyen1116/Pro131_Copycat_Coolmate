@@ -1,15 +1,14 @@
-﻿using shop.ViewModels.Common;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
+using shop.ViewModels.Common;
 
 namespace shop.AdminApp.Controllers.Components
 {
-     public class PagerViewComponent : ViewComponent
+    public class PagerViewComponent : ViewComponent
+    {
+        public Task<IViewComponentResult> InvokeAsync(PagedResultBase result)
         {
-            public Task<IViewComponentResult> InvokeAsync(PagedResultBase result)
-            {
-                return Task.FromResult((IViewComponentResult)View("Default", result));
-            }
+            return Task.FromResult((IViewComponentResult)View("Default", result));
         }
-    
+    }
+
 }

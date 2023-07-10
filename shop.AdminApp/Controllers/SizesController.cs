@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using shop.ApiIntegration.Sizes;
-using shop.ViewModels.Catalog.Sizes;
-using System.Text;
 
 namespace shop.AdminApp.Controllers
 {
@@ -15,14 +12,14 @@ namespace shop.AdminApp.Controllers
         }
         public async Task<IActionResult> Show()
         {
-           var data = await _sizeApiClient.GetAll();
+            var data = await _sizeApiClient.GetAll();
             if (TempData["result"] != null)
             {
                 ViewBag.SuccessMsg = TempData["result"];
             }
             return View(data);
         }
-        public async Task<IActionResult> GetById(Guid id) 
+        public async Task<IActionResult> GetById(Guid id)
         {
             var data = await _sizeApiClient.GetById(id);
             if (TempData["result"] != null)
