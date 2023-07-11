@@ -1,10 +1,9 @@
 ﻿using shop.ViewModels.Catalog.Stats;
 
-namespace shop.Application.Catalog.Stats
+namespace shop.Application.Catalog.Stats;
+
+public interface IStatisticsServices
 {
-    public interface IStatisticsServices
-    {
-        Task<StatsVm> GetStatistics();
-        Dictionary<Guid, bool> CheckProductsOutOfStock(List<Guid> productIds);
-    }
+    Task<StatsVm> GetStatistics();
+    Dictionary<Guid, bool> CheckProductsOutOfStock(List<Guid> productIds);
 }

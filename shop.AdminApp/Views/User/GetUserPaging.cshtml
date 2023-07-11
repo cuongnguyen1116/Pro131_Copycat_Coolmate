@@ -1,8 +1,9 @@
-﻿@model PagedResult<shop.ViewModels.Catalog.Products.ProductVm>
-@using shop.ViewModels.Common;
+﻿@using shop.ViewModels.Common
+
+@model PagedResult<shop.ViewModels.System.Users.UserVm>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "GetUserPaging";
 }
 
 @section Scripts{
@@ -14,7 +15,7 @@
 }
 
 <div class="container-fluid">
-    <h1 class="mt-4">Danh sách sản phẩm</h1>
+    <h1 class="mt-4">Danh sách người dùng</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
         <li class="breadcrumb-item active">Danh sách sản phẩm</li>
@@ -22,9 +23,6 @@
     <div class="card mb-12">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-6 col-xs-12">
-                    <a class="btn btn-success" asp-action="Create" asp-controller="Product">Tạo mới</a>
-                </div>
                 <div class="col-md-6 col-xs-12">
                     <form asp-action="GetOrdersPaging" method="get">
                         <div class="row">
@@ -54,31 +52,27 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
+                    <thead>
+                        <tr>
                             <th>
-                                <a asp-action="ShowAllProductProp" style="color: black">Product Name</a>
+                                Tên
                             </th>
                             <th>
-                                Material
+                                Họ
                             </th>
                             <th>
-                                Size
+                                Số điện thoại
                             </th>
                             <th>
-                                Color
+                                Tài khoản
                             </th>
                             <th>
-                                Giá nhập
+                                Email
                             </th>
                             <th>
-                                Giá bán
+                                Ngày sinh
                             </th>
-                            <th>
-                                Số lượng tồn
-                            </th>
-
-                            <th>
-                                Action
-                            </th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,31 +80,27 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
+                                    @Html.DisplayFor(modelItem => item.FirstName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.MaterialName)
+                                    @Html.DisplayFor(modelItem => item.LastName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.SizeName)
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ColorName)
+                                    @Html.DisplayFor(modelItem => item.UserName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.OriginalPrice)
+                                    @Html.DisplayFor(modelItem => item.Email)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Price)
+                                    @Html.DisplayFor(modelItem => item.Dob)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Stock)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })||
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id })||
-
+                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                                 </td>
                             </tr>
                         }

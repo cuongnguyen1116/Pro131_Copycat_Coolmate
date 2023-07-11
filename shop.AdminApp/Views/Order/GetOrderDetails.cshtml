@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "GetOrderDetails";
-    decimal total = 0;
+decimal total = 0;
 }
 
 <h1 class="mt-4">Chi tiết đơn hàng</h1>
@@ -22,11 +22,11 @@
     <div class="card-body">
         <div class="row">
             @if (ViewBag.SuccessMsg != null)
-            {
-                <div id="msgAlert" class="alert alert-success" role="alert">
+        {
+            <div id="msgAlert" class="alert alert-success" role="alert">
                     @ViewBag.SuccessMsg
                 </div>
-            }
+        }
         </div>
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
@@ -51,8 +51,8 @@
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
-                    {
-                        <tr>
+                {
+                    <tr>
                             <td>
                                 <img src="" />
                             </td>
@@ -69,16 +69,16 @@
                                 @Html.DisplayFor(modelItem => item.SubTotal)
                             </td>
                         </tr>
-                    }
+                }
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="1">Total</td>
                         <td colspan="4" align="right" >
                             @foreach (var item in Model)
-                            {
-                                total += item.SubTotal;
-                            }
+                        {
+                            total += item.SubTotal;
+                        }
                             @total
                         </td>
                     </tr>

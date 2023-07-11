@@ -95,19 +95,39 @@
                     <h4>Danh sách cần làm</h4>
                     <p>Những việc bạn sẽ phải làm</p>
                 </div>
-                <div class="table" style="padding: 0px 200px">
-                    <table>
+                <div style="padding: 0px 200px">
+                    <table class="w-100 ">
                         <tr>
-                            <td>Chờ xác nhận: @Model.PendingOrderCount</td>
-                            <td>Chờ lấy hàng: @Model.AwaitingShipmentOrderCount</td>
-                            <td>Đã xử lý: @Model.AwaitingPickupOrderCount</td>
-                            <td>Đơn hủy: @Model.CancelledOrderCount</td>
+                            <td class="w-25" style="text-align: center">
+                                <p>Chờ xác nhận</p>
+                                <p style="color: #2673dd">@Model.PendingOrderCount</p>
+                            </td > 
+                            <td class="w-25" style="text-align: center">
+                                <p>Chờ lấy hàng</p>
+                                <p style="color: #2673dd">@Model.AwaitingShipmentOrderCount</p>
+                            </td>
+                            <td class="w-25" style="text-align: center">
+                                <p>Đã xử lý</p>
+                                <p style="color: #2673dd">@Model.AwaitingPickupOrderCount</p>
+                            </td>
+                            <td class="w-25" style="text-align: center">
+                                <p>Đơn hủy</p>
+                                <p style="color: #2673dd">@Model.CancelledOrderCount</p>
+                            </td>
                         </tr>
                         <tr>
                             @*<td>Trả hàng / Hoàn tiền chờ xử lý</td>*@
-                            <td>Sản phẩm bị tạm khóa</td>
-                            <td>Sản phẩm hết hàng: @Model.OutOfStockProductCount</td>
-                            <td>Sản phẩm ngừng bán</td>
+                            @*<td>Sản phẩm bị tạm khóa</td>*@
+                            <td class="w-25" style="text-align: center"></td>
+                            <td class="w-25" style="text-align: center">
+                                <p>Sản phẩm hết hàng</p>
+                                <p style="color: #2673dd">@Model.OutOfStockProductCount</p>
+                            </td>
+                            <td class="w-25" style="text-align: center">
+                                <p>Sản phẩm ngừng bán</p>
+                                <p style="color: #2673dd">@Model.StopSellingProductCount</p>
+                            </td>
+                            <td class="w-25" style="text-align: center"></td>
                             @*<td>Chương trình khuyến mãi chờ xử lý</td>*@
                         </tr>
                     </table>

@@ -1,10 +1,9 @@
 ﻿using shop.ViewModels.Common;
 
-namespace shop.ViewModels.Catalog.Categories
+namespace shop.ViewModels.Catalog.Categories;
+
+public class CategoryAssignRequest
 {
-    public class CategoryAssignRequest
-    {
-        public Guid Id { get; set; }
-        public List<SelectItem> Categories { get; set; } = new List<SelectItem>();
-    }
+    public Guid Id { get; set; }
+    public List<SelectItem> Categories { get; set; } = new List<SelectItem>();
 }

@@ -4,7 +4,7 @@
 
 @{
     ViewData["Title"] = "Order";
-    int count = 0;
+int count = 0;
 }
 
 @section Scripts{
@@ -65,11 +65,11 @@
         <div class="card-body">
             <div class="row">
                 @if (ViewBag.SuccessMsg != null)
-                {
-                    <div id="msgAlert" class="alert alert-success" role="alert">
+            {
+                <div id="msgAlert" class="alert alert-success" role="alert">
                         @ViewBag.SuccessMsg
                     </div>
-                }
+            }
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
@@ -85,13 +85,13 @@
                     </thead>
                     <tbody>
                         @foreach (var item in Model.Items)
-                        {
-                            @*<tr onclick="location.href='@Url.Action("GetOrderDetails", "Order", new { id = item.Id })'">*@
-                            <tr>
+                    {
+                        @*<tr onclick="location.href='@Url.Action("GetOrderDetails", "Order", new { id = item.Id })'">*@
+                        <tr>
                                 <td>
                                     @{
-                                        count++;
-                                    }
+                                    count++;
+                                }
                                     @count
                                 </td>
                                 <td>
@@ -108,29 +108,29 @@
                                 </td>
                                 <td>
                                     @if (item.Status == shop.Data.Enums.OrderStatus.Cancelled || item.Status == shop.Data.Enums.OrderStatus.Completed)
+                                {
+                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
+                                    @if (item.Status == shop.Data.Enums.OrderStatus.Pending)
                                     {
-                                        <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
+                                        <a class="btn btn-warning" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Xác nhận</a>
                                     }
-                                    else
+                                    else if (item.Status == shop.Data.Enums.OrderStatus.AwaitingShipment)
                                     {
-                                        <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
-                                        @if (item.Status == shop.Data.Enums.OrderStatus.Pending)
-                                        {
-                                            <a class="btn btn-warning" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Xác nhận</a>
-                                        }
-                                        else if (item.Status == shop.Data.Enums.OrderStatus.AwaitingShipment)
-                                        {
-                                            <a class="btn btn-info" href="@Url.Action("GetOrderToShipper", "Order", new {id = item.Id})">Đã gửi hàng</a>
-                                        }
-                                        else if (item.Status == shop.Data.Enums.OrderStatus.AWaitingPickup)
-                                        {
-                                            <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn thành</a>
-                                        }
-                                        <a class="btn btn-danger" href="@Url.Action("CancelOrder", "Order", new {id = item.Id})">Hủy</a>
+                                        <a class="btn btn-info" href="@Url.Action("GetOrderToShipper", "Order", new {id = item.Id})">Đã gửi hàng</a>
                                     }
+                                    else if (item.Status == shop.Data.Enums.OrderStatus.AWaitingPickup)
+                                    {
+                                        <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn thành</a>
+                                    }
+                                    <a class="btn btn-danger" href="@Url.Action("CancelOrder", "Order", new {id = item.Id})">Hủy</a>
+                                }
                                 </td>
                             </tr>
-                        }
+                    }
                     </tbody>
                 </table>
             </div>

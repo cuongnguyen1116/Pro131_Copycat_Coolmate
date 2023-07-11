@@ -1,9 +1,8 @@
 ﻿using shop.ViewModels.Catalog.Stats;
 
-namespace shop.ApiIntegration.Stats
+namespace shop.ApiIntegration.Stats;
+
+public interface IStatisticsApiClient
 {
-    public interface IStatisticsApiClient
-    {
-        Task<StatsVm> GetStatistics();
-    }
+    Task<StatsVm> GetStatistics();
 }

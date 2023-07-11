@@ -2,6 +2,7 @@ using shop.ApiIntegration.Categories;
 using shop.ApiIntegration.Orders;
 using shop.ApiIntegration.Products;
 using shop.ApiIntegration.Stats;
+using shop.ApiIntegration.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddTransient<IProductApiClient, ProductApiClient>();
 builder.Services.AddTransient<ICategoryApiClient, CategoryApiClient>();
 builder.Services.AddTransient<IOrderApiClient, OrderApiClient>();
 builder.Services.AddTransient<IStatisticsApiClient, StatisticApiClient>();
+builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

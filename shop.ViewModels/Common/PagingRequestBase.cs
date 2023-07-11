@@ -1,9 +1,8 @@
-﻿namespace shop.ViewModels.Common
-{
-    public class PagingRequestBase
-    {
-        public int PageIndex { get; set; }
+﻿namespace shop.ViewModels.Common;
 
-        public int PageSize { get; set; }
-    }
+public class PagingRequestBase
+{
+    public int PageIndex { get; set; }
+
+    public int PageSize { get; set; }
 }
