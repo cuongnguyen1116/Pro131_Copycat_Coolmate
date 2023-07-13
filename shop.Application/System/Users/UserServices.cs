@@ -2,10 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using shop.Data.Context;
 using shop.Data.Entities;
 using shop.Utilities.Exceptions;
 using shop.ViewModels.Common;
 using shop.ViewModels.System.Users;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -19,13 +21,15 @@ public class UserServices : IUserServices
     private readonly SignInManager<AppUser> _signInManager;
     private readonly RoleManager<AppRole> _roleManager;
     private readonly IConfiguration _config;
+    private readonly ShopDbContext _context;
 
-    public UserServices(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config)
+    public UserServices(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config, ShopDbContext context)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _roleManager = roleManager;
         _config = config;
+        _context = context;
     }
 
     public async Task<ApiResult<string>> Authencate(LoginRequest request)
@@ -45,7 +49,7 @@ public class UserServices : IUserServices
                 new Claim(ClaimTypes.GivenName,user.FirstName),
                 new Claim(ClaimTypes.Role, string.Join(";",roles)),
                 new Claim(ClaimTypes.Name, request.UserName)
-            };
+        };
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -90,22 +94,23 @@ public class UserServices : IUserServices
         return userVm;
     }
 
-    public async Task<PagedResult<UserVm>> GetUsersPaging(GetUserPagingRequest request)
+    public async Task<PagedResult<UserVm>> GetStaffPaging(GetUserPagingRequest request)
     {
         int totalRow;
 
-        var query = _userManager.Users;
-        
+        // var query = _userManager.Users;
+        var role = await _roleManager.FindByNameAsync("employee");
+        var users = await _userManager.GetUsersInRoleAsync(role.Name);
         if (!string.IsNullOrEmpty(request.Keyword))
         {
-            query = query.Where(x => x.UserName.Contains(request.Keyword) || x.PhoneNumber.Contains(request.Keyword));
-            totalRow = query.Count();
+            users =   users.Where(x => x.UserName.Contains(request.Keyword) || x.PhoneNumber.Contains(request.Keyword)).ToList();
+            totalRow = users.Count();
         }
 
         //3. Paging
         //int totalRow = await query.CountAsync();
-        totalRow = await query.CountAsync();
-        var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+        totalRow =  users.Count();
+        var data =  users.Skip((request.PageIndex - 1) * request.PageSize)
             .Take(request.PageSize)
             .Select(x => new UserVm()
             {
@@ -115,9 +120,9 @@ public class UserServices : IUserServices
                 FirstName = x.FirstName,
                 Id = x.Id,
                 LastName = x.LastName
-            }).ToListAsync();
+            });
 
-        
+
 
         //4. Select and projection
         var pagedResult = new PagedResult<UserVm>()
@@ -125,7 +130,7 @@ public class UserServices : IUserServices
             TotalRecords = totalRow,
             PageIndex = request.PageIndex,
             PageSize = request.PageSize,
-            Items = data
+            Items = data.ToList()
         };
         return pagedResult;
     }

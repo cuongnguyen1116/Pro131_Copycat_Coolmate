@@ -22,7 +22,7 @@ public class UserApiClient : BaseApiClient, IUserApiClient
 
     public async Task<PagedResult<UserVm>> GetUserPaging(GetUserPagingRequest request)
     {
-        string apiUrl = $"/api/Users/get-user-paging?KeyWord={request.Keyword}&PageIndex={request.PageIndex}&PageSize={request.PageSize}";
+        string apiUrl = $"/api/Users/get-staff-paging?KeyWord={request.Keyword}&PageIndex={request.PageIndex}&PageSize={request.PageSize}";
         var response = await _httpClient.GetAsync(apiUrl);
         response.EnsureSuccessStatusCode();
         string apiData = await response.Content.ReadAsStringAsync();

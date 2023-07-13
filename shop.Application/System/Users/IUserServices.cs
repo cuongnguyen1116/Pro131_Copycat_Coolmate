@@ -10,7 +10,7 @@ public interface IUserServices
     Task<ApiResult<bool>> Register(RegisterRequest request);
 
     Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request);
-    Task<PagedResult<UserVm>> GetUsersPaging(GetUserPagingRequest request);
+    Task<PagedResult<UserVm>> GetStaffPaging(GetUserPagingRequest request);
     Task<UserVm> GetById(Guid id);
     Task<ApiResult<bool>> Delete(Guid id);
 

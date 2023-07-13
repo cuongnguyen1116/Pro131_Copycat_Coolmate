@@ -16,10 +16,10 @@ public class UsersController : ControllerBase
        _userServices = userServices;
     }
 
-    [HttpGet("get-user-paging")]
+    [HttpGet("get-staff-paging")]
     public async Task<IActionResult> GetUserPaging([FromQuery] GetUserPagingRequest request)
     {
-        var result = await _userServices.GetUsersPaging(request);
+        var result = await _userServices.GetStaffPaging(request);
         return Ok(result);
     }
 

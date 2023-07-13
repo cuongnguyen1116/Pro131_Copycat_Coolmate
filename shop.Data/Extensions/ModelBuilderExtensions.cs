@@ -1127,18 +1127,21 @@ public static class ModelBuilderExtensions
             {
                 Id = roleId1,
                 Name = "admin",
+                NormalizedName = "ADMIN",
                 Description = "Administrator role"
             },
             new AppRole
             {
                 Id = roleId2,
                 Name = "employee",
+                NormalizedName="EMPLOYEE",
                 Description = "Employee role"
             },
             new AppRole
             {
                 Id = roleId3,
                 Name = "customer",
+                NormalizedName = "CUSTOMER",
                 Description = "Customer role"
             });
         #endregion
@@ -1173,6 +1176,7 @@ public static class ModelBuilderExtensions
             PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
             SecurityStamp = string.Empty,
             FirstName = "Cuong",
+            PhoneNumber = "0987654321",
             LastName = "Nguyen Phuc Minh",
             DoB = new DateTime(2003, 11, 16)
         };
@@ -1189,6 +1193,7 @@ public static class ModelBuilderExtensions
             SecurityStamp = string.Empty,
             FirstName = "Hoc",
             LastName = "Nguyen Kim",
+            PhoneNumber = "0987654321",
             DoB = new DateTime(2003, 07, 19)
         };
 
@@ -1203,6 +1208,7 @@ public static class ModelBuilderExtensions
             PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
             SecurityStamp = string.Empty,
             FirstName = "Hieu",
+            PhoneNumber = "0987654321",
             LastName = "Le Minh",
             DoB = new DateTime(2003, 03, 18)
         };
@@ -1219,6 +1225,7 @@ public static class ModelBuilderExtensions
             SecurityStamp = string.Empty,
             FirstName = "John",
             LastName = "Doe",
+            PhoneNumber = "0987654321",
             DoB = new DateTime(1990, 01, 01)
         };
 
@@ -1234,6 +1241,7 @@ public static class ModelBuilderExtensions
             SecurityStamp = string.Empty,
             FirstName = "Jane",
             LastName = "Doe",
+            PhoneNumber = "0987654321",
             DoB = new DateTime(1995, 05, 05)
         };
 
@@ -1249,6 +1257,7 @@ public static class ModelBuilderExtensions
             SecurityStamp = string.Empty,
             FirstName = "Bob",
             LastName = "Smith",
+            PhoneNumber = "0987654321",
             DoB = new DateTime(1998, 12, 31)
         };
 
@@ -1264,6 +1273,7 @@ public static class ModelBuilderExtensions
             SecurityStamp = string.Empty,
             FirstName = "Jennifer",
             LastName = "Smith",
+            PhoneNumber = "0987654321",
             DoB = new DateTime(1988, 10, 15)
         };
 
@@ -1278,6 +1288,7 @@ public static class ModelBuilderExtensions
             PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
             SecurityStamp = string.Empty,
             FirstName = "Billie",
+            PhoneNumber = "0987654321",
             LastName = "Jean",
             DoB = new DateTime(1988, 10, 15)
         };
@@ -1293,6 +1304,7 @@ public static class ModelBuilderExtensions
             PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
             SecurityStamp = string.Empty,
             FirstName = "Michael",
+            PhoneNumber = "0987654321",
             LastName = "Jackson",
             DoB = new DateTime(1988, 10, 15)
         };
@@ -1308,6 +1320,7 @@ public static class ModelBuilderExtensions
             PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
             SecurityStamp = string.Empty,
             FirstName = "Michael",
+            PhoneNumber = "0987654321",
             LastName = "Jackson",
             DoB = new DateTime(1988, 10, 15)
         };
@@ -1324,6 +1337,7 @@ public static class ModelBuilderExtensions
             SecurityStamp = string.Empty,
             FirstName = "Thúy",
             LastName = "Loan",
+            PhoneNumber = "0987654321",
             DoB = new DateTime(1988, 10, 15)
         };
 
@@ -1338,6 +1352,7 @@ public static class ModelBuilderExtensions
             PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
             SecurityStamp = string.Empty,
             FirstName = "Ariana",
+            PhoneNumber = "0987654321",
             LastName = "Grande",
             DoB = new DateTime(1988, 10, 15)
         };
@@ -1353,6 +1368,7 @@ public static class ModelBuilderExtensions
             PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
             SecurityStamp = string.Empty,
             FirstName = "Karla Camila",
+            PhoneNumber = "0987654321",
             LastName = " Cabello Estrabao",
             DoB = new DateTime(1988, 10, 15)
         };
@@ -1368,6 +1384,7 @@ public static class ModelBuilderExtensions
             PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
             SecurityStamp = string.Empty,
             FirstName = "Robyn",
+            PhoneNumber = "0987654321",
             LastName = "Fenty",
             DoB = new DateTime(1988, 10, 15)
         };
@@ -1382,6 +1399,7 @@ public static class ModelBuilderExtensions
             EmailConfirmed = true,
             PasswordHash = hasher.HashPassword(null, "@bc19xyZ"),
             SecurityStamp = string.Empty,
+            PhoneNumber = "0987654321",
             FirstName = "Aubrey",
             LastName = "Drake Graham",
             DoB = new DateTime(1988, 10, 15)
