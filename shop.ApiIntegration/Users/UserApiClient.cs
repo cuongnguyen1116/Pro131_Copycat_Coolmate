@@ -20,13 +20,13 @@ public class UserApiClient : BaseApiClient, IUserApiClient
         return null;
     }
 
-    public async Task<PagedResult<List<UserVm>>> GetUserPaging(GetUserPagingRequest request)
+    public async Task<PagedResult<UserVm>> GetUserPaging(GetUserPagingRequest request)
     {
         string apiUrl = $"/api/Users/get-user-paging?KeyWord={request.Keyword}&PageIndex={request.PageIndex}&PageSize={request.PageSize}";
         var response = await _httpClient.GetAsync(apiUrl);
         response.EnsureSuccessStatusCode();
         string apiData = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<PagedResult<List<UserVm>>>(apiData);
+        var result = JsonConvert.DeserializeObject<PagedResult<UserVm>>(apiData);
         return result;
     }
 

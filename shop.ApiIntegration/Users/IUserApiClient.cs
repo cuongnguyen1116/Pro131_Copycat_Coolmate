@@ -5,5 +5,5 @@ namespace shop.ApiIntegration.Users;
 
 public interface IUserApiClient
 {
-    Task<PagedResult<List<UserVm>>> GetUserPaging(GetUserPagingRequest request);
+    Task<PagedResult<UserVm>> GetUserPaging(GetUserPagingRequest request);
 }

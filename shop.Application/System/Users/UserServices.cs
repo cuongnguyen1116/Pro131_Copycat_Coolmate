@@ -7,6 +7,7 @@ using shop.Utilities.Exceptions;
 using shop.ViewModels.Common;
 using shop.ViewModels.System.Users;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -94,6 +95,7 @@ public class UserServices : IUserServices
         int totalRow;
 
         var query = _userManager.Users;
+        
         if (!string.IsNullOrEmpty(request.Keyword))
         {
             query = query.Where(x => x.UserName.Contains(request.Keyword) || x.PhoneNumber.Contains(request.Keyword));
@@ -102,7 +104,7 @@ public class UserServices : IUserServices
 
         //3. Paging
         //int totalRow = await query.CountAsync();
-
+        totalRow = await query.CountAsync();
         var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
             .Take(request.PageSize)
             .Select(x => new UserVm()
@@ -115,7 +117,7 @@ public class UserServices : IUserServices
                 LastName = x.LastName
             }).ToListAsync();
 
-        totalRow = data.Count;
+        
 
         //4. Select and projection
         var pagedResult = new PagedResult<UserVm>()
