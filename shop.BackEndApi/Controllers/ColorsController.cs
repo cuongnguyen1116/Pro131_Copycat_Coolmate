@@ -30,29 +30,29 @@ public class ColorsController : ControllerBase
         return Ok(color);
     }
 
-        [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] ColorCreateRequest request)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+    [HttpPost("create")]
+    public async Task<IActionResult> Create([FromBody] ColorCreateRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var result = await _colorServices.Create(request);
-            return Ok(result);
-        }
+        var result = await _colorServices.Create(request);
+        return Ok(result);
+    }
 
-        [HttpPut("update/{id}")]
-        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] ColorUpdateRequest request)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            var result = await _colorServices.Update(id, request);
-            return Ok(result);
+    [HttpPut("update/{id}")]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] ColorUpdateRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+        var result = await _colorServices.Update(id, request);
+        return Ok(result);
 
     }
 
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            var result = await _colorServices.Delete(id);
-            return Ok(result);
-        }
+    [HttpDelete("delete/{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var result = await _colorServices.Delete(id);
+        return Ok(result);
     }
 }
+

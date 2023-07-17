@@ -29,27 +29,27 @@ public class MaterialsController : ControllerBase
         return Ok(result);
     }
 
-        [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] MaterialCreateRequest request)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            var result = await _materialServices.Create(request);
-            return Ok(result);
-        }
+    [HttpPost("create")]
+    public async Task<IActionResult> Create([FromBody] MaterialCreateRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+        var result = await _materialServices.Create(request);
+        return Ok(result);
+    }
 
-        [HttpPut("update/{id}")]
-        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] MaterialUpdateRequest request)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            var result = await _materialServices.Update(id, request);
-            return Ok(result);
-        }
+    [HttpPut("update/{id}")]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] MaterialUpdateRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+        var result = await _materialServices.Update(id, request);
+        return Ok(result);
+    }
 
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            var result = await _materialServices.Delete(id);
-            return Ok(result);
-        }
+    [HttpDelete("delete/{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var result = await _materialServices.Delete(id);
+        return Ok(result);
     }
 }
+
