@@ -1,6 +1,9 @@
 using shop.ApiIntegration.Categories;
+using shop.ApiIntegration.Colors;
+using shop.ApiIntegration.Materials;
 using shop.ApiIntegration.Orders;
 using shop.ApiIntegration.Products;
+using shop.ApiIntegration.Sizes;
 using shop.ApiIntegration.Stats;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +16,9 @@ builder.Services.AddTransient<IProductApiClient, ProductApiClient>();
 builder.Services.AddTransient<ICategoryApiClient, CategoryApiClient>();
 builder.Services.AddTransient<IOrderApiClient, OrderApiClient>();
 builder.Services.AddTransient<IStatisticsApiClient, StatisticApiClient>();
+builder.Services.AddTransient<ISizesApiClient, SizesApiClient>();
+builder.Services.AddTransient<IMaterialApiClient, MaterialApiClient>();
+builder.Services.AddTransient<IColorApiClient, ColorApiClient>();
 
 var app = builder.Build();
 

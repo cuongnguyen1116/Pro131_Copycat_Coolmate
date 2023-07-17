@@ -29,23 +29,23 @@ namespace shop.BackEndApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(MaterialVm vm)
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] MaterialCreateRequest request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var result = await _materialServices.Create(vm);
+            var result = await _materialServices.Create(request);
             return Ok(result);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, MaterialVm vm)
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] MaterialUpdateRequest request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var result = await _materialServices.Update(id, vm);
+            var result = await _materialServices.Update(id, request);
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var result = await _materialServices.Delete(id);
