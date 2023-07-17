@@ -1,20 +1,19 @@
-﻿namespace shop.ViewModels.Common
+﻿namespace shop.ViewModels.Common;
+
+public class PagedResultBase
 {
-    public class PagedResultBase
+    public int PageIndex { get; set; }
+
+    public int PageSize { get; set; }
+
+    public int TotalRecords { get; set; }
+
+    public int PageCount
     {
-        public int PageIndex { get; set; }
-
-        public int PageSize { get; set; }
-
-        public int TotalRecords { get; set; }
-
-        public int PageCount
+        get
         {
-            get
-            {
-                var pageCount = (double)TotalRecords / PageSize;
-                return (int)Math.Ceiling(pageCount);
-            }
+            var pageCount = (double)TotalRecords / PageSize;
+            return (int)Math.Ceiling(pageCount);
         }
     }
 }

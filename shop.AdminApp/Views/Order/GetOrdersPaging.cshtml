@@ -1,0 +1,140 @@
+﻿@using shop.ViewModels.Common
+
+@model PagedResult<shop.ViewModels.Catalog.Orders.OrderVm>
+
+@{
+    ViewData["Title"] = "Order";
+int count = 0;
+}
+
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+        }, 2000);
+    </script>
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Danh sách đơn hàng</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Danh sách đơn hàng</li>
+    </ol>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order")">Tất cả</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order", new {status = 1})">Chờ xác nhận</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order", new {status = 2})">Chờ lấy hàng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order", new {status = 3})">Đang giao</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order", new {status = 4})">Hoàn thành</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("GetOrdersPaging","Order", new {status = 5})">Đã hủy</a>
+        </li>
+    </ul>
+
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <form asp-action="GetOrdersPaging" method="get">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary">Tìm</button>
+                                <button type="button" onclick="window.location.href='/Product/Index'" class="btn btn-dark">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                @if (ViewBag.SuccessMsg != null)
+            {
+                <div id="msgAlert" class="alert alert-success" role="alert">
+                        @ViewBag.SuccessMsg
+                    </div>
+            }
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Tên khách hàng</th>
+                            <th>Tổng đơn hàng</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                    {
+                        @*<tr onclick="location.href='@Url.Action("GetOrderDetails", "Order", new { id = item.Id })'">*@
+                        <tr>
+                                <td>
+                                    @{
+                                    count++;
+                                }
+                                    @count
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CustomerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Total)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    @if (item.Status == shop.Data.Enums.OrderStatus.Cancelled || item.Status == shop.Data.Enums.OrderStatus.Completed)
+                                {
+                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
+                                    @if (item.Status == shop.Data.Enums.OrderStatus.Pending)
+                                    {
+                                        <a class="btn btn-warning" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Xác nhận</a>
+                                    }
+                                    else if (item.Status == shop.Data.Enums.OrderStatus.AwaitingShipment)
+                                    {
+                                        <a class="btn btn-info" href="@Url.Action("GetOrderToShipper", "Order", new {id = item.Id})">Đã gửi hàng</a>
+                                    }
+                                    else if (item.Status == shop.Data.Enums.OrderStatus.AWaitingPickup)
+                                    {
+                                        <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn thành</a>
+                                    }
+                                    <a class="btn btn-danger" href="@Url.Action("CancelOrder", "Order", new {id = item.Id})">Hủy</a>
+                                }
+                                </td>
+                            </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+            @await Component.InvokeAsync("Pager",Model)
+        </div>
+    </div>
+</div>

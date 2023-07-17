@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace shop.ApiIntegration.Sizes
 {
-    public interface ISizesApiClient
-    {
-        Task<List<SizeVm>> GetAll();
+public interface ISizesApiClient
+{
+    Task<List<SizeVm>> GetAll();
 
-        Task<SizeVm> GetById(Guid id);
-    }
+    Task<SizeVm> GetById(Guid id);
+}
 }

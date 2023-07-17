@@ -1,14 +1,18 @@
-﻿using shop.ViewModels.System.Users;
+﻿using shop.ViewModels.Common;
+using shop.ViewModels.System.Users;
 
 namespace shop.Application.System.Users;
 
 public interface IUserServices
 {
-    Task<string> Authencate(LoginRequest request);
-    Task<bool> Register(RegisterRequest request);
-    Task<bool> Update(Guid id, UserUpdateRequest request);
-    Task<List<UserVm>> GetAll();
+    Task<ApiResult<string>> Authencate(LoginRequest request);
+
+    Task<ApiResult<bool>> Register(RegisterRequest request);
+
+    Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request);
+    Task<PagedResult<UserVm>> GetStaffPaging(GetUserPagingRequest request);
     Task<UserVm> GetById(Guid id);
-    Task<bool> Delete(Guid id);
-    Task<bool> RoleAssign(Guid id, RoleAssignRequest request);
+    Task<ApiResult<bool>> Delete(Guid id);
+
+    Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
 }

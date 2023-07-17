@@ -6,7 +6,7 @@ namespace shop.Application.Catalog.Products;
 
 public interface IProductServices
 {
-    Task<List<ProductVm>> GetAll(ProductPagingRequest request);
+    Task<PagedResult<ProductVm>> GetAll(ProductPagingRequest request);
     Task<ProductVm> GetById(Guid productdetailId);
     Task<bool> Create(ProductCreateRequest request);
     Task<bool> Update(ProductUpdateRequest request);
@@ -18,7 +18,7 @@ public interface IProductServices
     Task<bool> CreateProductProp(ProductPropVm request);
     Task<bool> UpdateProductProp(ProductPropVm request);
     Task<bool> DeleteProductProp(Guid productPropId);
-    Task<ApiResult<bool>> AddImages( ProductImageRequest request);
+    Task<ApiResult<bool>> AddImages(ProductImageRequest request);
     //Task<int> RemoveImages(Guid imageId);
     //Task<int> UpdateImages(Guid imageId, ProductImageRequest request);
 

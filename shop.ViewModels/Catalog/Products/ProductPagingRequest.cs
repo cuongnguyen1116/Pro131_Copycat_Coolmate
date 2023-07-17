@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using shop.ViewModels.Common;
 
-namespace shop.ViewModels.Catalog.Products
+namespace shop.ViewModels.Catalog.Products;
+
+public class ProductPagingRequest : PagingRequestBase
 {
-    public class ProductPagingRequest
-    {
-        public string? Keyword { get; set; }
-        
+    public string? Keyword { get; set; }
 
-        public Guid? CategoryId { get; set; }
-    }
+    public Guid? CategoryId { get; set; }
 }

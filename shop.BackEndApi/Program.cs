@@ -7,7 +7,7 @@ using shop.Application.Catalog.Orders;
 using shop.Application.Catalog.Products;
 using shop.Application.Catalog.Sizes;
 using shop.Application.Catalog.Stats;
-using shop.Application.Common;
+using shop.Application.Common.StoreFile;
 using shop.Application.System.Roles;
 using shop.Application.System.Users;
 using shop.Data.Context;
@@ -18,7 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-var connectionString = builder.Configuration.GetConnectionString(SystemConstants.MainConnectionString);
+var connectionString = builder.Configuration.GetConnectionString(SystemConstants.MainConnectionString); // "copycate_coolmatedb"
 
 builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ShopDbContext>().AddDefaultTokenProviders();
@@ -49,9 +49,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
 app.MapControllers();
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapControllerRoute(
+//        name: "default",
+//        pattern: "{controller=Home}/{action=Index}/{id?}");
+//});
 
 app.Run();

@@ -5,6 +5,7 @@ using shop.ApiIntegration.Orders;
 using shop.ApiIntegration.Products;
 using shop.ApiIntegration.Sizes;
 using shop.ApiIntegration.Stats;
+using shop.ApiIntegration.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +22,10 @@ builder.Services.AddTransient<IMaterialApiClient, MaterialApiClient>();
 builder.Services.AddTransient<IColorApiClient, ColorApiClient>();
 
 var app = builder.Build();
-
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

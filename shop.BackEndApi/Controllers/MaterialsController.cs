@@ -2,32 +2,32 @@
 using shop.Application.Catalog.Materials;
 using shop.ViewModels.Catalog.Materials;
 
-namespace shop.BackEndApi.Controllers
+namespace shop.BackEndApi.Controllers;
+
+[Route("/api/[controller]")]
+[ApiController]
+public class MaterialsController : ControllerBase
 {
-    [Route("/api/[controller]")]
-    [ApiController]
-    public class MaterialsController : ControllerBase
+    private readonly IMaterialServices _materialServices;
+
+    public MaterialsController(IMaterialServices materialServices)
     {
-        private readonly IMaterialServices _materialServices;
+        _materialServices = materialServices;
+    }
 
-        public MaterialsController(IMaterialServices materialServices)
-        {
-            _materialServices = materialServices;
-        }
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var result = await _materialServices.GetAll();
+        return Ok(result);
+    }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var result = await _materialServices.GetAll();
-            return Ok(result);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
-        {
-            var result = await _materialServices.GetById(id);
-            return Ok(result);
-        }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var result = await _materialServices.GetById(id);
+        return Ok(result);
+    }
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] MaterialCreateRequest request)

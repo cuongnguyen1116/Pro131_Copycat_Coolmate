@@ -22,4 +22,12 @@ public class SystemConstants
     {
         public const string NA = "N/A";
     }
+
+    public class GoogleDriveSettings
+    {
+        public const string CLIENT_ID = "626351511318-49okv64cm9jjrkpjqiopf1en5c4bjo84.apps.googleusercontent.com";
+        public const string CLIENT_SECRET = "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";
+        public const string REDIRECT_URI = "https://developers.google.com/oauthplayground";
+        public const string REFRESH_TOKEN = "";
+    }
 }

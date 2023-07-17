@@ -1,7 +1,6 @@
-﻿namespace shop.ViewModels.Catalog.Products
+﻿namespace shop.ViewModels.Catalog.Products;
+
+public class ProductDeleteRequest
 {
-    public class ProductDeleteRequest
-    {
-        public Guid? Id { get; set; }
-    }
+    public Guid? Id { get; set; }
 }

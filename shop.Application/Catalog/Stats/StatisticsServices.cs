@@ -1,41 +1,73 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using shop.Data.Context;
-using shop.ViewModels.Catalog.Stats;
 using shop.Data.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using shop.ViewModels.Catalog.Stats;
 
-namespace shop.Application.Catalog.Stats
+namespace shop.Application.Catalog.Stats;
+
+public class StatisticsServices : BaseServices, IStatisticsServices
 {
-    public class StatisticsServices : BaseServices, IStatisticsServices
+    public StatisticsServices(ShopDbContext context) : base(context)
     {
-        public StatisticsServices(ShopDbContext context) : base(context)
-        {
-        }
+    }
 
-        public async Task<StatsVm> GetStatistics()
-        {
-            var stats = await _context.Orders
-                .Where(x => x.OrderStatus == OrderStatus.Completed && x.CompletedDate >= DateTime.Now.AddDays(-30) && x.CompletedDate <= DateTime.Now)
-                .Select(x => new
-                {
-                    Order = x,
-                    OrderDetails = x.OrderDetails.Select(od => new
+    public async Task<StatsVm> GetStatistics()
+    {
+        var orders = await _context.Orders
+                    .GroupBy(o => o.OrderStatus)
+                    .Select(g => new
                     {
-                        od.Price,
-                        od.Quantity
+                        OrderStatus = g.Key,
+                        Count = g.Count()
                     })
-                })
-                .ToListAsync();
+                    .ToListAsync();
 
-            decimal revenue = stats.Sum(x => x.OrderDetails.Sum(od => od.Price * od.Quantity));
-            int count = stats.Count;
+        decimal revenue = await _context.Orders
+            .Where(o => o.OrderStatus == OrderStatus.Completed)
+            .SelectMany(o => o.OrderDetails)
+            .SumAsync(od => od.Price * od.Quantity);
 
-            return new StatsVm { Revenue = revenue, OrderCount = count };
+        var stopSellingProductCount = await _context.Products.Where(x => x.Status == Status.Inactive).CountAsync();
+
+        var outOfStockDictionary = CheckProductsOutOfStock(await _context.Products.Select(x => x.Id).ToListAsync());
+
+        int outOfStockProductCount = 0;
+
+        foreach (var item in outOfStockDictionary)
+        {
+            if (item.Value == true) outOfStockProductCount++;
         }
+
+        var statsVm = new StatsVm
+        {
+            StopSellingProductCount = stopSellingProductCount,
+            OutOfStockProductCount = outOfStockProductCount,
+            Revenue = revenue,
+            PendingOrderCount = orders.FirstOrDefault(s => s.OrderStatus == OrderStatus.Pending)?.Count ?? 0,
+            AwaitingShipmentOrderCount = orders.FirstOrDefault(s => s.OrderStatus == OrderStatus.AwaitingShipment)?.Count ?? 0,
+            AwaitingPickupOrderCount = orders.FirstOrDefault(s => s.OrderStatus == OrderStatus.AWaitingPickup)?.Count ?? 0,
+            CompletedOrderCount = orders.FirstOrDefault(s => s.OrderStatus == OrderStatus.Completed)?.Count ?? 0,
+            CancelledOrderCount = orders.FirstOrDefault(s => s.OrderStatus == OrderStatus.Cancelled)?.Count ?? 0
+        };
+
+        return statsVm;
+    }
+
+    public Dictionary<Guid, bool> CheckProductsOutOfStock(List<Guid> productIds)
+    {
+        var result = new Dictionary<Guid, bool>();
+
+        var groupedProductDetails = _context.ProductDetails
+            .AsEnumerable() // Chuyển sang thực thi trên client-side
+            .GroupBy(pd => pd.ProductId)
+            .ToDictionary(g => g.Key, g => g.Sum(pd => pd.Stock));
+
+        foreach (Guid productId in productIds)
+        {
+            bool isOutOfStock = !groupedProductDetails.ContainsKey(productId) || groupedProductDetails[productId] == 0;
+            result.Add(productId, isOutOfStock);
+        }
+
+        return result;
     }
 }

@@ -3,32 +3,32 @@ using shop.Application.Catalog.Colors;
 using shop.ViewModels.Catalog.Colors;
 using shop.ViewModels.Catalog.Materials;
 
-namespace shop.BackEndApi.Controllers
+namespace shop.BackEndApi.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class ColorsController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ColorsController : ControllerBase
+    private readonly IColorServices _colorServices;
+
+    public ColorsController(IColorServices colorServices)
     {
-        private readonly IColorServices _colorServices;
+        _colorServices = colorServices;
+    }
 
-        public ColorsController(IColorServices colorServices)
-        {
-            _colorServices = colorServices;
-        }
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var colors = await _colorServices.GetAll();
+        return Ok(colors);
+    }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var colors = await _colorServices.GetAll();
-            return Ok(colors);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
-        {
-            var color = await _colorServices.GetById(id);
-            return Ok(color);
-        }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var color = await _colorServices.GetById(id);
+        return Ok(color);
+    }
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] ColorCreateRequest request)
@@ -46,7 +46,7 @@ namespace shop.BackEndApi.Controllers
             var result = await _colorServices.Update(id, request);
             return Ok(result);
 
-        }
+    }
 
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete(Guid id)
