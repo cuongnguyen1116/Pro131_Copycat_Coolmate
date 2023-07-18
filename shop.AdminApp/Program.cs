@@ -19,6 +19,7 @@ builder.Services.AddTransient<IOrderApiClient, OrderApiClient>();
 builder.Services.AddTransient<IStatisticsApiClient, StatisticApiClient>();
 builder.Services.AddTransient<ISizesApiClient, SizesApiClient>();
 builder.Services.AddTransient<IMaterialApiClient, MaterialApiClient>();
+builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 builder.Services.AddTransient<IColorApiClient, ColorApiClient>();
 
 var app = builder.Build();
