@@ -11,6 +11,7 @@ public interface IUserServices
 
     Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request);
     Task<PagedResult<UserVm>> GetStaffPaging(GetUserPagingRequest request);
+    Task<PagedResult<UserVm>> GetCustomerPaging(GetUserPagingRequest request);
     Task<UserVm> GetById(Guid id);
     Task<ApiResult<bool>> Delete(Guid id);
 
