@@ -17,7 +17,6 @@ public class ShopDbContextFactory : IDesignTimeDbContextFactory<ShopDbContext>
 
         var optionsBuilder = new DbContextOptionsBuilder<ShopDbContext>();
         optionsBuilder.UseSqlServer(connectionString);
-
         return new ShopDbContext(optionsBuilder.Options);
     }
 }

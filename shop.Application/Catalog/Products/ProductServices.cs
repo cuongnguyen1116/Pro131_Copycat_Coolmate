@@ -17,6 +17,10 @@ public class ProductServices : IProductServices
     private readonly IStorageService _storageService;
     private const string USER_CONTENT_FOLDER_NAME = "user-content";
 
+    public ProductServices()
+    {
+    }
+
     public ProductServices(ShopDbContext context, IStorageService storageService)
     {
         _context = context;

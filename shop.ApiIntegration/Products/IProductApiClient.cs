@@ -15,6 +15,7 @@ public interface IProductApiClient
     Task<ProductVm> GetById(Guid productDetailId);
     Task<ProductPropVm> GetByIdProductProp(Guid productPropId);
     Task<PagedResult<ProductVm>> GetAll(ProductPagingRequest request);
+    Task<List<ProductVm>> GetAllByCustomer();
     Task<bool> CreateProductProp(ProductPropVm request);
     Task<bool> UpdateProductProp(ProductPropVm request);
     Task<bool> DeleteProductProp(ProductPropVm request);
