@@ -123,7 +123,6 @@ public class UserServices : IUserServices
             });
 
 
-
         //4. Select and projection
         var pagedResult = new PagedResult<UserVm>()
         {

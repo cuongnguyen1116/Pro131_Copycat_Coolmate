@@ -1,14 +1,25 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileSystemGlobbing;
+using OfficeOpenXml;
+using shop.Application.Common.StoreFile;
+using shop.Application.System.Users;
 using shop.Data.Context;
 using shop.Data.Enums;
 using shop.ViewModels.Catalog.Stats;
+using System.Data;
+using System.IO;
 
 namespace shop.Application.Catalog.Stats;
 
 public class StatisticsServices : BaseServices, IStatisticsServices
 {
-    public StatisticsServices(ShopDbContext context) : base(context)
+    private readonly IHostingEnvironment _hostingEnvironment;
+    public StatisticsServices(ShopDbContext context, IHostingEnvironment hostingEnvironment) : base(context)
     {
+        _hostingEnvironment = hostingEnvironment;
     }
 
     public async Task<StatsVm> GetStatistics()
@@ -70,4 +81,45 @@ public class StatisticsServices : BaseServices, IStatisticsServices
 
         return result;
     }
+    public DataTable GetData()
+    {
+        DataTable dt = new DataTable();
+        dt.TableName = "User";
+        dt.Columns.Add("Id",typeof(string));
+        dt.Columns.Add("FirstName", typeof(string));
+        dt.Columns.Add("LastName", typeof(string));
+        dt.Columns.Add("Email",typeof(string));
+        dt.Columns.Add("PhoneNumber",typeof(string));
+        dt.Columns.Add("Dob",typeof(string));
+        var users = _context.Users.ToList();
+        if (users.Count>0)
+        {
+            users.ForEach(item =>
+            {
+                dt.Rows.Add(item.Id, item.FirstName,item.LastName,item.Email,item.PhoneNumber,item.DoB);
+            });
+        }
+        return dt;
+
+    }
+    //public async Task<bool> ExportToExcel()
+    //{
+
+    //    var data = GetData();
+    //    using(XLWorkbook wb = new XLWorkbook())
+    //    {
+    //        var sheet1 = wb.AddWorksheet(data, "User");
+    //        using(MemoryStream ms = new MemoryStream())
+    //        {
+    //            wb.SaveAs(ms);
+    //            ms.Position = 0;
+    //            //File(ms.ToArray(),"application/vnd.openxmlformats-officedocument.spreadsheerml.sheet","User.xlsx");
+    //            File.WriteAllBytes("User.xlsx", ms.ToArray());
+    //            //return ms;
+    //        }
+    //    }
+    //    return true;
+        
+
+    //}
 }
