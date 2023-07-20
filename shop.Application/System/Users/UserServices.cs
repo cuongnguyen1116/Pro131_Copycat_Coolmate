@@ -135,6 +135,47 @@ public class UserServices : IUserServices
         return pagedResult;
     }
 
+    public async Task<PagedResult<UserVm>> GetCustomerPaging(GetUserPagingRequest request) 
+    {
+        int totalRow;
+
+        // var query = _userManager.Users;
+        var role = await _roleManager.FindByNameAsync("customer");
+        var users = await _userManager.GetUsersInRoleAsync(role.Name);
+        if (!string.IsNullOrEmpty(request.Keyword))
+        {
+            users = users.Where(x => x.UserName.Contains(request.Keyword) || x.PhoneNumber.Contains(request.Keyword)).ToList();
+            totalRow = users.Count();
+        }
+
+        //3. Paging
+        //int totalRow = await query.CountAsync();
+        totalRow = users.Count();
+        var data = users.Skip((request.PageIndex - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .Select(x => new UserVm()
+            {
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+                UserName = x.UserName,
+                FirstName = x.FirstName,
+                Id = x.Id,
+                LastName = x.LastName
+            });
+
+
+
+        //4. Select and projection
+        var pagedResult = new PagedResult<UserVm>()
+        {
+            TotalRecords = totalRow,
+            PageIndex = request.PageIndex,
+            PageSize = request.PageSize,
+            Items = data.ToList()
+        };
+        return pagedResult;
+    }
+
     public async Task<ApiResult<bool>> Register(RegisterRequest request)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);

@@ -23,6 +23,13 @@ public class UsersController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet("get-customer-paging")]
+    public async Task<IActionResult> GetCustomerPaging([FromQuery] GetUserPagingRequest request)
+    {
+        var result = await _userServices.GetCustomerPaging(request);
+        return Ok(result);
+    }
+
     [HttpGet("get-by-id/{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {

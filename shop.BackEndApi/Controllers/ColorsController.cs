@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Colors;
 using shop.ViewModels.Catalog.Colors;
+using shop.ViewModels.Catalog.Materials;
 
 namespace shop.BackEndApi.Controllers;
 
@@ -29,28 +30,29 @@ public class ColorsController : ControllerBase
         return Ok(color);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create(ColorVm vm)
+    [HttpPost("create")]
+    public async Task<IActionResult> Create([FromBody] ColorCreateRequest request)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        var result = await _colorServices.Create(vm);
+        var result = await _colorServices.Create(request);
         return Ok(result);
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, ColorVm vm)
+    [HttpPut("update/{id}")]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] ColorUpdateRequest request)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
-        var result = await _colorServices.Update(id, vm);
+        var result = await _colorServices.Update(id, request);
         return Ok(result);
 
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("delete/{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
         var result = await _colorServices.Delete(id);
         return Ok(result);
     }
 }
+
