@@ -32,6 +32,23 @@ public class UserController : Controller
         }
         return View(data);
     }
+
+    public async Task<IActionResult> GetCustomerPaging(string? keyword, int pageIndex = 1, int pageSize = 10)
+    {
+        var request = new GetUserPagingRequest
+        {
+            Keyword = keyword,
+            PageIndex = pageIndex,
+            PageSize = pageSize
+        };
+        var data = await _userApiClient.GetCustomerPaging(request);
+        ViewBag.KeyWord = keyword;
+        if (TempData["result"] != null)
+        {
+            ViewBag.SuccessMsg = TempData["result"];
+        }
+        return View(data);
+    }
     public async Task<IActionResult> ExportToExcel()
     {
         var excelexport = await _statisticsApiClient.ExportToExcel();
