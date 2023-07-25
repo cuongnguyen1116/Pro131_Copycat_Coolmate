@@ -15,12 +15,25 @@ namespace shop.CustomerApp.Controllers
         {
             _productApiClient = productApiClient;
         }
+
         [HttpGet]
-        public async Task<IActionResult> ShowAllProduct()
+        public async Task<IActionResult> ShowAllProduct(int index, int pagesize, string keyword)
         {
-            var data = await _productApiClient.GetListProductProp();
+            var resquest = new ProductPagingRequest()
+            {
+                PageIndex = index,
+                PageSize = pagesize,
+                Keyword = keyword
+            };
+            var data = await _productApiClient.GetAll(resquest);
             return View(data);
-            
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ShowProductDetail(Guid id)
+        {
+            var data = await _productApiClient.GetByIdProductProp(id);
+            return View(data);
         }
     }
 }

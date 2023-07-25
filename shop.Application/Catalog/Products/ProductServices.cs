@@ -37,7 +37,7 @@ public class ProductServices : IProductServices
                     join s in _context.Sizes on pd.SizeId equals s.Id
                     join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                     from pi in ppi.DefaultIfEmpty()
-                        //where pi.IsDefault == true
+                    where pi.IsDefault == true
                     select new { pd, p, c, m, s, pi };
         if (!string.IsNullOrEmpty(request.Keyword))
         {
@@ -137,7 +137,26 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return true;
     }
-
+    // ProductDetail 
+    public async Task<List<ProductDetailVm>> GetAllPD()
+    {
+        var list = (from a in _context.Products
+                   join b in _context.ProductDetails on a.Id equals b.ProductId
+                   join c in _context.Sizes on b.SizeId equals c.Id
+                   join d in _context.Colors on b.ColorId equals d.Id
+                   select new ProductDetailVm
+                   {
+                       Id = a.Id,
+                       Name = a.Name,
+                       Color = d.Name,
+                       Size = c.Name,
+                       Description = a.Description,
+                       Price = b.Price,
+                       Status = b.Status,
+                       //ThumbnailImage
+                   }).ToList();
+        return list;
+    }
     public async Task<ProductVm> GetById(Guid productdetailId)
     {
         var productdetail = await _context.ProductDetails.FindAsync(productdetailId);
@@ -207,7 +226,7 @@ public class ProductServices : IProductServices
 
     public async Task<List<ProductPropVm>> GetListProductProp()
     {
-        return await _context.Products
+        var lst = await _context.Products
                .Select(i => new ProductPropVm()
                {
                    Id = i.Id,
@@ -216,6 +235,8 @@ public class ProductServices : IProductServices
                    Status = i.Status
                }
            ).ToListAsync();
+
+        return lst;
     }
 
     public async Task<ProductPropVm> GetByIdProductProp(Guid productPropId)
@@ -237,7 +258,7 @@ public class ProductServices : IProductServices
                 Name = product.Name,
                 Description = product.Description,
                 Status = product.Status,
-                Categories = categories
+                Categories = categories,
             };
             return productProp;
         }
@@ -381,4 +402,6 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return new ApiSuccessResult<bool>($"Thêm ảnh có caption {productImage.Caption} thành công");
     }
+
+    
 }

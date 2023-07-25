@@ -6,7 +6,8 @@
     <title>@ViewData["Title"] - shop.CustomerApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/shop.CustomerApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/shop.CustomerApp.styles.css" asp-append-version="true" />*@
 </head>
 <body>
     @*    <header>
@@ -59,9 +60,9 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a asp-controller="Home" asp-action="Index" class="nav-item nav-link active">Home</a>
                         <a asp-controller="Product" asp-action="ShowAllProduct" class="nav-item nav-link">Products</a>
-                        <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
+                        <a asp-controller="Product" asp-action="ShowProductDetail" class="nav-item nav-link">Product Detail</a>
                         <a href="cart.html" class="nav-item nav-link">Cart</a>
                         <a href="checkout.html" class="nav-item nav-link">Checkout</a>
                         <a href="my-account.html" class="nav-item nav-link">My Account</a>

@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<shop.ViewModels.Catalog.Products.ProductPropVm>
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration;
 
-@{
-    ViewData["Title"] = "ShowAllProduct";
-}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +93,7 @@
                         @foreach (var item in Model)
                         {
                             <div class="card" style="width: 18rem; margin: 10px">
-                                <img src="..." class="card-img-top" alt="...">
+                                <img src="@(Configuration["BaseAddress"]+ item.ThumbnailImage)"></img>
                                 <div class="card-body">
                                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
                                     @*<p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>*@
@@ -102,12 +101,13 @@
                                 <div class="container_swap" style="margin-bottom:10px;width:110px">
 
                                     <div class="div_left">
-                                        <button type="button" class="btn btn-danger">Buy now</button>
+                                        <button class="btn btn-danger">Buy now</button>
 
                                     </div>
 
                                     <div class="div_right">
-                                        <button type="button" class="btn btn-danger">Chi tiết</button>
+                                        @Html.ActionLink("Detail", "ShowProductDetail", new {  Id=item.Id  })
+                                        @*<button class="btn btn-danger" onclick= "window.location.href='/Product/ShowProductDetail(item.Id)'">Chi tiết</button>*@
                                     </div>
 
                                 </div>
