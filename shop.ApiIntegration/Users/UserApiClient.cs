@@ -29,7 +29,15 @@ public class UserApiClient : BaseApiClient, IUserApiClient
         var result = JsonConvert.DeserializeObject<PagedResult<UserVm>>(apiData);
         return result;
     }
-
+    public async Task<PagedResult<UserVm>> GetCustomerPaging(GetUserPagingRequest request)
+    {
+        string apiUrl = $"/api/Users/get-customer-paging?KeyWord={request.Keyword}&PageIndex={request.PageIndex}&PageSize={request.PageSize}";
+        var response = await _httpClient.GetAsync(apiUrl);
+        response.EnsureSuccessStatusCode();
+        string apiData = await response.Content.ReadAsStringAsync();
+        var result = JsonConvert.DeserializeObject<PagedResult<UserVm>>(apiData);
+        return result;
+    }
     public async Task<UserVm> GetById(Guid id)
     {
         string apiUrl = $"/api/Users/get-by-id/{id}";

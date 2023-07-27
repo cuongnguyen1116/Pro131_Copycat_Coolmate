@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using shop.ApiIntegration.Sizes;
-
-namespace shop.AdminApp.Controllers;
+using shop.ViewModels.Catalog.Sizes;
+using System.Text;
 
 public class SizesController : Controller
 {

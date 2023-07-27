@@ -6,7 +6,7 @@ public interface IMaterialServices
 {
     Task<List<MaterialVm>> GetAll();
     Task<MaterialVm> GetById(Guid id);
-    Task<bool> Create(MaterialVm request);
-    Task<bool> Update(Guid id, MaterialVm request);
+    Task<bool> Create(MaterialCreateRequest request);
+    Task<bool> Update(Guid id, MaterialUpdateRequest request);
     Task<bool> Delete(Guid id);
 }

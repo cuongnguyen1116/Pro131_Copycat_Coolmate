@@ -6,4 +6,5 @@ public interface IStatisticsServices
 {
     Task<StatsVm> GetStatistics();
     Dictionary<Guid, bool> CheckProductsOutOfStock(List<Guid> productIds);
+    //Task<bool> ExportToExcel();
 }

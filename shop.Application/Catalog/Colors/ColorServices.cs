@@ -12,7 +12,7 @@ public class ColorServices : BaseServices, IColorServices
     {
     }
 
-    public async Task<bool> Create(ColorVm request)
+    public async Task<bool> Create(ColorCreateRequest request)
     {
         var existingColor = await _context.Colors.FirstOrDefaultAsync(x => x.Name.ToLower().Trim() == request.Name.ToLower().Trim());
         if (existingColor != null) throw new ShopException($"Color names '{request.Name}' đã tồn tại");
@@ -57,7 +57,7 @@ public class ColorServices : BaseServices, IColorServices
         };
     }
 
-    public async Task<bool> Update(Guid id, ColorVm request)
+    public async Task<bool> Update(Guid id, ColorUpdateRequest request)
     {
         var existingColor = await _context.Colors.FindAsync(id) ?? throw new ShopException($"Can not find color with id {id}");
         existingColor.Name = request.Name;
