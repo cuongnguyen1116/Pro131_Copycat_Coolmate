@@ -12,6 +12,31 @@
             $('#msgAlert').fadeOut('slow');
         }, 2000);
     </script>
+    <script>
+        $(function () {
+            $('#downloadButton').click(function () {
+                $.ajax({
+                    url: '@Url.Action("ExportToExcel", "ControllerName")',
+                    method: 'GET',
+                    xhrFields: {
+                        responseType: 'blob'
+                    },
+                    success: function (response) {
+                        var a = document.createElement('a');
+                        var url = window.URL.createObjectURL(response);
+                        a.href = url;
+                        a.download = 'User.xlsx';
+                        $('body').append(a);
+                        a.click();
+                        setTimeout(function () {
+                            $(a).remove();
+                            window.URL.revokeObjectURL(url);
+                        }, 0);
+                    }
+                });
+            });
+        });
+    </script>
 }
 
 <div class="container-fluid">
@@ -32,6 +57,9 @@
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary">Tìm</button>
                                 <button type="button" onclick="window.location.href='Order/GetOrdersPaging?pageIndex=1&status=6'" class="btn btn-dark">Reset</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" asp-action="ExportToExcel" asp-controller="User" download="User.xlsx" class="btn btn-primary">export</button>
                             </div>
                         </div>
                     </form>

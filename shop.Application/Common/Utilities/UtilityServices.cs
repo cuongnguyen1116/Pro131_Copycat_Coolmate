@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using shop.Data.Context;
+using shop.Data.Entities;
+using System.Text;
 
 namespace shop.Application.Common.Utilities;
 
@@ -22,4 +25,34 @@ public static class UtilityServices
 
         return dateString + randomString.ToString();
     }
+    //this method will create some random bullshit
+    public static string GenerateCode(int length)
+    {
+        Random random = new Random();
+        string Chars= "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+
+        StringBuilder randomString = new();
+
+        for (int i = 0; i < length; i++)
+        {
+            randomString.Append(Chars[random.Next(Chars.Length)]);
+        }
+        return randomString.ToString();
+    }
+    public static string GenerateUniqueCode(DbContext context, int length)
+    {
+        string uniqueCode;
+        bool existingPromotion;
+
+        do
+        {
+            uniqueCode = GenerateCode(length);
+            existingPromotion = context.Set<Promotion>().Any(p => p.PromotionCode.ToLower().Trim() == uniqueCode.ToLower());
+        }
+        while (existingPromotion);
+
+        return uniqueCode;
+    }
+
 }

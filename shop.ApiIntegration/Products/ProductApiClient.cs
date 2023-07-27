@@ -63,17 +63,6 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
 
         var requestContent = new MultipartFormDataContent();
 
-        //if (request.ThumbnailImage != null)
-        //{
-        //    byte[] data;
-        //    using (var br = new BinaryReader(request.ThumbnailImage.OpenReadStream()))
-        //    {
-        //        data = br.ReadBytes((int)request.ThumbnailImage.OpenReadStream().Length);
-        //    }
-        //    ByteArrayContent bytes = new ByteArrayContent(data);
-        //    requestContent.Add(bytes, "ThumbnailImage", request.ThumbnailImage.FileName);
-        //}
-
         requestContent.Add(new StringContent(request.Price.ToString()), "price");
         requestContent.Add(new StringContent(request.Stock.ToString()), "stock");
         requestContent.Add(new StringContent(request.Status.ToString()), "status");

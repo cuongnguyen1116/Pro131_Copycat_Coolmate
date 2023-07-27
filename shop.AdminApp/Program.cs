@@ -3,6 +3,7 @@ using shop.ApiIntegration.Colors;
 using shop.ApiIntegration.Materials;
 using shop.ApiIntegration.Orders;
 using shop.ApiIntegration.Products;
+using shop.ApiIntegration.Promotions;
 using shop.ApiIntegration.Sizes;
 using shop.ApiIntegration.Stats;
 using shop.ApiIntegration.Users;
@@ -21,6 +22,7 @@ builder.Services.AddTransient<ISizesApiClient, SizesApiClient>();
 builder.Services.AddTransient<IMaterialApiClient, MaterialApiClient>();
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 builder.Services.AddTransient<IColorApiClient, ColorApiClient>();
+builder.Services.AddTransient<IPromotionApiClient, PromotionApiClient>();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

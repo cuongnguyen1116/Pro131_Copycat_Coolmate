@@ -5,4 +5,5 @@ namespace shop.ApiIntegration.Stats;
 public interface IStatisticsApiClient
 {
     Task<StatsVm> GetStatistics();
+    public Task<bool> ExportToExcel();
 }

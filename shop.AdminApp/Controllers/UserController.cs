@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using shop.ApiIntegration.Stats;
 using shop.ApiIntegration.Users;
 using shop.ViewModels.System.Users;
 
@@ -7,10 +8,12 @@ namespace shop.AdminApp.Controllers;
 public class UserController : Controller
 {
     private readonly IUserApiClient _userApiClient;
+    private readonly IStatisticsApiClient _statisticsApiClient;
 
-    public UserController(IUserApiClient userApiClient)
+    public UserController(IUserApiClient userApiClient, IStatisticsApiClient statisticsApiClient)
     {
         _userApiClient = userApiClient;
+        _statisticsApiClient = statisticsApiClient;
     }
 
     public async Task<IActionResult> GetUserPaging(string? keyword, int pageIndex = 1, int pageSize = 10)
@@ -45,5 +48,11 @@ public class UserController : Controller
             ViewBag.SuccessMsg = TempData["result"];
         }
         return View(data);
+    }
+    public async Task<IActionResult> ExportToExcel()
+    {
+        var excelexport = await _statisticsApiClient.ExportToExcel();
+
+        return RedirectToAction("GetUserPaging");
     }
 }
