@@ -33,7 +33,7 @@ public class ProductServices : IProductServices
                     join s in _context.Sizes on pd.SizeId equals s.Id
                     join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                     from pi in ppi.DefaultIfEmpty()
-                        //where pi.IsDefault == true
+                        where pi.IsDefault == true
                     select new { pd, p, c, m, s, pi };
         if (!string.IsNullOrEmpty(request.Keyword))
         {

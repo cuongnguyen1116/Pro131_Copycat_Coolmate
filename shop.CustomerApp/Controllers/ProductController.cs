@@ -10,17 +10,18 @@ namespace shop.CustomerApp.Controllers
         private readonly IProductApiClient _productApiClient;
         private readonly ICategoryApiClient _categoryApiClient;
 
-        public ProductController(IProductApiClient productApiClient)
+        public ProductController(IProductApiClient productApiClient, ICategoryApiClient categoryApiClient)
         {
             _productApiClient = productApiClient;
+            _categoryApiClient = categoryApiClient;
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowAllProduct(int index, int pagesize, string keyword)
+        public async Task<IActionResult> ShowAllProduct(string? keyword, int pageindex = 1, int pagesize =10)
         {
             var resquest = new ProductPagingRequest()
             {
-                PageIndex = index,
+                PageIndex = pageindex,
                 PageSize = pagesize,
                 Keyword = keyword
             };
