@@ -6,19 +6,16 @@ using shop.ViewModels.Catalog.Materials;
 
 namespace shop.Application.Catalog.Materials;
 
-public class MaterialServices : IMaterialServices
+public class MaterialServices : BaseServices, IMaterialServices
 {
-    private readonly ShopDbContext _context;
-
-    public MaterialServices(ShopDbContext context)
+    public MaterialServices(ShopDbContext context) : base(context)
     {
-        _context = context;
     }
 
-    public Task<List<MaterialVm>> GetAll()
+    public async Task<List<MaterialVm>> GetAll()
     {
         var data = _context.Materials;
-        var list = data.Select(x => new MaterialVm
+        var list = await data.Select(x => new MaterialVm
         {
             Id = x.Id,
             Name = x.Name,
@@ -39,7 +36,7 @@ public class MaterialServices : IMaterialServices
         return material;
     }
 
-    public async Task<bool> Create(MaterialVm request)
+    public async Task<bool> Create(MaterialCreateRequest request)
     {
         var existingMaterial = await _context.Materials.FirstOrDefaultAsync(x => x.Name.ToLower().Trim() == request.Name.ToLower().Trim());
         if (existingMaterial != null) throw new ShopException($"Material names '{request.Name}' đã tồn tại");
@@ -56,7 +53,7 @@ public class MaterialServices : IMaterialServices
         return true;
     }
 
-    public async Task<bool> Update(Guid id, MaterialVm request)
+    public async Task<bool> Update(Guid id, MaterialUpdateRequest request)
     {
         var existingMaterial = await _context.Materials.FindAsync(id) ?? throw new ShopException($"Can not find material with id {id}");
         existingMaterial.Name = request.Name;

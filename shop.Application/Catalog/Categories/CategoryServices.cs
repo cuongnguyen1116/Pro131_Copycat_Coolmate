@@ -6,18 +6,15 @@ using shop.ViewModels.Catalog.Categories;
 
 namespace shop.Application.Catalog.Categories;
 
-public class CategoryServices : ICategoryServices
+public class CategoryServices : BaseServices, ICategoryServices
 {
-    private readonly ShopDbContext _context;
-
-    public CategoryServices(ShopDbContext context)
+    public CategoryServices(ShopDbContext context) : base(context)
     {
-        _context = context;
     }
 
     public async Task<bool> Create(CategoryVm vm)
     {
-        var existing = _context.Categories.FirstOrDefault(x=>x.Name.Trim().ToLower() == vm.Name.Trim().ToLower());
+        var existing = _context.Categories.FirstOrDefault(x => x.Name.Trim().ToLower() == vm.Name.Trim().ToLower());
         if (existing != null) throw new ShopException($"Đã tồn tại danh mục với tên {vm.Name}");
         var category = new Category
         {

@@ -8,7 +8,7 @@ public class CartDetailConfigurations : IEntityTypeConfiguration<CartDetail>
 {
     public void Configure(EntityTypeBuilder<CartDetail> builder)
     {
-       // builder.HasKey(x => x.Id);
+        // builder.HasKey(x => x.Id);
         builder.HasKey(x => new { x.ProductDetailId, x.UserId });
 
         builder.Property(x => x.Quantity).IsRequired();

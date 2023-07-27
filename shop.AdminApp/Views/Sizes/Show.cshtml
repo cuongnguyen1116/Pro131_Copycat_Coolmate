@@ -1,0 +1,59 @@
+﻿@model IEnumerable<shop.ViewModels.Catalog.Sizes.SizeVm>
+
+@{
+    ViewData["Title"] = "Show";
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+        }, 2000);
+    </script>
+}
+<div class="container-fluid">
+    <h1 class="mt-4">Danh sách kích cỡ</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">
+            Danh sách kích cỡ
+
+        </li>
+    </ol>
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th style="color:orangered">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+

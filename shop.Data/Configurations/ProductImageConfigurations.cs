@@ -14,6 +14,6 @@ public class ProductImageConfigurations : IEntityTypeConfiguration<ProductImage>
 
         builder.Property(x => x.Caption).HasMaxLength(128).IsRequired();
 
-        builder.HasOne(x => x.ProductDetail).WithMany(x => x.ProductImages).HasForeignKey(x => x.ProductDetailId);
+        builder.HasOne(x => x.Product).WithMany(x => x.ProductImages).HasForeignKey(x => x.ProductId);
     }
 }

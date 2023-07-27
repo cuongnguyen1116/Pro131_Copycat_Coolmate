@@ -1,0 +1,120 @@
+﻿@using shop.ViewModels.Common
+@model PagedResult<shop.ViewModels.Catalog.Promotions.PromotionVM>
+
+@{
+    ViewData["Title"] = "Show";
+    int count = 0;
+}
+
+
+<div class="container-fluid">
+    <h1 class="mt-4">Danh sách khuyến mãi</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Danh sách khuyến mãi</li>
+    </ol>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Show","Promotion")">Tất cả</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Show","Promotion", new {status = 1})">Dừng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Show","Promotion", new {status = 2})">Đang diễn ra</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Show","Promotion", new {status = 3})">Sắp diễn ra</a>
+        </li>
+    </ul>
+
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <form asp-action="ShowAll" method="get">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary">Tìm</button>
+                                <button type="button" onclick="window.location.href='/Promotion/Show'" class="btn btn-dark">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                @if (ViewBag.SuccessMsg != null)
+                {
+                    <div id="msgAlert" class="alert alert-success" role="alert">
+                        @ViewBag.SuccessMsg
+                    </div>
+                }
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã khuyến mãi</th>
+                            <th>Ngày bắt đầu</th>
+                            <th>Ngày kết thúc</th>
+                            <th>Giảm theo phần trăm</th>
+                            <th>Giảm theo giá tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                           
+                            <tr>
+                                <td>
+                                    @{
+                                        count++;
+                                    }
+                                    @count
+                                </td>                              
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PromotionCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StartDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FinishDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DiscountPercent)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DiscountAmount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                                    @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @await Component.InvokeAsync("Pager",Model)
+        </div>
+    </div>
+</div>
+
+
+
+
+

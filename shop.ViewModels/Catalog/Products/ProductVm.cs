@@ -1,9 +1,4 @@
 ﻿using shop.Data.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace shop.ViewModels.Catalog.Products;
 
@@ -20,7 +15,7 @@ public class ProductVm
     public string SizeName { set; get; }
     public string MaterialName { get; set; }
     public string ColorName { get; set; }
-    public Status Status  { get; set; }
-    
-    public List<string> Categories { get; set; } = new List<string>();
+    public Status Status { get; set; }
+    public List<string> Images { get; set; } = new List<string>();
+
 }
