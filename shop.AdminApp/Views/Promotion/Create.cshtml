@@ -3,6 +3,8 @@
 
 @{
     ViewData["Title"] = "Create";
+    string percent = ViewBag.DiscountPercent;
+    string number = ViewBag.DiscountAmount;
 }
 
 <h1>Create</h1>
@@ -14,23 +16,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label for="PromotionCode">Promotion Code</label>
-                <input type="text" class="form-control" id="PromotionCode" name="PromotionCode" value="@TempData["PromotionCode"]" />
+                <input type="text" class="form-control" id="PromotionCode" name="PromotionCode" />
             </div>
             <div class="form-group">
                 <label for="StartDate">Start Date</label>
-                <input type="date" class="form-control" id="StartDate" name="StartDate" value="@TempData["StartDate"]" />
+                <input type="date" class="form-control" id="StartDate" name="StartDate" />
             </div>
             <div class="form-group">
                 <label for="FinishDate">Finish Date</label>
-                <input type="date" class="form-control" id="FinishDate" name="FinishDate" value="@TempData["FinishDate"]" />
+                <input type="date" class="form-control" id="FinishDate" name="FinishDate" />
             </div>
             <div class="form-group">
                 <label for="DiscountPercent">Discount Percent</label>
-                <input type="number" class="form-control" id="DiscountPercent" name="DiscountPercent" value="@TempData["DiscountPercent"]" />
+                <input type="number" class="form-control" id="DiscountPercent" name="DiscountPercent" value="@percent" />
             </div>
             <div class="form-group">
                 <label for="DiscountAmount">Discount Amount</label>
-                <input type="number" class="form-control" id="DiscountAmount" name="DiscountAmount" value="@TempData["DiscountAmount"]" />
+                <input type="number" class="form-control" id="DiscountAmount" name="DiscountAmount" value="@number" />
             </div>
             <div class="form-group">
                 <label for="Status">Status</label>
@@ -49,7 +51,7 @@
 </div>
 
 <div>
-    <a asp-action="ShowAll">Back to List</a>
+    <a asp-action="Show">Back to List</a>
 </div>
 
 @section Scripts {

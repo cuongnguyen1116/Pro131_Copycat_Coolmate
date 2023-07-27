@@ -27,7 +27,7 @@ namespace shop.BackEndApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("promotion/{promotionId}")]
+        [HttpGet("{promotionId}")]
         public async Task<IActionResult> GetById(Guid promotionId)
         {
             var product = await _promotionService.GetById(promotionId);

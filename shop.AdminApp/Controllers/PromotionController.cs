@@ -40,17 +40,17 @@ namespace shop.AdminApp.Controllers
         {
             var promotion = await _promotionApiClient.GetById(id);
             // Lưu giá trị thuộc tính vào TempData để tái sử dụng ở trang tạo mới
-            TempData["StartDate"] = promotion.StartDate.ToString("yyyy-MM-dd");
-            TempData["FinishDate"] = promotion.FinishDate.ToString("yyyy-MM-dd");
+            
             TempData["DiscountPercent"] = promotion.DiscountPercent;
             TempData["DiscountAmount"] = promotion.DiscountAmount;
-            TempData["Status"] = promotion.Status;
 
             return View(promotion);
         }
 
         public async Task<IActionResult> Create()
         {
+            ViewBag.DiscountPercent = TempData["DiscountPercent"];
+            ViewBag.DiscountAmount = TempData["DiscountAmount"];
             return View();
         }
         [HttpPost]
@@ -60,6 +60,9 @@ namespace shop.AdminApp.Controllers
             {
                 return View(ModelState);
             }
+
+            ViewBag.DiscountPercent = TempData["DiscountPercent"];
+            ViewBag.DiscountAmount = TempData["DiscountAmount"];
             var result = await _promotionApiClient.CreatePromotion(collection);
             if (result)
             {
@@ -70,6 +73,7 @@ namespace shop.AdminApp.Controllers
             ModelState.AddModelError("", "Thêm mới thất bại");
             return View(collection);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
