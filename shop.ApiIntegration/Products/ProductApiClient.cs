@@ -269,4 +269,9 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
 
         return JsonConvert.DeserializeObject<ApiResult<bool>>(result);
     }
+
+    public Task<List<ProductVm>> GetAllByCustomer()
+    {
+        throw new NotImplementedException();
+    }
 }

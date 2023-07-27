@@ -32,6 +32,7 @@ public class ProductsController : ControllerBase
         return Ok(result);
     }
 
+
     [HttpGet("listPropductProp")]
     public async Task<IActionResult> GetListProductProp()
     {
@@ -160,12 +161,12 @@ public class ProductsController : ControllerBase
             return BadRequest(ModelState);
 
         var result = await _productServices.CategoryAssign(id, request);
-        if (result.IsSuccessed) 
+        if (result.IsSuccessed)
             return Ok(result);
 
         return BadRequest(result);
-        
-        
+
+
     }
 
     [HttpPost("create-image")]
@@ -177,9 +178,9 @@ public class ProductsController : ControllerBase
             return BadRequest(ModelState);
         }
         var productImage = await _productServices.AddImages(request);
-        if (productImage.IsSuccessed)   
+        if (productImage.IsSuccessed)
             return Ok(productImage);
         return BadRequest();
-          
+
     }
 }

@@ -1,5 +1,7 @@
+
 ﻿@using shop.ViewModels.Common;
 @model PagedResult<shop.ViewModels.Catalog.Products.ProductVm>
+
 @inject Microsoft.Extensions.Configuration.IConfiguration Configuration;
 
 
@@ -91,10 +93,12 @@
                             </div>
                         </div>
 
+
                         @foreach (var item in Model.Items)
                         {
                             <div class="card" style="width: 18rem; margin: 10px">
                                 <img src="@(Configuration["BaseAddress"]+ item.ThumbnailImage)">
+
                                 <div class="card-body">
                                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
                                     @*<p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>*@
@@ -114,12 +118,14 @@
                                 </div>
                             </div>
                         }
+
                         
 
                     </div>
 
                     <!-- Pagination Start -->
 @*                    <div class="col-md-12">
+
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
                                 <li class="page-item disabled">
@@ -133,7 +139,9 @@
                                 </li>
                             </ul>
                         </nav>
+
                     </div>*@
+
                     <!-- Pagination Start -->
                 </div>
 
@@ -277,7 +285,9 @@
             </div>
         </div>
     </div>
+
     @await Component.InvokeAsync("Pager",Model)
+
 
     <!-- Product List End -->
     <!-- Brand Start -->

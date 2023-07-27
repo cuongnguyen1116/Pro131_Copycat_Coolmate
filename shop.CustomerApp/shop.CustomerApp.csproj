@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\shop.ApiIntegration\shop.ApiIntegration.csproj" />
+
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,7 @@ namespace shop.CustomerApp.Controllers
     {
         private readonly IProductApiClient _productApiClient;
         private readonly ICategoryApiClient _categoryApiClient;
-
+        
         public ProductController(IProductApiClient productApiClient, ICategoryApiClient categoryApiClient)
         {
             _productApiClient = productApiClient;
@@ -22,6 +22,7 @@ namespace shop.CustomerApp.Controllers
             var resquest = new ProductPagingRequest()
             {
                 PageIndex = pageindex,
+
                 PageSize = pagesize,
                 Keyword = keyword
             };
