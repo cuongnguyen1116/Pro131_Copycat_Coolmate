@@ -23,7 +23,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6 col-xs-12">
-                    <a class="btn btn-success" asp-action="Create" asp-controller="Product">Tạo mới</a>
+                    <a class="btn btn-primary" asp-action="Create" asp-controller="Product">Tạo mới</a>
                 </div>
                 <div class="col-md-6 col-xs-12">
                     <form asp-action="Index" method="get">
@@ -55,16 +55,31 @@
                     <thead>
                         <tr>
                             <th>
-                                <a asp-action="ShowAllProductProp" style="color: black">Product Name</a>
+                                <a asp-action="ShowAllProductProp" style="color: black">
+                                    Product Name
+                                    <i class="fas fa-cog"></i>
+                                </a>
                             </th>
                             <th>
-                                Material
+                                <a asp-action="Show" asp-controller="Material" style="color: black">
+                                    Material
+                                    <i class="fas fa-cog"></i>
+                                </a>
                             </th>
                             <th>
-                                Size
+
+                                <a asp-action="Show" asp-controller="Sizes" style="color: black">
+                                    Size
+                                    <i class="fas fa-cog"></i>
+                                </a>
+
                             </th>
                             <th>
-                                Color
+                                <a asp-action="Show" asp-controller="Color" style="color: black">
+                                    Material
+                                    <i class="fas fa-cog"></i>
+                                </a>
+
                             </th>
                             <th>
                                 Giá nhập

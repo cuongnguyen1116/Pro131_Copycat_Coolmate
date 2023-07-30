@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using shop.ApiIntegration.Categories;
 using shop.ApiIntegration.Products;
@@ -18,7 +19,7 @@ public class ProductController : Controller
         _productApiClient = productApiClient;
         _categoryApiClient = categoryApiClient;
     }
-
+    [Authorize(Policy = "AdminOrManager")]
     public async Task<IActionResult> Index(string? keyword, int pageIndex = 1, int pageSize = 10)
     {
         var request = new ProductPagingRequest()
@@ -37,6 +38,7 @@ public class ProductController : Controller
     }
 
     [HttpGet]
+    [Authorize(Policy = "AdminOrManager")]
     public async Task<IActionResult> Details(Guid id)
     {
         var result = await _productApiClient.GetById(id);
@@ -62,6 +64,7 @@ public class ProductController : Controller
     }
 
     [HttpPost]
+    [Authorize(Policy = "admin")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> CreateImage([FromForm] ProductImageRequest request, Guid productid, string? keyword)
     {
@@ -89,7 +92,7 @@ public class ProductController : Controller
         return View(request);
 
     }
-
+    [Authorize(Policy = "AdminOrManager")]
     public async Task<IActionResult> Create(Guid productPropId, Guid sizeId, Guid colorId, Guid materialId)
     {
         var productprops = _productApiClient.GetListProductProp();
@@ -124,6 +127,7 @@ public class ProductController : Controller
     }
 
     [HttpPost]
+    [Authorize(Policy = "AdminOrManager")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> Create([FromForm] ProductCreateRequest request, Guid productPropId, Guid sizeId, Guid colorId, Guid materialId)
     {
@@ -169,12 +173,14 @@ public class ProductController : Controller
     }
 
     //Bảng  product
+    [Authorize(Policy = "AdminOrManager")]
     public IActionResult CreateProduct()
     {
         return View();
     }
 
     [HttpPost]
+    [Authorize(Policy = "AdminOrManager")]
     public async Task<IActionResult> CreateProduct(ProductPropVm request)
     {
         if (!ModelState.IsValid)
@@ -194,6 +200,7 @@ public class ProductController : Controller
 
     //Bảng  productdetail
     [HttpGet]
+    [Authorize(Policy = "admin")]
     public async Task<IActionResult> Edit(Guid id)
     {
         var product = await _productApiClient.GetById(id);
@@ -228,6 +235,7 @@ public class ProductController : Controller
 
     //Bảng  product
     [HttpGet]
+    [Authorize(Policy = "admin")]
     public async Task<IActionResult> EditProduct(Guid id)
     {
         var product = await _productApiClient.GetByIdProductProp(id);
@@ -236,6 +244,7 @@ public class ProductController : Controller
     }
 
     [HttpPost]
+    //[Authorize(Policy = "admin")]
     public async Task<IActionResult> EditProduct(ProductPropVm request)
     {
         if (!ModelState.IsValid)
@@ -253,6 +262,7 @@ public class ProductController : Controller
     }
 
     //Bảng  productdetail
+    [Authorize(Policy = "admin")]
     public async Task<IActionResult> Delete(ProductDeleteRequest request)
     {
         if (!ModelState.IsValid)
@@ -268,7 +278,7 @@ public class ProductController : Controller
         ModelState.AddModelError("", "Xóa không thành công");
         return View(request);
     }
-
+    [Authorize(Policy = "admin")]
     public async Task<IActionResult> DeleteProduct(ProductPropVm vm)
     {
         if (!ModelState.IsValid)
@@ -283,7 +293,7 @@ public class ProductController : Controller
         ModelState.AddModelError("", "Xóa không thành công");
         return View(vm);
     }
-
+   // [Authorize(Policy = "admin")]
     private async Task<CategoryAssignRequest> GetCategoryAssignRequest(Guid id)
     {
 
@@ -303,6 +313,7 @@ public class ProductController : Controller
     }
 
     [HttpGet]
+    [Authorize(Policy = "admin")]
     public async Task<IActionResult> CategoryAssign(Guid id)
     {
         var roleAssignRequest = await GetCategoryAssignRequest(id);
@@ -310,6 +321,7 @@ public class ProductController : Controller
     }
 
     [HttpPost]
+    [Authorize(Policy = "admin")]
     public async Task<IActionResult> CategoryAssign(CategoryAssignRequest request)
     {
         if (!ModelState.IsValid)
@@ -330,6 +342,7 @@ public class ProductController : Controller
     }
 
     //Bảng  product
+    [Authorize(Policy = "AdminOrManager")]
     public async Task<IActionResult> ShowAllProductProp(string keyword, Guid? categoryId)
     {
         var request = new ProductPagingRequest()
