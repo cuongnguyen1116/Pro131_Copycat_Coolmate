@@ -269,4 +269,24 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
 
         return JsonConvert.DeserializeObject<ApiResult<bool>>(result);
     }
+
+    public async Task<List<ProductVm>> GetFeaturedProducts(int take)
+    {
+        string apiURL = $"/api/Products/featured/{take}";
+        var response = await _httpClient.GetAsync(apiURL);
+        response.EnsureSuccessStatusCode();
+        string apiData = await response.Content.ReadAsStringAsync();
+        var result = JsonConvert.DeserializeObject<List<ProductVm>>(apiData);
+        return result;
+    }
+
+    public async Task<List<ProductVm>> GetRecentProducts(int take)
+    {
+        string apiURL = $"/api/Products/recent/{take}";
+        var response = await _httpClient.GetAsync(apiURL);
+        response.EnsureSuccessStatusCode();
+        string apiData = await response.Content.ReadAsStringAsync();
+        var result = JsonConvert.DeserializeObject<List<ProductVm>>(apiData);
+        return result;
+    }
 }

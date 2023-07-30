@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using shop.Application.Common.StoreFile;
 using shop.Data.Context;
@@ -33,7 +34,7 @@ public class ProductServices : IProductServices
                     join s in _context.Sizes on pd.SizeId equals s.Id
                     join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                     from pi in ppi.DefaultIfEmpty()
-                        where pi.IsDefault == true
+                    where pi.IsDefault == true
                     select new { pd, p, c, m, s, pi };
         if (!string.IsNullOrEmpty(request.Keyword))
         {
@@ -376,5 +377,65 @@ public class ProductServices : IProductServices
         _context.ProductImages.Add(productImage);
         await _context.SaveChangesAsync();
         return new ApiSuccessResult<bool>($"Thêm ảnh có caption {productImage.Caption} thành công");
+    }
+
+    public async Task<List<ProductVm>> GetFeaturedProducts(int take)
+    {
+        //1. Select join
+        var query = from p in _context.Products
+                    join pd in _context.ProductDetails on p.Id equals pd.ProductId
+                    join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+                    from pic in ppic.DefaultIfEmpty()
+                    join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
+                    from pi in ppi.DefaultIfEmpty()
+                    join c in _context.Categories on pic.CategoryId equals c.Id into picc
+                    from c in picc.DefaultIfEmpty()
+                    where (pi == null || pi.IsDefault == true) && pd.IsFeatured == true
+                    select new { p, pd, pic, pi };
+
+        var data = await query.OrderByDescending(x => x.pd.CreatedDate).Take(take)
+            .Select(x => new ProductVm()
+            {
+                Id = x.pd.Id,
+                Name = x.p.Name,
+                CreatedDate = x.pd.CreatedDate,
+                Description = x.p.Description,
+                OriginalPrice = x.pd.OriginalPrice,
+                Price = x.pd.Price,
+                Stock = x.pd.Stock,
+                ThumbnailImage = x.pi.ImagePath
+            }).ToListAsync();
+
+        return data;
+    }
+
+    public async Task<List<ProductVm>> GetRecentProducts(int take)
+    {
+        //1. Select join
+        var query = from p in _context.Products
+                    join pd in _context.ProductDetails on p.Id equals pd.ProductId
+                    join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+                    from pic in ppic.DefaultIfEmpty()
+                    join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
+                    from pi in ppi.DefaultIfEmpty()
+                    join c in _context.Categories on pic.CategoryId equals c.Id into picc
+                    from c in picc.DefaultIfEmpty()
+                    where (pi == null || pi.IsDefault == true)
+                    select new { p, pd, pic, pi };
+
+        var data = await query.OrderByDescending(x => x.pd.CreatedDate).Take(take)
+            .Select(x => new ProductVm()
+            {
+                Id = x.pd.Id,
+                Name = x.p.Name,
+                CreatedDate = x.pd.CreatedDate,
+                Description = x.p.Description,
+                OriginalPrice = x.pd.OriginalPrice,
+                Price = x.pd.Price,
+                Stock = x.pd.Stock,
+                ThumbnailImage = x.pi.ImagePath
+            }).ToListAsync();
+
+        return data;
     }
 }

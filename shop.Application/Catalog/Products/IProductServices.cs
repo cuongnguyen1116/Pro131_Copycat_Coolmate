@@ -21,5 +21,7 @@ public interface IProductServices
     Task<ApiResult<bool>> AddImages(ProductImageRequest request);
     //Task<int> RemoveImages(Guid imageId);
     //Task<int> UpdateImages(Guid imageId, ProductImageRequest request);
+    Task<List<ProductVm>> GetFeaturedProducts(int take);
+    Task<List<ProductVm>> GetRecentProducts(int take);
 
 }

@@ -13,6 +13,7 @@ public class ProductDetail
     public decimal Price { get; set; }
     public decimal OriginalPrice { get; set; }
     public DateTime CreatedDate { get; set; }
+    public bool? IsFeatured { get; set; }
     public Status Status { get; set; }
     public virtual Product Product { get; set; }
     public virtual Color Color { get; set; }

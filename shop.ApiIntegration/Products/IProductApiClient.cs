@@ -25,4 +25,7 @@ public interface IProductApiClient
     Task<List<ColorVm>> GetListColor();
     Task<List<SizeVm>> GetListSize();
     Task<ApiResult<bool>> CreateImage(ProductImageRequest request, Guid productdid);
+    Task<List<ProductVm>> GetFeaturedProducts(int take);
+
+    Task<List<ProductVm>> GetRecentProducts(int take);
 }
