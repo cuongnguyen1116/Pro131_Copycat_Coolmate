@@ -1,7 +1,9 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Office.CustomUI;
 using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Stats;
 using shop.Data.Context;
+using shop.Data.Enums;
 using System.Data;
 using System.Net;
 using System.Net.Http.Headers;
@@ -50,26 +52,57 @@ public class StatisticsController : ControllerBase
         return dt;
 
     }
-    [HttpGet("excelexport")]
-    public async Task<IActionResult> ExportToExcel()
+    [NonAction]
+    public DataTable GetDataFromTurnOver(int? selectedMonth)
     {
-        var data = GetData();
+
+        DataTable dt = new DataTable();
+        dt.TableName = "Doanh Thu";
+        dt.Columns.Add("Month", typeof(int));
+        dt.Columns.Add("Sum of turnover", typeof(decimal));
+
+        var turnover = _shopDbContext.Orders.Where(p => p.OrderStatus == OrderStatus.Completed && p.CompletedDate.Value.Month == selectedMonth)
+        .ToList();
+
+
+        if (turnover.Count > 0)
+        {
+            decimal totalAmount = 0;
+            foreach (var item in turnover)
+            {
+                totalAmount += item.Total;
+            }
+
+            turnover.ForEach(item =>
+            {
+                dt.Rows.Add(selectedMonth, totalAmount);
+            });
+
+        }
+        return dt;
+
+    }
+
+    [HttpGet("excelexport")]
+    public async Task<IActionResult> ExportToExcel(int? selectedDate)
+    {
+        var data = GetDataFromTurnOver(selectedDate);
         using (XLWorkbook wb = new XLWorkbook())
         {
-            var sheet1 = wb.AddWorksheet(data, "User");
+            var sheet1 = wb.AddWorksheet(data, "Doanh_Thu");
             using (MemoryStream ms = new MemoryStream())
             {
                 wb.SaveAs(ms);
                 var contentDisposition = new ContentDisposition
                 {
-                    FileName = "User.xlsx",
+                    FileName = "Doanh_Thu.xlsx",
                     Inline = false
                 };
                 Response.Headers.Add("Content-Disposition", contentDisposition.ToString());
                 return File(ms.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheerml.sheet");
-               
+
             }
         }
-       
+
     }
 }
