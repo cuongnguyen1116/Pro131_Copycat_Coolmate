@@ -6,9 +6,6 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     background: #f3f6ff;
-    margin: 0;
-    padding: 0;
-    height: 100%;
 }
 
 a {
@@ -2396,21 +2393,4 @@ h2 {
     .footer-bottom .template-by {
         text-align: center; 
     } 
-}
-
-
-.container_swap {
-    width: 400px;
-}
-
-.div_left {
-    width: 200px;
-    float: left;
-    text-align: center;
-}
-
-.div_right {
-    width: 200px;
-    float: left;
-    text-align: center;
 }
