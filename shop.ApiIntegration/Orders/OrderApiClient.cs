@@ -47,6 +47,16 @@ public class OrderApiClient : BaseApiClient, IOrderApiClient
         return result;
     }
 
+    public async Task<ApiResult<bool>> ConfirmAllOrder()
+    {
+        string apiUrl = "/api/orders/confirm-all-order";
+        var response = await _httpClient.GetAsync(apiUrl);
+        response.EnsureSuccessStatusCode();
+        string apiData = await response.Content.ReadAsStringAsync();
+        var result = JsonConvert.DeserializeObject<ApiResult<bool>>(apiData);
+        return result;
+    }
+
     public async Task<ApiResult<bool>> ConfirmOrder(Guid id)
     {
         string apiUrl = $"/api/orders/confirm-order/{id}";

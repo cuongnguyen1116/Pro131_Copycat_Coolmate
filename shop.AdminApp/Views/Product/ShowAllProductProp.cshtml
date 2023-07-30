@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "ShowAllProductProp";
-Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section Scripts{
@@ -48,11 +48,11 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         <div class="card-body">
             <div class="row">
                 @if (ViewBag.SuccessMsg != null)
-            {
-                <div id="msgAlert" class="alert alert-success" role="alert">
+                {
+                    <div id="msgAlert" class="alert alert-success" role="alert">
                         @ViewBag.SuccessMsg
                     </div>
-            }
+                }
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -74,8 +74,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
-                    {
-                        <tr>
+                        {
+                            <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
@@ -91,7 +91,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                                     @Html.ActionLink("CategoryAssign", "CategoryAssign", new { id = item.Id }) |
                                 </td>
                             </tr>
-                    }
+                        }
                     </tbody>
                 </table>
             </div>

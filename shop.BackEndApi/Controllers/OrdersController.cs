@@ -30,6 +30,14 @@ public class OrdersController : ControllerBase
         return Ok(list);
     }
 
+    [HttpGet("confirm-all-order")]
+    public async Task<IActionResult> ConfirmAllOrder()
+    {
+        var response = await _orderServices.ConfirmAllOrder();
+        if (response.IsSuccessed) return Ok(response);
+        return BadRequest(response.ResultObj);
+    }
+
     [HttpGet("confirm-order/{id}")]
     public async Task<IActionResult> ConfirmOrder(Guid id)
     {

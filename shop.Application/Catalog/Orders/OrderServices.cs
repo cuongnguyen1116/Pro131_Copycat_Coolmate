@@ -90,6 +90,21 @@ public class OrderServices : BaseServices, IOrderServices
         return data;
     }
 
+    // xác nhận cho tất cả các đơn hàng có trạng thái là pending (chờ)
+    public async Task<ApiResult<bool>> ConfirmAllOrder()
+    {
+        var listPendingOrders = _context.Orders.Where(x=>x.OrderStatus== OrderStatus.Pending).ToList();
+        foreach (var order in listPendingOrders)
+        {
+            order.CompletedDate = DateTime.Now;
+            order.OrderStatus = OrderStatus.AwaitingShipment;
+            _context.Orders.Update(order);
+        }
+        await _context.SaveChangesAsync();
+
+        return new ApiSuccessResult<bool>("Xác nhận thành công tất cả các đơn hàng chờ xác nhận");
+    }
+
     public async Task<ApiResult<bool>> ConfirmOrder(Guid id)
     {
         var existingOrder = await _context.Orders.FindAsync(id);

@@ -4,7 +4,7 @@
 
 @{
     ViewData["Title"] = "Order";
-int count = 0;
+
 }
 
 @section Scripts{
@@ -12,6 +12,53 @@ int count = 0;
         setTimeout(function () {
             $('#msgAlert').fadeOut('slow');
         }, 2000);
+
+        function getOrderDetails(orderId) {
+            // Gửi yêu cầu Ajax để lấy dữ liệu từ Controller
+            $.ajax({
+                type: "GET",
+                url: "/Order/GetOrderDetails",
+                data: { id: orderId },
+                success: function (data) {
+                    // Xử lý dữ liệu trả về
+                    updateSmallTable(data);
+                },
+                error: function (error) {
+                    console.error("Error fetching order details:", error);
+                }
+            });
+        }
+
+        function updateSmallTable(data) {
+            var tbody = $("#smalltable tbody");
+
+            // Xóa các dòng hiện tại trong bảng
+            tbody.empty();
+
+            // Kiểm tra xem dữ liệu có tồn tại và không rỗng
+            if (data && data.length > 0) {
+                // Duyệt qua từng phần tử trong mảng data và thêm vào bảng
+                data.forEach(function (item) {
+                    var row = "<tr>" +
+                        "<td>" + item.imagePath + "</td>" +
+                        "<td>" + item.productName + "</td>" +
+                        "<td>" + item.quantity + "</td>" +
+                        "<td>" + item.price + "</td>" +
+                        "<td>" + item.subTotal + "</td>" +
+                        "</tr>";
+                    tbody.append(row);
+                });
+            } else {
+                // Nếu data rỗng hoặc không tồn tại, có thể hiển thị thông báo hoặc xử lý khác tùy ý.
+                // Ví dụ:
+                var emptyRow = "<tr><td colspan='5'>Không có dữ liệu</td></tr>";
+                tbody.append(emptyRow);
+            }
+
+            // Hiển thị bảng
+            $(".expandable-body").removeClass("d-none");
+        }
+
     </script>
 }
 
@@ -46,18 +93,24 @@ int count = 0;
     <div class="card mb-12">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-6 col-xs-12">
-                    <form asp-action="GetOrdersPaging" method="get">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                <div class="col-md-6 ">
+                    <div>
+                        <form asp-action="GetOrdersPaging" method="get">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary">Tìm</button>
+                                    <button type="button" onclick="window.location.href='/Order/GetOrdersPaging'" class="btn btn-dark">Reset</button>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary">Tìm</button>
-                                <button type="button" onclick="window.location.href='/Product/Index'" class="btn btn-dark">Reset</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                    <div class="col-md-4" style="margin-top: 10px">
+                        <a class="btn btn-info" asp-action="ConfirmAllOrder" asp-controller="Order">Xác nhận tất cả đơn hàng</a>
+                        <button class="btn btn-info" id="process-selected-orders">Xử lý các đơn hàng được chọn</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,17 +118,21 @@ int count = 0;
         <div class="card-body">
             <div class="row">
                 @if (ViewBag.SuccessMsg != null)
-            {
-                <div id="msgAlert" class="alert alert-success" role="alert">
+                {
+                    <div id="msgAlert" class="alert alert-success" role="alert">
                         @ViewBag.SuccessMsg
                     </div>
-            }
+                }
+            </div>
+            <div class="row">
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>STT</th>
+                            <th>
+                                <input type="checkbox" id="check-all-checkbox" onclick="checkAll()" />
+                            </th>
                             <th>Mã đơn hàng</th>
                             <th>Tên khách hàng</th>
                             <th>Tổng đơn hàng</th>
@@ -85,14 +142,11 @@ int count = 0;
                     </thead>
                     <tbody>
                         @foreach (var item in Model.Items)
-                    {
-                        @*<tr onclick="location.href='@Url.Action("GetOrderDetails", "Order", new { id = item.Id })'">*@
-                        <tr>
+                        {
+                            @*<tr onclick="location.href='@Url.Action("GetOrderDetails", "Order", new { id = item.Id })'">*@
+                            <tr data-widget="expandable-table" aria-expanded="false" onclick="getOrderDetails('@item.Id')">
                                 <td>
-                                    @{
-                                    count++;
-                                }
-                                    @count
+                                    <input type="checkbox" class="order-checkbox" data-id="@item.Id" />
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.OrderCode)
@@ -107,30 +161,44 @@ int count = 0;
                                     @Html.DisplayFor(modelItem => item.Status)
                                 </td>
                                 <td>
-                                    @if (item.Status == shop.Data.Enums.OrderStatus.Cancelled || item.Status == shop.Data.Enums.OrderStatus.Completed)
-                                {
-                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
-                                }
-                                else
-                                {
-                                    <a class="btn btn-primary" href="@Url.Action("GetOrderDetails", "Order", new {id = item.Id})">Chi tiết</a>
                                     @if (item.Status == shop.Data.Enums.OrderStatus.Pending)
                                     {
-                                        <a class="btn btn-warning" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})">Xác nhận</a>
+                                        <a class="btn btn-warning" href="@Url.Action("ConfirmOrder", "Order", new {id = item.Id})" onclick="event.stopPropagation();">Xác nhận</a>
                                     }
                                     else if (item.Status == shop.Data.Enums.OrderStatus.AwaitingShipment)
                                     {
-                                        <a class="btn btn-info" href="@Url.Action("GetOrderToShipper", "Order", new {id = item.Id})">Đã gửi hàng</a>
+                                        <a class="btn btn-info" href="@Url.Action("GetOrderToShipper", "Order", new {id = item.Id})" onclick="event.stopPropagation();">Đã gửi hàng</a>
                                     }
                                     else if (item.Status == shop.Data.Enums.OrderStatus.AWaitingPickup)
                                     {
-                                        <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})">Hoàn thành</a>
+                                        <a class="btn btn-success" href="@Url.Action("CompleteOrder", "Order", new {id = item.Id})" onclick="event.stopPropagation();">Hoàn thành</a>
                                     }
-                                    <a class="btn btn-danger" href="@Url.Action("CancelOrder", "Order", new {id = item.Id})">Hủy</a>
-                                }
+                                    @if(item.Status != shop.Data.Enums.OrderStatus.Cancelled)
+                                    {
+                                        <a class="btn btn-danger" href="@Url.Action("CancelOrder", "Order", new {id = item.Id})" onclick="event.stopPropagation();">Hủy</a>
+                                    }
+
                                 </td>
                             </tr>
-                    }
+                            <tr class="expandable-body d-none">
+                                <td colspan="6">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover" id="smalltable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Hình ảnh</th>
+                                                    <th>Product Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                    <th>SubTotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -138,3 +206,43 @@ int count = 0;
         </div>
     </div>
 </div>
+
+<script>
+    // Hàm xử lý sự kiện khi checkbox đầu tiên được chọn
+    function checkAll() {
+        var checkboxes = document.getElementsByClassName('order-checkbox');
+        var checkAllCheckbox = document.getElementById('check-all-checkbox');
+
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = checkAllCheckbox.checked;
+        }
+    }
+
+    // Gửi id của những order được checkbox == true về controller
+    $(document).ready(function () {
+        // Gán sự kiện click cho nút xử lý đơn hàng được chọn
+        $("#process-selected-orders").click(function () {
+            // Lấy danh sách các đơn hàng được chọn
+            var selectedOrderIds = [];
+            $(".order-checkbox:checked").each(function () {
+                selectedOrderIds.push($(this).data("id"));
+            });
+
+            // Gửi yêu cầu Ajax lên server
+            $.ajax({
+                type: "POST",
+                url: "/Order/ProcessSelectedOrders",
+                data: { orderIds: selectedOrderIds },
+                success: function (data) {
+                    // Xử lý kết quả trả về nếu cần
+                    // ...
+                },
+                error: function (error) {
+                    // Xử lý lỗi nếu có
+                    // ...
+                }
+            });
+        });
+    });
+
+</script>

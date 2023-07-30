@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿
+using Microsoft.Extensions.Http;
+using Microsoft.Extensions.Configuration;
 using shop.Utilities.Constants;
 
 namespace shop.ApiIntegration;

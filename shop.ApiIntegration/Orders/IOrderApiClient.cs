@@ -9,6 +9,7 @@ public interface IOrderApiClient
     Task<PagedResult<OrderVm>> GetOrdersPaging(OrderPagingRequest request);
     Task<List<OrderVm>> GetOrdersByStatus(OrderStatus status);
     Task<List<OrderDetailVm>> GetOrderDetails(Guid id);
+    Task<ApiResult<bool>> ConfirmAllOrder();
     Task<ApiResult<bool>> ConfirmOrder(Guid id);
     Task<ApiResult<bool>> GetOrderToShipper(Guid id);
     Task<ApiResult<bool>> CompleteOrder(Guid id);

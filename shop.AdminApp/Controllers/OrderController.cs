@@ -7,6 +7,7 @@ namespace shop.AdminApp.Controllers;
 
 public class OrderController : Controller
 {
+    private static List<Guid> selectedOrderIds = new();
     private readonly IOrderApiClient _orderApiClient;
 
     public OrderController(IOrderApiClient orderApiClient)
@@ -35,8 +36,36 @@ public class OrderController : Controller
 
     public async Task<IActionResult> GetOrderDetails(Guid id)
     {
-        var data = await _orderApiClient.GetOrderDetails(id);
-        return View(data);
+        List<OrderDetailVm> orderDetails = await _orderApiClient.GetOrderDetails(id);
+        // Lấy dữ liệu của orderDetails từ nguồn nào đó, ví dụ như database
+
+        // Trả về dữ liệu dạng JSON
+        return new JsonResult(orderDetails);
+    }
+
+    //public async Task<IActionResult> GetOrderDetails(Guid id)
+    //{
+    //    var data = await _orderApiClient.GetOrderDetails(id);
+    //    return View(data);
+    //}
+
+    [HttpPost]
+    public async Task<IActionResult> ProcessSelectedOrders(List<Guid> orderIds)
+    {
+        selectedOrderIds = orderIds;
+        return View();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ConfirmAllOrder()
+    {
+        var response = await _orderApiClient.ConfirmAllOrder();
+        if (response.IsSuccessed)
+        {
+            TempData["result"] = response.Message;
+            return RedirectToAction("GetOrdersPaging", "Order");
+        }
+        return View();
     }
 
     public async Task<IActionResult> ConfirmOrder(Guid id)
