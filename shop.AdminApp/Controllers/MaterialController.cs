@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using shop.ApiIntegration.Materials;
 using shop.ViewModels.Catalog.Materials;
 using shop.ViewModels.Catalog.Products;
 
 namespace shop.AdminApp.Controllers
 {
+    [Authorize(Policy = "admin")]
     public class MaterialController : Controller
     {
         private readonly IMaterialApiClient _materialApiClient;

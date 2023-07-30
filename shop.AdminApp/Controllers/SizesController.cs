@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using shop.ApiIntegration.Sizes;
 using shop.ViewModels.Catalog.Sizes;
 using System.Text;
 
+[Authorize(Policy = "admin")]
 public class SizesController : Controller
 {
     readonly ISizesApiClient _sizeApiClient;

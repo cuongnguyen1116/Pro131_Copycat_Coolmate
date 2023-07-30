@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using shop.Application.Catalog.Categories;
 using shop.Application.Catalog.Colors;
 using shop.Application.Catalog.Materials;
@@ -13,16 +16,20 @@ using shop.Application.System.Roles;
 using shop.Application.System.Users;
 using shop.Data.Context;
 using shop.Data.Entities;
+using System.Text;
 using shop.Utilities.Constants;
+using Microsoft.IdentityModel.Tokens;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 
 var builder = WebApplication.CreateBuilder(args);
-
+ConfigurationManager configuration = builder.Configuration;
 // Add services to the container.
 
 var connectionString = builder.Configuration.GetConnectionString(SystemConstants.MainConnectionString); // "copycate_coolmatedb"
 
 builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ShopDbContext>().AddDefaultTokenProviders();
+
 
 builder.Services.AddTransient<IColorServices, ColorServices>();
 builder.Services.AddTransient<IMaterialServices, MaterialServices>();
@@ -39,7 +46,64 @@ builder.Services.AddTransient<IPromotionService, PromotionService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Shop", Version = "v1" });
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n
+                      Enter 'Bearer' [space] and then your token in the text input below.
+                      \r\n\r\nExample: 'Bearer 12345abcdef'",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+      {
+       {
+           new OpenApiSecurityScheme
+              {
+                 Reference = new OpenApiReference
+                 {
+                      Type = ReferenceType.SecurityScheme,
+                         Id = "Bearer"
+                 },
+                 Scheme = "oauth2",
+                 Name = "Bearer",
+                 In = ParameterLocation.Header,
+               },
+              new List<string>()
+                }
+            });
+});
+string issuer = configuration["Tokens:Issuer"];
+string signingKey = configuration["Tokens:Key"];
+byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes(signingKey);
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidIssuer = issuer,
+        ValidateAudience = true,
+        ValidAudience = issuer,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ClockSkew = System.TimeSpan.Zero,
+        IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
+    };
+});
+
 
 var app = builder.Build();
 
@@ -47,7 +111,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Shop V1");
+    });
 }
 
 app.UseHttpsRedirection();

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using shop.AdminApp.Models;
 using shop.ApiIntegration.Stats;
 using System.Diagnostics;
 
 namespace shop.AdminApp.Controllers;
 
+[Authorize(Policy = "AdminOrManager")]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -19,6 +21,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var data = await _statisticsApiClient.GetStatistics();
+        var user = User.Identity.Name;
         return View(data);
     }
 
