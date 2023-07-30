@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using shop.ApiIntegration.Colors;
 using shop.ViewModels.Catalog.Colors;
 
 namespace shop.AdminApp.Controllers
 {
+    [Authorize(Policy = "admin")]
     public class ColorController : Controller
     {
         private readonly IColorApiClient _ColorApiClient;

@@ -12,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using ZXing;
 
 namespace shop.Application.System.Users;
 
@@ -118,6 +119,7 @@ public class UserServices : IUserServices
                 PhoneNumber = x.PhoneNumber,
                 UserName = x.UserName,
                 FirstName = x.FirstName,
+                Dob = x.DoB,
                 Id = x.Id,
                 LastName = x.LastName
             });
@@ -158,6 +160,7 @@ public class UserServices : IUserServices
                 PhoneNumber = x.PhoneNumber,
                 UserName = x.UserName,
                 FirstName = x.FirstName,
+                Dob= x.DoB,
                 Id = x.Id,
                 LastName = x.LastName
             });
@@ -175,7 +178,7 @@ public class UserServices : IUserServices
         return pagedResult;
     }
 
-    public async Task<ApiResult<bool>> Register(RegisterRequest request)
+    public async Task<ApiResult<bool>> RegisterEmployee(RegisterRequest request)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
         if (user != null)
@@ -197,8 +200,10 @@ public class UserServices : IUserServices
             PhoneNumber = request.PhoneNumber
         };
         var result = await _userManager.CreateAsync(user, request.Password);
+        //var role = _config["Role"];
         if (result.Succeeded)
         {
+            await _userManager.AddToRoleAsync(user, "employee");
             return new ApiSuccessResult<bool>("Đăng ký thành công");
         }
         return new ApiErrorResult<bool>("Đăng ký không thành công");
@@ -249,8 +254,46 @@ public class UserServices : IUserServices
         var result = await _userManager.UpdateAsync(user);
         if (result.Succeeded)
         {
-            return new ApiSuccessResult<bool>($"Cập nhật user có id {id} thành công");
+            return new ApiSuccessResult<bool>($"Xóa user có id {id} thành công");
         }
         return new ApiErrorResult<bool>("Cập nhật không thành công");
+    }
+
+    public async Task<ApiResult<bool>> RegisterCustomer(RegisterRequest request)
+    {
+        var user = await _userManager.FindByNameAsync(request.UserName);
+        if (user != null)
+        {
+            return new ApiErrorResult<bool>("Tài khoản đã tồn tại");
+        }
+        if (await _userManager.FindByEmailAsync(request.Email) != null)
+        {
+            return new ApiErrorResult<bool>("Emai đã tồn tại");
+        }
+
+        user = new AppUser()
+        {
+            DoB = request.Dob,
+            Email = request.Email,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            UserName = request.UserName,
+            PhoneNumber = request.PhoneNumber
+        };
+        var result = await _userManager.CreateAsync(user, request.Password);
+        
+        if (result.Succeeded)
+        {
+
+            await _userManager.AddToRoleAsync(user, "customer");
+            var giohang = new Cart()
+            {
+                UserId = user.Id,
+                Description = user.UserName
+            };
+             _context.Carts.Add(giohang);
+            return new ApiSuccessResult<bool>("Đăng ký thành công");
+        }
+        return new ApiErrorResult<bool>("Đăng ký không thành công");
     }
 }

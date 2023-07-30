@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using shop.ApiIntegration.Orders;
 using shop.Data.Enums;
 using shop.ViewModels.Catalog.Orders;
 
 namespace shop.AdminApp.Controllers;
 
+[Authorize(Policy = "AdminOrManager")]
 public class OrderController : Controller
 {
     private static List<Guid> selectedOrderIds = new();

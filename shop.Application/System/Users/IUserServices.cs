@@ -7,7 +7,8 @@ public interface IUserServices
 {
     Task<ApiResult<string>> Authencate(LoginRequest request);
 
-    Task<ApiResult<bool>> Register(RegisterRequest request);
+    Task<ApiResult<bool>> RegisterEmployee(RegisterRequest request);
+    Task<ApiResult<bool>> RegisterCustomer(RegisterRequest request);
 
     Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request);
     Task<PagedResult<UserVm>> GetStaffPaging(GetUserPagingRequest request);
