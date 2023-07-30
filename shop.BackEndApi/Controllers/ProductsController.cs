@@ -100,7 +100,7 @@ public class ProductsController : ControllerBase
     //Bang Product
     [HttpPost("createproductprop")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> CreateProductProp([FromForm] ProductPropVm request)
+    public async Task<IActionResult> CreateProductProp([FromForm] ProductPropRequest request)
     {
         if (!ModelState.IsValid)
         {
@@ -119,7 +119,7 @@ public class ProductsController : ControllerBase
     //Bang Product
     [HttpPut("updateProductProp/{productPropId}")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> UpdateProductProp([FromRoute] Guid productPropId, [FromForm] ProductPropVm request)
+    public async Task<IActionResult> UpdateProductProp([FromRoute] Guid productPropId, [FromForm] ProductPropRequest request)
     {
         if (!ModelState.IsValid)
         {

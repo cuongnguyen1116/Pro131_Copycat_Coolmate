@@ -73,7 +73,7 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
 
     }
     //Bảng  product
-    public async Task<bool> CreateProductProp(ProductPropVm request)
+    public async Task<bool> CreateProductProp(ProductPropRequest request)
     {
 
         string url = $"/api/Products/createproductprop/";
@@ -107,7 +107,7 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
 
     }
     //Bảng  product
-    public async Task<bool> DeleteProductProp(ProductPropVm request)
+    public async Task<bool> DeleteProductProp(ProductPropRequest request)
     {
 
         string apiURL = $"/api/Products/deleteProductProp/{request.Id}";
@@ -127,14 +127,14 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
         return result;
     }
 
-    public async Task<List<ProductPropVm>> GetAllProductProp(ProductPagingRequest request)
+    public async Task<List<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request)
     {
 
         string apiURL = $"/api/Products/propductprops?keyword={request.Keyword}&categoryId={request.CategoryId}";
         var response = await _httpClient.GetAsync(apiURL);
         response.EnsureSuccessStatusCode();
         string apiData = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<List<ProductPropVm>>(apiData);
+        var result = JsonConvert.DeserializeObject<List<ProductPropRequest>>(apiData);
         return result;
     }
 
@@ -151,7 +151,7 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
         return result;
     }
     //Bảng  product
-    public async Task<ProductPropVm> GetByIdProductProp(Guid productPropId)
+    public async Task<ProductPropRequest> GetByIdProductProp(Guid productPropId)
     {
 
 
@@ -159,7 +159,7 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
         var response = await _httpClient.GetAsync(apiURL);
         response.EnsureSuccessStatusCode();
         string apiData = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<ProductPropVm>(apiData);
+        var result = JsonConvert.DeserializeObject<ProductPropRequest>(apiData);
         return result;
     }
     // Lấy danh sách màu
@@ -187,14 +187,14 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
         return result;
     }
     //Lấy danh sách tên san phẩm
-    public async Task<List<ProductPropVm>> GetListProductProp()
+    public async Task<List<ProductPropRequest>> GetListProductProp()
     {
 
         string apiURL = "/api/Products/listPropductProp";
         var response = await _httpClient.GetAsync(apiURL);
         response.EnsureSuccessStatusCode();
         string apiData = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<List<ProductPropVm>>(apiData);
+        var result = JsonConvert.DeserializeObject<List<ProductPropRequest>>(apiData);
         return result;
     }
     //Lấy danh sách size
@@ -212,7 +212,7 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
     // Bảng ProductDetail
 
     //Bảng  product
-    public async Task<bool> UpdateProductProp(ProductPropVm request)
+    public async Task<bool> UpdateProductProp(ProductPropRequest request)
     {
 
         string url = $"/api/Products/updateProductProp/{request.Id}";
@@ -270,23 +270,23 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
         return JsonConvert.DeserializeObject<ApiResult<bool>>(result);
     }
 
-    public async Task<List<ProductVm>> GetFeaturedProducts(int take)
+    public async Task<List<ProductPropVM>> GetFeaturedProducts(int take)
     {
         string apiURL = $"/api/Products/featured/{take}";
         var response = await _httpClient.GetAsync(apiURL);
         response.EnsureSuccessStatusCode();
         string apiData = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<List<ProductVm>>(apiData);
+        var result = JsonConvert.DeserializeObject<List<ProductPropVM>>(apiData);
         return result;
     }
 
-    public async Task<List<ProductVm>> GetRecentProducts(int take)
+    public async Task<List<ProductPropVM>> GetRecentProducts(int take)
     {
         string apiURL = $"/api/Products/recent/{take}";
         var response = await _httpClient.GetAsync(apiURL);
         response.EnsureSuccessStatusCode();
         string apiData = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<List<ProductVm>>(apiData);
+        var result = JsonConvert.DeserializeObject<List<ProductPropVM>>(apiData);
         return result;
     }
 }

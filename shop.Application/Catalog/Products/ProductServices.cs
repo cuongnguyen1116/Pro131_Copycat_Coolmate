@@ -168,7 +168,7 @@ public class ProductServices : IProductServices
         return productDetailViewModel;
     }
     //Lấy tên sản phẩm
-    public async Task<List<ProductPropVm>> GetAllProductProp(ProductPagingRequest request)
+    public async Task<List<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request)
     {
         var query = from p in _context.Products
                     join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
@@ -191,7 +191,7 @@ public class ProductServices : IProductServices
         }
 
         // Project the query to the view model
-        var productProps = await query.Select(q => new ProductPropVm
+        var productProps = await query.Select(q => new ProductPropRequest
         {
             Id = q.p.Id,
             Name = q.p.Name,
@@ -202,10 +202,10 @@ public class ProductServices : IProductServices
         return productProps;
     }
 
-    public async Task<List<ProductPropVm>> GetListProductProp()
+    public async Task<List<ProductPropRequest>> GetListProductProp()
     {
         return await _context.Products
-               .Select(i => new ProductPropVm()
+               .Select(i => new ProductPropRequest()
                {
                    Id = i.Id,
                    Name = i.Name,
@@ -215,7 +215,7 @@ public class ProductServices : IProductServices
            ).ToListAsync();
     }
 
-    public async Task<ProductPropVm> GetByIdProductProp(Guid productPropId)
+    public async Task<ProductPropRequest> GetByIdProductProp(Guid productPropId)
     {
         var product = await _context.Products.FindAsync(productPropId);
         var categories = await (from c in _context.Categories
@@ -228,7 +228,7 @@ public class ProductServices : IProductServices
         }
         else
         {
-            var productProp = new ProductPropVm()
+            var productProp = new ProductPropRequest()
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -240,7 +240,7 @@ public class ProductServices : IProductServices
         }
     }
 
-    public async Task<bool> CreateProductProp(ProductPropVm request)
+    public async Task<bool> CreateProductProp(ProductPropRequest request)
     {
         var product = new Product()
         {
@@ -269,7 +269,7 @@ public class ProductServices : IProductServices
         return true;
     }
 
-    public async Task<bool> UpdateProductProp(ProductPropVm request)
+    public async Task<bool> UpdateProductProp(ProductPropRequest request)
     {
         var product = await _context.Products
             .Include(p => p.ProductImages)
@@ -379,61 +379,51 @@ public class ProductServices : IProductServices
         return new ApiSuccessResult<bool>($"Thêm ảnh có caption {productImage.Caption} thành công");
     }
 
-    public async Task<List<ProductVm>> GetFeaturedProducts(int take)
+    public async Task<List<ProductPropVM>> GetFeaturedProducts(int take)
     {
         //1. Select join
         var query = from p in _context.Products
-                    join pd in _context.ProductDetails on p.Id equals pd.ProductId
                     join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
                     from pic in ppic.DefaultIfEmpty()
                     join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                     from pi in ppi.DefaultIfEmpty()
                     join c in _context.Categories on pic.CategoryId equals c.Id into picc
                     from c in picc.DefaultIfEmpty()
-                    where (pi == null || pi.IsDefault == true) && pd.IsFeatured == true
-                    select new { p, pd, pic, pi };
+                    where (pi == null || pi.IsDefault == true) /*&& pd.IsFeatured == true*/
+                    select new { p, pic, pi };
 
-        var data = await query.OrderByDescending(x => x.pd.CreatedDate).Take(take)
-            .Select(x => new ProductVm()
+        var data = await query.Take(take)
+            .Select(x => new ProductPropVM()
             {
-                Id = x.pd.Id,
+                Id = x.p.Id,
                 Name = x.p.Name,
-                CreatedDate = x.pd.CreatedDate,
                 Description = x.p.Description,
-                OriginalPrice = x.pd.OriginalPrice,
-                Price = x.pd.Price,
-                Stock = x.pd.Stock,
-                ThumbnailImage = x.pi.ImagePath
+                Image = x.pi.ImagePath
             }).ToListAsync();
 
         return data;
     }
 
-    public async Task<List<ProductVm>> GetRecentProducts(int take)
+    public async Task<List<ProductPropVM>> GetRecentProducts(int take)
     {
         //1. Select join
         var query = from p in _context.Products
-                    join pd in _context.ProductDetails on p.Id equals pd.ProductId
                     join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
                     from pic in ppic.DefaultIfEmpty()
                     join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                     from pi in ppi.DefaultIfEmpty()
                     join c in _context.Categories on pic.CategoryId equals c.Id into picc
                     from c in picc.DefaultIfEmpty()
-                    where (pi == null || pi.IsDefault == true)
-                    select new { p, pd, pic, pi };
+                    where (pi == null || pi.IsDefault == true) 
+                    select new { p, pic, pi };
 
-        var data = await query.OrderByDescending(x => x.pd.CreatedDate).Take(take)
-            .Select(x => new ProductVm()
+        var data = await query.Take(take)
+            .Select(x => new ProductPropVM()
             {
-                Id = x.pd.Id,
+                Id = x.p.Id,
                 Name = x.p.Name,
-                CreatedDate = x.pd.CreatedDate,
                 Description = x.p.Description,
-                OriginalPrice = x.pd.OriginalPrice,
-                Price = x.pd.Price,
-                Stock = x.pd.Stock,
-                ThumbnailImage = x.pi.ImagePath
+                Image = x.pi.ImagePath
             }).ToListAsync();
 
         return data;

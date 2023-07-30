@@ -818,10 +818,11 @@ h2 {
 }
 
 .product-item .product-price .btn {
-    float: right;
+    float: none;
     border: none;
     color: #000000;
     background: #FF6F61;
+    justify-content:center;
 }
 
 .product-item:hover .product-price .btn,

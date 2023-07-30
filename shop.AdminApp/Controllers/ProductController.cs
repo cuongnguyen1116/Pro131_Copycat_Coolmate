@@ -181,7 +181,7 @@ public class ProductController : Controller
 
     [HttpPost]
     [Authorize(Policy = "AdminOrManager")]
-    public async Task<IActionResult> CreateProduct(ProductPropVm request)
+    public async Task<IActionResult> CreateProduct(ProductPropRequest request)
     {
         if (!ModelState.IsValid)
         {
@@ -245,7 +245,7 @@ public class ProductController : Controller
 
     [HttpPost]
     //[Authorize(Policy = "admin")]
-    public async Task<IActionResult> EditProduct(ProductPropVm request)
+    public async Task<IActionResult> EditProduct(ProductPropRequest request)
     {
         if (!ModelState.IsValid)
             return View(request);
@@ -279,7 +279,7 @@ public class ProductController : Controller
         return View(request);
     }
     [Authorize(Policy = "admin")]
-    public async Task<IActionResult> DeleteProduct(ProductPropVm vm)
+    public async Task<IActionResult> DeleteProduct(ProductPropRequest vm)
     {
         if (!ModelState.IsValid)
             return View(vm);
