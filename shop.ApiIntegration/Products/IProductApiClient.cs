@@ -13,16 +13,19 @@ public interface IProductApiClient
     Task<bool> UpdateProduct(ProductUpdateRequest request);
     Task<bool> DeleteProduct(ProductDeleteRequest request);
     Task<ProductVm> GetById(Guid productDetailId);
-    Task<ProductPropVm> GetByIdProductProp(Guid productPropId);
+    Task<ProductPropRequest> GetByIdProductProp(Guid productPropId);
     Task<PagedResult<ProductVm>> GetAll(ProductPagingRequest request);
-    Task<bool> CreateProductProp(ProductPropVm request);
-    Task<bool> UpdateProductProp(ProductPropVm request);
-    Task<bool> DeleteProductProp(ProductPropVm request);
+    Task<bool> CreateProductProp(ProductPropRequest request);
+    Task<bool> UpdateProductProp(ProductPropRequest request);
+    Task<bool> DeleteProductProp(ProductPropRequest request);
     Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request);
-    Task<List<ProductPropVm>> GetListProductProp();
-    Task<List<ProductPropVm>> GetAllProductProp(ProductPagingRequest request);
+    Task<List<ProductPropRequest>> GetListProductProp();
+    Task<List<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request);
     Task<List<MaterialVm>> GetListMaterial();
     Task<List<ColorVm>> GetListColor();
     Task<List<SizeVm>> GetListSize();
     Task<ApiResult<bool>> CreateImage(ProductImageRequest request, Guid productdid);
+    Task<List<ProductPropVM>> GetFeaturedProducts(int take);
+
+    Task<List<ProductPropVM>> GetRecentProducts(int take);
 }

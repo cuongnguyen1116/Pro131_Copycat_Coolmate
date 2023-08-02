@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Products;
 using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
@@ -99,7 +100,7 @@ public class ProductsController : ControllerBase
     //Bang Product
     [HttpPost("createproductprop")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> CreateProductProp([FromForm] ProductPropVm request)
+    public async Task<IActionResult> CreateProductProp([FromForm] ProductPropRequest request)
     {
         if (!ModelState.IsValid)
         {
@@ -118,7 +119,7 @@ public class ProductsController : ControllerBase
     //Bang Product
     [HttpPut("updateProductProp/{productPropId}")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> UpdateProductProp([FromRoute] Guid productPropId, [FromForm] ProductPropVm request)
+    public async Task<IActionResult> UpdateProductProp([FromRoute] Guid productPropId, [FromForm] ProductPropRequest request)
     {
         if (!ModelState.IsValid)
         {
@@ -181,5 +182,21 @@ public class ProductsController : ControllerBase
             return Ok(productImage);
         return BadRequest();
           
+    }
+    [HttpGet("featured/{take}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetFeaturedProducts(int take)
+    {
+        var products = await _productServices.GetFeaturedProducts(take);
+
+        return Ok(products);
+    }
+    [HttpGet("recent/{take}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetRecentProducts(int take)
+    {
+        var products = await _productServices.GetRecentProducts(take);
+
+        return Ok(products);
     }
 }

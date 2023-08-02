@@ -1,7 +1,14 @@
+using shop.ApiIntegration.Products;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
+builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(30));
+builder.Services.AddTransient<IProductApiClient, ProductApiClient>();
+
 
 var app = builder.Build();
 
@@ -17,7 +24,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
