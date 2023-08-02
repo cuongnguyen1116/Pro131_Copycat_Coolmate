@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using shop.ApiIntegration.Promotions;
-using shop.Data.Entities;
 using shop.Data.Enums;
-using shop.ViewModels.Catalog.Materials;
-using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Catalog.Promotions;
 
 namespace shop.AdminApp.Controllers
@@ -14,7 +10,7 @@ namespace shop.AdminApp.Controllers
         private readonly IPromotionApiClient _promotionApiClient;
         public PromotionController(IPromotionApiClient promotionApiClient)
         {
-            _promotionApiClient = promotionApiClient;   
+            _promotionApiClient = promotionApiClient;
         }
         // GET: PromotionController
         public async Task<IActionResult> Show(string? keyword, PromotionStatus status, string? PromotionCode, int pageIndex = 1, int pageSize = 10)
@@ -40,7 +36,7 @@ namespace shop.AdminApp.Controllers
         {
             var promotion = await _promotionApiClient.GetById(id);
             // Lưu giá trị thuộc tính vào TempData để tái sử dụng ở trang tạo mới
-            
+
             TempData["DiscountPercent"] = promotion.DiscountPercent;
             TempData["DiscountAmount"] = promotion.DiscountAmount;
 

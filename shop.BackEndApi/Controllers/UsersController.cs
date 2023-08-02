@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using shop.Application.System.Users;
 using shop.ViewModels.System.Users;
@@ -14,7 +13,7 @@ public class UsersController : ControllerBase
 
     public UsersController(IUserServices userServices)
     {
-       _userServices = userServices;
+        _userServices = userServices;
     }
     [HttpPost("authenticate")]
     [AllowAnonymous]

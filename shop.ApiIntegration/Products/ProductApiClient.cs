@@ -262,7 +262,7 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
 
         var response = await _httpClient.PostAsync(apiURL, requestContent);
         response.EnsureSuccessStatusCode();
-        
+
         string result = await response.Content.ReadAsStringAsync();
         if (response.IsSuccessStatusCode)
             return JsonConvert.DeserializeObject<ApiResult<bool>>(result);

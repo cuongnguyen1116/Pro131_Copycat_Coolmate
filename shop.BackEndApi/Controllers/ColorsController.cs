@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Colors;
 using shop.ViewModels.Catalog.Colors;
-using shop.ViewModels.Catalog.Materials;
 
 namespace shop.BackEndApi.Controllers;
 

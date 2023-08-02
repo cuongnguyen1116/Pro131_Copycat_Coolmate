@@ -293,7 +293,7 @@ public class ProductController : Controller
         ModelState.AddModelError("", "Xóa không thành công");
         return View(vm);
     }
-   // [Authorize(Policy = "admin")]
+    // [Authorize(Policy = "admin")]
     private async Task<CategoryAssignRequest> GetCategoryAssignRequest(Guid id)
     {
 

@@ -15,7 +15,7 @@ public class ApiSuccessResult<T> : ApiResult<T>
     public ApiSuccessResult(string message)
     {
         IsSuccessed = true;
-        
+
         Message = message;
     }
 }

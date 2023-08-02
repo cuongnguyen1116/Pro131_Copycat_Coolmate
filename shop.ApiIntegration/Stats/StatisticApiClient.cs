@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using shop.ViewModels.Catalog.Stats;
-using System.Net;
-using System.Net.Http.Headers;
 using System.Net.Mime;
 
 namespace shop.ApiIntegration.Stats;
@@ -25,16 +23,16 @@ public class StatisticApiClient : BaseApiClient, IStatisticsApiClient
     public async Task<bool> ExportToExcel()
     {
         string url = "/api/statistics/excelexport";
-        var response =  await _httpClient.GetAsync(url);
+        var response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
         var contentDisposition = response.Content.Headers.ContentDisposition;
-        var fileName =  new ContentDisposition(contentDisposition.ToString()).FileName;
+        var fileName = new ContentDisposition(contentDisposition.ToString()).FileName;
         var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads", fileName);
         if (File.Exists(filePath))
         {
             // check trùng thì thêm ngày tháng vào
             var timestamp = DateTime.Now.ToString("ddMMyyhhmmss");
-            fileName =  fileName + "_" + timestamp;
+            fileName = fileName + "_" + timestamp;
             filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads", fileName);
         }
         using (var fileStream = new FileStream(filePath, FileMode.Create))

@@ -3,7 +3,6 @@ using shop.ApiIntegration.Products;
 using shop.CustomerApp.Models;
 using shop.Utilities.Constants;
 using System.Diagnostics;
-using System.Text.RegularExpressions;
 
 namespace shop.CustomerApp.Controllers
 {
@@ -23,7 +22,7 @@ namespace shop.CustomerApp.Controllers
         {
             var viewModel = new HomeViewModel
             {
-                FeaturedProducts = await _productApiClient.GetFeaturedProducts( SystemConstants.ProductSettings.NumberOfFeaturedProducts),
+                FeaturedProducts = await _productApiClient.GetFeaturedProducts(SystemConstants.ProductSettings.NumberOfFeaturedProducts),
                 LatestProducts = await _productApiClient.GetRecentProducts(SystemConstants.ProductSettings.NumberOfLatestProducts)
             };
             return View(viewModel);

@@ -1,5 +1,4 @@
 ﻿using shop.ViewModels.Catalog.Products;
-using shop.ViewModels.Catalog.Sizes;
 
 namespace shop.CustomerApp.Models
 {

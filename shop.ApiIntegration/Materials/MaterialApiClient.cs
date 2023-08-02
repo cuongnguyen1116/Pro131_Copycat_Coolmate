@@ -1,13 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using shop.ViewModels.Catalog.Materials;
-using shop.ViewModels.Catalog.Sizes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace shop.ApiIntegration.Materials
 {

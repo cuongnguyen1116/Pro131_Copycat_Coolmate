@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using shop.Data.Entities;
 using shop.Data.Enums;
-using System.Runtime.ConstrainedExecution;
 
 namespace shop.Data.Extensions;
 

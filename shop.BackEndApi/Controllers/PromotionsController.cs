@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Promotions;
-using shop.ViewModels.Catalog.Materials;
-using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Catalog.Promotions;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -63,6 +61,6 @@ namespace shop.BackEndApi.Controllers
             var result = await _promotionService.Update(id, request);
             return Ok(result);
         }
-        
+
     }
 }

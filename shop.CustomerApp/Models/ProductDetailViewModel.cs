@@ -9,6 +9,6 @@ namespace shop.CustomerApp.Models
 
         public ProductVm Product { get; set; }
 
-        
+
     }
 }

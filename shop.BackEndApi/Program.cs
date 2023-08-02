@@ -1,8 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using shop.Application.Catalog.Categories;
 using shop.Application.Catalog.Colors;
 using shop.Application.Catalog.Materials;
@@ -16,10 +16,7 @@ using shop.Application.System.Roles;
 using shop.Application.System.Users;
 using shop.Data.Context;
 using shop.Data.Entities;
-using System.Text;
 using shop.Utilities.Constants;
-using Microsoft.IdentityModel.Tokens;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;

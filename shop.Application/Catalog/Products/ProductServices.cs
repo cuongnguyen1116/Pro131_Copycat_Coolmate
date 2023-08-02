@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using shop.Application.Common.StoreFile;
 using shop.Data.Context;
@@ -414,7 +413,7 @@ public class ProductServices : IProductServices
                     from pi in ppi.DefaultIfEmpty()
                     join c in _context.Categories on pic.CategoryId equals c.Id into picc
                     from c in picc.DefaultIfEmpty()
-                    where (pi == null || pi.IsDefault == true) 
+                    where (pi == null || pi.IsDefault == true)
                     select new { p, pic, pi };
 
         var data = await query.Take(take)

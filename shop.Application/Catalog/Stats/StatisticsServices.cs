@@ -1,16 +1,9 @@
-﻿using ClosedXML.Excel;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileSystemGlobbing;
-using OfficeOpenXml;
-using shop.Application.Common.StoreFile;
-using shop.Application.System.Users;
 using shop.Data.Context;
 using shop.Data.Enums;
 using shop.ViewModels.Catalog.Stats;
 using System.Data;
-using System.IO;
 
 namespace shop.Application.Catalog.Stats;
 
@@ -85,18 +78,18 @@ public class StatisticsServices : BaseServices, IStatisticsServices
     {
         DataTable dt = new DataTable();
         dt.TableName = "User";
-        dt.Columns.Add("Id",typeof(string));
+        dt.Columns.Add("Id", typeof(string));
         dt.Columns.Add("FirstName", typeof(string));
         dt.Columns.Add("LastName", typeof(string));
-        dt.Columns.Add("Email",typeof(string));
-        dt.Columns.Add("PhoneNumber",typeof(string));
-        dt.Columns.Add("Dob",typeof(string));
+        dt.Columns.Add("Email", typeof(string));
+        dt.Columns.Add("PhoneNumber", typeof(string));
+        dt.Columns.Add("Dob", typeof(string));
         var users = _context.Users.ToList();
-        if (users.Count>0)
+        if (users.Count > 0)
         {
             users.ForEach(item =>
             {
-                dt.Rows.Add(item.Id, item.FirstName,item.LastName,item.Email,item.PhoneNumber,item.DoB);
+                dt.Rows.Add(item.Id, item.FirstName, item.LastName, item.Email, item.PhoneNumber, item.DoB);
             });
         }
         return dt;
@@ -119,7 +112,7 @@ public class StatisticsServices : BaseServices, IStatisticsServices
     //        }
     //    }
     //    return true;
-        
+
 
     //}
 }

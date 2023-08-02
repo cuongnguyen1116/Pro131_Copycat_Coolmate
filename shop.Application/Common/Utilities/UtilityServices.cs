@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using shop.Data.Context;
 using shop.Data.Entities;
 using System.Text;
 
@@ -29,7 +28,7 @@ public static class UtilityServices
     public static string GenerateCode(int length)
     {
         Random random = new Random();
-        string Chars= "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 
         StringBuilder randomString = new();

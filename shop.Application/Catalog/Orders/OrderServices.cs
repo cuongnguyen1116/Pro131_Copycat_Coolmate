@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using shop.Data.Context;
-using shop.Data.Entities;
 using shop.Data.Enums;
 using shop.ViewModels.Catalog.Orders;
 using shop.ViewModels.Common;
