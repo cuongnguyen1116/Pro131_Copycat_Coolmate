@@ -279,17 +279,17 @@ public class UserServices : IUserServices
             PhoneNumber = request.PhoneNumber
         };
         var result = await _userManager.CreateAsync(user, request.Password);
-
+        var giohang = new Cart()
+        {
+            UserId = user.Id,
+            Description = user.UserName
+        };
+        await _context.Carts.AddAsync(giohang);
         if (result.Succeeded)
         {
 
             await _userManager.AddToRoleAsync(user, "customer");
-            var giohang = new Cart()
-            {
-                UserId = user.Id,
-                Description = user.UserName
-            };
-            _context.Carts.Add(giohang);
+            
             return new ApiSuccessResult<bool>("Đăng ký thành công");
         }
         return new ApiErrorResult<bool>("Đăng ký không thành công");

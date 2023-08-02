@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using shop.ApiIntegration.Products;
 using shop.CustomerApp.Models;
+using LazZiya.ExpressLocalization;
 using shop.Utilities.Constants;
 using System.Diagnostics;
 
@@ -10,12 +11,13 @@ namespace shop.CustomerApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductApiClient _productApiClient;
+        
 
-        public HomeController(ILogger<HomeController> logger, IProductApiClient productApiClient)
+        public HomeController(ILogger<HomeController> logger,  IProductApiClient productApiClient)
         {
             _logger = logger;
             _productApiClient = productApiClient;
-
+            
         }
 
         public async Task<IActionResult> Index()

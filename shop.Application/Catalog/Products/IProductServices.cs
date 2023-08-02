@@ -11,8 +11,9 @@ public interface IProductServices
     Task<bool> Create(ProductCreateRequest request);
     Task<bool> Update(ProductUpdateRequest request);
     Task<bool> Delete(Guid productdetailId);
+    //Task<ProductVm> Detail(Guid productId);
     Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request);
-    Task<List<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request);
+    Task<PagedResult<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request);
     Task<List<ProductPropRequest>> GetListProductProp();
     Task<ProductPropRequest> GetByIdProductProp(Guid productPropId);
     Task<bool> CreateProductProp(ProductPropRequest request);

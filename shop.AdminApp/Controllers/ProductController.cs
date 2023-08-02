@@ -36,7 +36,32 @@ public class ProductController : Controller
         }
         return View(data);
     }
-
+    //Bảng  product
+    [Authorize(Policy = "AdminOrManager")]
+    public async Task<IActionResult> ShowAllProductProp(string keyword, Guid? categoryId, int pageIndex = 1, int pageSize = 9)
+    {
+        var request = new ProductPagingRequest()
+        {
+            Keyword = keyword,
+            CategoryId = categoryId,
+            PageIndex = pageIndex,
+            PageSize = pageSize
+        };
+        var data = await _productApiClient.GetAllProductProp(request);
+        ViewBag.Keyword = keyword;
+        var categories = await _categoryApiClient.GetAll();
+        ViewBag.Categories = categories.Select(x => new SelectListItem()
+        {
+            Text = x.Name,
+            Value = x.Id.ToString(),
+            Selected = categoryId.ToString() == x.Id.ToString()
+        });
+        if (TempData["result"] != null)
+        {
+            ViewBag.SuccessMsg = TempData["result"];
+        }
+        return View(data);
+    }
     [HttpGet]
     [Authorize(Policy = "AdminOrManager")]
     public async Task<IActionResult> Details(Guid id)
@@ -54,7 +79,7 @@ public class ProductController : Controller
             Keyword = keyword
         };
         var data = await _productApiClient.GetAllProductProp(request);
-        ViewBag.ProductImage = data.Select(x => new SelectListItem()
+        ViewBag.ProductImage = data.Items.Select(x => new SelectListItem()
         {
             Text = x.Name,
             Value = x.Id.ToString(),
@@ -74,7 +99,7 @@ public class ProductController : Controller
             Keyword = keyword
         };
         var data = await _productApiClient.GetAllProductProp(ppr);
-        ViewBag.ProductImage = data.Select(x => new SelectListItem()
+        ViewBag.ProductImage = data.Items.Select(x => new SelectListItem()
         {
             Text = x.Name,
             Value = x.Id.ToString(),
@@ -244,7 +269,7 @@ public class ProductController : Controller
     }
 
     [HttpPost]
-    //[Authorize(Policy = "admin")]
+    [Authorize(Policy = "admin")]
     public async Task<IActionResult> EditProduct(ProductPropRequest request)
     {
         if (!ModelState.IsValid)
@@ -341,28 +366,5 @@ public class ProductController : Controller
         return View(roleAssignRequest);
     }
 
-    //Bảng  product
-    [Authorize(Policy = "AdminOrManager")]
-    public async Task<IActionResult> ShowAllProductProp(string keyword, Guid? categoryId)
-    {
-        var request = new ProductPagingRequest()
-        {
-            Keyword = keyword,
-            CategoryId = categoryId
-        };
-        var data = await _productApiClient.GetAllProductProp(request);
-        ViewBag.Keyword = keyword;
-        var categories = await _categoryApiClient.GetAll();
-        ViewBag.Categories = categories.Select(x => new SelectListItem()
-        {
-            Text = x.Name,
-            Value = x.Id.ToString(),
-            Selected = categoryId.ToString() == x.Id.ToString()
-        });
-        if (TempData["result"] != null)
-        {
-            ViewBag.SuccessMsg = TempData["result"];
-        }
-        return View(data);
-    }
+   
 }

@@ -20,7 +20,7 @@ public interface IProductApiClient
     Task<bool> DeleteProductProp(ProductPropRequest request);
     Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request);
     Task<List<ProductPropRequest>> GetListProductProp();
-    Task<List<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request);
+    Task<PagedResult<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request);
     Task<List<MaterialVm>> GetListMaterial();
     Task<List<ColorVm>> GetListColor();
     Task<List<SizeVm>> GetListSize();
