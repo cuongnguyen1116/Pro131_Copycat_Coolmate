@@ -127,14 +127,14 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
         return result;
     }
 
-    public async Task<List<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request)
+    public async Task<PagedResult<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request)
     {
 
-        string apiURL = $"/api/Products/propductprops?keyword={request.Keyword}&categoryId={request.CategoryId}";
+        string apiURL = $"/api/Products/propductprops?pageindex={request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}&categoryId={request.CategoryId}";
         var response = await _httpClient.GetAsync(apiURL);
         response.EnsureSuccessStatusCode();
         string apiData = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<List<ProductPropRequest>>(apiData);
+        var result = JsonConvert.DeserializeObject<PagedResult<ProductPropRequest>>(apiData);
         return result;
     }
 
