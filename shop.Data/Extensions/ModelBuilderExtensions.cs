@@ -26,6 +26,7 @@ public static class ModelBuilderExtensions
         #endregion
 
         #region product
+        
         var productId1 = new Guid("1dc01736-d7e2-4c24-94de-00844d5cb1f9");
         var productId2 = new Guid("3b997d7b-e67a-4b00-8e4a-043ce70b2844");
         var productId3 = new Guid("470f5c7e-a94a-4f1a-930c-bda7d4f73256");
@@ -52,8 +53,8 @@ public static class ModelBuilderExtensions
             new Product
             {
                 Id = productId2,
-                Name = "Summer Coolwaves",
-                Description = "Sản phẩm trong Bộ sưu tập Summer. Chất liệu: 100% Cotton mềm mại. Định lượng vải: 200gsm, dày dặn. Dáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà. Hình in PET bền bỉ, không lo bong tróc, thoải mái giặt máy. Tự hào sản xuất tại Việt Nam",
+                Name = "Áo thun nam Cotton Compact",
+                Description = "Chất liệu: 95% Cotton Compact - 5% Spandex\r\nPhù hợp với: mặc ở nhà, đi làm, đi chơi\r\nKiểu dáng: Regular Fit dáng suông\r\nTự hào sản xuất tại Việt Nam Xem nhà máy >\r\nNgười mẫu: 184 cm, 73 kg, mặc size 2XL",
                 Status = Status.Active
             },
             new Product
@@ -101,29 +102,29 @@ public static class ModelBuilderExtensions
             new Product
             {
                 Id = productId9,
-                Name = "Summer Coolwaves Graphic - Cây dừa",
-                Description = "Sản phẩm trong Bộ sưu tập Summer\r\nChất liệu: 100% Cotton mềm mại\r\nĐịnh lượng vải: 200gsm, dày dặn\r\nDáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà\r\nHình in PET bền bỉ, không lo bong tróc, thoải mái giặt máy\r\nTự hào sản xuất tại Việt Nam",
+                Name = " Áo thun Marvel logo Spider-Man",
+                Description = "Là sản phẩm của sự hợp tác giữa Coolmate và Disney - đơn vị sở hữu bản quyền Marvel\r\nChất liệu 100% Cotton mềm mại\r\nĐịnh lượng vải 245gsm dày dặn\r\nPhù hợp với: đi làm, đi chơi, mặc ở nhà\r\nKiểu dáng: Regular\r\nTự hào sản xuất tại Việt Nam",
                 Status = Status.Active
             },
             new Product
             {
                 Id = productId10,
-                Name = "Care &Share Tuổi thơ dữ dội - Bắn bi",
-                Description = "10% Doanh thu từ mỗi sản phẩm sẽ được quyên góp vào Quỹ Care & Share\r\nChất liệu: 100% Cotton mềm mại\r\nĐịnh lượng vải: 200gsm, dày dặn\r\nDáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà\r\nTự hào sản xuất tại Việt Nam",
+                Name = "Áo thun thể thao nam ProMax-S1",
+                Description = "Chất liệu: 100% Polyester\r\nXử lý hoàn thiện vải: Quick-Dry và Wicking\r\nDệt kiểu Mesh, thoáng khí\r\nPhù hợp với: chơi thể thao, mặc ở nhà\r\nKiểu dáng: Regular fit dáng suông\r\nNgười mẫu: 175 cm - 75 kg, mặc size XL",
                 Status = Status.Active
             },
             new Product
             {
                 Id = productId11,
-                Name = "Care &Share Tuổi thơ dữ dội - Pattern tranh",
-                Description = "10% Doanh thu từ mỗi sản phẩm sẽ được quyên góp vào Quỹ Care & Share\r\nChất liệu: 100% Cotton mềm mại\r\nĐịnh lượng vải: 200gsm, dày dặn\r\nDáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà\r\nTự hào sản xuất tại Việt Nam",
+                Name = "Áo thun Marvel Thor Mjolnir",
+                Description = "Là sản phẩm của sự hợp tác giữa Coolmate và Disney - đơn vị sở hữu bản quyền Marvel\r\nChất liệu 100% Cotton mềm mại\r\nĐịnh lượng vải 245gsm dày dặn\r\nPhù hợp với: đi làm, đi chơi, mặc ở nhà\r\nKiểu dáng: Regular\r\nTự hào sản xuất tại Việt Nam",
                 Status = Status.Active
             },
             new Product
             {
                 Id = productId12,
-                Name = "Care &Share Tuổi thơ dữ dội - Tắm mưa",
-                Description = "10% Doanh thu từ mỗi sản phẩm sẽ được quyên góp vào Quỹ Care & Share\r\nChất liệu: 100% Cotton mềm mại\r\nĐịnh lượng vải: 200gsm, dày dặn\r\nDáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà\r\nTự hào sản xuất tại Việt Nam",
+                Name = "Áo thun Marvel Big Logo Hulk",
+                Description = "Là sản phẩm của sự hợp tác giữa Coolmate và Disney - đơn vị sở hữu bản quyền Marvel\r\nChất liệu 100% Cotton mềm mại\r\nĐịnh lượng vải 245gsm dày dặn\r\nPhù hợp với: đi làm, đi chơi, mặc ở nhà\r\nKiểu dáng: Regular\r\nTự hào sản xuất tại Việt Nam",
                 Status = Status.Active
             },
             new Product
@@ -143,12 +144,166 @@ public static class ModelBuilderExtensions
             new Product
             {
                 Id = productId15,
-                Name = "Care &Share Tuổi thơ dữ dội - Bấm chuông",
-                Description = "10% Doanh thu từ mỗi sản phẩm sẽ được quyên góp vào Quỹ Care & Share\r\nChất liệu: 100% Cotton mềm mại\r\nĐịnh lượng vải: 200gsm, dày dặn\r\nDáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà\r\nTự hào sản xuất tại Việt Nam",
+                Name = "Áo thun Marvel Captain America",
+                Description = "Là sản phẩm của sự hợp tác giữa Coolmate và Disney - đơn vị sở hữu bản quyền Marvel\r\nChất liệu 100% Cotton mềm mại\r\nĐịnh lượng vải 245gsm dày dặn\r\nPhù hợp với: đi làm, đi chơi, mặc ở nhà\r\nKiểu dáng: Regular\r\nTự hào sản xuất tại Việt Nam",
                 Status = Status.Active
             });
         #endregion
+        #region Image 
+        var iamge1 = new Guid("9dd02bd4-364a-49a2-94a2-d07e9ce72d8d");
+        var iamge2 = new Guid("5f28acd7-5b28-4eff-8470-aa00b479b032");
+        var iamge3 = new Guid("69872c02-390d-4e06-a171-1c07fc74f7b2");
+        var iamge4 = new Guid("b0c90cab-a051-41da-9802-ab83af74c2a6");
+        var iamge5 = new Guid("e276a5f2-ac33-4d19-8001-b915bb85cbd1");
+        var iamge6 = new Guid("9d2b5026-adb0-4306-9b29-1a7d99a51d2a");
+        var iamge7 = new Guid("311f107f-544f-4c67-9195-a2e220a76ff7");
+        var iamge8 = new Guid("d8251322-9a9f-4580-ba70-69f8e78320e2");
+        var iamge9 = new Guid("027e3184-5cca-436d-a3dc-8d96ac8436cf");
+        var iamge10 = new Guid("89c445bd-fd4d-40a1-8129-2613e62ce612");
+        var iamge11 = new Guid("98f5bafe-936c-4512-a379-9a8b53fa3c9f");
+        var iamge12 = new Guid("1620bd77-a5aa-43fc-a6e5-224b85cd276b");
+        var iamge13 = new Guid("5936551b-8520-4b63-92fd-0fd8a19dd1f3");
+        var iamge14 = new Guid("e11c3fe7-a75e-4065-bc48-ff43446d3dce");
+        var iamge15 = new Guid("389516c7-bb09-4889-a01b-9ffb56a7d105");
+        builder.Entity<ProductImage>().HasData(
+            new ProductImage
+            {
+                Id = iamge1,
+                ProductId = productId1,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder =1
+            },
+            new ProductImage
+            {
+                Id = iamge2,
+                ProductId = productId2,
+                ImagePath = "/user-content/tee-navy-1.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge3,
+                ProductId = productId3,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge4,
+                ProductId = productId4,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge5,
+                ProductId = productId5,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge6,
+                ProductId = productId6,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge7,
+                ProductId = productId7,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge8,
+                ProductId = productId8,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge9,
+                ProductId = productId9,
+                ImagePath = "/user-content/Ao_thun_Marvel_logo_Spiderman18.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge10,
+                ProductId = productId10,
+                ImagePath = "/user-content/_CMM2689.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge11,
+                ProductId = productId11,
+                ImagePath = "/user-content/_CMM0423.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge12,
+                ProductId = productId12,
+                ImagePath = "/user-content/Ao_thun_Marvel_Big_Logo_Hulk16.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge13,
+                ProductId = productId13,
+                ImagePath = "/user-content/ban_linh_trang_1.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge14,
+                ProductId = productId14,
+                ImagePath = "/user-content/23-Ao_thun_Cotton_Summer_Coolwaves_Graphic_-_Cay_dua4.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge15,
+                ProductId = productId15,
+                ImagePath = "/user-content/Ao_thun_Marvel_Captain_America-6.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            }
 
+            );
+        #endregion
         #region product in categories
         builder.Entity<ProductInCategory>().HasData(
             new ProductInCategory
