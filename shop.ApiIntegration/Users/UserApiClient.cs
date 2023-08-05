@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using shop.ViewModels.Common;
 using shop.ViewModels.System.Users;
-using System.Net.Http;
 using System.Text;
 
 namespace shop.ApiIntegration.Users;
@@ -11,32 +10,32 @@ namespace shop.ApiIntegration.Users;
 public class UserApiClient : BaseApiClient, IUserApiClient
 {
     private readonly IHttpContextAccessor _contextAccessor;
-    
-    
 
-    public UserApiClient(HttpClient httpClient, IConfiguration configuration,IHttpContextAccessor httpContextAccessor) : base(httpClient, configuration)
+
+
+    public UserApiClient(HttpClient httpClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor) : base(httpClient, configuration)
     {
         _contextAccessor = httpContextAccessor;
-        
+
     }
 
     public async Task<ApiResult<string>> Authenticate(LoginRequest request)
     {
 
         string url = $"/api/Users/authenticate";
-        var json = JsonConvert.SerializeObject(request) ;
-        var httpContent = new StringContent(json,Encoding.UTF8,"application/json");
+        var json = JsonConvert.SerializeObject(request);
+        var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-        var response = await _httpClient.PostAsync(url, httpContent) ;
+        var response = await _httpClient.PostAsync(url, httpContent);
         string result = await response.Content.ReadAsStringAsync();
 
         if (response.IsSuccessStatusCode)
         {
-            return  JsonConvert.DeserializeObject<ApiSuccessResult<string>>(result);
+            return JsonConvert.DeserializeObject<ApiSuccessResult<string>>(result);
         }
 
         return JsonConvert.DeserializeObject<ApiErrorResult<string>>(result);
-        
+
     }
 
     public async Task<PagedResult<UserVm>> GetUserPaging(GetUserPagingRequest request)

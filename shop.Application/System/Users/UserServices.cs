@@ -9,10 +9,8 @@ using shop.ViewModels.Common;
 using shop.ViewModels.System.Users;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using ZXing;
 
 namespace shop.Application.System.Users;
 
@@ -104,14 +102,14 @@ public class UserServices : IUserServices
         var users = await _userManager.GetUsersInRoleAsync(role.Name);
         if (!string.IsNullOrEmpty(request.Keyword))
         {
-            users =   users.Where(x => x.UserName.Contains(request.Keyword) || x.PhoneNumber.Contains(request.Keyword)).ToList();
+            users = users.Where(x => x.UserName.Contains(request.Keyword) || x.PhoneNumber.Contains(request.Keyword)).ToList();
             totalRow = users.Count();
         }
 
         //3. Paging
         //int totalRow = await query.CountAsync();
-        totalRow =  users.Count();
-        var data =  users.Skip((request.PageIndex - 1) * request.PageSize)
+        totalRow = users.Count();
+        var data = users.Skip((request.PageIndex - 1) * request.PageSize)
             .Take(request.PageSize)
             .Select(x => new UserVm()
             {
@@ -136,7 +134,7 @@ public class UserServices : IUserServices
         return pagedResult;
     }
 
-    public async Task<PagedResult<UserVm>> GetCustomerPaging(GetUserPagingRequest request) 
+    public async Task<PagedResult<UserVm>> GetCustomerPaging(GetUserPagingRequest request)
     {
         int totalRow;
 
@@ -160,7 +158,7 @@ public class UserServices : IUserServices
                 PhoneNumber = x.PhoneNumber,
                 UserName = x.UserName,
                 FirstName = x.FirstName,
-                Dob= x.DoB,
+                Dob = x.DoB,
                 Id = x.Id,
                 LastName = x.LastName
             });
@@ -281,17 +279,17 @@ public class UserServices : IUserServices
             PhoneNumber = request.PhoneNumber
         };
         var result = await _userManager.CreateAsync(user, request.Password);
-        
+        var giohang = new Cart()
+        {
+            UserId = user.Id,
+            Description = user.UserName
+        };
+        await _context.Carts.AddAsync(giohang);
         if (result.Succeeded)
         {
 
             await _userManager.AddToRoleAsync(user, "customer");
-            var giohang = new Cart()
-            {
-                UserId = user.Id,
-                Description = user.UserName
-            };
-             _context.Carts.Add(giohang);
+            
             return new ApiSuccessResult<bool>("Đăng ký thành công");
         }
         return new ApiErrorResult<bool>("Đăng ký không thành công");

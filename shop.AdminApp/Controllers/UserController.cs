@@ -17,7 +17,7 @@ public class UserController : Controller
         _userApiClient = userApiClient;
         _statisticsApiClient = statisticsApiClient;
     }
-    
+
     public async Task<IActionResult> GetUserPaging(string? keyword, int pageIndex = 1, int pageSize = 10)
     {
         var sessions = HttpContext.Session.GetString("Token");
@@ -35,7 +35,7 @@ public class UserController : Controller
         }
         return View(data);
     }
-   
+
     public async Task<IActionResult> GetCustomerPaging(string? keyword, int pageIndex = 1, int pageSize = 10)
     {
         var sessions = HttpContext.Session.GetString("Token");
@@ -55,13 +55,13 @@ public class UserController : Controller
     }
 
     [HttpGet]
-    
+
     public IActionResult Create()
     {
         return View();
     }
     [HttpPost]
-    
+
     public async Task<IActionResult> Create(RegisterRequest request)
     {
         if (!ModelState.IsValid)

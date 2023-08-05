@@ -37,6 +37,7 @@
 
             // Kiểm tra xem dữ liệu có tồn tại và không rỗng
             if (data && data.length > 0) {
+                console.log(data.length);
                 // Duyệt qua từng phần tử trong mảng data và thêm vào bảng
                 data.forEach(function (item) {
                     var row = "<tr>" +
@@ -146,7 +147,7 @@
                             @*<tr onclick="location.href='@Url.Action("GetOrderDetails", "Order", new { id = item.Id })'">*@
                             <tr data-widget="expandable-table" aria-expanded="false" onclick="getOrderDetails('@item.Id')">
                                 <td>
-                                    <input type="checkbox" class="order-checkbox" data-id="@item.Id" />
+                                    <input type="checkbox" class="order-checkbox" data-id="@item.Id" onclick="event.stopPropagation();" />
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.OrderCode)

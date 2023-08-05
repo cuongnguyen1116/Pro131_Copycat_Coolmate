@@ -1,16 +1,9 @@
-﻿using ClosedXML.Excel;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileSystemGlobbing;
-using OfficeOpenXml;
-using shop.Application.Common.StoreFile;
-using shop.Application.System.Users;
 using shop.Data.Context;
 using shop.Data.Enums;
 using shop.ViewModels.Catalog.Stats;
 using System.Data;
-using System.IO;
 
 namespace shop.Application.Catalog.Stats;
 

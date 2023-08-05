@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DocumentFormat.OpenXml.Office2016.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using shop.Application.Common.StoreFile;
 using shop.Data.Context;
@@ -33,7 +35,7 @@ public class ProductServices : IProductServices
                     join s in _context.Sizes on pd.SizeId equals s.Id
                     join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                     from pi in ppi.DefaultIfEmpty()
-                        where pi.IsDefault == true
+                    where pi.IsDefault == true
                     select new { pd, p, c, m, s, pi };
         if (!string.IsNullOrEmpty(request.Keyword))
         {
@@ -76,7 +78,7 @@ public class ProductServices : IProductServices
     private async Task<string> SaveFile(IFormFile file)
     {
         var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-        var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+        var fileName = originalFileName;
         await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
         return "/" + USER_CONTENT_FOLDER_NAME + "/" + fileName;
     }
@@ -167,21 +169,49 @@ public class ProductServices : IProductServices
         return productDetailViewModel;
     }
     //Lấy tên sản phẩm
-    public async Task<List<ProductPropVm>> GetAllProductProp(ProductPagingRequest request)
+    //public async Task<ProductVm> Detail(Guid productId)
+    //{
+    //    //    var query = from data in _context.ProductDetails
+    //    //                where data.ProductId == productId
+    //    //                select data;
+    //    var query = from p in _context.Products
+    //                join pd in _context.ProductDetails on p.Id equals pd.ProductId
+    //                join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
+    //                from pi in ppi.DefaultIfEmpty()
+    //                join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+    //                from pic in ppic.DefaultIfEmpty()
+    //                join c in _context.Categories on pic.CategoryId equals c.Id into picc
+    //                from c in picc.DefaultIfEmpty()
+    //                where (pi == null || pi.IsDefault == true)
+    //                select new { p, pic, pi, pd };
+    //    if (productId != Guid.Empty)
+    //    {
+    //        // Filter the query based on the categoryId
+    //        query = query.Where(q => q.pd.ProductId == productId);
+    //    }
+    //    var product = await _context.Products.FindAsync(productId);
+
+    //    return products;
+
+    //}
+    public async Task<PagedResult<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request)
     {
         var query = from p in _context.Products
+                    join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi 
+                    from pi in ppi.DefaultIfEmpty()
                     join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
                     from pic in ppic.DefaultIfEmpty()
                     join c in _context.Categories on pic.CategoryId equals c.Id into picc
                     from c in picc.DefaultIfEmpty()
-                    select new { p, pic };
+                    where (pi == null || pi.IsDefault == true)
+                    select new { p, pic,pi };
 
         if (!string.IsNullOrEmpty(request.Keyword))
         {
             // Filter the query based on the keyword
             query = query.Where(q => q.p.Name.Contains(request.Keyword));
         }
-
+        int totalRow = await query.CountAsync();
 
         if (request.CategoryId != null && request.CategoryId != Guid.Empty)
         {
@@ -190,21 +220,31 @@ public class ProductServices : IProductServices
         }
 
         // Project the query to the view model
-        var productProps = await query.Select(q => new ProductPropVm
+        var productProps = await query.Skip((request.PageIndex -1) * request.PageSize)
+            .Take(request.PageSize)
+            .Select(q => new ProductPropRequest
         {
             Id = q.p.Id,
             Name = q.p.Name,
             Description = q.p.Description,
             Status = q.p.Status,
+            Image = q.pi.ImagePath
         }).ToListAsync();
+        var pagedResult = new PagedResult<ProductPropRequest>()
+        {
+            TotalRecords = totalRow,
+            PageSize = request.PageSize,
+            PageIndex = request.PageIndex,
+            Items = productProps
+        };
 
-        return productProps;
+        return pagedResult;
     }
 
-    public async Task<List<ProductPropVm>> GetListProductProp()
+    public async Task<List<ProductPropRequest>> GetListProductProp()
     {
         return await _context.Products
-               .Select(i => new ProductPropVm()
+               .Select(i => new ProductPropRequest()
                {
                    Id = i.Id,
                    Name = i.Name,
@@ -213,8 +253,9 @@ public class ProductServices : IProductServices
                }
            ).ToListAsync();
     }
+    
 
-    public async Task<ProductPropVm> GetByIdProductProp(Guid productPropId)
+    public async Task<ProductPropRequest> GetByIdProductProp(Guid productPropId)
     {
         var product = await _context.Products.FindAsync(productPropId);
         var categories = await (from c in _context.Categories
@@ -227,7 +268,7 @@ public class ProductServices : IProductServices
         }
         else
         {
-            var productProp = new ProductPropVm()
+            var productProp = new ProductPropRequest()
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -239,7 +280,7 @@ public class ProductServices : IProductServices
         }
     }
 
-    public async Task<bool> CreateProductProp(ProductPropVm request)
+    public async Task<bool> CreateProductProp(ProductPropRequest request)
     {
         var product = new Product()
         {
@@ -268,7 +309,7 @@ public class ProductServices : IProductServices
         return true;
     }
 
-    public async Task<bool> UpdateProductProp(ProductPropVm request)
+    public async Task<bool> UpdateProductProp(ProductPropRequest request)
     {
         var product = await _context.Products
             .Include(p => p.ProductImages)
@@ -377,4 +418,56 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return new ApiSuccessResult<bool>($"Thêm ảnh có caption {productImage.Caption} thành công");
     }
+
+    public async Task<List<ProductPropVM>> GetFeaturedProducts(int take)
+    {
+        //1. Select join
+        var query = from p in _context.Products
+                    join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+                    from pic in ppic.DefaultIfEmpty()
+                    join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
+                    from pi in ppi.DefaultIfEmpty()
+                    join c in _context.Categories on pic.CategoryId equals c.Id into picc
+                    from c in picc.DefaultIfEmpty()
+                    where (pi == null || pi.IsDefault == true) /*&& pd.IsFeatured == true*/
+                    select new { p, pic, pi };
+
+        var data = await query.Take(take)
+            .Select(x => new ProductPropVM()
+            {
+                Id = x.p.Id,
+                Name = x.p.Name,
+                Description = x.p.Description,
+                Image = x.pi.ImagePath
+            }).ToListAsync();
+
+        return data;
+    }
+
+    public async Task<List<ProductPropVM>> GetRecentProducts(int take)
+    {
+        //1. Select join
+        var query = from p in _context.Products
+                    join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+                    from pic in ppic.DefaultIfEmpty()
+                    join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
+                    from pi in ppi.DefaultIfEmpty()
+                    join c in _context.Categories on pic.CategoryId equals c.Id into picc
+                    from c in picc.DefaultIfEmpty()
+                    where (pi == null || pi.IsDefault == true)
+                    select new { p, pic, pi };
+
+        var data = await query.Take(take)
+            .Select(x => new ProductPropVM()
+            {
+                Id = x.p.Id,
+                Name = x.p.Name,
+                Description = x.p.Description,
+                Image = x.pi.ImagePath
+            }).ToListAsync();
+
+        return data;
+    }
+
+    
 }

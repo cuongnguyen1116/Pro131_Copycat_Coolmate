@@ -11,15 +11,18 @@ public interface IProductServices
     Task<bool> Create(ProductCreateRequest request);
     Task<bool> Update(ProductUpdateRequest request);
     Task<bool> Delete(Guid productdetailId);
+    //Task<ProductVm> Detail(Guid productId);
     Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request);
-    Task<List<ProductPropVm>> GetAllProductProp(ProductPagingRequest request);
-    Task<List<ProductPropVm>> GetListProductProp();
-    Task<ProductPropVm> GetByIdProductProp(Guid productPropId);
-    Task<bool> CreateProductProp(ProductPropVm request);
-    Task<bool> UpdateProductProp(ProductPropVm request);
+    Task<PagedResult<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request);
+    Task<List<ProductPropRequest>> GetListProductProp();
+    Task<ProductPropRequest> GetByIdProductProp(Guid productPropId);
+    Task<bool> CreateProductProp(ProductPropRequest request);
+    Task<bool> UpdateProductProp(ProductPropRequest request);
     Task<bool> DeleteProductProp(Guid productPropId);
     Task<ApiResult<bool>> AddImages(ProductImageRequest request);
     //Task<int> RemoveImages(Guid imageId);
     //Task<int> UpdateImages(Guid imageId, ProductImageRequest request);
+    Task<List<ProductPropVM>> GetFeaturedProducts(int take);
+    Task<List<ProductPropVM>> GetRecentProducts(int take);
 
 }

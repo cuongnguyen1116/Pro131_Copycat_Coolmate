@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using shop.ApiIntegration.Materials;
 using shop.ViewModels.Catalog.Materials;
-using shop.ViewModels.Catalog.Products;
 
 namespace shop.AdminApp.Controllers
 {

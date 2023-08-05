@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using shop.ViewModels.Catalog.Stats;
-using System.Net;
-using System.Net.Http.Headers;
 using System.Net.Mime;
 
 namespace shop.ApiIntegration.Stats;
@@ -55,7 +53,7 @@ public class StatisticApiClient : BaseApiClient, IStatisticsApiClient
         var response =  await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
         var contentDisposition = response.Content.Headers.ContentDisposition;
-        var fileName =  new ContentDisposition(contentDisposition.ToString()).FileName;
+        var fileName = new ContentDisposition(contentDisposition.ToString()).FileName;
         var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads", fileName);
         if (File.Exists(filePath))
         {

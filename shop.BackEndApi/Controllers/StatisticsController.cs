@@ -1,5 +1,4 @@
 ﻿using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Office.CustomUI;
 using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Stats;
 using shop.Data.Context;
@@ -7,8 +6,6 @@ using shop.Data.Enums;
 using shop.ViewModels.Catalog.Stats;
 using System.Collections.Generic;
 using System.Data;
-using System.Net;
-using System.Net.Http.Headers;
 using System.Net.Mime;
 
 namespace shop.BackEndApi.Controllers;

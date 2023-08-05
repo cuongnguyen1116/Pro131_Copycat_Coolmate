@@ -26,6 +26,7 @@ public static class ModelBuilderExtensions
         #endregion
 
         #region product
+        
         var productId1 = new Guid("1dc01736-d7e2-4c24-94de-00844d5cb1f9");
         var productId2 = new Guid("3b997d7b-e67a-4b00-8e4a-043ce70b2844");
         var productId3 = new Guid("470f5c7e-a94a-4f1a-930c-bda7d4f73256");
@@ -52,8 +53,8 @@ public static class ModelBuilderExtensions
             new Product
             {
                 Id = productId2,
-                Name = "Summer Coolwaves",
-                Description = "Sản phẩm trong Bộ sưu tập Summer. Chất liệu: 100% Cotton mềm mại. Định lượng vải: 200gsm, dày dặn. Dáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà. Hình in PET bền bỉ, không lo bong tróc, thoải mái giặt máy. Tự hào sản xuất tại Việt Nam",
+                Name = "Áo thun nam Cotton Compact",
+                Description = "Chất liệu: 95% Cotton Compact - 5% Spandex\r\nPhù hợp với: mặc ở nhà, đi làm, đi chơi\r\nKiểu dáng: Regular Fit dáng suông\r\nTự hào sản xuất tại Việt Nam Xem nhà máy >\r\nNgười mẫu: 184 cm, 73 kg, mặc size 2XL",
                 Status = Status.Active
             },
             new Product
@@ -101,29 +102,29 @@ public static class ModelBuilderExtensions
             new Product
             {
                 Id = productId9,
-                Name = "Summer Coolwaves Graphic - Cây dừa",
-                Description = "Sản phẩm trong Bộ sưu tập Summer\r\nChất liệu: 100% Cotton mềm mại\r\nĐịnh lượng vải: 200gsm, dày dặn\r\nDáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà\r\nHình in PET bền bỉ, không lo bong tróc, thoải mái giặt máy\r\nTự hào sản xuất tại Việt Nam",
+                Name = " Áo thun Marvel logo Spider-Man",
+                Description = "Là sản phẩm của sự hợp tác giữa Coolmate và Disney - đơn vị sở hữu bản quyền Marvel\r\nChất liệu 100% Cotton mềm mại\r\nĐịnh lượng vải 245gsm dày dặn\r\nPhù hợp với: đi làm, đi chơi, mặc ở nhà\r\nKiểu dáng: Regular\r\nTự hào sản xuất tại Việt Nam",
                 Status = Status.Active
             },
             new Product
             {
                 Id = productId10,
-                Name = "Care &Share Tuổi thơ dữ dội - Bắn bi",
-                Description = "10% Doanh thu từ mỗi sản phẩm sẽ được quyên góp vào Quỹ Care & Share\r\nChất liệu: 100% Cotton mềm mại\r\nĐịnh lượng vải: 200gsm, dày dặn\r\nDáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà\r\nTự hào sản xuất tại Việt Nam",
+                Name = "Áo thun thể thao nam ProMax-S1",
+                Description = "Chất liệu: 100% Polyester\r\nXử lý hoàn thiện vải: Quick-Dry và Wicking\r\nDệt kiểu Mesh, thoáng khí\r\nPhù hợp với: chơi thể thao, mặc ở nhà\r\nKiểu dáng: Regular fit dáng suông\r\nNgười mẫu: 175 cm - 75 kg, mặc size XL",
                 Status = Status.Active
             },
             new Product
             {
                 Id = productId11,
-                Name = "Care &Share Tuổi thơ dữ dội - Pattern tranh",
-                Description = "10% Doanh thu từ mỗi sản phẩm sẽ được quyên góp vào Quỹ Care & Share\r\nChất liệu: 100% Cotton mềm mại\r\nĐịnh lượng vải: 200gsm, dày dặn\r\nDáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà\r\nTự hào sản xuất tại Việt Nam",
+                Name = "Áo thun Marvel Thor Mjolnir",
+                Description = "Là sản phẩm của sự hợp tác giữa Coolmate và Disney - đơn vị sở hữu bản quyền Marvel\r\nChất liệu 100% Cotton mềm mại\r\nĐịnh lượng vải 245gsm dày dặn\r\nPhù hợp với: đi làm, đi chơi, mặc ở nhà\r\nKiểu dáng: Regular\r\nTự hào sản xuất tại Việt Nam",
                 Status = Status.Active
             },
             new Product
             {
                 Id = productId12,
-                Name = "Care &Share Tuổi thơ dữ dội - Tắm mưa",
-                Description = "10% Doanh thu từ mỗi sản phẩm sẽ được quyên góp vào Quỹ Care & Share\r\nChất liệu: 100% Cotton mềm mại\r\nĐịnh lượng vải: 200gsm, dày dặn\r\nDáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà\r\nTự hào sản xuất tại Việt Nam",
+                Name = "Áo thun Marvel Big Logo Hulk",
+                Description = "Là sản phẩm của sự hợp tác giữa Coolmate và Disney - đơn vị sở hữu bản quyền Marvel\r\nChất liệu 100% Cotton mềm mại\r\nĐịnh lượng vải 245gsm dày dặn\r\nPhù hợp với: đi làm, đi chơi, mặc ở nhà\r\nKiểu dáng: Regular\r\nTự hào sản xuất tại Việt Nam",
                 Status = Status.Active
             },
             new Product
@@ -143,12 +144,166 @@ public static class ModelBuilderExtensions
             new Product
             {
                 Id = productId15,
-                Name = "Care &Share Tuổi thơ dữ dội - Bấm chuông",
-                Description = "10% Doanh thu từ mỗi sản phẩm sẽ được quyên góp vào Quỹ Care & Share\r\nChất liệu: 100% Cotton mềm mại\r\nĐịnh lượng vải: 200gsm, dày dặn\r\nDáng áo vừa vặn, phù hợp với đi chơi, đi làm và ở nhà\r\nTự hào sản xuất tại Việt Nam",
+                Name = "Áo thun Marvel Captain America",
+                Description = "Là sản phẩm của sự hợp tác giữa Coolmate và Disney - đơn vị sở hữu bản quyền Marvel\r\nChất liệu 100% Cotton mềm mại\r\nĐịnh lượng vải 245gsm dày dặn\r\nPhù hợp với: đi làm, đi chơi, mặc ở nhà\r\nKiểu dáng: Regular\r\nTự hào sản xuất tại Việt Nam",
                 Status = Status.Active
             });
         #endregion
+        #region Image 
+        var iamge1 = new Guid("9dd02bd4-364a-49a2-94a2-d07e9ce72d8d");
+        var iamge2 = new Guid("5f28acd7-5b28-4eff-8470-aa00b479b032");
+        var iamge3 = new Guid("69872c02-390d-4e06-a171-1c07fc74f7b2");
+        var iamge4 = new Guid("b0c90cab-a051-41da-9802-ab83af74c2a6");
+        var iamge5 = new Guid("e276a5f2-ac33-4d19-8001-b915bb85cbd1");
+        var iamge6 = new Guid("9d2b5026-adb0-4306-9b29-1a7d99a51d2a");
+        var iamge7 = new Guid("311f107f-544f-4c67-9195-a2e220a76ff7");
+        var iamge8 = new Guid("d8251322-9a9f-4580-ba70-69f8e78320e2");
+        var iamge9 = new Guid("027e3184-5cca-436d-a3dc-8d96ac8436cf");
+        var iamge10 = new Guid("89c445bd-fd4d-40a1-8129-2613e62ce612");
+        var iamge11 = new Guid("98f5bafe-936c-4512-a379-9a8b53fa3c9f");
+        var iamge12 = new Guid("1620bd77-a5aa-43fc-a6e5-224b85cd276b");
+        var iamge13 = new Guid("5936551b-8520-4b63-92fd-0fd8a19dd1f3");
+        var iamge14 = new Guid("e11c3fe7-a75e-4065-bc48-ff43446d3dce");
+        var iamge15 = new Guid("389516c7-bb09-4889-a01b-9ffb56a7d105");
+        builder.Entity<ProductImage>().HasData(
+            new ProductImage
+            {
+                Id = iamge1,
+                ProductId = productId1,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder =1
+            },
+            new ProductImage
+            {
+                Id = iamge2,
+                ProductId = productId2,
+                ImagePath = "/user-content/tee-navy-1.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge3,
+                ProductId = productId3,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge4,
+                ProductId = productId4,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge5,
+                ProductId = productId5,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge6,
+                ProductId = productId6,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge7,
+                ProductId = productId7,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge8,
+                ProductId = productId8,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge9,
+                ProductId = productId9,
+                ImagePath = "/user-content/Ao_thun_Marvel_logo_Spiderman18.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge10,
+                ProductId = productId10,
+                ImagePath = "/user-content/_CMM2689.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge11,
+                ProductId = productId11,
+                ImagePath = "/user-content/_CMM0423.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge12,
+                ProductId = productId12,
+                ImagePath = "/user-content/Ao_thun_Marvel_Big_Logo_Hulk16.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge13,
+                ProductId = productId13,
+                ImagePath = "/user-content/ban_linh_trang_1.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge14,
+                ProductId = productId14,
+                ImagePath = "/user-content/23-Ao_thun_Cotton_Summer_Coolwaves_Graphic_-_Cay_dua4.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = iamge15,
+                ProductId = productId15,
+                ImagePath = "/user-content/Ao_thun_Marvel_Captain_America-6.jpg",
+                Caption = "ThumbnailImage",
+                IsDefault = true,
+                SortOrder = 1
+            }
 
+            );
+        #endregion
         #region product in categories
         builder.Entity<ProductInCategory>().HasData(
             new ProductInCategory
@@ -367,6 +522,8 @@ public static class ModelBuilderExtensions
         #endregion
 
         #region product detail
+
+        #region product detail id
         var productDetailId1 = new Guid("9a6ccc00-6b1c-40c5-be61-eb71323c9151");
         var productDetailId2 = new Guid("3643727e-d49c-45f5-bfae-9cd4fbcebb45");
         var productDetailId3 = new Guid("b799297f-d21e-4280-8df9-a3c6788c806e");
@@ -429,694 +586,822 @@ public static class ModelBuilderExtensions
         var productDetailID60 = new Guid("111f1d26-a7e8-429c-a7b9-21427cf975fc");
         var productDetailID61 = new Guid("6b58ba80-86df-4671-a17b-17a65dd4f7b2");
         var productDetailID62 = new Guid("1faa9efb-c6c0-4e5e-888c-0010dede6497");
-        builder.Entity<ProductDetail>().HasData(
-            new ProductDetail
-            {
-                Id = productDetailId1,
-                ProductId = productId1,
-                Stock = 50,
-                Price = 199000,
-                OriginalPrice = 150000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId2,
-                SizeId = sizeId1,
-            },
-            new ProductDetail
-            {
-                Id = productDetailId2,
-                ProductId = productId1,
-                Stock = 50,
-                Price = 209000,
-                OriginalPrice = 150000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId2,
-                SizeId = sizeId2,
-            }, new ProductDetail
-            {
-                Id = productDetailId3,
-                ProductId = productId1,
-                Stock = 50,
-                Price = 219000,
-                OriginalPrice = 150000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId2,
-                SizeId = sizeId3,
-            },
-            new ProductDetail
-            {
-                Id = productDetailId4,
-                ProductId = productId1,
-                Stock = 50,
-                Price = 229000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId2,
-                SizeId = sizeId4
-            },
-            new ProductDetail
-            {
-                Id = productDetailId5,
-                ProductId = productId1,
-                Stock = 50,
-                Price = 239000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId2,
-                SizeId = sizeId5
-            }, new ProductDetail
-            {
-                Id = productDetailId6,
-                ProductId = productId1,
-                Stock = 50,
-                Price = 249000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId2,
-                SizeId = sizeId6
-            }, new ProductDetail
-            {
-                Id = productDetailId7,
-                ProductId = productId2,
-                Stock = 50,
-                Price = 259000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailId8,
-                ProductId = productId2,
-                Stock = 50,
-                Price = 269000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailId9,
-                ProductId = productId2,
-                Stock = 50,
-                Price = 279000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId3
-            }, new ProductDetail
-            {
-                Id = productDetailId10,
-                ProductId = productId2,
-                Stock = 50,
-                Price = 289000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId4
-            }, new ProductDetail
-            {
-                Id = productDetailId11,
-                ProductId = productId2,
-                Stock = 50,
-                Price = 299000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId5
-            }, new ProductDetail
-            {
-                Id = productDetailId12,
-                ProductId = productId2,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId6
-            }, new ProductDetail
-            {
-                Id = productDetailID13,
-                ProductId = productId3,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID14,
-                ProductId = productId3,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID15,
-                ProductId = productId3,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId3
-            }, new ProductDetail
-            {
-                Id = productDetailID16,
-                ProductId = productId3,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId4
-            }, new ProductDetail
-            {
-                Id = productDetailID17,
-                ProductId = productId4,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID18,
-                ProductId = productId4,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID19,
-                ProductId = productId4,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId3
-            }, new ProductDetail
-            {
-                Id = productDetailID20,
-                ProductId = productId4,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId4
-            }, new ProductDetail
-            {
-                Id = productDetailID21,
-                ProductId = productId5,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID22,
-                ProductId = productId5,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID23,
-                ProductId = productId5,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId3
-            }, new ProductDetail
-            {
-                Id = productDetailID24,
-                ProductId = productId5,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId4
-            }, new ProductDetail
-            {
-                Id = productDetailID25,
-                ProductId = productId6,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID26,
-                ProductId = productId6,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID27,
-                ProductId = productId6,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId3
-            }, new ProductDetail
-            {
-                Id = productDetailID28,
-                ProductId = productId6,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId4
-            }, new ProductDetail
-            {
-                Id = productDetailID29,
-                ProductId = productId7,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID30,
-                ProductId = productId7,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID31,
-                ProductId = productId7,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId3
-            }, new ProductDetail
-            {
-                Id = productDetailID32,
-                ProductId = productId7,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId4
-            }, new ProductDetail
-            {
-                Id = productDetailID33,
-                ProductId = productId8,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID34,
-                ProductId = productId8,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID35,
-                ProductId = productId8,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId3
-            }, new ProductDetail
-            {
-                Id = productDetailID36,
-                ProductId = productId8,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId4
-            }, new ProductDetail
-            {
-                Id = productDetailID37,
-                ProductId = productId9,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID38,
-                ProductId = productId9,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID39,
-                ProductId = productId9,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId3
-            }, new ProductDetail
-            {
-                Id = productDetailID40,
-                ProductId = productId9,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId4
-            }, new ProductDetail
-            {
-                Id = productDetailID41,
-                ProductId = productId9,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId5
-            }, new ProductDetail
-            {
-                Id = productDetailID42,
-                ProductId = productId9,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId6
-            }, new ProductDetail
-            {
-                Id = productDetailID43,
-                ProductId = productId10,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID44,
-                ProductId = productId10,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID45,
-                ProductId = productId10,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId3
-            }, new ProductDetail
-            {
-                Id = productDetailID46,
-                ProductId = productId10,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId4
-            }, new ProductDetail
-            {
-                Id = productDetailID47,
-                ProductId = productId11,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID48,
-                ProductId = productId11,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID49,
-                ProductId = productId12,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID50,
-                ProductId = productId12,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID51,
-                ProductId = productId12,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId3
-            }, new ProductDetail
-            {
-                Id = productDetailID52,
-                ProductId = productId12,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId4
-            }, new ProductDetail
-            {
-                Id = productDetailID53,
-                ProductId = productId13,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID54,
-                ProductId = productId13,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID55,
-                ProductId = productId13,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID56,
-                ProductId = productId13,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID57,
-                ProductId = productId14,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID58,
-                ProductId = productId14,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID59,
-                ProductId = productId15,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId1
-            }, new ProductDetail
-            {
-                Id = productDetailID60,
-                ProductId = productId15,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId2
-            }, new ProductDetail
-            {
-                Id = productDetailID61,
-                ProductId = productId15,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId3
-            }, new ProductDetail
-            {
-                Id = productDetailID62,
-                ProductId = productId15,
-                Stock = 50,
-                Price = 309000,
-                OriginalPrice = 200000,
-                CreatedDate = DateTime.Now,
-                MaterialId = materialId1,
-                ColorId = colorId1,
-                SizeId = sizeId4
-            });
-        #endregion        
+        #endregion
+
+        #region product id 1
+        var productDetail1 = new ProductDetail
+        {
+            Id = productDetailId1,
+            ProductId = productId1,
+            Stock = 50,
+            Price = 200000,
+            OriginalPrice = 150000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId2,
+            SizeId = sizeId1,
+        };
+
+        var productDetail2 = new ProductDetail
+        {
+            Id = productDetailId2,
+            ProductId = productId1,
+            Stock = 50,
+            Price = 210000,
+            OriginalPrice = 150000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId2,
+            SizeId = sizeId2,
+        };
+
+        var productDetail3 = new ProductDetail
+        {
+            Id = productDetailId3,
+            ProductId = productId1,
+            Stock = 50,
+            Price = 220000,
+            OriginalPrice = 150000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId2,
+            SizeId = sizeId3,
+        };
+
+        var productDetail4 = new ProductDetail
+        {
+            Id = productDetailId4,
+            ProductId = productId1,
+            Stock = 50,
+            Price = 230000,
+            OriginalPrice = 150000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId2,
+            SizeId = sizeId4
+        };
+
+        var productDetail5 = new ProductDetail
+        {
+            Id = productDetailId5,
+            ProductId = productId1,
+            Stock = 50,
+            Price = 240000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId2,
+            SizeId = sizeId5
+        };
+
+        var productDetail6 = new ProductDetail
+        {
+            Id = productDetailId6,
+            ProductId = productId1,
+            Stock = 50,
+            Price = 250000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId2,
+            SizeId = sizeId6
+        };
+        #endregion
+
+        #region product id 2
+        var productDetail7 = new ProductDetail
+        {
+            Id = productDetailId7,
+            ProductId = productId2,
+            Stock = 50,
+            Price = 260000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId1
+        };
+
+        var productDetail8 = new ProductDetail
+        {
+            Id = productDetailId8,
+            ProductId = productId2,
+            Stock = 50,
+            Price = 270000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId2
+        };
+
+        var productDetail9 = new ProductDetail
+        {
+            Id = productDetailId9,
+            ProductId = productId2,
+            Stock = 50,
+            Price = 280000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId3
+        };
+
+        var productDetail10 = new ProductDetail
+        {
+            Id = productDetailId10,
+            ProductId = productId2,
+            Stock = 50,
+            Price = 290000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId4
+        };
+
+        var productDetail11 = new ProductDetail
+        {
+            Id = productDetailId11,
+            ProductId = productId2,
+            Stock = 50,
+            Price = 300000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId5
+        };
+
+        var productDetail12 = new ProductDetail
+        {
+            Id = productDetailId12,
+            ProductId = productId2,
+            Stock = 50,
+            Price = 310000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId6
+        };
+        #endregion
+
+        #region product id 3
+        var productDetail13 = new ProductDetail
+        {
+            Id = productDetailID13,
+            ProductId = productId3,
+            Stock = 50,
+            Price = 310000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId1
+        };
+
+        var productDetail14 = new ProductDetail
+        {
+            Id = productDetailID14,
+            ProductId = productId3,
+            Stock = 50,
+            Price = 320000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId2
+        };
+
+        var productDetail15 = new ProductDetail
+        {
+            Id = productDetailID15,
+            ProductId = productId3,
+            Stock = 50,
+            Price = 330000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId3
+        };
+
+        var productDetail16 = new ProductDetail
+        {
+            Id = productDetailID16,
+            ProductId = productId3,
+            Stock = 50,
+            Price = 340000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId4
+        };
+
+        var productDetail17 = new ProductDetail
+        {
+            Id = productDetailID17,
+            ProductId = productId3,
+            Stock = 50,
+            Price = 350000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId5
+        };
+
+        var productDetail18 = new ProductDetail
+        {
+            Id = productDetailID18,
+            ProductId = productId3,
+            Stock = 50,
+            Price = 360000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId6
+        };
+        #endregion
+
+        #region product id 4
+        var productDetail19 = new ProductDetail
+        {
+            Id = productDetailID19,
+            ProductId = productId4,
+            Stock = 50,
+            Price = 309000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId1
+        };
+
+        var productDetail20 = new ProductDetail
+        {
+            Id = productDetailID20,
+            ProductId = productId4,
+            Stock = 50,
+            Price = 309000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId2
+        };
+
+        var productDetail21 = new ProductDetail
+        {
+            Id = productDetailID21,
+            ProductId = productId4,
+            Stock = 50,
+            Price = 309000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId3
+        };
+
+        var productDetail22 = new ProductDetail
+        {
+            Id = productDetailID22,
+            ProductId = productId4,
+            Stock = 50,
+            Price = 309000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId4
+        };
+
+        var productDetail23 = new ProductDetail
+        {
+            Id = productDetailID23,
+            ProductId = productId4,
+            Stock = 50,
+            Price = 309000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId5
+        };
+
+        var productDetail24 = new ProductDetail
+        {
+            Id = productDetailID24,
+            ProductId = productId4,
+            Stock = 50,
+            Price = 309000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId6
+        };
+        #endregion
+
+        #region product id 5
+
+        var productDetail25 = new ProductDetail
+        {
+            Id = productDetailID25,
+            ProductId = productId5,
+            Stock = 50,
+            Price = 310000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId1
+        };
+        var productDetail26 = new ProductDetail
+        {
+            Id = productDetailID26,
+            ProductId = productId5,
+            Stock = 50,
+            Price = 320000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId2
+        };
+        var productDetail27 = new ProductDetail
+        {
+            Id = productDetailID27,
+            ProductId = productId5,
+            Stock = 50,
+            Price = 330000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId3
+        };
+        var productDetail28 = new ProductDetail
+        {
+            Id = productDetailID28,
+            ProductId = productId5,
+            Stock = 50,
+            Price = 340000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId4
+        };
+        var productDetail29 = new ProductDetail
+        {
+            Id = productDetailID29,
+            ProductId = productId5,
+            Stock = 50,
+            Price = 350000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId5
+        };
+        var productDetail30 = new ProductDetail
+        {
+            Id = productDetailID30,
+            ProductId = productId5,
+            Stock = 50,
+            Price = 360000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId6
+        };
+
+        #endregion
+
+        #region product id 6
+
+        var productDetail31 = new ProductDetail
+        {
+            Id = productDetailID31,
+            ProductId = productId6,
+            Stock = 50,
+            Price = 310000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId1
+        };
+        var productDetail32 = new ProductDetail
+        {
+            Id = productDetailID32,
+            ProductId = productId6,
+            Stock = 50,
+            Price = 320000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId2
+        };
+        var productDetail33 = new ProductDetail
+        {
+            Id = productDetailID33,
+            ProductId = productId6,
+            Stock = 50,
+            Price = 330000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId3
+        };
+        var productDetail34 = new ProductDetail
+        {
+            Id = productDetailID34,
+            ProductId = productId6,
+            Stock = 50,
+            Price = 340000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId4
+        };
+        var productDetail35 = new ProductDetail
+        {
+            Id = productDetailID35,
+            ProductId = productId6,
+            Stock = 50,
+            Price = 350000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId5
+        };
+        var productDetail36 = new ProductDetail
+        {
+            Id = productDetailID36,
+            ProductId = productId6,
+            Stock = 50,
+            Price = 360000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId6
+        };
+
+        #endregion
+
+        #region product id 7
+
+        var productDetail37 = new ProductDetail
+        {
+            Id = productDetailID37,
+            ProductId = productId7,
+            Stock = 50,
+            Price = 310000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId1
+        };
+        var productDetail38 = new ProductDetail
+        {
+            Id = productDetailID38,
+            ProductId = productId7,
+            Stock = 50,
+            Price = 320000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId2
+        };
+        var productDetail39 = new ProductDetail
+        {
+            Id = productDetailID39,
+            ProductId = productId7,
+            Stock = 50,
+            Price = 330000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId3
+        };
+        var productDetail40 = new ProductDetail
+        {
+            Id = productDetailID40,
+            ProductId = productId7,
+            Stock = 50,
+            Price = 340000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId4
+        };
+        var productDetail41 = new ProductDetail
+        {
+            Id = productDetailID41,
+            ProductId = productId7,
+            Stock = 50,
+            Price = 350000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId5
+        };
+        var productDetail42 = new ProductDetail
+        {
+            Id = productDetailID42,
+            ProductId = productId7,
+            Stock = 50,
+            Price = 360000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId6
+        };
+
+        #endregion
+
+        #region product id 8
+
+        var productDetail43 = new ProductDetail
+        {
+            Id = productDetailID43,
+            ProductId = productId8,
+            Stock = 50,
+            Price = 310000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId1
+        };
+        var productDetail44 = new ProductDetail
+        {
+            Id = productDetailID44,
+            ProductId = productId8,
+            Stock = 50,
+            Price = 320000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId2
+        };
+        var productDetail45 = new ProductDetail
+        {
+            Id = productDetailID45,
+            ProductId = productId8,
+            Stock = 50,
+            Price = 330000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId3
+        };
+        var productDetail46 = new ProductDetail
+        {
+            Id = productDetailID46,
+            ProductId = productId8,
+            Stock = 50,
+            Price = 340000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId4
+        };
+        var productDetail47 = new ProductDetail
+        {
+            Id = productDetailID47,
+            ProductId = productId8,
+            Stock = 50,
+            Price = 350000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId5
+        };
+        var productDetail48 = new ProductDetail
+        {
+            Id = productDetailID48,
+            ProductId = productId8,
+            Stock = 50,
+            Price = 360000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId6
+        };
+
+        #endregion
+
+        #region product id 9
+
+        var productDetail49 = new ProductDetail
+        {
+            Id = productDetailID49,
+            ProductId = productId9,
+            Stock = 50,
+            Price = 310000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId1
+        };
+        var productDetail50 = new ProductDetail
+        {
+            Id = productDetailID50,
+            ProductId = productId9,
+            Stock = 50,
+            Price = 320000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId2
+        };
+        var productDetail51 = new ProductDetail
+        {
+            Id = productDetailID51,
+            ProductId = productId9,
+            Stock = 50,
+            Price = 330000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId3
+        };
+        var productDetail52 = new ProductDetail
+        {
+            Id = productDetailID52,
+            ProductId = productId9,
+            Stock = 50,
+            Price = 340000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId4
+        };
+        var productDetail53 = new ProductDetail
+        {
+            Id = productDetailID53,
+            ProductId = productId9,
+            Stock = 50,
+            Price = 350000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId5
+        };
+        var productDetail54 = new ProductDetail
+        {
+            Id = productDetailID54,
+            ProductId = productId9,
+            Stock = 50,
+            Price = 360000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId6
+        };
+
+        #endregion
+
+        #region product id 10
+
+        var productDetail55 = new ProductDetail
+        {
+            Id = productDetailID55,
+            ProductId = productId10,
+            Stock = 50,
+            Price = 310000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId1
+        };
+        var productDetail56 = new ProductDetail
+        {
+            Id = productDetailID56,
+            ProductId = productId10,
+            Stock = 50,
+            Price = 320000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId2
+        };
+        var productDetail57 = new ProductDetail
+        {
+            Id = productDetailID57,
+            ProductId = productId10,
+            Stock = 50,
+            Price = 330000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId3
+        };
+        var productDetail58 = new ProductDetail
+        {
+            Id = productDetailID58,
+            ProductId = productId10,
+            Stock = 50,
+            Price = 340000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId4
+        };
+        var productDetail59 = new ProductDetail
+        {
+            Id = productDetailID59,
+            ProductId = productId10,
+            Stock = 50,
+            Price = 350000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId5
+        };
+        var productDetail60 = new ProductDetail
+        {
+            Id = productDetailID60,
+            ProductId = productId10,
+            Stock = 50,
+            Price = 360000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId6
+        };
+
+        #endregion
+
+        #region product id 11
+
+        var productDetail61 = new ProductDetail
+        {
+            Id = productDetailID61,
+            ProductId = productId11,
+            Stock = 50,
+            Price = 310000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId3
+        };
+        var productDetail62 = new ProductDetail
+        {
+            Id = productDetailID62,
+            ProductId = productId11,
+            Stock = 50,
+            Price = 320000,
+            OriginalPrice = 200000,
+            CreatedDate = DateTime.Now,
+            MaterialId = materialId1,
+            ColorId = colorId1,
+            SizeId = sizeId4
+        };
+
+        #endregion
+
+        builder.Entity<ProductDetail>().HasData(productDetail1, productDetail2, productDetail3, productDetail4, productDetail5, productDetail6, productDetail7, productDetail8, productDetail9, productDetail10, productDetail11, productDetail12, productDetail13, productDetail14, productDetail15, productDetail16, productDetail17, productDetail18, productDetail19, productDetail20, productDetail21, productDetail22, productDetail23, productDetail24, productDetail25, productDetail26, productDetail27, productDetail28, productDetail29, productDetail30, productDetail31, productDetail32, productDetail33, productDetail34, productDetail35, productDetail36, productDetail37, productDetail38, productDetail39, productDetail40, productDetail41, productDetail42, productDetail43, productDetail44, productDetail45, productDetail46, productDetail47, productDetail48, productDetail49, productDetail50, productDetail51, productDetail52, productDetail53, productDetail54, productDetail55, productDetail56, productDetail57, productDetail58, productDetail59, productDetail60, productDetail61, productDetail62);
+
+        #endregion
 
         #region role
         var roleId1 = new Guid("1090dcdd-b383-417b-9523-d73f0373fbb0");
@@ -1134,7 +1419,7 @@ public static class ModelBuilderExtensions
             {
                 Id = roleId2,
                 Name = "employee",
-                NormalizedName="EMPLOYEE",
+                NormalizedName = "EMPLOYEE",
                 Description = "Employee role"
             },
             new AppRole
@@ -1480,6 +1765,7 @@ public static class ModelBuilderExtensions
         #endregion
 
         #region order
+        #region order id
         var orderId1 = new Guid("f602aed4-37de-446c-8b4d-d5e407a4bf33");
         var orderId2 = new Guid("4f31c9cd-6fdf-4d3a-9d8b-6f1d3d5c1c24");
         var orderId3 = new Guid("7afa0b0b-1c0d-4bd4-a1e8-9f1a38a5e5ab");
@@ -1492,9 +1778,24 @@ public static class ModelBuilderExtensions
         var orderId10 = new Guid("25610f9a-ecf7-4202-a6ab-dcbe86c20bb8");
         var orderId11 = new Guid("5f312584-d47e-4e8b-bc9c-584657befbf6");
         var orderId12 = new Guid("41e0267d-90e0-4429-b3c6-c1eb650bc680");
+        var orderId13 = new Guid("2b621949-1c0a-48f0-874f-3f01f7300ce8");
+        var orderId14 = new Guid("1e347471-5095-4e8d-9753-e33c1eb551f0");
+        var orderId15 = new Guid("4b9659a7-4b0b-4935-8f9d-b7c7f22d9f50");
+        var orderId16 = new Guid("db5e550b-3ff7-4efa-a27e-270970d5b396");
+        var orderId17 = new Guid("db2522f0-fdd5-45f3-9f5b-cdf1320e14b8");
+        var orderId18 = new Guid("a9b47112-adc2-44d6-bec1-1c4d51d6b1a6");
+        var orderId19 = new Guid("0da98ae9-3b88-453c-af1b-b5e7fa1a0b25");
+        var orderId20 = new Guid("9eef26cf-0fa7-4f11-9a34-25b8d98bf61e");
+        var orderId21 = new Guid("d4af834f-e04d-4130-9023-8eb9b5e88b94");
+        var orderId22 = new Guid("7ab228bb-55a0-4b43-ae24-c93488420591");
+        var orderId23 = new Guid("36d18042-c5cd-4d8e-a3da-f083ced04457");
+        var orderId24 = new Guid("636e4f56-0470-4b8a-b13b-58faac1cffb3");
+        var orderId25 = new Guid("504a9755-2870-45ef-8766-df4f603f175e");
+        #endregion
 
         DateTime createdDate = DateTime.Now;
 
+        #region order 1
         var order1 = new Order
         {
             Id = orderId1,
@@ -1507,10 +1808,30 @@ public static class ModelBuilderExtensions
             ShipName = "Alice",
             ShipPhoneNumber = "0123456789",
             ShipAddress = "123 Main St.",
-            Total = 1000000,
+            Total = 2500000,
             OrderStatus = OrderStatus.Pending
         };
 
+        var orderDetail1 = new OrderDetail
+        {
+            OrderId = orderId1,
+            ProductDetailId = productDetailId1,
+            Quantity = 5,
+            Price = 200000,
+            Status = Status.Active
+        };
+
+        var orderDetail2 = new OrderDetail
+        {
+            OrderId = orderId1,
+            ProductDetailId = productDetailId2,
+            Quantity = 5,
+            Price = 210000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 2
         var order2 = new Order
         {
             Id = orderId2,
@@ -1524,11 +1845,29 @@ public static class ModelBuilderExtensions
             ShipName = "Alice",
             ShipPhoneNumber = "0123456789",
             ShipAddress = "1010 Oak Dr.",
-            Total = 2000000,
+            Total = 2250000,
             OrderStatus = OrderStatus.Pending
-
         };
 
+        var orderDetail3 = new OrderDetail
+        {
+            OrderId = orderId2,
+            ProductDetailId = productDetailId3,
+            Quantity = 5,
+            Price = 220000,
+            Status = Status.Active
+        };
+        var orderDetail4 = new OrderDetail
+        {
+            OrderId = orderId2,
+            ProductDetailId = productDetailId4,
+            Quantity = 5,
+            Price = 230000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 3
         var order3 = new Order
         {
             Id = orderId3,
@@ -1541,10 +1880,28 @@ public static class ModelBuilderExtensions
             ShipName = "Alice",
             ShipPhoneNumber = "0123456789",
             ShipAddress = "1111 Pine Ln.",
-            Total = 3000000,
+            Total = 2250000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail5 = new OrderDetail
+        {
+            OrderId = orderId3,
+            ProductDetailId = productDetailId5,
+            Quantity = 5,
+            Price = 240000,
+            Status = Status.Active
+        };
+        var orderDetail6 = new OrderDetail
+        {
+            OrderId = orderId3,
+            ProductDetailId = productDetailId2,
+            Quantity = 5,
+            Price = 210000,
+            Status = Status.Active
+        };
+        #endregion
 
+        #region order 4
         var order4 = new Order
         {
             Id = orderId4,
@@ -1557,10 +1914,20 @@ public static class ModelBuilderExtensions
             ShipName = "Alice",
             ShipPhoneNumber = "0123456789",
             ShipAddress = "123 Main St.",
-            Total = 290000,
+            Total = 1200000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail7 = new OrderDetail
+        {
+            OrderId = orderId4,
+            ProductDetailId = productDetailId5,
+            Quantity = 5,
+            Price = 240000,
+            Status = Status.Active
+        };
+        #endregion
 
+        #region order 5
         var order5 = new Order
         {
             Id = orderId5,
@@ -1570,10 +1937,20 @@ public static class ModelBuilderExtensions
             ShipName = "0987654321",
             ShipPhoneNumber = "0987654321",
             ShipAddress = "456 Elm St.",
-            Total = 275000,
+            Total = 1200000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail8 = new OrderDetail
+        {
+            OrderId = orderId5,
+            ProductDetailId = productDetailId5,
+            Quantity = 5,
+            Price = 240000,
+            Status = Status.Active
+        };
+        #endregion
 
+        #region order 6
         var order6 = new Order
         {
             Id = orderId6,
@@ -1583,10 +1960,20 @@ public static class ModelBuilderExtensions
             ShipName = "0987654321",
             ShipPhoneNumber = "0987654321",
             ShipAddress = "789 Maple Ave.",
-            Total = 129000,
+            Total = 1200000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail9 = new OrderDetail
+        {
+            OrderId = orderId6,
+            ProductDetailId = productDetailId5,
+            Quantity = 5,
+            Price = 240000,
+            Status = Status.Active
+        };
+        #endregion
 
+        #region order 7
         var order7 = new Order
         {
             Id = orderId7,
@@ -1596,10 +1983,28 @@ public static class ModelBuilderExtensions
             ShipName = "Charlie",
             ShipPhoneNumber = "0987654321",
             ShipAddress = "1212 Cedar Blvd.",
-            Total = 232000,
+            Total = 2480000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail10 = new OrderDetail
+        {
+            OrderId = orderId7,
+            ProductDetailId = productDetailId10,
+            Quantity = 4,
+            Price = 290000,
+            Status = Status.Active
+        };
+        var orderDetail11 = new OrderDetail
+        {
+            OrderId = orderId7,
+            ProductDetailId = productDetailID45,
+            Quantity = 4,
+            Price = 330000,
+            Status = Status.Active
+        };
+        #endregion
 
+        #region order 8
         var order8 = new Order
         {
             Id = orderId8,
@@ -1609,10 +2014,20 @@ public static class ModelBuilderExtensions
             ShipName = "Charlie",
             ShipPhoneNumber = "0987654321",
             ShipAddress = "1212 Cedar Blvd.",
-            Total = 232000,
+            Total = 680000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail12 = new OrderDetail
+        {
+            OrderId = orderId8,
+            ProductDetailId = productDetailID40,
+            Quantity = 2,
+            Price = 340000,
+            Status = Status.Active
+        };
+        #endregion
 
+        #region order 9
         var order9 = new Order
         {
             Id = orderId9,
@@ -1622,10 +2037,28 @@ public static class ModelBuilderExtensions
             ShipName = "Charlie",
             ShipPhoneNumber = "0987654321",
             ShipAddress = "1212 Cedar Blvd.",
-            Total = 232000,
+            Total = 2100000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail13 = new OrderDetail
+        {
+            OrderId = orderId9,
+            ProductDetailId = productDetailID30,
+            Quantity = 4,
+            Price = 360000,
+            Status = Status.Active
+        };
+        var orderDetail14 = new OrderDetail
+        {
+            OrderId = orderId9,
+            ProductDetailId = productDetailID15,
+            Quantity = 2,
+            Price = 330000,
+            Status = Status.Active
+        };
+        #endregion
 
+        #region order 10
         var order10 = new Order
         {
             Id = orderId10,
@@ -1635,10 +2068,28 @@ public static class ModelBuilderExtensions
             ShipName = "Charlie",
             ShipPhoneNumber = "0987654321",
             ShipAddress = "1212 Cedar Blvd.",
-            Total = 232000,
+            Total = 949000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail15 = new OrderDetail
+        {
+            OrderId = orderId10,
+            ProductDetailId = productDetailID23,
+            Quantity = 1,
+            Price = 309000,
+            Status = Status.Active
+        };
+        var orderDetail16 = new OrderDetail
+        {
+            OrderId = orderId10,
+            ProductDetailId = productDetailID32,
+            Quantity = 2,
+            Price = 320000,
+            Status = Status.Active
+        };
+        #endregion
 
+        #region order 11
         var order11 = new Order
         {
             Id = orderId11,
@@ -1648,10 +2099,28 @@ public static class ModelBuilderExtensions
             ShipName = "Charlie",
             ShipPhoneNumber = "0987654321",
             ShipAddress = "1212 Cedar Blvd.",
-            Total = 232000,
+            Total = 1400000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail17 = new OrderDetail
+        {
+            OrderId = orderId11,
+            ProductDetailId = productDetailID60,
+            Quantity = 3,
+            Price = 360000,
+            Status = Status.Active
+        };
+        var orderDetail18 = new OrderDetail
+        {
+            OrderId = orderId11,
+            ProductDetailId = productDetailID62,
+            Quantity = 1,
+            Price = 320000,
+            Status = Status.Active
+        };
+        #endregion
 
+        #region order 12
         var order12 = new Order
         {
             Id = orderId12,
@@ -1661,185 +2130,461 @@ public static class ModelBuilderExtensions
             ShipName = "Charlie",
             ShipPhoneNumber = "0987654321",
             ShipAddress = "1212 Cedar Blvd.",
-            Total = 232000,
+            Total = 1298000,
             OrderStatus = OrderStatus.Pending
-        };
-
-        builder.Entity<Order>().HasData(order1, order2, order3, order4, order5, order6, order7, order8, order9, order10, order11, order12);
-        #endregion
-
-        #region order detail
-        var orderDetail1 = new OrderDetail
-        {
-            OrderId = orderId1,
-            ProductDetailId = productDetailId1,
-            Quantity = 5,
-            Price = 199000,
-            Status = Status.Active
-        };
-
-        var orderDetail2 = new OrderDetail
-        {
-            OrderId = orderId1,
-            ProductDetailId = productDetailId2,
-            Quantity = 5,
-            Price = 209000,
-            Status = Status.Active
-        };
-        var orderDetail3 = new OrderDetail
-        {
-            OrderId = orderId2,
-            ProductDetailId = productDetailId3,
-            Quantity = 5,
-            Price = 219000,
-            Status = Status.Active
-        };
-        var orderDetail4 = new OrderDetail
-        {
-            OrderId = orderId2,
-            ProductDetailId = productDetailId4,
-            Quantity = 5,
-            Price = 229000,
-            Status = Status.Active
-        };
-        var orderDetail5 = new OrderDetail
-        {
-            OrderId = orderId3,
-            ProductDetailId = productDetailId5,
-            Quantity = 5,
-            Price = 239000,
-            Status = Status.Active
-        };
-        var orderDetail6 = new OrderDetail
-        {
-            OrderId = orderId3,
-            ProductDetailId = productDetailId2,
-            Quantity = 5,
-            Price = 209000,
-            Status = Status.Active
-        };
-        var orderDetail7 = new OrderDetail
-        {
-            OrderId = orderId4,
-            ProductDetailId = productDetailId5,
-            Quantity = 5,
-            Price = 239000,
-            Status = Status.Active
-        };
-        var orderDetail8 = new OrderDetail
-        {
-            OrderId = orderId5,
-            ProductDetailId = productDetailId5,
-            Quantity = 5,
-            Price = 239000,
-            Status = Status.Active
-        };
-        var orderDetail9 = new OrderDetail
-        {
-            OrderId = orderId6,
-            ProductDetailId = productDetailId5,
-            Quantity = 5,
-            Price = 239000,
-            Status = Status.Active
-        };
-        var orderDetail10 = new OrderDetail
-        {
-            OrderId = orderId7,
-            ProductDetailId = productDetailId10,
-            Quantity = 4,
-            Price = 289000,
-            Status = Status.Active
-        };
-        var orderDetail11 = new OrderDetail
-        {
-            OrderId = orderId7,
-            ProductDetailId = productDetailID45,
-            Quantity = 4,
-            Price = 289000,
-            Status = Status.Active
-        };
-        var orderDetail12 = new OrderDetail
-        {
-            OrderId = orderId8,
-            ProductDetailId = productDetailID40,
-            Quantity = 4,
-            Price = 289000,
-            Status = Status.Active
-        };
-        var orderDetail13 = new OrderDetail
-        {
-            OrderId = orderId9,
-            ProductDetailId = productDetailID30,
-            Quantity = 4,
-            Price = 289000,
-            Status = Status.Active
-        };
-        var orderDetail14 = new OrderDetail
-        {
-            OrderId = orderId9,
-            ProductDetailId = productDetailID15,
-            Quantity = 4,
-            Price = 289000,
-            Status = Status.Active
-        };
-        var orderDetail15 = new OrderDetail
-        {
-            OrderId = orderId10,
-            ProductDetailId = productDetailID23,
-            Quantity = 4,
-            Price = 289000,
-            Status = Status.Active
-        };
-        var orderDetail16 = new OrderDetail
-        {
-            OrderId = orderId10,
-            ProductDetailId = productDetailID32,
-            Quantity = 4,
-            Price = 289000,
-            Status = Status.Active
-        };
-        var orderDetail17 = new OrderDetail
-        {
-            OrderId = orderId11,
-            ProductDetailId = productDetailID60,
-            Quantity = 4,
-            Price = 289000,
-            Status = Status.Active
-        };
-        var orderDetail18 = new OrderDetail
-        {
-            OrderId = orderId11,
-            ProductDetailId = productDetailID62,
-            Quantity = 4,
-            Price = 289000,
-            Status = Status.Active
-        };
-        var orderDetail19 = new OrderDetail
+        }; var orderDetail19 = new OrderDetail
         {
             OrderId = orderId12,
             ProductDetailId = productDetailID58,
-            Quantity = 4,
-            Price = 289000,
+            Quantity = 2,
+            Price = 340000,
             Status = Status.Active
         };
         var orderDetail20 = new OrderDetail
         {
             OrderId = orderId12,
             ProductDetailId = productDetailID21,
-            Quantity = 4,
-            Price = 289000,
+            Quantity = 1,
+            Price = 309000,
             Status = Status.Active
         };
         var orderDetail21 = new OrderDetail
         {
             OrderId = orderId12,
             ProductDetailId = productDetailID24,
-            Quantity = 4,
-            Price = 289000,
+            Quantity = 1,
+            Price = 309000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 13
+        var order13 = new Order
+        {
+            Id = orderId13,
+            UserId = userId5,
+            OrderCode = "230707FYufCS6av9hB9Q",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 919000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail22 = new OrderDetail
+        {
+            OrderId = orderId13,
+            ProductDetailId = productDetailID24,
+            Quantity = 1,
+            Price = 309000,
+            Status = Status.Active
+        };
+        var orderDetail23 = new OrderDetail
+        {
+            OrderId = orderId13,
+            ProductDetailId = productDetailID49,
+            Quantity = 2,
+            Price = 310000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 14
+        var order14 = new Order
+        {
+            Id = orderId14,
+            UserId = userId6,
+            OrderCode = "230801SXEgJCBEeHL7d1",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 1570000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail24 = new OrderDetail
+        {
+            OrderId = orderId14,
+            ProductDetailId = productDetailId11,
+            Quantity = 1,
+            Price = 300000,
+            Status = Status.Active
+        };
+        var orderDetail25 = new OrderDetail
+        {
+            OrderId = orderId14,
+            ProductDetailId = productDetailId9,
+            Quantity = 2,
+            Price = 280000,
+            Status = Status.Active
+        };
+        var orderDetail26 = new OrderDetail
+        {
+            OrderId = orderId14,
+            ProductDetailId = productDetailID35,
+            Quantity = 1,
+            Price = 350000,
+            Status = Status.Active
+        };
+        var orderDetail27 = new OrderDetail
+        {
+            OrderId = orderId14,
+            ProductDetailId = productDetailID42,
+            Quantity = 1,
+            Price = 360000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 15
+        var order15 = new Order
+        {
+            Id = orderId15,
+            UserId = userId5,
+            OrderCode = "230801VIWgz33iG8yapt",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 300000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail28 = new OrderDetail
+        {
+            OrderId = orderId15,
+            ProductDetailId = productDetailId11,
+            Quantity = 1,
+            Price = 300000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 16
+
+        var order16 = new Order
+        {
+            Id = orderId16,
+            UserId = userId7,
+            OrderCode = "230801Qozs4uGrAuVq8E",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 350000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail29 = new OrderDetail
+        {
+            OrderId = orderId16,
+            ProductDetailId = productDetailID47,
+            Quantity = 1,
+            Price = 350000,
             Status = Status.Active
         };
 
-        builder.Entity<OrderDetail>().HasData(orderDetail1, orderDetail2, orderDetail3, orderDetail4, orderDetail5, orderDetail6, orderDetail7, orderDetail8, orderDetail9, orderDetail10, orderDetail11, orderDetail12, orderDetail13, orderDetail14, orderDetail15, orderDetail16, orderDetail17, orderDetail18, orderDetail19, orderDetail20, orderDetail21);
+        #endregion
+
+        #region order 17
+        var order17 = new Order
+        {
+            Id = orderId17,
+            UserId = userId9,
+            OrderCode = "230801o0pnBzrpz8Fbym",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 330000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderdetail30 = new OrderDetail
+        {
+            OrderId = orderId17,
+            ProductDetailId = productDetailID39,
+            Quantity = 1,
+            Price = 330000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 18
+        var order18 = new Order
+        {
+            Id = orderId18,
+            UserId = userId8,
+            OrderCode = "230801hQxR49OV9jeFFe",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 309000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail31 = new OrderDetail
+        {
+            OrderId = orderId18,
+            ProductDetailId = productDetailID24,
+            Quantity = 1,
+            Price = 309000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 19
+        var order19 = new Order
+        {
+            Id = orderId19,
+            UserId = userId9,
+            OrderCode = "230801WktWctiKr8vNEi",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 340000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail32 = new OrderDetail
+        {
+            OrderId = orderId19,
+            ProductDetailId = productDetailID16,
+            Quantity = 1,
+            Price = 340000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 20
+        var order20 = new Order
+        {
+            Id = orderId20,
+            UserId = userId11,
+            OrderCode = "230801CNrbpk8h3XReKq",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 360000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail33 = new OrderDetail
+        {
+            OrderId = orderId20,
+            ProductDetailId = productDetailID54,
+            Quantity = 1,
+            Price = 360000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 21
+        var order21 = new Order
+        {
+            Id = orderId21,
+            UserId = userId10,
+            OrderCode = "2308018XIRfv5jmzXhiM",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 350000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail34 = new OrderDetail
+        {
+            OrderId = orderId21,
+            ProductDetailId = productDetailID41,
+            Quantity = 1,
+            Price = 350000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 22
+        var order22 = new Order
+        {
+            Id = orderId22,
+            UserId = userId12,
+            OrderCode = "2308018XIRfv5jmzXhiM",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 330000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail35 = new OrderDetail
+        {
+            OrderId = orderId22,
+            ProductDetailId = productDetailID39,
+            Quantity = 1,
+            Price = 330000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 23
+        var order23 = new Order
+        {
+            Id = orderId23,
+            UserId = userId13,
+            OrderCode = "230801iiuE7NDZigm9Zc",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 360000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail36 = new OrderDetail
+        {
+            OrderId = orderId23,
+            ProductDetailId = productDetailID36,
+            Quantity = 1,
+            Price = 360000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 24
+        var order24 = new Order
+        {
+            Id = orderId24,
+            UserId = userId14,
+            OrderCode = "230801G0F0PyhkHPp5OS",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 360000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail37 = new OrderDetail
+        {
+            OrderId = orderId24,
+            ProductDetailId = productDetailID36,
+            Quantity = 1,
+            Price = 360000,
+            Status = Status.Active
+        };
+        #endregion
+
+        #region order 25
+        var order25 = new Order
+        {
+            Id = orderId25,
+            UserId = userId15,
+            OrderCode = "230801sYy2TamPTiUl52",
+            CreatedDate = createdDate,
+            CompletedDate = createdDate.AddMinutes(20),
+            ShipName = "Charlie",
+            ShipPhoneNumber = "0987654321",
+            ShipAddress = "1212 Cedar Blvd.",
+            Total = 360000,
+            OrderStatus = OrderStatus.Pending
+        };
+        var orderDetail38 = new OrderDetail
+        {
+            OrderId = orderId25,
+            ProductDetailId = productDetailID36,
+            Quantity = 1,
+            Price = 360000,
+            Status = Status.Active
+        };
+        #endregion
+
+
+        builder.Entity<Order>().HasData(order1, order2, order3, order4, order5, order6, order7, order8, order9, order10, order11, order12, order13, order14, order15, order16, order17, order18, order19, order20, order21, order22, order23, order24, order25);
+        builder.Entity<OrderDetail>().HasData(orderDetail1, orderDetail2, orderDetail3, orderDetail4, orderDetail5, orderDetail6, orderDetail7, orderDetail8, orderDetail9, orderDetail10, orderDetail11, orderDetail12, orderDetail13, orderDetail14, orderDetail15, orderDetail16, orderDetail17, orderDetail18, orderDetail19, orderDetail20, orderDetail21, orderDetail22, orderDetail23, orderDetail24, orderDetail25, orderDetail26, orderDetail27, orderDetail28, orderDetail29, orderdetail30, orderDetail31, orderDetail32, orderDetail33, orderDetail34, orderDetail35, orderDetail36, orderDetail37, orderDetail38);
+        #endregion
+
+        #region cart
+
+        var cart1 = new Cart
+        {
+            UserId = userId4,
+            Description = "1",
+        };
+
+        var cart2 = new Cart
+        {
+            UserId = userId5,
+            Description = "2",
+        };
+
+        var cart3 = new Cart
+        {
+            UserId = userId6,
+            Description = "3",
+        };
+
+        var cart4 = new Cart
+        {
+            UserId = userId7,
+            Description = "4",
+        };
+
+        var cart5 = new Cart
+        {
+            UserId = userId8,
+            Description = "5",
+        };
+
+        var cart6 = new Cart
+        {
+            UserId = userId9,
+            Description = "6",
+        };
+
+        var cart7 = new Cart
+        {
+            UserId = userId10,
+            Description = "7",
+        };
+
+        var cart8 = new Cart
+        {
+            UserId = userId11,
+            Description = "8",
+        };
+
+        var cart9 = new Cart
+        {
+            UserId = userId12,
+            Description = "9",
+        };
+
+        var cart10 = new Cart
+        {
+            UserId = userId13,
+            Description = "10",
+        };
+
+        var cart11 = new Cart
+        {
+            UserId = userId14,
+            Description = "11",
+        };
+
+        var cart12 = new Cart
+        {
+            UserId = userId15,
+            Description = "12",
+        };
+
+        builder.Entity<Cart>().HasData(cart1, cart2, cart3, cart4, cart5, cart6, cart7, cart8, cart9, cart10, cart11, cart12);
+
         #endregion
     }
 }

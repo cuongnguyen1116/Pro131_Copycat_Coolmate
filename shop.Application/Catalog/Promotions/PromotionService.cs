@@ -1,19 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using shop.Application.Common.Utilities;
 using shop.Data.Context;
 using shop.Data.Entities;
-using shop.Data.Enums;
 using shop.Utilities.Exceptions;
-using shop.ViewModels.Catalog.Materials;
 using shop.ViewModels.Catalog.Promotions;
 using shop.ViewModels.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace shop.Application.Catalog.Promotions
 {
@@ -22,11 +13,11 @@ namespace shop.Application.Catalog.Promotions
 
         public PromotionService(ShopDbContext context) : base(context)
         { }
-        
+
 
         public async Task<bool> Create(PromotionCreateRequest request)
         {
-            string uniqueCode = UtilityServices.GenerateUniqueCode(_context, 12);          
+            string uniqueCode = UtilityServices.GenerateUniqueCode(_context, 12);
             var Promotion = new Promotion
             {
                 Id = Guid.NewGuid(),
@@ -55,7 +46,8 @@ namespace shop.Application.Catalog.Promotions
             int totalRow = await query.CountAsync();
 
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
-                .Take(request.PageSize).Select(p => new PromotionVM {
+                .Take(request.PageSize).Select(p => new PromotionVM
+                {
                     Id = p.Id,
                     PromotionCode = p.PromotionCode,
                     StartDate = p.StartDate,

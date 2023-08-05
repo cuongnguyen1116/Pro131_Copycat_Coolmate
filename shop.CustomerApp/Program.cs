@@ -1,7 +1,20 @@
+using LazZiya.ExpressLocalization;
+using shop.ApiIntegration.Categories;
+using shop.ApiIntegration.Products;
+using shop.ApiIntegration.Users;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
+builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(30));
+builder.Services.AddTransient<IProductApiClient, ProductApiClient>();
+builder.Services.AddTransient<ICategoryApiClient, CategoryApiClient>();
+//builder.Services.AddTransient<ISharedCultureLocalizer, SharedCultureLocalizer>();
+//builder.Services.AddTransient<IUserApiClient, UserApiClient>();
+
 
 var app = builder.Build();
 
@@ -17,11 +30,26 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
+//app.UseRequestLocalization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapControllerRoute(
+//                     name: "Product Detail",
+//                     pattern: "/product/{id}", new
+//                     {
+//                         controller = "Product",
+//                         action = "Detail"
+//                     });
+//    endpoints.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
+//});
 
 app.Run();
