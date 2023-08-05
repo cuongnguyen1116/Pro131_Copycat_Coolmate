@@ -27,7 +27,7 @@ namespace shop.CustomerApp.Controllers
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
-            var data = await _productApiClient.GetAllProductProp(request);
+            var data = await _productApiClient.GetAllProduct(request);
             //var viewmodel = new ProductDetailViewModel()
             //{
             //    Products = data

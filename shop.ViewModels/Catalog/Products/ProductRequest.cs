@@ -3,7 +3,7 @@ using shop.Data.Enums;
 
 namespace shop.ViewModels.Catalog.Products;
 
-public class ProductPropRequest
+public class ProductRequest
 {
     public Guid? Id { get; set; }
     public string Name { get; set; }

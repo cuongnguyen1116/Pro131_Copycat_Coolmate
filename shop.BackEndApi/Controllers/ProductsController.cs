@@ -18,38 +18,38 @@ public class ProductsController : ControllerBase
     }
 
     // Bảng ProductDetail
-    [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] ProductPagingRequest request)
+    [HttpGet("productdetails")]
+    public async Task<IActionResult> GetAllProductDetail([FromQuery] ProductPagingRequest request)
     {
-        var result = await _productServices.GetAll(request);
+        var result = await _productServices.GetAllProductDetail(request);
         return Ok(result);
     }
 
     //Bảng product
-    [HttpGet("propductprops")]/*?keyword={request.Keyword}&categoryId={request.CategoryId}*/
-    public async Task<IActionResult> GetAllProductProp([FromQuery] ProductPagingRequest request)
+    [HttpGet("products")]/*?keyword={request.Keyword}&categoryId={request.CategoryId}*/
+    public async Task<IActionResult> GetAllProduct([FromQuery] ProductPagingRequest request)
     {
-        var result = await _productServices.GetAllProductProp(request);
+        var result = await _productServices.GetAllProduct(request);
         return Ok(result);
     }
 
-    [HttpGet("listPropductProp")]
-    public async Task<IActionResult> GetListProductProp()
+    [HttpGet("listPropduct")]
+    public async Task<IActionResult> GetListProduct()
     {
-        var result = await _productServices.GetListProductProp();
+        var result = await _productServices.GetListProduct();
         return Ok(result);
     }
 
     // Bảng ProductDetail
-    [HttpPost("create")]
+    [HttpPost("create-productdetail")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
+    public async Task<IActionResult> CreateProductDetail([FromForm] ProductDetailCreateRequest request)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        var sanphamId = await _productServices.Create(request);
+        var sanphamId = await _productServices.CreateProductDetail(request);
         if (sanphamId == false)
             return BadRequest();
         else
@@ -60,36 +60,36 @@ public class ProductsController : ControllerBase
     }
 
     // Bảng ProductDetail
-    [HttpPut("update/{productDetailId}")]
+    [HttpPut("update-productdetail/{productDetailId}")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Update([FromRoute] Guid productDetailId, [FromForm] ProductUpdateRequest request)
+    public async Task<IActionResult> UpdateProductDetail([FromRoute] Guid productDetailId, [FromForm] ProductDetailUpdateRequest request)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
         request.Id = productDetailId;
-        var check = await _productServices.Update(request);
+        var check = await _productServices.UpdateProductDetail(request);
         if (check == false)
             return BadRequest();
         return Ok();
     }
 
     // Bảng ProductDetail
-    [HttpDelete("delete/{productDetailId}")]
-    public async Task<IActionResult> Delete(Guid productDetailId)
+    [HttpDelete("delete-productdetail/{productDetailId}")]
+    public async Task<IActionResult> DeleteProductDetail(Guid productDetailId)
     {
-        var check = await _productServices.Delete(productDetailId);
+        var check = await _productServices.DeleteProductDetail(productDetailId);
         if (check == false)
             return BadRequest();
         return Ok();
     }
 
     // Bảng ProductDetail
-    [HttpGet("product/{productDetailId}")]
-    public async Task<IActionResult> GetById(Guid productDetailId)
+    [HttpGet("productdetail/{productDetailId}")]
+    public async Task<IActionResult> GetByIdProductDetail(Guid productDetailId)
     {
-        var product = await _productServices.GetById(productDetailId);
+        var product = await _productServices.GetByIdProductDetail(productDetailId);
         if (product == null)
         {
             return BadRequest("Can't find product");
@@ -98,15 +98,15 @@ public class ProductsController : ControllerBase
     }
 
     //Bang Product
-    [HttpPost("createproductprop")]
+    [HttpPost("createproduct")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> CreateProductProp([FromForm] ProductPropRequest request)
+    public async Task<IActionResult> CreateProduct([FromForm] ProductRequest request)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        var sanphamId = await _productServices.CreateProductProp(request);
+        var sanphamId = await _productServices.CreateProduct(request);
         if (sanphamId == false)
             return BadRequest();
         else
@@ -117,36 +117,36 @@ public class ProductsController : ControllerBase
     }
 
     //Bang Product
-    [HttpPut("updateProductProp/{productPropId}")]
+    [HttpPut("updateProduct/{productId}")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> UpdateProductProp([FromRoute] Guid productPropId, [FromForm] ProductPropRequest request)
+    public async Task<IActionResult> UpdateProduct([FromRoute] Guid productId, [FromForm] ProductRequest request)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        request.Id = productPropId;
-        var check = await _productServices.UpdateProductProp(request);
+        request.Id = productId;
+        var check = await _productServices.UpdateProduct(request);
         if (check == false)
             return BadRequest();
         return Ok();
     }
 
     //Bang Product
-    [HttpDelete("deleteProductProp/{productPropId}")]
-    public async Task<IActionResult> DeleteProductProp(Guid productPropId)
+    [HttpDelete("deleteProduct/{productId}")]
+    public async Task<IActionResult> DeleteProduct(Guid productId)
     {
-        var check = await _productServices.DeleteProductProp(productPropId);
+        var check = await _productServices.DeleteProduct(productId);
         if (check == false)
             return BadRequest();
         return Ok();
     }
 
     //Bang Product
-    [HttpGet("productprop/{productPropId}")]
-    public async Task<IActionResult> GetByIdProductProp(Guid productPropId)
+    [HttpGet("product/{productId}")]
+    public async Task<IActionResult> GetByIdProduct(Guid productId)
     {
-        var product = await _productServices.GetByIdProductProp(productPropId);
+        var product = await _productServices.GetByIdProduct(productId);
         if (product == null)
         {
             return BadRequest("Can't find product");
@@ -154,7 +154,7 @@ public class ProductsController : ControllerBase
         return Ok(product);
     }
 
-    [HttpPut("productProp/{id}/categories")]
+    [HttpPut("product/{id}/categories")]
     public async Task<IActionResult> CategoryAssign(Guid id, [FromBody] CategoryAssignRequest request)
     {
         if (!ModelState.IsValid)

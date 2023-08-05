@@ -2,7 +2,7 @@
 
 namespace shop.ViewModels.Catalog.Products;
 
-public class ProductCreateRequest
+public class ProductDetailCreateRequest
 {
     public Guid? ProductId { get; set; }
     public Guid? ColorId { get; set; }

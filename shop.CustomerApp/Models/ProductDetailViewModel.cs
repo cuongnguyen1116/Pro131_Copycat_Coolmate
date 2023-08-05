@@ -7,8 +7,8 @@ namespace shop.CustomerApp.Models
     {
         public CategoryVm Category { get; set; }
 
-        public ProductVm Product { get; set; }
+        public ProductDetailVm Product { get; set; }
 
-        public List<ProductPropVM> Products { get; set; }
+        public List<ProductVm> Products { get; set; }
     }
 }

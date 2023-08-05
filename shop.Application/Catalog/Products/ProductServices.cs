@@ -25,8 +25,8 @@ public class ProductServices : IProductServices
         _storageService = storageService;
     }
 
-    //Phân trang list sản phẩm
-    public async Task<PagedResult<ProductVm>> GetAll(ProductPagingRequest request)
+    // table productdetail
+    public async Task<PagedResult<ProductDetailVm>> GetAllProductDetail(ProductPagingRequest request)
     {
         var query = from pd in _context.ProductDetails
                     join p in _context.Products on pd.ProductId equals p.Id
@@ -46,7 +46,7 @@ public class ProductServices : IProductServices
         //gán productvm với data từ query
         var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
-                .Select(x => new ProductVm
+                .Select(x => new ProductDetailVm
                 {
                     Id = x.pd.Id,
                     Price = x.pd.Price,
@@ -63,7 +63,7 @@ public class ProductServices : IProductServices
                 }).ToListAsync();
 
         //lấy data gán vào list item
-        var pagedResult = new PagedResult<ProductVm>()
+        var pagedResult = new PagedResult<ProductDetailVm>()
         {
             TotalRecords = totalRow,
             PageSize = request.PageSize,
@@ -82,8 +82,8 @@ public class ProductServices : IProductServices
         await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
         return "/" + USER_CONTENT_FOLDER_NAME + "/" + fileName;
     }
-
-    public async Task<bool> Create(ProductCreateRequest request)
+    // table ProductDetail
+    public async Task<bool> CreateProductDetail(ProductDetailCreateRequest request)
     {
         var productDetail = new ProductDetail()
         {
@@ -104,8 +104,8 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return true;
     }
-
-    public async Task<bool> Update(ProductUpdateRequest request)
+    // table ProductDetail
+    public async Task<bool> UpdateProductDetail(ProductDetailUpdateRequest request)
     {
         var productdetail = await _context.ProductDetails.FirstOrDefaultAsync(pd => pd.Id == request.Id) ?? throw new ShopException($"Can't find a product with id: {request.Id}");
         productdetail.Stock = request.Stock;
@@ -120,8 +120,8 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return true;
     }
-
-    public async Task<bool> Delete(Guid productdetailId)
+    // table ProductDetail
+    public async Task<bool> DeleteProductDetail(Guid productdetailId)
     {
 
         var productdetail = await _context.ProductDetails.FindAsync(productdetailId);
@@ -135,8 +135,8 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return true;
     }
-
-    public async Task<ProductVm> GetById(Guid productdetailId)
+    // table ProductDetail
+    public async Task<ProductDetailVm> GetByIdProductDetail(Guid productdetailId)
     {
         var productdetail = await _context.ProductDetails.FindAsync(productdetailId);
         var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == productdetail.ProductId);
@@ -150,7 +150,7 @@ public class ProductServices : IProductServices
                             select pi.ImagePath).ToListAsync();
 
         //var image = await _context.ProductImages.Where(x => x.ProductId == product.Id && x.IsDefault == true).FirstOrDefaultAsync();
-        var productDetailViewModel = new ProductVm()
+        var productDetailViewModel = new ProductDetailVm()
         {
             Id = productdetailId,
             Price = productdetail.Price,
@@ -194,7 +194,9 @@ public class ProductServices : IProductServices
     //    return products;
 
     //}
-    public async Task<PagedResult<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request)
+
+    //Table Product
+    public async Task<PagedResult<ProductRequest>> GetAllProduct(ProductPagingRequest request)
     {
         var query = from p in _context.Products
                     join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi 
@@ -222,7 +224,7 @@ public class ProductServices : IProductServices
         // Project the query to the view model
         var productProps = await query.Skip((request.PageIndex -1) * request.PageSize)
             .Take(request.PageSize)
-            .Select(q => new ProductPropRequest
+            .Select(q => new ProductRequest
         {
             Id = q.p.Id,
             Name = q.p.Name,
@@ -230,7 +232,7 @@ public class ProductServices : IProductServices
             Status = q.p.Status,
             Image = q.pi.ImagePath
         }).ToListAsync();
-        var pagedResult = new PagedResult<ProductPropRequest>()
+        var pagedResult = new PagedResult<ProductRequest>()
         {
             TotalRecords = totalRow,
             PageSize = request.PageSize,
@@ -240,11 +242,11 @@ public class ProductServices : IProductServices
 
         return pagedResult;
     }
-
-    public async Task<List<ProductPropRequest>> GetListProductProp()
+    // table product get all ko tham số để tạo dropdown lúc create product detail
+    public async Task<List<ProductRequest>> GetListProduct()
     {
         return await _context.Products
-               .Select(i => new ProductPropRequest()
+               .Select(i => new ProductRequest()
                {
                    Id = i.Id,
                    Name = i.Name,
@@ -253,14 +255,14 @@ public class ProductServices : IProductServices
                }
            ).ToListAsync();
     }
-    
 
-    public async Task<ProductPropRequest> GetByIdProductProp(Guid productPropId)
+    // table Product
+    public async Task<ProductRequest> GetByIdProduct(Guid productId)
     {
-        var product = await _context.Products.FindAsync(productPropId);
+        var product = await _context.Products.FindAsync(productId);
         var categories = await (from c in _context.Categories
                                 join pic in _context.ProductInCategories on c.Id equals pic.CategoryId
-                                where pic.ProductId == productPropId
+                                where pic.ProductId == productId
                                 select c.Name).ToListAsync();
         if (product == null)
         {
@@ -268,7 +270,7 @@ public class ProductServices : IProductServices
         }
         else
         {
-            var productProp = new ProductPropRequest()
+            var productProp = new ProductRequest()
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -279,8 +281,8 @@ public class ProductServices : IProductServices
             return productProp;
         }
     }
-
-    public async Task<bool> CreateProductProp(ProductPropRequest request)
+    // table Product
+    public async Task<bool> CreateProduct(ProductRequest request)
     {
         var product = new Product()
         {
@@ -308,8 +310,8 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return true;
     }
-
-    public async Task<bool> UpdateProductProp(ProductPropRequest request)
+    // table Product
+    public async Task<bool> UpdateProduct(ProductRequest request)
     {
         var product = await _context.Products
             .Include(p => p.ProductImages)
@@ -353,16 +355,18 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return true;
     }
-
-    public async Task<bool> DeleteProductProp(Guid productPropId)
+    // table Product
+    public async Task<bool> DeleteProduct(Guid productId)
     {
-        var product = await _context.Products.FindAsync(productPropId) ?? throw new ShopException("Can't find product");
-        var images = _context.ProductImages.Where(i => i.ProductId == productPropId);
+        var product = await _context.Products.FindAsync(productId) ?? throw new ShopException("Can't find product");
+        var images = _context.ProductImages.Where(i => i.ProductId == productId);
         foreach (var image in images)
         {
             await _storageService.DeleteFileAsync(image.ImagePath);
         }
+        var productdetails = await _context.ProductDetails.Where(pd => pd.ProductId == productId).ToListAsync();
         _context.Products.Remove(product);
+        _context.ProductDetails.RemoveRange(productdetails);
         await _context.SaveChangesAsync();
         return true;
 
@@ -418,8 +422,8 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return new ApiSuccessResult<bool>($"Thêm ảnh có caption {productImage.Caption} thành công");
     }
-
-    public async Task<List<ProductPropVM>> GetFeaturedProducts(int take)
+    // get list product làm đẹp cho view home customerapp
+    public async Task<List<ProductVm>> GetFeaturedProducts(int take)
     {
         //1. Select join
         var query = from p in _context.Products
@@ -433,7 +437,7 @@ public class ProductServices : IProductServices
                     select new { p, pic, pi };
 
         var data = await query.Take(take)
-            .Select(x => new ProductPropVM()
+            .Select(x => new ProductVm()
             {
                 Id = x.p.Id,
                 Name = x.p.Name,
@@ -444,7 +448,7 @@ public class ProductServices : IProductServices
         return data;
     }
 
-    public async Task<List<ProductPropVM>> GetRecentProducts(int take)
+    public async Task<List<ProductVm>> GetRecentProducts(int take)
     {
         //1. Select join
         var query = from p in _context.Products
@@ -458,7 +462,7 @@ public class ProductServices : IProductServices
                     select new { p, pic, pi };
 
         var data = await query.Take(take)
-            .Select(x => new ProductPropVM()
+            .Select(x => new ProductVm()
             {
                 Id = x.p.Id,
                 Name = x.p.Name,
