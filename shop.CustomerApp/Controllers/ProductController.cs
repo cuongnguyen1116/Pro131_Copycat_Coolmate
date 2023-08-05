@@ -16,6 +16,7 @@ namespace shop.CustomerApp.Controllers
             _productApiClient = productApiClient;
             _categoryApiClient = categoryApiClient;
         }
+
         public async Task<IActionResult> Show(string keyword, Guid? categoryId, int pageIndex = 1, int pageSize = 9)
         {
 
@@ -41,6 +42,7 @@ namespace shop.CustomerApp.Controllers
             });
             return View(data);
         }
+
         public async Task<IActionResult> Detail(Guid id)
         {
 
