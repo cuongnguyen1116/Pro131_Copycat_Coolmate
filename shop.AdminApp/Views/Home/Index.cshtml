@@ -1,7 +1,8 @@
-﻿@model shop.ViewModels.Catalog.Stats.StatsVm
+﻿@model shop.ViewModels.Catalog.Stats.ViewModelAllStatistic
 
 @{
     ViewData["Title"] = "Home Page";
+
 }
 
 <!-- Content Header (Page header) -->
@@ -30,9 +31,9 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>@Model.CompletedOrderCount</h3>
+                        <h3>@Model.OrderStatistics.CompletedOrderCount</h3>
 
-                        <p>Số đơn hàng đã hoàn thành trong 30 ngày gần nhất</p>
+                        <p>Số đơn hàng đã hoàn thành trong 30 ngày gần nhất và tổng tiền là: @Model.OrderStatistics.TotalMoney</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -45,7 +46,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>@Model.Revenue</h3>
+                        <h3>@Model.StatsVms.Revenue</h3>
 
                         <p>Doanh thu</p>
                     </div>
@@ -90,6 +91,41 @@
         <!-- /.row -->
         <!-- Main row -->
         <div class="row">
+            <div class="smoller-row">
+                <div class="col-lg-3 col-6">
+
+                    <div>
+                        <h4>Export</h4>
+                    </div>
+
+                    <a class="btn btn-primary" href="@Url.Action("ExportMostSaleProduct","Home")" class="small-box-footer">Most Sale Product<i class="fa fa-download"></i></a>
+                </div>
+                <div class="col-lg-3 col-6">
+
+                    <div>
+
+                        <h4>Export</h4>
+                    </div>
+
+                    <a class="btn btn-primary" href="@Url.Action("ExportOrderStatistic","Home")" class="small-box-footer">Order Statisitc By Date<i class="fa fa-download"></i></a>
+                </div>
+                <div class="col-lg-3 col-6">
+
+                    <div>
+                        <h4>Export</h4>
+                    </div>
+
+                    <a class="btn btn-primary" href="@Url.Action("ExportStatistic","Home")" class="small-box-footer">Order Status<i class="fa fa-download"></i></a>
+                </div>
+                <div class="col-lg-3 col-6">
+
+                    <div>
+                        <h4>Export</h4>
+                    </div>
+
+                    <a class="btn btn-primary" href="@Url.Action("ExportUserWithMostBuy","Home")" class="small-box-footer">Most Purchase Customer<i class="fa fa-download"></i></a>
+                </div>
+            </div>
             <div>
                 <div>
                     <h4>Danh sách cần làm</h4>
@@ -100,19 +136,19 @@
                         <tr>
                             <td class="w-25" style="text-align: center">
                                 <p>Chờ xác nhận</p>
-                                <p style="color: #2673dd">@Model.PendingOrderCount</p>
-                            </td > 
+                                <p style="color: #2673dd">@Model.StatsVms.PendingOrderCount</p>
+                            </td>
                             <td class="w-25" style="text-align: center">
                                 <p>Chờ lấy hàng</p>
-                                <p style="color: #2673dd">@Model.AwaitingShipmentOrderCount</p>
+                                <p style="color: #2673dd">@Model.StatsVms.AwaitingShipmentOrderCount</p>
                             </td>
                             <td class="w-25" style="text-align: center">
                                 <p>Đã xử lý</p>
-                                <p style="color: #2673dd">@Model.AwaitingPickupOrderCount</p>
+                                <p style="color: #2673dd">@Model.StatsVms.AwaitingPickupOrderCount</p>
                             </td>
                             <td class="w-25" style="text-align: center">
                                 <p>Đơn hủy</p>
-                                <p style="color: #2673dd">@Model.CancelledOrderCount</p>
+                                <p style="color: #2673dd">@Model.StatsVms.CancelledOrderCount</p>
                             </td>
                         </tr>
                         <tr>
@@ -121,11 +157,11 @@
                             <td class="w-25" style="text-align: center"></td>
                             <td class="w-25" style="text-align: center">
                                 <p>Sản phẩm hết hàng</p>
-                                <p style="color: #2673dd">@Model.OutOfStockProductCount</p>
+                                <p style="color: #2673dd">@Model.StatsVms.OutOfStockProductCount</p>
                             </td>
                             <td class="w-25" style="text-align: center">
                                 <p>Sản phẩm ngừng bán</p>
-                                <p style="color: #2673dd">@Model.StopSellingProductCount</p>
+                                <p style="color: #2673dd">@Model.StatsVms.StopSellingProductCount</p>
                             </td>
                             <td class="w-25" style="text-align: center"></td>
                             @*<td>Chương trình khuyến mãi chờ xử lý</td>*@

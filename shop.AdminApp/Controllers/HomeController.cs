@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using shop.AdminApp.Models;
 using shop.ApiIntegration.Stats;
+using shop.ViewModels.Catalog.Stats;
 using System.Diagnostics;
 
 namespace shop.AdminApp.Controllers;
@@ -20,11 +21,58 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var data = await _statisticsApiClient.GetStatistics();
-        var user = User.Identity.Name;
-        return View(data);
+        var mostProductStatistic = await _statisticsApiClient.GetMostProductStatistic();
+        var orderStatistic = await _statisticsApiClient.GetOrderStatistic();
+        var statVm = await _statisticsApiClient.GetStatistics();
+        var userWithTotalOrder = await _statisticsApiClient.GetUserWithTotalOrder();
+        var vmAllStatistic = new ViewModelAllStatistic() 
+        {
+            MostProductStatistics = mostProductStatistic,
+            OrderStatistics = orderStatistic,
+            StatsVms = statVm,
+            UserWithTotalOrders = userWithTotalOrder
+        };
+        return View(vmAllStatistic);
+        
     }
+    public async Task<IActionResult> ExportMostSaleProduct()
+    {
+        var response = await _statisticsApiClient.ExportMostSaleToExcel();
+        if (TempData["result"] != null)
+        {
+            ViewBag.SuccessMsg = TempData["result"];
+        }
 
+        return RedirectToAction("Index", "Home");
+    }
+    public async Task<IActionResult> ExportOrderStatistic()
+    {
+        var response = await _statisticsApiClient.ExportOrderStatisticToExcel();
+        if (TempData["result"] != null)
+        {
+            ViewBag.SuccessMsg = TempData["result"];
+        }
+        return View(response);
+    }
+    public async Task<IActionResult> ExportStatistic()
+    {
+        var response = await _statisticsApiClient.ExportToExcel();
+        if (TempData["result"] != null)
+        {
+            ViewBag.SuccessMsg = TempData["result"];
+        }
+        return View(response);
+        
+    }
+    public async Task<IActionResult> ExportUserWithMostBuy()
+    {
+        var response = await _statisticsApiClient.ExportUserWithTotalOrderToExcel();
+        if (TempData["result"] != null)
+        {
+            ViewBag.SuccessMsg = TempData["result"];
+        }
+        return View(response);
+    }
     public IActionResult Privacy()
     {
         return View();
