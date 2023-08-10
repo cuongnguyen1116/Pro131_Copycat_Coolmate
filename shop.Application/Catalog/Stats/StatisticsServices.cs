@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using shop.Data.Context;
 using shop.Data.Enums;
@@ -72,7 +73,7 @@ public class StatisticsServices : BaseServices, IStatisticsServices
 
         return result;
     }
-    public async Task<OrderStatistic> GetOrderStatisticByDate()
+    public async Task<Order30Days> GetOrderByDate()
     {
         var startDate = DateTime.Now.AddDays(-30);
         //xác định khoảng thời gian bắt đầu và kết thúc của tháng hiện tại bằng cách sử dụng DateTime.Now và phương thức AddDays(-30) để lấy thời gian 30 ngày trước đó.
@@ -86,14 +87,14 @@ public class StatisticsServices : BaseServices, IStatisticsServices
         // Tính số lượng các đơn hàng có trạng thái là "Completed" trong tháng hiện tại
         int completedOrderCount = completedOrders.Count;
         decimal totalMoney = completedOrders.Sum(muney => muney.Total);
-        var orderStat = new OrderStatistic()
+        var orderStat = new Order30Days()
         {
             CompletedOrderCount = completedOrderCount,
             TotalMoney = totalMoney,
         };
         return orderStat;
     }
-    public async Task<List<MostProductStatistic>> GetProductMostSaleStatistic()
+    public async Task<List<MostSaleProduct>> GetMostSaleProduct()
     {
 
         // Bước 1: Lấy ra danh sách ProductDetailId từ các hoá đơn hoàn tất (completed) trong orderdetails
@@ -119,14 +120,14 @@ public class StatisticsServices : BaseServices, IStatisticsServices
                 bestSellingProductQuantities,
                 pd => pd.Id,
                 bs => bs.ProductDetailId,
-                (pd, bs) => new MostProductStatistic //kết nối productdetails với orderdetails
+                (pd, bs) => new MostSaleProduct //kết nối productdetails với orderdetails
                 {
                     ProductId = pd.Product.Id,
                     ProductName = pd.Product.Name,
                     TotalQuantitySold = bs.TotalQuantitySold //lấy ra 3 trường thuộc tính
                 })
             .GroupBy(p => new { p.ProductId, p.ProductName }) //nhóm danh sách theo productid và productname 
-            .Select(g => new MostProductStatistic
+            .Select(g => new MostSaleProduct
             {
                 ProductId = g.Key.ProductId,
                 ProductName = g.Key.ProductName,
@@ -139,7 +140,7 @@ public class StatisticsServices : BaseServices, IStatisticsServices
 
         return bestSellingProductsData;
     }
-    public async Task<List<UserWithTotalOrder>> GetCustomerWithTotalOrder()
+    public async Task<List<CustomerMostBuy>> CustomerMostBuy()
     {
         var query = from u in _context.AppUsers
                     join o in _context.Orders on u.Id equals o.UserId
@@ -164,7 +165,7 @@ public class StatisticsServices : BaseServices, IStatisticsServices
                            };
 
         var result = groupedQuery.AsEnumerable()
-                                 .Select(x => new UserWithTotalOrder //chuyển kết quả từ groupedQuery thành danh sách đối tượng UserWithTotalOrder
+                                 .Select(x => new CustomerMostBuy //chuyển kết quả từ groupedQuery thành danh sách đối tượng UserWithTotalOrder
                                  {
                                      UserId = x.UserId,
                                      UserName = x.UserName,
@@ -176,5 +177,100 @@ public class StatisticsServices : BaseServices, IStatisticsServices
         return result;
     }
 
+    public DataTable GetSaleStatistic(StatsVm statsVm)
+    {
+        DataTable dt = new()
+        {
+            TableName = "Statistic"
+        };
+
+        dt.Columns.Add("StopSellingProductCount", typeof(int));
+        dt.Columns.Add("OutOfStockProductCount", typeof(int));
+        dt.Columns.Add("Revenue", typeof(decimal));
+        dt.Columns.Add("PendingOrderCount", typeof(int));
+        dt.Columns.Add("AwaitingShipmentOrderCount", typeof(int));
+        dt.Columns.Add("AwaitingPickupOrderCount", typeof(int));
+        dt.Columns.Add("CompletedOrderCount", typeof(int));
+        dt.Columns.Add("CancelledOrderCount", typeof(int));
+        // Thêm dữ liệu vào DataTable từ danh sách userWithTotalOrders
+
+        DataRow row = dt.NewRow();
+        row["StopSellingProductCount"] = statsVm.StopSellingProductCount;
+        row["OutOfStockProductCount"] = statsVm.OutOfStockProductCount;
+        row["Revenue"] = statsVm.Revenue;
+        row["PendingOrderCount"] = statsVm.PendingOrderCount;
+        row["AwaitingShipmentOrderCount"] = statsVm.AwaitingShipmentOrderCount;
+        row["AwaitingPickupOrderCount"] = statsVm.AwaitingPickupOrderCount;
+        row["CompletedOrderCount"] = statsVm.CompletedOrderCount;
+        row["CancelledOrderCount"] = statsVm.CancelledOrderCount;
+        dt.Rows.Add(row);// để thêm vào trong datatable
+
+        return dt;
+
+    }
+    public DataTable GetCustomerMostBuy(List<CustomerMostBuy> CustomerMostBuy)
+    {
+        DataTable dt = new()
+        {
+            TableName = "CustomerMostBuy"
+        };
+
+        dt.Columns.Add("UserId", typeof(string));
+        dt.Columns.Add("UserName", typeof(string));
+        dt.Columns.Add("TotalOrders", typeof(int));
+        dt.Columns.Add("TotalProducts", typeof(int));
+        // Thêm dữ liệu vào DataTable từ danh sách userWithTotalOrders
+        foreach (var item in CustomerMostBuy)
+        {
+            DataRow row = dt.NewRow();
+            row["UserId"] = item.UserId;
+            row["UserName"] = item.UserName;
+            row["TotalOrders"] = item.TotalOrders;
+            row["TotalProducts"] = item.TotalProducts;
+            dt.Rows.Add(row);// để thêm vào trong datatable
+        }
+        return dt;
+
+    }
+
+    public DataTable GetMostSaleProduct(List<MostSaleProduct> MostSaleProduct)
+    {
+        DataTable dt = new()
+        {
+            TableName = "MostSoldProduct"
+        };
+
+        dt.Columns.Add("Id", typeof(string));
+        dt.Columns.Add("ProductName", typeof(string));
+        dt.Columns.Add("TotalQuantitySold", typeof(int));
+        // Thêm dữ liệu vào DataTable từ danh sách bestSellingProductsData
+        foreach (var productStatistic in MostSaleProduct)
+        {
+            DataRow row = dt.NewRow();
+            row["Id"] = productStatistic.ProductId;
+            row["ProductName"] = productStatistic.ProductName;
+            row["TotalQuantitySold"] = productStatistic.TotalQuantitySold;
+            dt.Rows.Add(row);
+        }
+        return dt;
+
+    }
+
+    public DataTable GetRevenue(Order30Days orderStatistics)
+    {
+
+        DataTable dt = new()
+        {
+            TableName = "Doanh Thu"
+        };
+        dt.Columns.Add("OrderAmount", typeof(int));
+        dt.Columns.Add("Sum of Revenue", typeof(decimal));
+        DataRow dr = dt.NewRow();
+        dr["OrderAmount"] = orderStatistics.CompletedOrderCount;
+        dr["Sum of Revenue"] = orderStatistics.TotalMoney;
+        dt.Rows.Add(dr); // Thêm hàng vào bảng
+        return dt;
+
+    }
 }
 
