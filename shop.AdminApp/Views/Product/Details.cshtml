@@ -1,4 +1,4 @@
-﻿@model shop.ViewModels.Catalog.Products.ProductVm
+﻿@model shop.ViewModels.Catalog.Products.ProductDetailVm
 @inject Microsoft.Extensions.Configuration.IConfiguration Configuration;
 
 @{
@@ -14,8 +14,6 @@ foreach (var path in ViewBag.ImagePath)
     imagePaths.Add(path);
 }
 }
-
-<h1>Chi tiết sản phẩm</h1>
 <div style="display:flex; align-items: center;">
     <div style="width:60%">
         <dl class="row">
@@ -118,10 +116,7 @@ foreach (var path in ViewBag.ImagePath)
     </div>
 
 </div>
-<div style="display:flex">
-    <div>
-        <a class="btn btn-success" asp-action="CreateImage" asp-controller="Product"> More Photos</a>
-    </div>||
+<div>
     <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>
 <style></style>

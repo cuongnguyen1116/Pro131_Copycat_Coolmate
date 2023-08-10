@@ -2,7 +2,7 @@
 
 namespace shop.ViewModels.Catalog.Products;
 
-public class ProductUpdateRequest
+public class ProductDetailUpdateRequest
 {
     public Guid Id { get; set; }
     public int Stock { get; set; }

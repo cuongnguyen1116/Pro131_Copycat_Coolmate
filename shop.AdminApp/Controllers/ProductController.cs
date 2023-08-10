@@ -20,6 +20,7 @@ public class ProductController : Controller
         _categoryApiClient = categoryApiClient;
     }
     [Authorize(Policy = "AdminOrManager")]
+    //bảng  productdetail
     public async Task<IActionResult> Index(string? keyword, int pageIndex = 1, int pageSize = 10)
     {
         var request = new ProductPagingRequest()
@@ -28,7 +29,7 @@ public class ProductController : Controller
             PageIndex = pageIndex,
             PageSize = pageSize
         };
-        var data = await _productApiClient.GetAll(request);
+        var data = await _productApiClient.GetAllProductDetail(request);
         ViewBag.Keyword = keyword;
         if (TempData["result"] != null)
         {
@@ -38,7 +39,7 @@ public class ProductController : Controller
     }
     //Bảng  product
     [Authorize(Policy = "AdminOrManager")]
-    public async Task<IActionResult> ShowAllProductProp(string keyword, Guid? categoryId, int pageIndex = 1, int pageSize = 9)
+    public async Task<IActionResult> ShowAllProduct(string keyword, Guid? categoryId, int pageIndex = 1, int pageSize = 9)
     {
         var request = new ProductPagingRequest()
         {
@@ -47,7 +48,7 @@ public class ProductController : Controller
             PageIndex = pageIndex,
             PageSize = pageSize
         };
-        var data = await _productApiClient.GetAllProductProp(request);
+        var data = await _productApiClient.GetAllProduct(request);
         ViewBag.Keyword = keyword;
         var categories = await _categoryApiClient.GetAll();
         ViewBag.Categories = categories.Select(x => new SelectListItem()
@@ -66,19 +67,19 @@ public class ProductController : Controller
     [Authorize(Policy = "AdminOrManager")]
     public async Task<IActionResult> Details(Guid id)
     {
-        var result = await _productApiClient.GetById(id);
+        var result = await _productApiClient.GetByIdProductDetail(id);
         ViewBag.ImagePath = result.Images;
         return View(result);
     }
 
-    //Bảng  productdetail
+    
     public async Task<IActionResult> CreateImage(string? keyword, Guid id)
     {
         var request = new ProductPagingRequest()
         {
             Keyword = keyword
         };
-        var data = await _productApiClient.GetAllProductProp(request);
+        var data = await _productApiClient.GetAllProduct(request);
         ViewBag.ProductImage = data.Items.Select(x => new SelectListItem()
         {
             Text = x.Name,
@@ -98,7 +99,7 @@ public class ProductController : Controller
         {
             Keyword = keyword
         };
-        var data = await _productApiClient.GetAllProductProp(ppr);
+        var data = await _productApiClient.GetAllProduct(ppr);
         ViewBag.ProductImage = data.Items.Select(x => new SelectListItem()
         {
             Text = x.Name,
@@ -117,15 +118,16 @@ public class ProductController : Controller
         return View(request);
 
     }
+    // tạo mới productdetail
     [Authorize(Policy = "AdminOrManager")]
-    public async Task<IActionResult> Create(Guid productPropId, Guid sizeId, Guid colorId, Guid materialId)
+    public async Task<IActionResult> Create(Guid productId, Guid sizeId, Guid colorId, Guid materialId)
     {
-        var productprops = _productApiClient.GetListProductProp();
-        ViewBag.ProductProp = productprops.Result.Select(x => new SelectListItem()
+        var products = _productApiClient.GetListProduct();
+        ViewBag.ProductProp = products.Result.Select(x => new SelectListItem()
         {
             Text = x.Name,
             Value = x.Id.ToString(),
-            Selected = productPropId.ToString() == x.Id.ToString()
+            Selected = productId.ToString() == x.Id.ToString()
         });
         var sizes = _productApiClient.GetListSize();
         ViewBag.Size = sizes.Result.Select(x => new SelectListItem()
@@ -154,16 +156,16 @@ public class ProductController : Controller
     [HttpPost]
     [Authorize(Policy = "AdminOrManager")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Create([FromForm] ProductCreateRequest request, Guid productPropId, Guid sizeId, Guid colorId, Guid materialId)
+    public async Task<IActionResult> Create([FromForm] ProductDetailCreateRequest request, Guid productId, Guid sizeId, Guid colorId, Guid materialId)
     {
         if (!ModelState.IsValid)
             return View(request);
-        var productprops = _productApiClient.GetListProductProp();
-        ViewBag.ProductProp = productprops.Result.Select(x => new SelectListItem()
+        var products = _productApiClient.GetListProduct();
+        ViewBag.ProductProp = products.Result.Select(x => new SelectListItem()
         {
             Text = x.Name,
             Value = x.Id.ToString(),
-            Selected = productPropId.ToString() == x.Id.ToString()
+            Selected = productId.ToString() == x.Id.ToString()
         });
         var sizes = _productApiClient.GetListSize();
         ViewBag.Size = sizes.Result.Select(x => new SelectListItem()
@@ -186,7 +188,7 @@ public class ProductController : Controller
             Value = x.Id.ToString(),
             Selected = materialId.ToString() == x.Id.ToString()
         });
-        var result = await _productApiClient.CreateProduct(request, productPropId, sizeId, colorId, materialId);
+        var result = await _productApiClient.CreateProductDetail(request, productId, sizeId, colorId, materialId);
         if (result)
         {
             TempData["result"] = "Thêm mới sản phẩm thành công";
@@ -197,7 +199,7 @@ public class ProductController : Controller
         return View(request);
     }
 
-    //Bảng  product
+    //tạo mới  product
     [Authorize(Policy = "AdminOrManager")]
     public IActionResult CreateProduct()
     {
@@ -206,30 +208,30 @@ public class ProductController : Controller
 
     [HttpPost]
     [Authorize(Policy = "AdminOrManager")]
-    public async Task<IActionResult> CreateProduct(ProductPropRequest request)
+    public async Task<IActionResult> CreateProduct(ProductRequest request)
     {
         if (!ModelState.IsValid)
         {
             return View(ModelState);
         }
-        var result = await _productApiClient.CreateProductProp(request);
+        var result = await _productApiClient.CreateProduct(request);
         if (result)
         {
             TempData["result"] = "Thêm mới sản phẩm thành công";
-            return RedirectToAction("ShowAllProductProp");
+            return RedirectToAction("ShowAllProduct");
         }
 
         ModelState.AddModelError("", "Thêm sản phẩm thất bại");
         return View(request);
     }
 
-    //Bảng  productdetail
+    //sửa  productdetail
     [HttpGet]
     [Authorize(Policy = "admin")]
     public async Task<IActionResult> Edit(Guid id)
     {
-        var product = await _productApiClient.GetById(id);
-        var editvm = new ProductUpdateRequest()
+        var product = await _productApiClient.GetByIdProductDetail(id);
+        var editvm = new ProductDetailUpdateRequest()
         {
             Id = product.Id,
             Status = product.Status,
@@ -242,7 +244,35 @@ public class ProductController : Controller
 
     [HttpPost]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Edit([FromForm] ProductUpdateRequest request)
+    public async Task<IActionResult> Edit([FromForm] ProductDetailUpdateRequest request)
+    {
+        if (!ModelState.IsValid)
+            return View(request);
+
+        var result = await _productApiClient.UpdateProductDetail(request);
+        if (result)
+        {
+            TempData["result"] = "Cập nhật sản phẩm thành công";
+            return RedirectToAction("Index");
+        }
+
+        ModelState.AddModelError("", "Cập nhật sản phẩm thất bại");
+        return View(request);
+    }
+
+    //sửa  product
+    [HttpGet]
+    [Authorize(Policy = "admin")]
+    public async Task<IActionResult> EditProduct(Guid id)
+    {
+        var product = await _productApiClient.GetByIdProduct(id);
+
+        return View(product);
+    }
+
+    [HttpPost]
+    [Authorize(Policy = "admin")]
+    public async Task<IActionResult> EditProduct(ProductRequest request)
     {
         if (!ModelState.IsValid)
             return View(request);
@@ -251,49 +281,21 @@ public class ProductController : Controller
         if (result)
         {
             TempData["result"] = "Cập nhật sản phẩm thành công";
-            return RedirectToAction("Index");
+            return RedirectToAction("ShowAllProduct");
         }
 
         ModelState.AddModelError("", "Cập nhật sản phẩm thất bại");
         return View(request);
     }
 
-    //Bảng  product
-    [HttpGet]
-    [Authorize(Policy = "admin")]
-    public async Task<IActionResult> EditProduct(Guid id)
-    {
-        var product = await _productApiClient.GetByIdProductProp(id);
-
-        return View(product);
-    }
-
-    [HttpPost]
-    [Authorize(Policy = "admin")]
-    public async Task<IActionResult> EditProduct(ProductPropRequest request)
-    {
-        if (!ModelState.IsValid)
-            return View(request);
-
-        var result = await _productApiClient.UpdateProductProp(request);
-        if (result)
-        {
-            TempData["result"] = "Cập nhật sản phẩm thành công";
-            return RedirectToAction("ShowAllProductProp");
-        }
-
-        ModelState.AddModelError("", "Cập nhật sản phẩm thất bại");
-        return View(request);
-    }
-
-    //Bảng  productdetail
+    //xóa  productdetail
     [Authorize(Policy = "admin")]
     public async Task<IActionResult> Delete(ProductDeleteRequest request)
     {
         if (!ModelState.IsValid)
             return View();
 
-        var result = await _productApiClient.DeleteProduct(request);
+        var result = await _productApiClient.DeleteProductDetail(request);
         if (result)
         {
             TempData["result"] = "Xóa sản phẩm thành công";
@@ -303,26 +305,27 @@ public class ProductController : Controller
         ModelState.AddModelError("", "Xóa không thành công");
         return View(request);
     }
+    //xóa product
     [Authorize(Policy = "admin")]
-    public async Task<IActionResult> DeleteProduct(ProductPropRequest vm)
+    public async Task<IActionResult> DeleteProduct(ProductDeleteRequest request)
     {
         if (!ModelState.IsValid)
-            return View(vm);
+            return View(ModelState);
 
-        var result = await _productApiClient.DeleteProductProp(vm);
+        var result = await _productApiClient.DeleteProduct(request);
         if (result)
         {
             TempData["result"] = "Xóa sản phẩm thành công";
-            return RedirectToAction("ShowAllProductProp");
+            return RedirectToAction("ShowAllProduct");
         }
         ModelState.AddModelError("", "Xóa không thành công");
-        return View(vm);
+        return View(request);
     }
-    // [Authorize(Policy = "admin")]
+    // lấy danh sách category 
     private async Task<CategoryAssignRequest> GetCategoryAssignRequest(Guid id)
     {
 
-        var productObj = await _productApiClient.GetByIdProductProp(id);
+        var productObj = await _productApiClient.GetByIdProduct(id);
         var categories = await _categoryApiClient.GetAll();
         var categoryAssignRequest = new CategoryAssignRequest();
         foreach (var role in categories)
@@ -336,7 +339,7 @@ public class ProductController : Controller
         }
         return categoryAssignRequest;
     }
-
+    //gán category
     [HttpGet]
     [Authorize(Policy = "admin")]
     public async Task<IActionResult> CategoryAssign(Guid id)
@@ -357,7 +360,7 @@ public class ProductController : Controller
         if (result.IsSuccessed)
         {
             TempData["result"] = "Gán danh mục thành công";
-            return RedirectToAction("ShowAllProductProp");
+            return RedirectToAction("ShowAllProduct");
         }
 
         ModelState.AddModelError("", result.Message);

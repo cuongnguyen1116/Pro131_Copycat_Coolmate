@@ -1,8 +1,8 @@
-﻿@model PagedResult<shop.ViewModels.Catalog.Products.ProductPropRequest>
+﻿@model PagedResult<shop.ViewModels.Catalog.Products.ProductRequest>
 @using shop.ViewModels.Common;
 
 @{
-    ViewData["Title"] = "ShowAllProductProp";
+    ViewData["Title"] = "ShowAllProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,7 +16,7 @@
 <div class="container-fluid">
     <h1 class="mt-4">Danh sách tên sản phẩm</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Trang chủ</a></li>
         <li class="breadcrumb-item active">Danh sách sản phẩm</li>
     </ol>
     <div class="card mb-12">
@@ -26,7 +26,7 @@
                     <a class="btn btn-success" asp-action="CreateProduct" asp-controller="Product">Tạo mới</a>
                 </div>
                 <div class="col-md-6 col-xs-12">
-                    <form asp-action="ShowAllProductProp" method="get">
+                    <form asp-action="ShowAllProduct" method="get">
                         <div class="row">
                             <div class="col-md-4">
                                 <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary">Tìm</button>
-                                <button type="button" onclick="window.location.href='/Product/ShowAllProductProp'" class="btn btn-dark">Reset</button>
+                                <button type="button" onclick="window.location.href='/Product/ShowAllProduct'" class="btn btn-dark">Reset</button>
                             </div>
                         </div>
                     </form>
@@ -87,9 +87,18 @@
                                     @Html.DisplayFor(modelItem => item.Status)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "EditProduct", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "DeleteProduct", new { id = item.Id }) |
-                                    @Html.ActionLink("CategoryAssign", "CategoryAssign", new { id = item.Id }) |
+                                    <a href="@Url.Action("EditProduct", new { id = item.Id })">
+                                        <i class="fas fa-edit"></i>
+                                    </a> |
+                                    <a href="@Url.Action("DeleteProduct", new { id = item.Id })">
+                                        <i class="fas fa-trash"></i>
+                                    </a> |
+                                    <a href="@Url.Action("CategoryAssign", new { id = item.Id })">
+                                        <i class="fas fa-tags"></i>
+                                    </a> |
+                                    <a href="@Url.Action("CreateImage")">
+                                        <i class="fas fa-image"></i>
+                                    </a>
                                 </td>
                             </tr>
                         }

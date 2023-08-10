@@ -60,19 +60,31 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
                             <div class="dropdown-menu">
-                                <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                                <a href="login.html" class="dropdown-item">Login & Register</a>
-                                <a href="contact.html" class="dropdown-item">Contact Us</a>
+                                <a asp-action="Register" asp-controller="Account" class="dropdown-item">Register</a>
+                                <a asp-action="Login" asp-controller="Account" class="dropdown-item">Login</a>
                             </div>
                         </div>
                     </div>
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Login</a>
-                                <a href="#" class="dropdown-item">Register</a>
-                            </div>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@User.Identity.Name</a>
+                                <div class="dropdown-menu">
+                                    <form action="/Account/Logout" method="post">
+                                        <button type="submit" style="padding-right:0;margin-top:10px;margin-bottom:0px;background:transparent;border:none;">
+                                            <span class="btn btn-large btn-success">Logout</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                            else
+                            {
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Guest!</a>
+                                <div class="dropdown-menu">
+                                    <a asp-action="Login" asp-controller="Account" class="dropdown-item">Login</a>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

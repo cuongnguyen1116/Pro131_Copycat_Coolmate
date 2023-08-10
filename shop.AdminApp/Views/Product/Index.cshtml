@@ -1,4 +1,4 @@
-﻿@model PagedResult<shop.ViewModels.Catalog.Products.ProductVm>
+﻿@model PagedResult<shop.ViewModels.Catalog.Products.ProductDetailVm>
 @using shop.ViewModels.Common;
 
 @{
@@ -16,7 +16,7 @@
 <div class="container-fluid">
     <h1 class="mt-4">Danh sách sản phẩm</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Trang chủ</a></li>
         <li class="breadcrumb-item active">Danh sách sản phẩm</li>
     </ol>
     <div class="card mb-12">
@@ -55,7 +55,7 @@
                     <thead>
                         <tr>
                             <th>
-                                <a asp-action="ShowAllProductProp" style="color: black">
+                                <a asp-action="ShowAllProduct" style="color: black">
                                     Product Name
                                     <i class="fas fa-cog"></i>
                                 </a>
@@ -122,10 +122,15 @@
                                     @Html.DisplayFor(modelItem => item.Stock)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })||
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id })||
-
+                                    <a href="@Url.Action("Edit", new { id = item.Id })">
+                                        <i class="fas fa-edit"></i>
+                                    </a> |
+                                    <a href="@Url.Action("Delete", new { id = item.Id })">
+                                        <i class="fas fa-trash"></i>
+                                    </a> |
+                                    <a href="@Url.Action("Details", new { id = item.Id })">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
                                 </td>
                             </tr>
                         }

@@ -6,23 +6,23 @@ namespace shop.Application.Catalog.Products;
 
 public interface IProductServices
 {
-    Task<PagedResult<ProductVm>> GetAll(ProductPagingRequest request);
-    Task<ProductVm> GetById(Guid productdetailId);
-    Task<bool> Create(ProductCreateRequest request);
-    Task<bool> Update(ProductUpdateRequest request);
-    Task<bool> Delete(Guid productdetailId);
+    Task<PagedResult<ProductDetailVm>> GetAllProductDetail(ProductPagingRequest request);
+    Task<ProductDetailVm> GetByIdProductDetail(Guid productdetailId);
+    Task<bool> CreateProductDetail(ProductDetailCreateRequest request);
+    Task<bool> UpdateProductDetail(ProductDetailUpdateRequest request);
+    Task<bool> DeleteProductDetail(Guid productdetailId);
     //Task<ProductVm> Detail(Guid productId);
     Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request);
-    Task<PagedResult<ProductPropRequest>> GetAllProductProp(ProductPagingRequest request);
-    Task<List<ProductPropRequest>> GetListProductProp();
-    Task<ProductPropRequest> GetByIdProductProp(Guid productPropId);
-    Task<bool> CreateProductProp(ProductPropRequest request);
-    Task<bool> UpdateProductProp(ProductPropRequest request);
-    Task<bool> DeleteProductProp(Guid productPropId);
+    Task<PagedResult<ProductRequest>> GetAllProduct(ProductPagingRequest request);
+    Task<List<ProductRequest>> GetListProduct();
+    Task<ProductRequest> GetByIdProduct(Guid productId);
+    Task<bool> CreateProduct(ProductRequest request);
+    Task<bool> UpdateProduct(ProductRequest request);
+    Task<bool> DeleteProduct(Guid productId);
     Task<ApiResult<bool>> AddImages(ProductImageRequest request);
     //Task<int> RemoveImages(Guid imageId);
     //Task<int> UpdateImages(Guid imageId, ProductImageRequest request);
-    Task<List<ProductPropVM>> GetFeaturedProducts(int take);
-    Task<List<ProductPropVM>> GetRecentProducts(int take);
+    Task<List<ProductVm>> GetFeaturedProducts(int take);
+    Task<List<ProductVm>> GetRecentProducts(int take);
 
 }

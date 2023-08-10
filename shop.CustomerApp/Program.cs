@@ -1,4 +1,5 @@
 using LazZiya.ExpressLocalization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using shop.ApiIntegration.Categories;
 using shop.ApiIntegration.Products;
 using shop.ApiIntegration.Users;
@@ -8,12 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.LoginPath = $"/Account/Index";
+    options.AccessDeniedPath = $"/User/Forbiden";
+
+});
 builder.Services.AddHttpClient();
 builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(30));
 builder.Services.AddTransient<IProductApiClient, ProductApiClient>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<ICategoryApiClient, CategoryApiClient>();
 //builder.Services.AddTransient<ISharedCultureLocalizer, SharedCultureLocalizer>();
-//builder.Services.AddTransient<IUserApiClient, UserApiClient>();
+builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 
 
 var app = builder.Build();
@@ -32,6 +40,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 //app.UseRequestLocalization();
 
 app.MapControllerRoute(

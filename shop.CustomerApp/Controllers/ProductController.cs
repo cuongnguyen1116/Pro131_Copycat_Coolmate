@@ -16,6 +16,7 @@ namespace shop.CustomerApp.Controllers
             _productApiClient = productApiClient;
             _categoryApiClient = categoryApiClient;
         }
+
         public async Task<IActionResult> Show(string keyword, Guid? categoryId, int pageIndex = 1, int pageSize = 9)
         {
 
@@ -26,7 +27,7 @@ namespace shop.CustomerApp.Controllers
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
-            var data = await _productApiClient.GetAllProductProp(request);
+            var data = await _productApiClient.GetAllProduct(request);
             //var viewmodel = new ProductDetailViewModel()
             //{
             //    Products = data
@@ -41,6 +42,7 @@ namespace shop.CustomerApp.Controllers
             });
             return View(data);
         }
+
         public async Task<IActionResult> Detail(Guid id)
         {
 

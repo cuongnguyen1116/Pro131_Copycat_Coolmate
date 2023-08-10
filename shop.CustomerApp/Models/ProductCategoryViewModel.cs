@@ -8,6 +8,6 @@ namespace shop.CustomerApp.Models
     {
         public CategoryVm Category { get; set; }
 
-        public PagedResult<ProductVm> Products { get; set; }
+        public PagedResult<ProductDetailVm> Products { get; set; }
     }
 }
