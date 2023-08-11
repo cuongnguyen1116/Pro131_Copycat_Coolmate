@@ -19,7 +19,7 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
     }
     public async Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request)
     {
-        string apiURL = $"/api/Products/productProp/{id}/categories/";
+        string apiURL = $"/api/Products/product/{id}/categories/";
         var json = JsonConvert.SerializeObject(request);
         var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 

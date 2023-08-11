@@ -46,10 +46,12 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-                                </td>
+                                    <a href="@Url.Action("Edit", new { id = item.Id })">
+                                        <i class="fas fa-edit"></i>
+                                    </a> |
+                                    <a href="@Url.Action("Delete", new { id = item.Id })">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
                             </tr>
                         }
                     </tbody>
