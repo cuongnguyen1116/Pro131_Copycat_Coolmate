@@ -20,36 +20,36 @@ public class StatisticApiClient : BaseApiClient, IStatisticsApiClient
         var result = JsonConvert.DeserializeObject<StatsVm>(apiData);
         return result;
     }
-    public async Task<List<MostProductStatistic>> GetMostProductStatistic()
+    public async Task<List<MostSaleProduct>> GetMostSaleProducts()
     {
-        string apiUrl = "/api/statistics/get-most-sale-product-statistic";
+        string apiUrl = "/api/statistics/most-sale-product";
         var response = await _httpClient.GetAsync(apiUrl);
         response.EnsureSuccessStatusCode();
         string apiData = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<List<MostProductStatistic>>(apiData);
+        var result = JsonConvert.DeserializeObject<List<MostSaleProduct>>(apiData);
         return result;
     }
-    public async Task<OrderStatistic> GetOrderStatistic()
+    public async Task<Order30Days> GetOrderByDate()
     {
-        string apiUrl = "/api/statistics/get-order-statistic";
+        string apiUrl = "/api/statistics/order-30-days";
         var response = await _httpClient.GetAsync(apiUrl);
         response.EnsureSuccessStatusCode();
         string apiData = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<OrderStatistic>(apiData);
+        var result = JsonConvert.DeserializeObject<Order30Days>(apiData);
         return result;
     }
-    public async Task<List<UserWithTotalOrder>> GetUserWithTotalOrder()
+    public async Task<List<CustomerMostBuy>> GetCustomerMostBuy()
     {
-        string apiUrl = "/api/statistics/get-user-with-total-order-statistic";
+        string apiUrl = "/api/statistics/customer-most-buy";
         var response = await _httpClient.GetAsync(apiUrl);
         response.EnsureSuccessStatusCode();
         string apiData = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<List<UserWithTotalOrder>>(apiData);
+        var result = JsonConvert.DeserializeObject<List<CustomerMostBuy>>(apiData);
         return result;
     }
     public async Task<bool> ExportToExcel()
     {
-        string url = "/api/statistics/excelexport-statistic";
+        string url = "/api/statistics/excelexport-Statistic";
         var response =  await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
         var contentDisposition = response.Content.Headers.ContentDisposition;
@@ -91,7 +91,7 @@ public class StatisticApiClient : BaseApiClient, IStatisticsApiClient
     }
     public async Task<bool> ExportOrderStatisticToExcel()
     {
-        string url = "/api/statistics/excelexport-revenue";
+        string url = "/api/statistics/excelexport-Revenue";
         var response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
         var contentDisposition = response.Content.Headers.ContentDisposition;
@@ -112,7 +112,7 @@ public class StatisticApiClient : BaseApiClient, IStatisticsApiClient
     }
     public async Task<bool> ExportUserWithTotalOrderToExcel()
     {
-        string url = "/api/statistics/excelexport-UserWithTotalOrder";
+        string url = "/api/statistics/excelexport-CustomerMostBuy";
         var response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
         var contentDisposition = response.Content.Headers.ContentDisposition;

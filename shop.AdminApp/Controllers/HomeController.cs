@@ -21,10 +21,10 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var mostProductStatistic = await _statisticsApiClient.GetMostProductStatistic();
-        var orderStatistic = await _statisticsApiClient.GetOrderStatistic();
+        var mostProductStatistic = await _statisticsApiClient.GetMostSaleProducts();
+        var orderStatistic = await _statisticsApiClient.GetOrderByDate();
         var statVm = await _statisticsApiClient.GetStatistics();
-        var userWithTotalOrder = await _statisticsApiClient.GetUserWithTotalOrder();
+        var userWithTotalOrder = await _statisticsApiClient.GetCustomerMostBuy();
         var vmAllStatistic = new ViewModelAllStatistic() 
         {
             MostProductStatistics = mostProductStatistic,
@@ -52,7 +52,7 @@ public class HomeController : Controller
         {
             ViewBag.SuccessMsg = TempData["result"];
         }
-        return View(response);
+        return RedirectToAction("Index", "Home");
     }
     public async Task<IActionResult> ExportStatistic()
     {
@@ -61,8 +61,8 @@ public class HomeController : Controller
         {
             ViewBag.SuccessMsg = TempData["result"];
         }
-        return View(response);
-        
+        return RedirectToAction("Index", "Home");
+
     }
     public async Task<IActionResult> ExportUserWithMostBuy()
     {
@@ -71,7 +71,7 @@ public class HomeController : Controller
         {
             ViewBag.SuccessMsg = TempData["result"];
         }
-        return View(response);
+        return RedirectToAction("Index", "Home");
     }
     public IActionResult Privacy()
     {

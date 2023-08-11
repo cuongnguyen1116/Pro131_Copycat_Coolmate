@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace shop.ViewModels.Catalog.Stats
 {
-    public class MostProductStatistic
+    public class MostSaleProduct
     {
         public Guid ProductId { get; set; }
         public string ProductName { get; set; }
