@@ -1,6 +1,7 @@
 using LazZiya.ExpressLocalization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using shop.ApiIntegration.Categories;
+using shop.ApiIntegration.Orders;
 using shop.ApiIntegration.Products;
 using shop.ApiIntegration.Users;
 
@@ -20,7 +21,7 @@ builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinute
 builder.Services.AddTransient<IProductApiClient, ProductApiClient>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<ICategoryApiClient, CategoryApiClient>();
-//builder.Services.AddTransient<ISharedCultureLocalizer, SharedCultureLocalizer>();
+builder.Services.AddTransient<IOrderApiClient, OrderApiClient>();
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 
 

@@ -12,4 +12,5 @@ public interface IOrderServices
     Task<ApiResult<bool>> GetOrderToShipper(Guid id);
     Task<ApiResult<bool>> CompleteOrder(Guid id);
     Task<ApiResult<bool>> CancelOrder(Guid id);
+    Task<PagedResult<OrderVm>> GetAllByIdUser(Guid id, int PageIndex, int PageSize);
 }

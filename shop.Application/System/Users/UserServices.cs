@@ -44,10 +44,45 @@ public class UserServices : IUserServices
         var roles = await _userManager.GetRolesAsync(user);
         var claims = new[]
         {
+
                 new Claim(ClaimTypes.Email,user.Email),
                 new Claim(ClaimTypes.GivenName,user.FirstName),
                 new Claim(ClaimTypes.Role, string.Join(";",roles)),
-                new Claim(ClaimTypes.Name, request.UserName)
+                new Claim(ClaimTypes.Name, request.UserName),
+                //new Claim("userId", user.Id.ToString())
+                
+        };
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(_config["Tokens:Issuer"],
+            _config["Tokens:Issuer"],
+            claims,
+            expires: DateTime.Now.AddHours(3),
+            signingCredentials: creds);
+
+        return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));
+    }
+    public async Task<ApiResult<string>> AuthencateCustomer(LoginRequest request)
+    {
+        var user = await _userManager.FindByNameAsync(request.UserName);
+        if (user == null) return new ApiErrorResult<string>("Tài khoản không tồn tại");
+
+        var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
+        if (!result.Succeeded)
+        {
+            return new ApiErrorResult<string>("Đăng nhập không đúng");
+        }
+        var roles = await _userManager.GetRolesAsync(user);
+        var claims = new[]
+        {
+
+                new Claim(ClaimTypes.Email,user.Email),
+                new Claim(ClaimTypes.GivenName,user.FirstName),
+                new Claim(ClaimTypes.Role, string.Join(";",roles)),
+                new Claim(ClaimTypes.Name, request.UserName),
+                new Claim("userId", user.Id.ToString())
+
         };
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

@@ -11,6 +11,7 @@ public interface IUserApiClient
     Task<ApiResult<bool>> RegisterEmployee(RegisterRequest registerRequest);
     Task<ApiResult<bool>> RegisterCustomer(RegisterRequest registerRequest);
     Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateRequest request);
+    Task<ApiResult<string>> AuthenticateCustomer(LoginRequest request);
     Task<ApiResult<bool>> DeleteUser(Guid id);
     Task<ApiResult<UserVm>> GetById(Guid id);
 }

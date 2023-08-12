@@ -6,7 +6,7 @@ namespace shop.Application.System.Users;
 public interface IUserServices
 {
     Task<ApiResult<string>> Authencate(LoginRequest request);
-
+    Task<ApiResult<string>> AuthencateCustomer(LoginRequest request);
     Task<ApiResult<bool>> RegisterEmployee(RegisterRequest request);
     Task<ApiResult<bool>> RegisterCustomer(RegisterRequest request);
 

@@ -69,4 +69,10 @@ public class OrdersController : ControllerBase
         if (response.IsSuccessed) return Ok(response);
         return BadRequest(response.ResultObj);
     }
+    [HttpGet("find-order-by-userid/{id}")]
+    public async Task<IActionResult> GetAllByIdUser([FromRoute] Guid id, int PageIndex, int PageSize)
+    {
+        var result = await _orderServices.GetAllByIdUser(id, PageIndex, PageSize);
+        return Ok(result);
+    }
 }

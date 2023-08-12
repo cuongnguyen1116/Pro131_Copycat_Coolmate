@@ -32,6 +32,23 @@ public class UsersController : ControllerBase
 
         return Ok(result);
     }
+    [HttpPost("authenticate-customer")]
+    [AllowAnonymous]
+    public async Task<IActionResult> AuthenticateCustomer([FromBody] LoginRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        var result = await _userServices.AuthencateCustomer(request);
+
+        if (string.IsNullOrEmpty(result.Message))
+        {
+            return BadRequest(result);
+        }
+
+        return Ok(result);
+    }
     [HttpGet("get-staff-paging")]
     public async Task<IActionResult> GetUserPaging([FromQuery] GetUserPagingRequest request)
     {

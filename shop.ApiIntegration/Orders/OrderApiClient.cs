@@ -100,4 +100,14 @@ public class OrderApiClient : BaseApiClient, IOrderApiClient
 
         return result;
     }
+
+    public async Task<PagedResult<OrderVm>> GetAllByIdUser(Guid id, int PageIndex, int PageSize)
+    {
+        string apiUrl = $"/api/Orders/find-order-by-userid/{id}?&PageIndex={PageIndex}&PageSize={PageSize}";
+        var response = await _httpClient.GetAsync(apiUrl);
+        response.EnsureSuccessStatusCode();
+        string apiData = await response.Content.ReadAsStringAsync();
+        var result = JsonConvert.DeserializeObject<PagedResult<OrderVm>>(apiData);
+        return result;
+    }
 }

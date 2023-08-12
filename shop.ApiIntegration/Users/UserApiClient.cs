@@ -37,6 +37,24 @@ public class UserApiClient : BaseApiClient, IUserApiClient
         return JsonConvert.DeserializeObject<ApiErrorResult<string>>(result);
 
     }
+    public async Task<ApiResult<string>> AuthenticateCustomer(LoginRequest request)
+    {
+
+        string url = $"/api/Users/authenticate-customer";
+        var json = JsonConvert.SerializeObject(request);
+        var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PostAsync(url, httpContent);
+        string result = await response.Content.ReadAsStringAsync();
+
+        if (response.IsSuccessStatusCode)
+        {
+            return JsonConvert.DeserializeObject<ApiSuccessResult<string>>(result);
+        }
+
+        return JsonConvert.DeserializeObject<ApiErrorResult<string>>(result);
+
+    }
 
     public async Task<PagedResult<UserVm>> GetUserPaging(GetUserPagingRequest request)
     {

@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DocumentFormat.OpenXml.Office2016.Excel;
+using Microsoft.EntityFrameworkCore;
 using shop.Data.Context;
 using shop.Data.Enums;
 using shop.ViewModels.Catalog.Orders;
 using shop.ViewModels.Common;
+using shop.ViewModels.System.Users;
 
 namespace shop.Application.Catalog.Orders;
 
@@ -224,5 +226,30 @@ public class OrderServices : BaseServices, IOrderServices
         await _context.SaveChangesAsync();
 
         return new ApiSuccessResult<bool>($"Đã hủy đơn hàng {existingOrder.OrderCode}");
+    }
+
+    public async Task<PagedResult<OrderVm>> GetAllByIdUser(Guid id,int PageIndex, int PageSize)
+    {
+        var orders = await _context.Orders.Select(o => new OrderVm
+        {
+            Id = o.Id,
+            CustomerId = o.UserId,
+            OrderCode =o.OrderCode,
+            Total = o.Total,
+            CompletedDate = o.CompletedDate,
+            Status = o.OrderStatus
+        }).Where(o=>o.CustomerId == id).ToListAsync();
+
+        int totalRow = orders.Count;
+        var pagedResult = new PagedResult<OrderVm>()
+        {
+            TotalRecords = totalRow,
+            PageIndex = 1,
+            PageSize = 10,
+            Items = orders
+        };
+        return pagedResult;
+
+
     }
 }
