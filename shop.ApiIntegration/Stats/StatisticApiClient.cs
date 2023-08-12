@@ -50,7 +50,7 @@ public class StatisticApiClient : BaseApiClient, IStatisticsApiClient
     public async Task<bool> ExportToExcel()
     {
         string url = "/api/statistics/excelexport-statistic";
-        var response =  await _httpClient.GetAsync(url);
+        var response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
         var contentDisposition = response.Content.Headers.ContentDisposition;
         var fileName = new ContentDisposition(contentDisposition.ToString()).FileName;
@@ -59,7 +59,7 @@ public class StatisticApiClient : BaseApiClient, IStatisticsApiClient
         {
             // check trùng thì thêm ngày tháng vào
             var timestamp = DateTime.Now.ToString("ddMMyyhhmmss");
-            fileName =   timestamp + "_" + fileName;
+            fileName = timestamp + "_" + fileName;
             filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads", fileName);
         }
         using (var fileStream = new FileStream(filePath, FileMode.Create))

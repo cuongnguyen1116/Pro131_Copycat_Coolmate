@@ -25,7 +25,7 @@ public class HomeController : Controller
         var orderStatistic = await _statisticsApiClient.GetOrderStatistic();
         var statVm = await _statisticsApiClient.GetStatistics();
         var userWithTotalOrder = await _statisticsApiClient.GetUserWithTotalOrder();
-        var vmAllStatistic = new ViewModelAllStatistic() 
+        var vmAllStatistic = new ViewModelAllStatistic()
         {
             MostProductStatistics = mostProductStatistic,
             OrderStatistics = orderStatistic,
@@ -33,7 +33,7 @@ public class HomeController : Controller
             UserWithTotalOrders = userWithTotalOrder
         };
         return View(vmAllStatistic);
-        
+
     }
     public async Task<IActionResult> ExportMostSaleProduct()
     {
@@ -62,7 +62,7 @@ public class HomeController : Controller
             ViewBag.SuccessMsg = TempData["result"];
         }
         return View(response);
-        
+
     }
     public async Task<IActionResult> ExportUserWithMostBuy()
     {

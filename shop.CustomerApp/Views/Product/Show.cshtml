@@ -58,9 +58,9 @@
                     </div>
 
                     @foreach (var item in Model.Items)
-                    {
-                        var url = $"/product/{item.Id}"; ;
-                        <div class="col-md-4">
+                {
+                    var url = $"/product/{item.Id}"; ;
+                    <div class="col-md-4">
                             <div class="product-item">
                                 <div class="product-title">
                                     <a href="#">@item.Name</a>
@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                         </div>
-                    }
+                }
                 </div>
                 @await Component.InvokeAsync("Pager",Model)
                 <!-- Pagination Start -->

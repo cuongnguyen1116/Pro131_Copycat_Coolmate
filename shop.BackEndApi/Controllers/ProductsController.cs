@@ -165,8 +165,6 @@ public class ProductsController : ControllerBase
             return Ok(result);
 
         return BadRequest(result);
-
-
     }
 
     [HttpPost("create-image")]
@@ -183,20 +181,27 @@ public class ProductsController : ControllerBase
         return BadRequest();
 
     }
+
     [HttpGet("featured/{take}")]
     [AllowAnonymous]
     public async Task<IActionResult> GetFeaturedProducts(int take)
     {
         var products = await _productServices.GetFeaturedProducts(take);
-
         return Ok(products);
     }
+
     [HttpGet("recent/{take}")]
     [AllowAnonymous]
     public async Task<IActionResult> GetRecentProducts(int take)
     {
         var products = await _productServices.GetRecentProducts(take);
-
         return Ok(products);
+    }
+
+    [HttpGet("showdetail/{id}")]
+    public async Task<IActionResult> ShowDetail(Guid id)
+    {
+        var detailResult = await _productServices.ShowDetail(id);
+        return Ok(detailResult);
     }
 }

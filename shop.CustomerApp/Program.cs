@@ -1,4 +1,3 @@
-using LazZiya.ExpressLocalization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using shop.ApiIntegration.Categories;
 using shop.ApiIntegration.Products;

@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2016.Excel;
-using DocumentFormat.OpenXml.Wordprocessing;
+﻿using DocumentFormat.OpenXml.Office.CustomUI;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using shop.Application.Common.StoreFile;
@@ -9,6 +8,7 @@ using shop.Utilities.Exceptions;
 using shop.ViewModels.Catalog.Categories;
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Common;
+using System.Collections.Immutable;
 using System.Net.Http.Headers;
 
 namespace shop.Application.Catalog.Products;
@@ -82,6 +82,7 @@ public class ProductServices : IProductServices
         await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
         return "/" + USER_CONTENT_FOLDER_NAME + "/" + fileName;
     }
+
     // table ProductDetail
     public async Task<bool> CreateProductDetail(ProductDetailCreateRequest request)
     {
@@ -104,6 +105,7 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return true;
     }
+
     // table ProductDetail
     public async Task<bool> UpdateProductDetail(ProductDetailUpdateRequest request)
     {
@@ -120,6 +122,7 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return true;
     }
+
     // table ProductDetail
     public async Task<bool> DeleteProductDetail(Guid productdetailId)
     {
@@ -135,6 +138,7 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return true;
     }
+
     // table ProductDetail
     public async Task<ProductDetailVm> GetByIdProductDetail(Guid productdetailId)
     {
@@ -168,6 +172,7 @@ public class ProductServices : IProductServices
 
         return productDetailViewModel;
     }
+
     //Lấy tên sản phẩm
     //public async Task<ProductVm> Detail(Guid productId)
     //{
@@ -199,14 +204,14 @@ public class ProductServices : IProductServices
     public async Task<PagedResult<ProductRequest>> GetAllProduct(ProductPagingRequest request)
     {
         var query = from p in _context.Products
-                    join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi 
+                    join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                     from pi in ppi.DefaultIfEmpty()
                     join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
                     from pic in ppic.DefaultIfEmpty()
                     join c in _context.Categories on pic.CategoryId equals c.Id into picc
                     from c in picc.DefaultIfEmpty()
                     where (pi == null || pi.IsDefault == true)
-                    select new { p, pic,pi };
+                    select new { p, pic, pi };
 
         if (!string.IsNullOrEmpty(request.Keyword))
         {
@@ -222,16 +227,16 @@ public class ProductServices : IProductServices
         }
 
         // Project the query to the view model
-        var productProps = await query.Skip((request.PageIndex -1) * request.PageSize)
+        var productProps = await query.Skip((request.PageIndex - 1) * request.PageSize)
             .Take(request.PageSize)
             .Select(q => new ProductRequest
-        {
-            Id = q.p.Id,
-            Name = q.p.Name,
-            Description = q.p.Description,
-            Status = q.p.Status,
-            Image = q.pi.ImagePath
-        }).ToListAsync();
+            {
+                Id = q.p.Id,
+                Name = q.p.Name,
+                Description = q.p.Description,
+                Status = q.p.Status,
+                Image = q.pi.ImagePath
+            }).ToListAsync();
         var pagedResult = new PagedResult<ProductRequest>()
         {
             TotalRecords = totalRow,
@@ -242,6 +247,7 @@ public class ProductServices : IProductServices
 
         return pagedResult;
     }
+
     // table product get all ko tham số để tạo dropdown lúc create product detail
     public async Task<List<ProductRequest>> GetListProduct()
     {
@@ -281,6 +287,7 @@ public class ProductServices : IProductServices
             return productProp;
         }
     }
+
     // table Product
     public async Task<bool> CreateProduct(ProductRequest request)
     {
@@ -310,6 +317,7 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return true;
     }
+
     // table Product
     public async Task<bool> UpdateProduct(ProductRequest request)
     {
@@ -355,6 +363,7 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return true;
     }
+
     // table Product
     public async Task<bool> DeleteProduct(Guid productId)
     {
@@ -422,6 +431,7 @@ public class ProductServices : IProductServices
         await _context.SaveChangesAsync();
         return new ApiSuccessResult<bool>($"Thêm ảnh có caption {productImage.Caption} thành công");
     }
+
     // get list product làm đẹp cho view home customerapp
     public async Task<List<ProductVm>> GetFeaturedProducts(int take)
     {
@@ -473,5 +483,59 @@ public class ProductServices : IProductServices
         return data;
     }
 
-    
+    // chat gpt viết
+    public async Task<ShowDetailResult> ShowDetail(Guid id)
+    {
+        // lấy dữ liệu
+        var query = from p in _context.Products
+                    join pd in _context.ProductDetails on p.Id equals pd.ProductId
+                    where pd.ProductId == id
+                    select new { pd, p };
+
+        var listImagePaths = await _context.ProductImages.Where(x => x.ProductId == id).Select(x => x.ImagePath).ToListAsync();
+
+        // khởi tạo
+        var availableColors = new Dictionary<Guid, string>();
+        var availableMaterials = new Dictionary<Guid, string>();
+        var availableSizes = new Dictionary<Guid, string>();
+
+        // tránh trùng bản ghi
+        var colorIds = query.Select(x => x.pd.ColorId).Distinct();
+        var materialIds = query.Select(x => x.pd.MaterialId).Distinct();
+        var sizeIds = query.Select(x => x.pd.SizeId).Distinct();
+
+        // lấy list màu, chất liệu, kích cỡ dựa trên list id
+        var colors = await _context.Colors.Where(c => colorIds.Contains(c.Id)).ToListAsync();
+        var materials = await _context.Materials.Where(m => materialIds.Contains(m.Id)).ToListAsync();
+        var sizes = await _context.Sizes.Where(s => sizeIds.Contains(s.Id)).OrderBy(x => x.SortOrder).ToListAsync();
+
+        // gán giá trị cho dict
+        foreach (var color in colors)
+        {
+            availableColors.Add(color.Id, color.Name);
+        }
+
+        foreach (var material in materials)
+        {
+            availableMaterials.Add(material.Id, material.Name);
+        }
+
+        foreach (var size in sizes)
+        {
+            availableSizes.Add(size.Id, size.Name);
+        }
+
+        var result = new ShowDetailResult
+        {
+            ProductId = query.FirstOrDefault().p.Id,
+            ProductName = query.FirstOrDefault().p.Name,
+            ListImagePaths = listImagePaths,
+            AvailableColors = availableColors,
+            AvailableMaterials = availableMaterials,
+            AvailableSizes = availableSizes,
+        };
+
+        return result;
+    }
+
 }

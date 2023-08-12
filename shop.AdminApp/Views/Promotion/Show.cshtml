@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "Show";
-    int count = 0;
+int count = 0;
 }
 
 
@@ -51,11 +51,11 @@
         <div class="card-body">
             <div class="row">
                 @if (ViewBag.SuccessMsg != null)
-                {
-                    <div id="msgAlert" class="alert alert-success" role="alert">
+            {
+                <div id="msgAlert" class="alert alert-success" role="alert">
                         @ViewBag.SuccessMsg
                     </div>
-                }
+            }
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
@@ -73,13 +73,13 @@
                     </thead>
                     <tbody>
                         @foreach (var item in Model.Items)
-                        {
-                           
-                            <tr>
+                    {
+                       
+                        <tr>
                                 <td>
                                     @{
-                                        count++;
-                                    }
+                                    count++;
+                                }
                                     @count
                                 </td>                              
                                 <td>
@@ -105,7 +105,7 @@
                                     @Html.ActionLink("Details", "Details", new {id = item.Id}) |
                                 </td>
                             </tr>
-                        }
+                    }
                     </tbody>
                 </table>
             </div>

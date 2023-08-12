@@ -289,7 +289,7 @@ public class UserServices : IUserServices
         {
 
             await _userManager.AddToRoleAsync(user, "customer");
-            
+
             return new ApiSuccessResult<bool>("Đăng ký thành công");
         }
         return new ApiErrorResult<bool>("Đăng ký không thành công");

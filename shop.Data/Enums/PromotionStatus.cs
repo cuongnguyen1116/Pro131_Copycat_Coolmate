@@ -1,10 +1,9 @@
-﻿namespace shop.Data.Enums
+﻿namespace shop.Data.Enums;
+
+public enum PromotionStatus
 {
-    public enum PromotionStatus
-    {
-        None,
-        Stopped,
-        OnGoing,
-        ComingSoon,
-    }
+    None,
+    Stopped,
+    OnGoing,
+    ComingSoon,
 }

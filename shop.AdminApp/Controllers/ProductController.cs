@@ -72,7 +72,7 @@ public class ProductController : Controller
         return View(result);
     }
 
-    
+
     public async Task<IActionResult> CreateImage(string? keyword, Guid id)
     {
         var request = new ProductPagingRequest()
@@ -369,5 +369,5 @@ public class ProductController : Controller
         return View(roleAssignRequest);
     }
 
-   
+
 }

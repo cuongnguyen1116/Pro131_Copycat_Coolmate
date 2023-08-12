@@ -66,8 +66,8 @@
         </div>
         <div class="row align-items-center product-slider product-slider-4">
             @foreach (var item in Model.FeaturedProducts)
-            {
-                <div class="col-lg-3">
+        {
+            <div class="col-lg-3">
                     <div class="product-item">
                         <div class="product-title">
                             <a href="#">@item.Name</a>
@@ -91,11 +91,11 @@
                         </div>
                         <div class="product-price">
                             <h3>200000<span>vnd</span></h3>
-                            <a class="btn" href=@Url.Action("ShowDetail","Product", new {id = item.Id})><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                            <a class="btn"><i class="fa fa-shopping-cart"></i>Buy Now</a>                           
                         </div>
                     </div>
                 </div>
-            }
+        }
         </div>
     </div>
 </div>
@@ -125,8 +125,8 @@
         </div>
         <div class="row align-items-center product-slider product-slider-4">
             @foreach (var item in Model.LatestProducts)
-            {
-                <div class="col-lg-3">
+        {
+            <div class="col-lg-3">
                     <div class="product-item">
                         <div class="product-title">
                             <a href="#">@item.Name</a>
@@ -154,8 +154,7 @@
                         </div>
                     </div>
                 </div>
-            }
-            
+        }            
         </div>
     </div>
 </div>

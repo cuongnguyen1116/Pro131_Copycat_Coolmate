@@ -1,8 +1,7 @@
-﻿namespace shop.ViewModels.Catalog.Colors
+﻿namespace shop.ViewModels.Catalog.Colors;
+
+public class ColorUpdateRequest
 {
-    public class ColorUpdateRequest
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-    }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
 }

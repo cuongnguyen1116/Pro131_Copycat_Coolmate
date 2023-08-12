@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace shop.ViewModels.Catalog.Stats;
 
-namespace shop.ViewModels.Catalog.Stats
+public class MostProductStatistic
 {
-    public class MostProductStatistic
-    {
-        public Guid ProductId { get; set; }
-        public string ProductName { get; set; }
-        public int TotalQuantitySold { get; set; }
-    }
+    public Guid ProductId { get; set; }
+    public string ProductName { get; set; }
+    public int TotalQuantitySold { get; set; }
 }
