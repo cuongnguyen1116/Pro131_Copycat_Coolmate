@@ -46,15 +46,17 @@ app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+//app.MapControllerRoute(
+//    name : "Product Detail"
+//    );
 //app.UseEndpoints(endpoints =>
 //{
 //    endpoints.MapControllerRoute(
 //                     name: "Product Detail",
-//                     pattern: "/product/{id}", new
+//                     pattern: "/product/ShowDetail/{id}", new
 //                     {
 //                         controller = "Product",
-//                         action = "Detail"
+//                         action = "ShowDetail"
 //                     });
 //    endpoints.MapControllerRoute(
 //    name: "default",

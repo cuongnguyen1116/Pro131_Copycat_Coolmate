@@ -1,6 +1,6 @@
 ﻿namespace shop.ViewModels.Catalog.Stats;
 
-public class UserWithTotalOrder
+public class CustomerMostBuy
 {
     public Guid UserId { get; set; }
     public string UserName { get; set; }

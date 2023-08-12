@@ -1,4 +1,4 @@
-﻿namespace shop.ViewModels.Catalog.Stats;
+﻿
 
 namespace shop.ViewModels.Catalog.Stats
 {
