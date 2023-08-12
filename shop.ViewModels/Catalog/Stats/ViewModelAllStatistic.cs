@@ -1,9 +1,12 @@
 ﻿namespace shop.ViewModels.Catalog.Stats;
 
-public class ViewModelAllStatistic
+namespace shop.ViewModels.Catalog.Stats
 {
-    public IEnumerable<MostProductStatistic> MostProductStatistics { get; set; }
-    public OrderStatistic OrderStatistics { get; set; }
-    public StatsVm StatsVms { get; set; }
-    public IEnumerable<UserWithTotalOrder> UserWithTotalOrders { get; set; }
+    public class ViewModelAllStatistic
+    {
+        public IEnumerable<MostSaleProduct> MostProductStatistics { get; set; }
+        public Order30Days OrderStatistics { get; set; }
+        public StatsVm StatsVms { get; set; }
+        public IEnumerable<CustomerMostBuy> UserWithTotalOrders { get; set; }
+    }
 }

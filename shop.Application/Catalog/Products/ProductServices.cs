@@ -127,14 +127,14 @@ public class ProductServices : IProductServices
     public async Task<bool> DeleteProductDetail(Guid productdetailId)
     {
 
-        var productdetail = await _context.ProductDetails.FindAsync(productdetailId);
+        var productdetail = await _context.ProductDetails.FirstOrDefaultAsync(pd=>pd.Id == productdetailId);
         if (productdetail == null)
         {
             throw new ShopException($"Can't find a product : {productdetailId}");
         }
+        productdetail.Status = Data.Enums.Status.Inactive;
 
-
-        _context.ProductDetails.Remove(productdetail);
+        _context.ProductDetails.Update(productdetail);
         await _context.SaveChangesAsync();
         return true;
     }
@@ -206,12 +206,13 @@ public class ProductServices : IProductServices
         var query = from p in _context.Products
                     join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                     from pi in ppi.DefaultIfEmpty()
+                    //join pd in _context.ProductDetails on p.Id equals pd.ProductId
                     join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
                     from pic in ppic.DefaultIfEmpty()
                     join c in _context.Categories on pic.CategoryId equals c.Id into picc
                     from c in picc.DefaultIfEmpty()
-                    where (pi == null || pi.IsDefault == true)
-                    select new { p, pic, pi };
+                    where (pi == null || pi.IsDefault == true) && _context.ProductDetails.Any(pd=>pd.ProductId == p.Id)
+                    select new { p, pic,pi };
 
         if (!string.IsNullOrEmpty(request.Keyword))
         {
@@ -367,15 +368,16 @@ public class ProductServices : IProductServices
     // table Product
     public async Task<bool> DeleteProduct(Guid productId)
     {
-        var product = await _context.Products.FindAsync(productId) ?? throw new ShopException("Can't find product");
-        var images = _context.ProductImages.Where(i => i.ProductId == productId);
-        foreach (var image in images)
-        {
-            await _storageService.DeleteFileAsync(image.ImagePath);
-        }
-        var productdetails = await _context.ProductDetails.Where(pd => pd.ProductId == productId).ToListAsync();
-        _context.Products.Remove(product);
-        _context.ProductDetails.RemoveRange(productdetails);
+        var product = await _context.Products.FirstOrDefaultAsync(p=>p.Id == productId) ?? throw new ShopException("Can't find product");
+        //var images = _context.ProductImages.Where(i => i.ProductId == productId);
+        //foreach (var image in images)
+        //{
+        //    await _storageService.DeleteFileAsync(image.ImagePath);
+        //}
+        //var productdetails = await _context.ProductDetails.Where(pd => pd.ProductId == productId).ToListAsync();
+        product.Status = Data.Enums.Status.Inactive;
+        _context.Products.Update(product);
+        //_context.ProductDetails.RemoveRange(productdetails);
         await _context.SaveChangesAsync();
         return true;
 
@@ -437,14 +439,15 @@ public class ProductServices : IProductServices
     {
         //1. Select join
         var query = from p in _context.Products
-                    join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
-                    from pic in ppic.DefaultIfEmpty()
-                    join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
-                    from pi in ppi.DefaultIfEmpty()
-                    join c in _context.Categories on pic.CategoryId equals c.Id into picc
-                    from c in picc.DefaultIfEmpty()
-                    where (pi == null || pi.IsDefault == true) /*&& pd.IsFeatured == true*/
-                    select new { p, pic, pi };
+                   join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+                   //join pd in _context.ProductDetails on p.Id equals pd.ProductId
+                   from pic in ppic.DefaultIfEmpty()
+                   join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
+                   from pi in ppi.DefaultIfEmpty()
+                   join c in _context.Categories on pic.CategoryId equals c.Id into picc
+                   from c in picc.DefaultIfEmpty()
+                   where (pi == null || pi.IsDefault == true) && _context.ProductDetails.Any(pd => pd.ProductId == p.Id) /*&& pd.IsFeatured == true*/
+                   select new { p, pic, pi };
 
         var data = await query.Take(take)
             .Select(x => new ProductVm()
@@ -463,12 +466,13 @@ public class ProductServices : IProductServices
         //1. Select join
         var query = from p in _context.Products
                     join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+                    //join pd in _context.ProductDetails on p.Id equals pd.ProductId
                     from pic in ppic.DefaultIfEmpty()
                     join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                     from pi in ppi.DefaultIfEmpty()
                     join c in _context.Categories on pic.CategoryId equals c.Id into picc
                     from c in picc.DefaultIfEmpty()
-                    where (pi == null || pi.IsDefault == true)
+                    where (pi == null || pi.IsDefault == true) && _context.ProductDetails.Any(pd => pd.ProductId == p.Id) /*&& pd.IsFeatured == true*/
                     select new { p, pic, pi };
 
         var data = await query.Take(take)
