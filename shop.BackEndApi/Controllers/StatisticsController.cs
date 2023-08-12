@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using shop.Application.Catalog.Stats;
 using shop.Data.Context;
-using shop.Data.Enums;
 using shop.ViewModels.Catalog.Stats;
-using System.Collections.Generic;
 using System.Data;
 using System.Net;
 using System.Net.Mime;

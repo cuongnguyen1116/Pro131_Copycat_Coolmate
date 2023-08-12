@@ -1,7 +1,6 @@
-﻿namespace shop.ViewModels.Catalog.Materials
+﻿namespace shop.ViewModels.Catalog.Materials;
+
+public class MaterialDeleteRequest
 {
-    public class MaterialDeleteRequest
-    {
-        public Guid? Id { get; set; }
-    }
+    public Guid? Id { get; set; }
 }

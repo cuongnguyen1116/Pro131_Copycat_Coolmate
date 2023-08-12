@@ -16,19 +16,14 @@ public class OrderServices : BaseServices, IOrderServices
 
     public async Task<PagedResult<OrderVm>> GetOrdersPaging(OrderPagingRequest request)
     {
-        var query = _context.Orders
-                             .Include(o => o.User)
-                             .OrderBy(o => o.CreatedDate)
-                             .AsQueryable();
+        var query = _context.Orders.Include(o => o.User).OrderBy(o => o.CreatedDate).AsQueryable();
 
         if (!string.IsNullOrEmpty(request.KeyWord))
         {
             var keyword = request.KeyWord.ToLower(); // Convert the keyword to lowercase
 
             query = query.Where(o =>
-                o.OrderCode.ToLower().Contains(keyword) ||
-                o.User.FirstName.ToLower().Contains(keyword) ||
-                o.User.LastName.ToLower().Contains(keyword)
+                o.OrderCode.ToLower().Contains(keyword) || o.User.FirstName.ToLower().Contains(keyword) || o.User.LastName.ToLower().Contains(keyword)
             );
         }
 
@@ -39,8 +34,7 @@ public class OrderServices : BaseServices, IOrderServices
 
         int totalRow = await query.CountAsync();
 
-        var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
-            .Take(request.PageSize)
+        var data = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
             .Select(o => new OrderVm
             {
                 Id = o.Id,

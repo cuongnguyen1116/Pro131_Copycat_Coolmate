@@ -1,7 +1,6 @@
-﻿namespace shop.ViewModels.Catalog.Colors
+﻿namespace shop.ViewModels.Catalog.Colors;
+
+public class ColorDeleteRequest
 {
-    public class ColorDeleteRequest
-    {
-        public Guid? Id { get; set; }
-    }
+    public Guid? Id { get; set; }
 }

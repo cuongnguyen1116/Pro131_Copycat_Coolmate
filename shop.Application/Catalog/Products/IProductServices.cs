@@ -24,5 +24,5 @@ public interface IProductServices
     //Task<int> UpdateImages(Guid imageId, ProductImageRequest request);
     Task<List<ProductVm>> GetFeaturedProducts(int take);
     Task<List<ProductVm>> GetRecentProducts(int take);
-
+    Task<ShowDetailResult> ShowDetail(Guid id);
 }

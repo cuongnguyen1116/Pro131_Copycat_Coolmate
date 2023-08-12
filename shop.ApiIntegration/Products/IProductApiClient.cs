@@ -26,6 +26,6 @@ public interface IProductApiClient
     Task<List<SizeVm>> GetListSize();
     Task<ApiResult<bool>> CreateImage(ProductImageRequest request, Guid productdid);
     Task<List<ProductVm>> GetFeaturedProducts(int take);
-
     Task<List<ProductVm>> GetRecentProducts(int take);
+    Task<ShowDetailResult> ShowDetail(Guid id);
 }

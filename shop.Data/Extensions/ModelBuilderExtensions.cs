@@ -26,7 +26,7 @@ public static class ModelBuilderExtensions
         #endregion
 
         #region product
-        
+
         var productId1 = new Guid("1dc01736-d7e2-4c24-94de-00844d5cb1f9");
         var productId2 = new Guid("3b997d7b-e67a-4b00-8e4a-043ce70b2844");
         var productId3 = new Guid("470f5c7e-a94a-4f1a-930c-bda7d4f73256");
@@ -149,6 +149,7 @@ public static class ModelBuilderExtensions
                 Status = Status.Active
             });
         #endregion
+
         #region Image 
         var iamge1 = new Guid("9dd02bd4-364a-49a2-94a2-d07e9ce72d8d");
         var iamge2 = new Guid("5f28acd7-5b28-4eff-8470-aa00b479b032");
@@ -165,6 +166,23 @@ public static class ModelBuilderExtensions
         var iamge13 = new Guid("5936551b-8520-4b63-92fd-0fd8a19dd1f3");
         var iamge14 = new Guid("e11c3fe7-a75e-4065-bc48-ff43446d3dce");
         var iamge15 = new Guid("389516c7-bb09-4889-a01b-9ffb56a7d105");
+        var image16 = new Guid("09c8ba6f-e443-4013-8f85-ee327a2809b1");
+        var image17 = new Guid("d88d96cb-1d98-4462-83fb-2d5af8b97141");
+        var image18 = new Guid("8dc8adce-ae13-4098-a88f-9d212a84bee5");
+        var image19 = new Guid("fbe934b1-cb4f-4605-9bc8-8bb518bca047");
+        var image20 = new Guid("7b5a9da0-9270-43e7-9a29-b23ceb0fc345");
+        var image21 = new Guid("a4710f56-6a96-49c0-90c9-dac289b8bbc2");
+        var image22 = new Guid("30dbbd7b-1a9e-4c97-9b13-7b322374936b");
+        var image23 = new Guid("d9726055-fcdb-43d7-8155-2035646d36be");
+        var image24 = new Guid("ae2f26c5-cc35-4607-8676-c7f876dcfa2d");
+        var image25 = new Guid("72b72d01-8144-4382-a56b-4d445b56c040");
+        var image26 = new Guid("176c72e0-3242-4a30-976b-2754badf5345");
+        var image27 = new Guid("215765c3-da42-4e6d-8a56-3a655aced106");
+        var image28 = new Guid("9c0bab1c-7e3b-4fb9-b0a9-d209253db752");
+        var image29 = new Guid("5a60998a-a665-4d47-88ac-8c084254949c");
+        var image30 = new Guid("d2c58945-c066-44f1-8246-96d6938b3606");
+        var image31 = new Guid("73114c7d-5b66-44d3-a30f-9e3a927ee855");
+        var image32 = new Guid("a4be356e-c721-4124-9708-fec4ddd4a01a");
         builder.Entity<ProductImage>().HasData(
             new ProductImage
             {
@@ -173,7 +191,16 @@ public static class ModelBuilderExtensions
                 ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
                 Caption = "ThumbnailImage",
                 IsDefault = true,
-                SortOrder =1
+                SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = image16,
+                ProductId = productId1,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-1.webp",
+                Caption = "Image",
+                IsDefault = false,
+                SortOrder = 2
             },
             new ProductImage
             {
@@ -186,12 +213,30 @@ public static class ModelBuilderExtensions
             },
             new ProductImage
             {
+                Id = image17,
+                ProductId = productId2,
+                ImagePath = "/user-content/tee-navy-2.jpg",
+                Caption = "Image",
+                IsDefault = false,
+                SortOrder = 2
+            },
+            new ProductImage
+            {
                 Id = iamge3,
                 ProductId = productId3,
                 ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
                 Caption = "ThumbnailImage",
                 IsDefault = true,
                 SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = image18,
+                ProductId = productId3,
+                ImagePath = "/user-content/Ao_thun_Marvel_logo_Spiderman18.jpg",
+                Caption = "lmao",
+                IsDefault = false,
+                SortOrder = 2,
             },
             new ProductImage
             {
@@ -204,12 +249,30 @@ public static class ModelBuilderExtensions
             },
             new ProductImage
             {
+                Id = image19,
+                ProductId = productId4,
+                ImagePath = "/user-content/coaoo4.jpg",
+                Caption = "image",
+                IsDefault = false,
+                SortOrder = 2,
+            },
+            new ProductImage
+            {
                 Id = iamge5,
                 ProductId = productId5,
                 ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
                 Caption = "ThumbnailImage",
                 IsDefault = true,
                 SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = image20,
+                ProductId = productId5,
+                ImagePath = "/user-content/Ao_thun_Marvel_logo_Spiderman1.jpg",
+                Caption = "image",
+                IsDefault= false,
+                SortOrder = 2,
             },
             new ProductImage
             {
@@ -222,12 +285,30 @@ public static class ModelBuilderExtensions
             },
             new ProductImage
             {
+                Id = image21,
+                ProductId = productId6,
+                ImagePath = "/user-content/Ao_thun_Marvel_Big_Logo_Hulk16.jpg",
+                Caption = "image",
+                IsDefault = false,
+                SortOrder = 2,
+            },
+            new ProductImage
+            {
                 Id = iamge7,
                 ProductId = productId7,
                 ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-3.webp",
                 Caption = "ThumbnailImage",
                 IsDefault = true,
                 SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = image22,
+                ProductId = productId7,
+                ImagePath = "/user-content/Ao_thun_Marvel_Captain_America011.jpg",
+                Caption = "image",
+                IsDefault = false,
+                SortOrder = 2,
             },
             new ProductImage
             {
@@ -240,12 +321,30 @@ public static class ModelBuilderExtensions
             },
             new ProductImage
             {
+                Id = image23,
+                ProductId = productId8,
+                ImagePath = "/user-content/Ao_thun_Marvel_Captain_America-6.jpg",
+                Caption = "image",
+                IsDefault = false,
+                SortOrder = 2,
+            },
+            new ProductImage
+            {
                 Id = iamge9,
                 ProductId = productId9,
                 ImagePath = "/user-content/Ao_thun_Marvel_logo_Spiderman18.jpg",
                 Caption = "ThumbnailImage",
                 IsDefault = true,
                 SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = image24,
+                ProductId = productId9,
+                ImagePath = "/user-content/Ao_thun_Marvel_Captain_America013.jpg",
+                Caption = "image",
+                IsDefault = false,
+                SortOrder = 2,
             },
             new ProductImage
             {
@@ -258,12 +357,30 @@ public static class ModelBuilderExtensions
             },
             new ProductImage
             {
+                Id = image25,
+                ProductId = productId10,
+                ImagePath = "/user-content/Ao_thun_Marvel_logo_Spiderman18.jpg",
+                Caption = "image",
+                IsDefault = false,
+                SortOrder = 2,
+            },
+            new ProductImage
+            {
                 Id = iamge11,
                 ProductId = productId11,
                 ImagePath = "/user-content/_CMM0423.jpg",
                 Caption = "ThumbnailImage",
                 IsDefault = true,
                 SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = image26,
+                ProductId = productId11,
+                ImagePath = "/user-content/ban_linh_trang_chi_tiet_2.jpg",
+                Caption = "image",
+                IsDefault = false,
+                SortOrder = 2,
             },
             new ProductImage
             {
@@ -276,12 +393,30 @@ public static class ModelBuilderExtensions
             },
             new ProductImage
             {
+                Id = image27,
+                ProductId = productId12,
+                ImagePath = "/user-content/Ao_thun_Gym_Powerfit-den-6.webp",
+                Caption = "image",
+                IsDefault = false,
+                SortOrder = 2,
+            },
+            new ProductImage
+            {
                 Id = iamge13,
                 ProductId = productId13,
                 ImagePath = "/user-content/ban_linh_trang_1.jpg",
                 Caption = "ThumbnailImage",
                 IsDefault = true,
                 SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = image28,
+                ProductId = productId13,
+                ImagePath = "/user-content/Ao_thun_Marvel_Big_Logo_Hulk15.jpg",
+                Caption = "image",
+                IsDefault = false,
+                SortOrder = 2,
             },
             new ProductImage
             {
@@ -294,16 +429,34 @@ public static class ModelBuilderExtensions
             },
             new ProductImage
             {
+                Id = image29,
+                ProductId = productId14,
+                ImagePath = "/user-content/ATS.RN.EF.TI.S3D_essential.jpg",
+                Caption = "image",
+                IsDefault = false,
+                SortOrder = 2,
+            },
+            new ProductImage
+            {
                 Id = iamge15,
                 ProductId = productId15,
                 ImagePath = "/user-content/Ao_thun_Marvel_Captain_America-6.jpg",
                 Caption = "ThumbnailImage",
                 IsDefault = true,
                 SortOrder = 1
+            },
+            new ProductImage
+            {
+                Id = image30,
+                ProductId = productId15,
+                ImagePath = "/user-content/Ao_thun_Cotton_Summer_Coolwaves-23-7.jpg",
+                Caption = "image",
+                IsDefault = false,
+                SortOrder = 2,
             }
-
             );
         #endregion
+
         #region product in categories
         builder.Entity<ProductInCategory>().HasData(
             new ProductInCategory

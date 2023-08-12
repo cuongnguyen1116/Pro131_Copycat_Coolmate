@@ -68,23 +68,23 @@
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
                             @if (User.Identity.IsAuthenticated)
-                            {
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@User.Identity.Name</a>
-                                <div class="dropdown-menu">
+                        {
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@User.Identity.Name</a>
+                            <div class="dropdown-menu">
                                     <form action="/Account/Logout" method="post">
                                         <button type="submit" style="padding-right:0;margin-top:10px;margin-bottom:0px;background:transparent;border:none;">
                                             <span class="btn btn-large btn-success">Logout</span>
                                         </button>
                                     </form>
                                 </div>
-                            }
-                            else
-                            {
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Guest!</a>
-                                <div class="dropdown-menu">
+                        }
+                        else
+                        {
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Guest!</a>
+                            <div class="dropdown-menu">
                                     <a asp-action="Login" asp-controller="Account" class="dropdown-item">Login</a>
                                 </div>
-                            }
+                        }
                         </div>
                     </div>
                 </div>

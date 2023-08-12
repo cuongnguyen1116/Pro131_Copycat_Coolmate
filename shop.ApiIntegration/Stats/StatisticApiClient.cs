@@ -59,7 +59,7 @@ public class StatisticApiClient : BaseApiClient, IStatisticsApiClient
         {
             // check trùng thì thêm ngày tháng vào
             var timestamp = DateTime.Now.ToString("ddMMyyhhmmss");
-            fileName =   timestamp + "_" + fileName;
+            fileName = timestamp + "_" + fileName;
             filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads", fileName);
         }
         using (var fileStream = new FileStream(filePath, FileMode.Create))

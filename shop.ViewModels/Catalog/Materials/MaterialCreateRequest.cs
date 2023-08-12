@@ -1,8 +1,7 @@
-﻿namespace shop.ViewModels.Catalog.Materials
+﻿namespace shop.ViewModels.Catalog.Materials;
+
+public class MaterialCreateRequest
 {
-    public class MaterialCreateRequest
-    {
-        public Guid? MaterialId { get; set; }
-        public string? Name { get; set; }
-    }
+    public Guid? MaterialId { get; set; }
+    public string? Name { get; set; }
 }

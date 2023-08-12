@@ -2,12 +2,11 @@
 using shop.ViewModels.Catalog.Products;
 using shop.ViewModels.Common;
 
-namespace shop.CustomerApp.Models
-{
-    public class ProductCategoryViewModel
-    {
-        public CategoryVm Category { get; set; }
+namespace shop.CustomerApp.Models;
 
-        public PagedResult<ProductDetailVm> Products { get; set; }
-    }
+public class ProductCategoryViewModel
+{
+    public CategoryVm Category { get; set; }
+
+    public PagedResult<ProductDetailVm> Products { get; set; }
 }

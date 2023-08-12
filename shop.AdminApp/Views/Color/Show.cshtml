@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Show";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section Scripts{
@@ -41,8 +41,8 @@
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
-                        {
-                            <tr>
+                    {
+                        <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
@@ -53,7 +53,7 @@
                                         <i class="fas fa-trash"></i>
                                     </a>
                             </tr>
-                        }
+                    }
                     </tbody>
                 </table>
             </div>

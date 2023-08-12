@@ -33,7 +33,7 @@ public class HomeController : Controller
             UserWithTotalOrders = userWithTotalOrder
         };
         return View(vmAllStatistic);
-        
+
     }
     public async Task<IActionResult> ExportMostSaleProduct()
     {
