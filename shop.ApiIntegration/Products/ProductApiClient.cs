@@ -309,4 +309,14 @@ public class ProductApiClient : BaseApiClient, IProductApiClient
         var result = JsonConvert.DeserializeObject<ShowDetailResult>(apiData);
         return result;
     }
+
+    public async Task<decimal> GetPriceForSize(Guid productId, Guid sizeId)
+    {
+        string apiUrl = $"/api/Products/getpriceforsize?productId={productId}&sizeId={sizeId}";
+        var response = await _httpClient.GetAsync(apiUrl);
+        response.EnsureSuccessStatusCode();
+        string apiData = await response.Content.ReadAsStringAsync();
+        var result = Convert.ToDecimal(apiData);
+        return result;
+    }
 }

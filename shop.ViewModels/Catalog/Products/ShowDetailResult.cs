@@ -10,6 +10,8 @@ public class ShowDetailResult
 {
     public Guid ProductId { get; set; }
     public string ProductName { get; set; }
+    public decimal ShowPrice { get; set; }
+    public string Description { get; set; }
     public List<ProductDetailVm> ListProductDetails { get; set; }
     public List<string> ListImagePaths { get; set; }
     public IDictionary<Guid, string>? AvailableColors { get; set; }

@@ -25,4 +25,5 @@ public interface IProductServices
     Task<List<ProductVm>> GetFeaturedProducts(int take);
     Task<List<ProductVm>> GetRecentProducts(int take);
     Task<ShowDetailResult> ShowDetail(Guid id);
+    decimal GetPriceForSize(Guid productId, Guid sizeId);
 }
