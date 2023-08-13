@@ -45,7 +45,12 @@ public class ProductController : Controller
     public async Task<IActionResult> ShowDetail(Guid id)
     {
         var data = await _productApiClient.ShowDetail(id);
-        ViewBag.ShowDetailData = data;
         return View(data);
+    }
+
+    public async Task<IActionResult> GetPriceForSize(Guid productId, Guid sizeId)
+    {
+        decimal price = await _productApiClient.GetPriceForSize(productId, sizeId);
+        return Json(new { price });
     }
 }

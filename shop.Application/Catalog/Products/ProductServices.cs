@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Office.CustomUI;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using shop.Application.Common.StoreFile;
 using shop.Data.Context;
@@ -127,7 +128,7 @@ public class ProductServices : IProductServices
     public async Task<bool> DeleteProductDetail(Guid productdetailId)
     {
 
-        var productdetail = await _context.ProductDetails.FirstOrDefaultAsync(pd=>pd.Id == productdetailId);
+        var productdetail = await _context.ProductDetails.FirstOrDefaultAsync(pd => pd.Id == productdetailId);
         if (productdetail == null)
         {
             throw new ShopException($"Can't find a product : {productdetailId}");
@@ -206,13 +207,13 @@ public class ProductServices : IProductServices
         var query = from p in _context.Products
                     join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                     from pi in ppi.DefaultIfEmpty()
-                    //join pd in _context.ProductDetails on p.Id equals pd.ProductId
+                        //join pd in _context.ProductDetails on p.Id equals pd.ProductId
                     join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
                     from pic in ppic.DefaultIfEmpty()
                     join c in _context.Categories on pic.CategoryId equals c.Id into picc
                     from c in picc.DefaultIfEmpty()
-                    where (pi == null || pi.IsDefault == true) && _context.ProductDetails.Any(pd=>pd.ProductId == p.Id)
-                    select new { p, pic,pi };
+                    where (pi == null || pi.IsDefault == true) && _context.ProductDetails.Any(pd => pd.ProductId == p.Id)
+                    select new { p, pic, pi };
 
         if (!string.IsNullOrEmpty(request.Keyword))
         {
@@ -336,12 +337,11 @@ public class ProductServices : IProductServices
         // Save thumbnail image
         if (request.ThumbnailImage != null)
         {
-            var thumbnailImage = product.ProductImages
-                .FirstOrDefault(pi => pi.IsDefault);
+            var thumbnailImage = product.ProductImages.FirstOrDefault(pi => pi.IsDefault);
 
             if (thumbnailImage != null)
             {
-                thumbnailImage.ImagePath = await this.SaveFile(request.ThumbnailImage);
+                thumbnailImage.ImagePath = await SaveFile(request.ThumbnailImage);
                 _context.ProductImages.Update(thumbnailImage);
             }
             else
@@ -352,7 +352,7 @@ public class ProductServices : IProductServices
                     {
                         Id= Guid.NewGuid(),
                         Caption = "Thumbnail image",
-                        ImagePath = await this.SaveFile(request.ThumbnailImage),
+                        ImagePath = await SaveFile(request.ThumbnailImage),
                         IsDefault = true,
                         SortOrder = 1
                     }
@@ -368,7 +368,7 @@ public class ProductServices : IProductServices
     // table Product
     public async Task<bool> DeleteProduct(Guid productId)
     {
-        var product = await _context.Products.FirstOrDefaultAsync(p=>p.Id == productId) ?? throw new ShopException("Can't find product");
+        var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productId) ?? throw new ShopException("Can't find product");
         //var images = _context.ProductImages.Where(i => i.ProductId == productId);
         //foreach (var image in images)
         //{
@@ -439,15 +439,15 @@ public class ProductServices : IProductServices
     {
         //1. Select join
         var query = from p in _context.Products
-                   join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
-                   //join pd in _context.ProductDetails on p.Id equals pd.ProductId
-                   from pic in ppic.DefaultIfEmpty()
-                   join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
-                   from pi in ppi.DefaultIfEmpty()
-                   join c in _context.Categories on pic.CategoryId equals c.Id into picc
-                   from c in picc.DefaultIfEmpty()
-                   where (pi == null || pi.IsDefault == true) && _context.ProductDetails.Any(pd => pd.ProductId == p.Id) /*&& pd.IsFeatured == true*/
-                   select new { p, pic, pi };
+                    join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+                    //join pd in _context.ProductDetails on p.Id equals pd.ProductId
+                    from pic in ppic.DefaultIfEmpty()
+                    join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
+                    from pi in ppi.DefaultIfEmpty()
+                    join c in _context.Categories on pic.CategoryId equals c.Id into picc
+                    from c in picc.DefaultIfEmpty()
+                    where (pi == null || pi.IsDefault == true) && _context.ProductDetails.Any(pd => pd.ProductId == p.Id) /*&& pd.IsFeatured == true*/
+                    select new { p, pic, pi };
 
         var data = await query.Take(take)
             .Select(x => new ProductVm()
@@ -533,6 +533,8 @@ public class ProductServices : IProductServices
         {
             ProductId = query.FirstOrDefault().p.Id,
             ProductName = query.FirstOrDefault().p.Name,
+            ShowPrice = query.FirstOrDefault(x => x.pd.SizeId == sizes[0].Id).pd.Price,
+            Description = query.FirstOrDefault().p.Description,
             ListImagePaths = listImagePaths,
             AvailableColors = availableColors,
             AvailableMaterials = availableMaterials,
@@ -542,4 +544,10 @@ public class ProductServices : IProductServices
         return result;
     }
 
+    // lấy giá với productId và sizeId
+    public  decimal GetPriceForSize(Guid productId, Guid sizeId)
+    {
+        decimal price = _context.ProductDetails.FirstOrDefault(x => x.ProductId == productId && x.SizeId == sizeId).Price;
+        return price;
+    }
 }

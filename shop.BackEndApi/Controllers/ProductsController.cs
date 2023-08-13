@@ -204,4 +204,11 @@ public class ProductsController : ControllerBase
         var detailResult = await _productServices.ShowDetail(id);
         return Ok(detailResult);
     }
+
+    [HttpGet("getpriceforsize")]
+    public IActionResult GetPriceForSize([FromQuery]Guid productId, [FromQuery]Guid sizeId)
+    {
+        var price = _productServices.GetPriceForSize(productId, sizeId);
+        return Ok(price);
+    }
 }
