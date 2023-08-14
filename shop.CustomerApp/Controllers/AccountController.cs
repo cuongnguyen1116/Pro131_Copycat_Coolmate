@@ -71,19 +71,21 @@ namespace shop.CustomerApp.Controllers
 
                 // Sử dụng userId ở đây cho mục đích mong muốn
             }
-            await HttpContext.SignInAsync(
-                        CookieAuthenticationDefaults.AuthenticationScheme,
-                        userPrincipal,
-                        authProperties);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal, authProperties);
 
             return RedirectToAction("Index", "Home");
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> Logout()
+        //{
+        //    await HttpContext.SignOutAsync(
+        //                CookieAuthenticationDefaults.AuthenticationScheme);
+        //}
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(
-                        CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return RedirectToAction("Index", "Home");
         }
@@ -114,7 +116,6 @@ namespace shop.CustomerApp.Controllers
                 Password = registerRequest.Password,
                 RememberMe = true
             });
-
             var userPrincipal = this.ValidateToken(loginResult.Message);
             var userIdClaim = userPrincipal.Claims.FirstOrDefault(c => c.Type == "userId");
             var authProperties = new AuthenticationProperties
@@ -135,6 +136,7 @@ namespace shop.CustomerApp.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         userPrincipal,
                         authProperties);
+            
 
             return RedirectToAction("Index", "Home");
         }
@@ -157,6 +159,7 @@ namespace shop.CustomerApp.Controllers
             return principal;
 
         }
+
         //public async Task<IActionResult> CheckOrder(Guid id, int PageIndex = 1, int PageSize = 10)
         //{
         //    var userIdinSession = HttpContext.Session.GetString("userId");
@@ -169,6 +172,7 @@ namespace shop.CustomerApp.Controllers
 
         //    return View(data);
         //}
+
         public async Task<IActionResult> MyAccount(Guid id, int PageIndex = 1, int PageSize = 10)
         {
             //var userIdinSession = HttpContext.Session.GetString("userId");
