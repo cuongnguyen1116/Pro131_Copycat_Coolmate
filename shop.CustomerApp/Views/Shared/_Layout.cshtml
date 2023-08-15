@@ -51,7 +51,7 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="@Url.ActionLink("Index","Home") class="nav-item nav-link active">Home</a>
                         <a asp-action="Show" asp-controller="Product" class="nav-item nav-link">Products</a>
                         <a asp-action="Detail" asp-controller="Product" class="nav-item nav-link">Product Detail</a>
                         <a href="cart.html" class="nav-item nav-link">Cart</a>
@@ -98,7 +98,7 @@
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="@Url.ActionLink("Index","Home")>
                             <img src="img/logo.png" alt="Logo">
                         </a>
                     </div>

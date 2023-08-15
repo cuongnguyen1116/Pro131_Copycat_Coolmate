@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using shop.ApiIntegration.Carts;
 using shop.ApiIntegration.Categories;
 using shop.ApiIntegration.Orders;
 using shop.ApiIntegration.Products;
@@ -15,6 +16,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.AccessDeniedPath = $"/User/Forbiden";
 
 });
+
 builder.Services.AddHttpClient();
 builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(30));
 builder.Services.AddTransient<IProductApiClient, ProductApiClient>();
@@ -22,6 +24,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<ICategoryApiClient, CategoryApiClient>();
 builder.Services.AddTransient<IOrderApiClient, OrderApiClient>();
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
+builder.Services.AddTransient<ICartApiClient, CartApiClient>();
 
 
 var app = builder.Build();

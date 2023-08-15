@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using shop.Application.Catalog.Carts;
 using shop.Application.Catalog.Categories;
 using shop.Application.Catalog.Colors;
 using shop.Application.Catalog.Materials;
@@ -27,7 +28,6 @@ var connectionString = builder.Configuration.GetConnectionString(SystemConstants
 builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ShopDbContext>().AddDefaultTokenProviders();
 
-
 builder.Services.AddTransient<IColorServices, ColorServices>();
 builder.Services.AddTransient<IMaterialServices, MaterialServices>();
 builder.Services.AddTransient<ISizeServices, SizeServices>();
@@ -39,6 +39,7 @@ builder.Services.AddTransient<IUserServices, UserServices>();
 builder.Services.AddTransient<IOrderServices, OrderServices>();
 builder.Services.AddTransient<IStatisticsServices, StatisticsServices>();
 builder.Services.AddTransient<IPromotionService, PromotionService>();
+builder.Services.AddTransient<ICartServices, CartServices>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

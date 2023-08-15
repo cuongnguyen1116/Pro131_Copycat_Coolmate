@@ -10,6 +10,7 @@ public class ProductController : Controller
 {
     private readonly IProductApiClient _productApiClient;
     private readonly ICategoryApiClient _categoryApiClient;
+
     public ProductController(IProductApiClient productApiClient, ICategoryApiClient categoryApiClient)
     {
         _productApiClient = productApiClient;
@@ -52,5 +53,5 @@ public class ProductController : Controller
     {
         decimal price = await _productApiClient.GetPriceForSize(productId, sizeId);
         return Json(new { price });
-    }
+    }    
 }

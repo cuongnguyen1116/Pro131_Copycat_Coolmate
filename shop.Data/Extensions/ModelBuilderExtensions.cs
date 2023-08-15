@@ -1965,8 +1965,12 @@ public static class ModelBuilderExtensions
             OrderStatus = OrderStatus.Pending
         };
 
+        var orderDetail1Id = new Guid("fce74626-1ee7-4a93-85e7-eaf69bfdb982");
+        var orderDetail2Id = new Guid("a7c511fc-b188-4a2a-abf6-ea649eb04e4d");
+
         var orderDetail1 = new OrderDetail
         {
+            Id = orderDetail1Id,
             OrderId = orderId1,
             ProductDetailId = productDetailId1,
             Quantity = 5,
@@ -1976,6 +1980,7 @@ public static class ModelBuilderExtensions
 
         var orderDetail2 = new OrderDetail
         {
+            Id = orderDetail2Id,
             OrderId = orderId1,
             ProductDetailId = productDetailId2,
             Quantity = 5,
@@ -2002,8 +2007,12 @@ public static class ModelBuilderExtensions
             OrderStatus = OrderStatus.Pending
         };
 
+        var orderDetail3Id = new Guid("6b06cec7-7f7d-40ae-94ec-5ac25aec1aa7");
+        var orderDetail4Id = new Guid("e8775943-84b2-49d5-9f39-f5fe268fa3ab");
+
         var orderDetail3 = new OrderDetail
         {
+            Id = orderDetail3Id,
             OrderId = orderId2,
             ProductDetailId = productDetailId3,
             Quantity = 5,
@@ -2012,6 +2021,7 @@ public static class ModelBuilderExtensions
         };
         var orderDetail4 = new OrderDetail
         {
+            Id = orderDetail4Id,
             OrderId = orderId2,
             ProductDetailId = productDetailId4,
             Quantity = 5,
@@ -2036,8 +2046,11 @@ public static class ModelBuilderExtensions
             Total = 2250000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail5Id = new Guid("01031bc1-c8a5-40bb-af00-859dbcc2e3c5");
+        var orderDetail6Id = new Guid("28dd891a-f482-4d04-a2bf-fb4fc14f6ae5");
         var orderDetail5 = new OrderDetail
         {
+            Id= orderDetail5Id,
             OrderId = orderId3,
             ProductDetailId = productDetailId5,
             Quantity = 5,
@@ -2046,6 +2059,7 @@ public static class ModelBuilderExtensions
         };
         var orderDetail6 = new OrderDetail
         {
+            Id=orderDetail6Id,
             OrderId = orderId3,
             ProductDetailId = productDetailId2,
             Quantity = 5,
@@ -2070,8 +2084,10 @@ public static class ModelBuilderExtensions
             Total = 1200000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail7Id = new Guid("87f2f4e9-0c7d-420e-98ac-5038673d0f39");
         var orderDetail7 = new OrderDetail
         {
+            Id = orderDetail7Id,
             OrderId = orderId4,
             ProductDetailId = productDetailId5,
             Quantity = 5,
@@ -2093,8 +2109,10 @@ public static class ModelBuilderExtensions
             Total = 1200000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail8Id = new Guid("87f330fa-7f07-4b4d-bd71-c962426bca62");
         var orderDetail8 = new OrderDetail
         {
+            Id = orderDetail8Id,
             OrderId = orderId5,
             ProductDetailId = productDetailId5,
             Quantity = 5,
@@ -2116,8 +2134,10 @@ public static class ModelBuilderExtensions
             Total = 1200000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail9Id = new Guid("5e26280e-7302-48bc-b26e-33a37bd3aa25");
         var orderDetail9 = new OrderDetail
         {
+            Id = orderDetail9Id,
             OrderId = orderId6,
             ProductDetailId = productDetailId5,
             Quantity = 5,
@@ -2139,8 +2159,11 @@ public static class ModelBuilderExtensions
             Total = 2480000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail10Id = new Guid("5d8d7ad4-7c00-45eb-ad0f-26a813eecad5");
+        var orderDetail11Id = new Guid("57378975-9ed6-4db4-8cb8-6ccd3989981a");
         var orderDetail10 = new OrderDetail
         {
+            Id = orderDetail10Id,
             OrderId = orderId7,
             ProductDetailId = productDetailId10,
             Quantity = 4,
@@ -2149,6 +2172,7 @@ public static class ModelBuilderExtensions
         };
         var orderDetail11 = new OrderDetail
         {
+                Id = orderDetail11Id,
             OrderId = orderId7,
             ProductDetailId = productDetailID45,
             Quantity = 4,
@@ -2170,8 +2194,10 @@ public static class ModelBuilderExtensions
             Total = 680000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail12Id = new Guid("fbee63d7-5bff-4830-aef3-ae8bd9c592c4");
         var orderDetail12 = new OrderDetail
         {
+            Id = orderDetail12Id,
             OrderId = orderId8,
             ProductDetailId = productDetailID40,
             Quantity = 2,
@@ -2193,8 +2219,11 @@ public static class ModelBuilderExtensions
             Total = 2100000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail13Id = new Guid("49445c27-3876-449d-a8ba-9d741c318180");
+        var orderDetail14Id = new Guid("c355f853-984c-4975-942b-2d368cf1f2a9");
         var orderDetail13 = new OrderDetail
         {
+            Id = orderDetail13Id,
             OrderId = orderId9,
             ProductDetailId = productDetailID30,
             Quantity = 4,
@@ -2203,6 +2232,7 @@ public static class ModelBuilderExtensions
         };
         var orderDetail14 = new OrderDetail
         {
+            Id = orderDetail14Id,
             OrderId = orderId9,
             ProductDetailId = productDetailID15,
             Quantity = 2,
@@ -2224,8 +2254,11 @@ public static class ModelBuilderExtensions
             Total = 949000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail15Id = new Guid("9adf9023-59ca-4013-a49d-6f3fa310e67e");
+        var orderDetail16Id = new Guid("75004318-d084-4fe6-b007-8688c7a48eb2");
         var orderDetail15 = new OrderDetail
         {
+            Id = orderDetail15Id,
             OrderId = orderId10,
             ProductDetailId = productDetailID23,
             Quantity = 1,
@@ -2234,6 +2267,7 @@ public static class ModelBuilderExtensions
         };
         var orderDetail16 = new OrderDetail
         {
+            Id = orderDetail16Id,
             OrderId = orderId10,
             ProductDetailId = productDetailID32,
             Quantity = 2,
@@ -2255,8 +2289,11 @@ public static class ModelBuilderExtensions
             Total = 1400000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail17Id = new Guid("5ca22d20-49a8-496d-9a9b-d17c84416f51");
+        var orderDetail18Id = new Guid("aafe7fe1-a73a-4943-ad8b-dbe1050844ad");
         var orderDetail17 = new OrderDetail
         {
+             Id = orderDetail17Id,
             OrderId = orderId11,
             ProductDetailId = productDetailID60,
             Quantity = 3,
@@ -2265,6 +2302,7 @@ public static class ModelBuilderExtensions
         };
         var orderDetail18 = new OrderDetail
         {
+            Id = orderDetail18Id,
             OrderId = orderId11,
             ProductDetailId = productDetailID62,
             Quantity = 1,
@@ -2285,8 +2323,13 @@ public static class ModelBuilderExtensions
             ShipAddress = "1212 Cedar Blvd.",
             Total = 1298000,
             OrderStatus = OrderStatus.Pending
-        }; var orderDetail19 = new OrderDetail
+        };
+        var orderDetail19Id = new Guid("616cb6cf-ea92-4796-b6b6-8d4723258110");
+        var orderDetail20Id = new Guid("23acf045-fc21-4c47-b826-55d8b4602ac1");
+        var orderDetail21Id = new Guid("6b1a25ac-d66a-4171-a142-3d0d425ef71b");
+        var orderDetail19 = new OrderDetail
         {
+            Id = orderDetail19Id,
             OrderId = orderId12,
             ProductDetailId = productDetailID58,
             Quantity = 2,
@@ -2295,6 +2338,7 @@ public static class ModelBuilderExtensions
         };
         var orderDetail20 = new OrderDetail
         {
+            Id = orderDetail20Id,
             OrderId = orderId12,
             ProductDetailId = productDetailID21,
             Quantity = 1,
@@ -2303,6 +2347,7 @@ public static class ModelBuilderExtensions
         };
         var orderDetail21 = new OrderDetail
         {
+            Id = orderDetail21Id,
             OrderId = orderId12,
             ProductDetailId = productDetailID24,
             Quantity = 1,
@@ -2325,8 +2370,11 @@ public static class ModelBuilderExtensions
             Total = 919000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail22Id = new Guid("f978d123-22e2-49ad-b313-86cca345e17d");
+        var orderDetail23Id = new Guid("8ef548a5-1379-4314-93ab-90cf3255bcfa");
         var orderDetail22 = new OrderDetail
         {
+            Id = orderDetail22Id,
             OrderId = orderId13,
             ProductDetailId = productDetailID24,
             Quantity = 1,
@@ -2334,7 +2382,8 @@ public static class ModelBuilderExtensions
             Status = Status.Active
         };
         var orderDetail23 = new OrderDetail
-        {
+        {   
+            Id = orderDetail23Id,
             OrderId = orderId13,
             ProductDetailId = productDetailID49,
             Quantity = 2,
@@ -2357,8 +2406,13 @@ public static class ModelBuilderExtensions
             Total = 1570000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail24Id = new Guid("d62d41e6-657c-4778-8555-e84a88bcc90f");
+        var orderDetail25Id = new Guid("9ecd85a1-9790-423f-8e1a-fea50164a749");
+        var orderDetail26Id = new Guid("ea3ee695-a55a-48fb-9e48-be694b837b19");
+        var orderDetail27Id = new Guid("2a31ca13-b55a-4075-8090-281a96d480ac");
         var orderDetail24 = new OrderDetail
         {
+            Id = orderDetail24Id,
             OrderId = orderId14,
             ProductDetailId = productDetailId11,
             Quantity = 1,
@@ -2367,6 +2421,7 @@ public static class ModelBuilderExtensions
         };
         var orderDetail25 = new OrderDetail
         {
+            Id = orderDetail25Id,
             OrderId = orderId14,
             ProductDetailId = productDetailId9,
             Quantity = 2,
@@ -2375,6 +2430,7 @@ public static class ModelBuilderExtensions
         };
         var orderDetail26 = new OrderDetail
         {
+            Id = orderDetail26Id,
             OrderId = orderId14,
             ProductDetailId = productDetailID35,
             Quantity = 1,
@@ -2383,6 +2439,7 @@ public static class ModelBuilderExtensions
         };
         var orderDetail27 = new OrderDetail
         {
+            Id = orderDetail27Id,
             OrderId = orderId14,
             ProductDetailId = productDetailID42,
             Quantity = 1,
@@ -2405,8 +2462,10 @@ public static class ModelBuilderExtensions
             Total = 300000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail28Id = new Guid("61e38a08-7ab8-40c6-81e7-e2a516dbf0ce");
         var orderDetail28 = new OrderDetail
         {
+            Id = orderDetail28Id,
             OrderId = orderId15,
             ProductDetailId = productDetailId11,
             Quantity = 1,
@@ -2430,8 +2489,10 @@ public static class ModelBuilderExtensions
             Total = 350000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail29Id = new Guid("beba2311-a1af-4420-a254-8da4624f98b6");
         var orderDetail29 = new OrderDetail
         {
+            Id = orderDetail29Id,
             OrderId = orderId16,
             ProductDetailId = productDetailID47,
             Quantity = 1,
@@ -2455,8 +2516,10 @@ public static class ModelBuilderExtensions
             Total = 330000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail30Id = new Guid("c83e2f11-a184-4409-83f8-44e45ed81a9b");
         var orderdetail30 = new OrderDetail
         {
+            Id = orderDetail30Id,
             OrderId = orderId17,
             ProductDetailId = productDetailID39,
             Quantity = 1,
@@ -2479,8 +2542,10 @@ public static class ModelBuilderExtensions
             Total = 309000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail31Id = new Guid("db3f2553-ca63-489e-9d16-b5439b3080c4");
         var orderDetail31 = new OrderDetail
         {
+            Id = orderDetail31Id,
             OrderId = orderId18,
             ProductDetailId = productDetailID24,
             Quantity = 1,
@@ -2503,8 +2568,10 @@ public static class ModelBuilderExtensions
             Total = 340000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail32Id = new Guid("61b0273e-d46a-42f5-9c92-d38c3a0453ad");
         var orderDetail32 = new OrderDetail
         {
+            Id = orderDetail32Id,
             OrderId = orderId19,
             ProductDetailId = productDetailID16,
             Quantity = 1,
@@ -2527,8 +2594,10 @@ public static class ModelBuilderExtensions
             Total = 360000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail33Id = new Guid("3c97b5da-3011-458d-b1ab-f5c65ea5c357");
         var orderDetail33 = new OrderDetail
         {
+            Id = orderDetail33Id,
             OrderId = orderId20,
             ProductDetailId = productDetailID54,
             Quantity = 1,
@@ -2551,8 +2620,10 @@ public static class ModelBuilderExtensions
             Total = 350000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail34Id = new Guid("cc67d86b-ef7c-4864-bc5e-2aca0e1f36ad");
         var orderDetail34 = new OrderDetail
         {
+            Id = orderDetail34Id,
             OrderId = orderId21,
             ProductDetailId = productDetailID41,
             Quantity = 1,
@@ -2575,8 +2646,10 @@ public static class ModelBuilderExtensions
             Total = 330000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail35Id = new Guid("a97c34ec-67bd-47e5-8c00-48f94e6332cf");
         var orderDetail35 = new OrderDetail
         {
+            Id = orderDetail35Id,
             OrderId = orderId22,
             ProductDetailId = productDetailID39,
             Quantity = 1,
@@ -2599,8 +2672,10 @@ public static class ModelBuilderExtensions
             Total = 360000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail36Id = new Guid("9e154e8d-d8bf-45ea-9d8f-822285bcb3f0");
         var orderDetail36 = new OrderDetail
         {
+            Id = orderDetail36Id,
             OrderId = orderId23,
             ProductDetailId = productDetailID36,
             Quantity = 1,
@@ -2623,8 +2698,10 @@ public static class ModelBuilderExtensions
             Total = 360000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail37Id = new Guid("3601d71e-12ba-4ee1-821c-6f47a1ad44cf");
         var orderDetail37 = new OrderDetail
         {
+            Id = orderDetail37Id,
             OrderId = orderId24,
             ProductDetailId = productDetailID36,
             Quantity = 1,
@@ -2647,8 +2724,10 @@ public static class ModelBuilderExtensions
             Total = 360000,
             OrderStatus = OrderStatus.Pending
         };
+        var orderDetail38Id = new Guid("3273381f-e5da-43f0-ac8a-dc7f9135e736");
         var orderDetail38 = new OrderDetail
         {
+            Id = orderDetail38Id,
             OrderId = orderId25,
             ProductDetailId = productDetailID36,
             Quantity = 1,

@@ -9,6 +9,8 @@ namespace shop.ViewModels.Catalog.Carts
     public class ShowCartResult
     {
         public Guid Id { get; set; }
-        List<CartDetailVm> ListCartDetail { get; set; }
+        public List<CartDetailVm> ListCartDetail { get; set; }
+        public decimal GrandTotal { get; set; }
+        
     }
 }

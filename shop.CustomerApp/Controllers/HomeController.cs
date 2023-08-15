@@ -11,7 +11,6 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly IProductApiClient _productApiClient;
 
-
     public HomeController(ILogger<HomeController> logger, IProductApiClient productApiClient)
     {
         _logger = logger;

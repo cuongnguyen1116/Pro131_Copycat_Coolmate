@@ -23,7 +23,6 @@ namespace shop.CustomerApp.Controllers
         private readonly IUserApiClient _userApiClient;
         private readonly IOrderApiClient _orderApiClient;
 
-
         public AccountController(IConfiguration configuration, IUserApiClient userApiClient, IOrderApiClient orderApiClient)
         {
             _configuration = configuration;
