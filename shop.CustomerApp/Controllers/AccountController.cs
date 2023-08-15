@@ -58,14 +58,15 @@ namespace shop.CustomerApp.Controllers
             var userIdClaim = userPrincipal.Claims.FirstOrDefault(c => c.Type == "userId");
             var authProperties = new AuthenticationProperties
             {
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30),
                 IsPersistent = false
             };
             HttpContext.Session.SetString(SystemConstants.AppSettings.Token, result.Message);
             if (userIdClaim != null)
             {
                 string userId = userIdClaim.Value;
-                HttpContext.Session.SetString("userId", userId);
+                //HttpContext.Session.SetString("userId",userId);
+                Response.Cookies.Append("userId", userId);
 
                 // Sử dụng userId ở đây cho mục đích mong muốn
             }
@@ -74,6 +75,12 @@ namespace shop.CustomerApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> Logout()
+        //{
+        //    await HttpContext.SignOutAsync(
+        //                CookieAuthenticationDefaults.AuthenticationScheme);
+        //}
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -102,21 +109,33 @@ namespace shop.CustomerApp.Controllers
                 ModelState.AddModelError("", result.Message);
                 return View();
             }
-            var loginResult = await _userApiClient.Authenticate(new LoginRequest()
+            var loginResult = await _userApiClient.AuthenticateCustomer(new LoginRequest()
             {
                 UserName = registerRequest.UserName,
                 Password = registerRequest.Password,
                 RememberMe = true
             });
-
             var userPrincipal = this.ValidateToken(loginResult.Message);
+            var userIdClaim = userPrincipal.Claims.FirstOrDefault(c => c.Type == "userId");
             var authProperties = new AuthenticationProperties
             {
                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
                 IsPersistent = false
             };
+            if (userIdClaim != null)
+            {
+                string userId = userIdClaim.Value;
+                //HttpContext.Session.SetString("userId",userId);
+                Response.Cookies.Append("userId", userId);
+
+                // Sử dụng userId ở đây cho mục đích mong muốn
+            }
             HttpContext.Session.SetString(SystemConstants.AppSettings.Token, loginResult.Message);
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal, authProperties);
+            await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        userPrincipal,
+                        authProperties);
+            
 
             return RedirectToAction("Index", "Home");
         }
@@ -155,10 +174,16 @@ namespace shop.CustomerApp.Controllers
 
         public async Task<IActionResult> MyAccount(Guid id, int PageIndex = 1, int PageSize = 10)
         {
-            var userIdinSession = HttpContext.Session.GetString("userId");
-            if (string.IsNullOrEmpty(userIdinSession)) return RedirectToAction("Login", "Account");
+            //var userIdinSession = HttpContext.Session.GetString("userId");
 
-            Guid userId = Guid.Parse(userIdinSession);
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            string userIdinCookies = Request.Cookies["userId"];
+            //if (string.IsNullOrEmpty(userIdinSession)) return RedirectToAction("Login", "Account");
+
+            Guid userId = Guid.Parse(userIdinCookies);
             id = userId;
             var data = await _orderApiClient.GetAllByIdUser(id, PageIndex, PageSize);
 
